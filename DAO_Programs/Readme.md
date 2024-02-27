@@ -14,6 +14,22 @@ A Modern, Modular, Membership Anchor-based DAO
 - **SubDAOs - Membership:**
   - Token-based membership
 
+- **Proposal Life Cycle:**
+Proposals in the MMM DAO system go through different phases during their lifetime. Here's an overview of the stages a proposal may undergo:
+  - **Evaluation Phase:** The proposal is under evaluation, undergoing analysis by the community members.
+  - **Open:** After evaluation, the proposal is open for voting by the community.
+  - **Succeeded:** If the proposal receives sufficient votes and meets the predefined criteria, it is marked as successful.
+  - **Failed:** If the proposal fails to meet the voting threshold or other requirements, it is marked as failed.
+
+## Proposal Types
+There are different types of proposals that can be created in the ArmaDAO system. Here are the main types:
+
+- **Bounty:** Proposals to pay a certain amount to a specific address.
+- **Executable:** Proposals to execute specific instructions on the blockchain. This can include setting fees, adjusting thresholds, and more.
+- **Vote:** Proposals intended solely to gather community opinions, without involving financial transactions.
+
+These are the common proposal types in our system, each serving its own purpose and functionality.  
+
 # Setup
 Some basic ground rules in order to keep our tests, `Anchor.toml` and `lib.rs` in sync:
 
