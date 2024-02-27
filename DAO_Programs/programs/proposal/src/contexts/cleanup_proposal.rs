@@ -98,7 +98,7 @@ impl<'info> CleanupProposal<'info> {
             ExecutableProposal::SetMaxExpiry(amount) => self.core_config.set_max_expiry(amount),
             ExecutableProposal::SetThreshold(amount) => self.core_config.set_threshold(amount),
             ExecutableProposal::SetQuorum(amount) => self.core_config.set_quorum(amount),
-            ExecutableProposal::SetPrevotingPeriod(amount) => self.core_config.set_prevoting_period(amount),
+            ExecutableProposal::SetEvaluationPeriod(amount) => self.core_config.set_evaluation_phase_period(amount),
             ExecutableProposal::SetAllowSubDao(value) => self.core_config.set_allow_sub_dao(value)
         }
     }

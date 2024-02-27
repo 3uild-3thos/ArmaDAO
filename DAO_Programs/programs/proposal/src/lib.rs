@@ -23,7 +23,7 @@ pub mod proposal {
         threshold: u64,
         expiry: u64,
         choices:u8,
-        prevoting_period:u64,
+        evaluation_period:u64,
 
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
@@ -39,7 +39,7 @@ pub mod proposal {
             threshold,
             expiry,
             choices,
-            prevoting_period,
+            evaluation_period,
             &ctx.bumps
         )
     }
@@ -54,7 +54,7 @@ pub mod proposal {
         threshold: u64,
         expiry: u64,
         choices:u8,
-        prevoting_period:u64,
+        evaluation_period:u64,
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
         ctx.accounts.pay_proposal_fee()?;
@@ -69,7 +69,7 @@ pub mod proposal {
             threshold,
             expiry,
             choices,
-            prevoting_period,
+            evaluation_period,
             &ctx.bumps
         )
     }
@@ -97,7 +97,7 @@ pub mod proposal {
         threshold: u64,
         expiry: u64,
         choices:u8,
-        prevoting_period:u64,
+        evaluation_period:u64,
 
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
@@ -113,7 +113,7 @@ pub mod proposal {
             threshold,
             expiry,
             choices,
-            prevoting_period,
+            evaluation_period,
             &ctx.bumps
         )
     } 

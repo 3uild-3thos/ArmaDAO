@@ -377,7 +377,7 @@
             "type": "u64"
           },
           {
-            "name": "minPrevotingPeriod",
+            "name": "evaluationPhasePeriod",
             "type": "u64"
           },
           {
@@ -503,7 +503,7 @@
             }
           },
           {
-            "name": "prevotingPeriod",
+            "name": "evaluationPeriod",
             "type": "u64"
           }
         ]
@@ -601,7 +601,7 @@
             ]
           },
           {
-            "name": "SetPrevotingPeriod",
+            "name": "SetEvaluationPeriod",
             "fields": [
               "u64"
             ]
@@ -621,7 +621,7 @@
         "kind": "enum",
         "variants": [
           {
-            "name": "PreVoting"
+            "name": "EvaluationPhase"
           },
           {
             "name": "Open"

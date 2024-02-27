@@ -104,7 +104,7 @@ impl<'info> CleanupProposalSubDao<'info> {
             ExecutableProposal::SetMaxExpiry(amount) => self.config_sub_dao.set_max_expiry(amount),
             ExecutableProposal::SetThreshold(amount) => self.config_sub_dao.set_threshold(amount),
             ExecutableProposal::SetQuorum(amount) => self.config_sub_dao.set_quorum(amount),
-            ExecutableProposal::SetPrevotingPeriod(amount) => self.config_sub_dao.set_prevoting_period(amount),
+            ExecutableProposal::SetEvaluationPeriod(amount) => self.config_sub_dao.set_evaluation_phase_period(amount),
             ExecutableProposal::SetAllowSubDao(_value) => {Ok(())}
         }
     }   

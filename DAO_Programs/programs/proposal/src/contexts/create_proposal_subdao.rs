@@ -53,7 +53,7 @@ impl<'info> CreateProposalSubDao<'info> {
         threshold: u64,
         expiry: u64,
         choices:u8,
-        prevoting_period: u64,
+        evaluation_period: u64,
         bumps: &CreateProposalSubDaoBumps,
     ) -> Result<()> {
         // Make sure user has staked the required amount
@@ -65,7 +65,7 @@ impl<'info> CreateProposalSubDao<'info> {
         // Check Max Expiry
         self.core_config.check_max_expiry(expiry)?;
         // Check Min Pre Voting Period
-        self.core_config.check_min_pre_voting(prevoting_period)?;
+        self.core_config.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
         self.proposal.check_choices()?; 
         // Check ID and add proposal change state
@@ -90,7 +90,7 @@ impl<'info> CreateProposalSubDao<'info> {
             threshold,
             expiry,
             choices,
-            prevoting_period,
+            evaluation_period,
             bumps.proposal
         )
     }

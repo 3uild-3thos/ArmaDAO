@@ -926,7 +926,7 @@
             "type": "u64"
           },
           {
-            "name": "minPrevotingPeriod",
+            "name": "evaluationPhasePeriod",
             "type": "u64"
           },
           {

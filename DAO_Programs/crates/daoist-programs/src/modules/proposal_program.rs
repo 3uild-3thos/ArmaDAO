@@ -1,5 +1,4 @@
 use anchor_lang::{prelude::*, solana_program};
-
 use crate::constants::*;
 use crate::errors::CoreError;
 use anchor_lang::solana_program::instruction::Instruction;
@@ -39,7 +38,7 @@ pub struct Proposal {
     pub bump: u8,
     pub created_time: u64,
     pub vote_counts: Vec<u64>,
-    pub prevoting_period: u64,
+    pub evaluation_period: u64,
 }
 impl anchor_lang::Owner for Proposal {
     fn owner() -> Pubkey {
@@ -69,7 +68,7 @@ impl Proposal {
         threshold: u64,
         expiry: u64,
         choices: u8,
-        prevoting_period: u64,
+        evaluation_period: u64,
         bump: u8,
     ) -> Result<()> {
         require!(name.len() < 33, CoreError::InvalidName);
@@ -78,7 +77,7 @@ impl Proposal {
         self.name = name;
         self.gist = gist;
         self.proposal = proposal;
-        self.result = ProposalStatus::Open;
+        self.result = Default::default();
         self.quorum = quorum;
         self.threshold = threshold;
         self.bump = bump;
@@ -89,14 +88,14 @@ impl Proposal {
         self.choices = choices;
         self.created_time = Clock::get()?.slot;
         self.vote_counts = vec![0; choices as usize];
-        self.prevoting_period = prevoting_period;
+        self.evaluation_period = evaluation_period;
 
         Ok(())
     }
 
-    // transition from PreVoting to Open
+    // transition from Evaluation Phase to Open
     pub fn try_initialize(&mut self) {
-        if self.result == ProposalStatus::PreVoting && self.is_analysed().is_ok() {
+        if self.result == ProposalStatus::EvaluationPhase && self.is_analysed().is_ok() {
             self.result = ProposalStatus::Open;
         }
     }
@@ -121,7 +120,7 @@ impl Proposal {
     }
     pub fn is_analysed(&self) -> Result<()> {
         require!(
-            Clock::get()?.slot >= self.created_time + self.prevoting_period,
+            Clock::get()?.slot >= self.created_time + self.evaluation_period,
             CoreError::InvalidRequiredTime
         );
         Ok(())
@@ -181,13 +180,13 @@ pub enum ExecutableProposal {
     SetMaxExpiry(u64),
     SetThreshold(u64),
     SetQuorum(u8),
-    SetPrevotingPeriod(u64),
+    SetEvaluationPeriod(u64),
     SetAllowSubDao(bool)
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Copy, Clone, Debug, PartialEq, Eq)]
 pub enum ProposalStatus {
-    PreVoting,
+    EvaluationPhase,
     Open,
     Succeeded,
     Failed,
@@ -195,7 +194,7 @@ pub enum ProposalStatus {
 
 impl Default for ProposalStatus {
     fn default() -> Self {
-        ProposalStatus::PreVoting
+        ProposalStatus::EvaluationPhase
     }
 }
 

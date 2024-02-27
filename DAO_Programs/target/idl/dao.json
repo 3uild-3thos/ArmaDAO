@@ -53,7 +53,7 @@
           "type": "u64"
         },
         {
-          "name": "minPrevotingPeriod",
+          "name": "evaluationPhasePeriod",
           "type": "u64"
         },
         {
@@ -194,7 +194,7 @@
           "type": "u64"
         },
         {
-          "name": "minPrevotingPeriod",
+          "name": "evaluationPhasePeriod",
           "type": "u64"
         },
         {
@@ -273,7 +273,7 @@
           "type": "u64"
         },
         {
-          "name": "minPrevotingPeriod",
+          "name": "evaluationPhasePeriod",
           "type": "u64"
         },
         {
@@ -371,7 +371,7 @@
             "type": "u64"
           },
           {
-            "name": "minPrevotingPeriod",
+            "name": "evaluationPhasePeriod",
             "type": "u64"
           },
           {

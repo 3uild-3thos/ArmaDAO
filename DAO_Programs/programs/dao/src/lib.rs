@@ -20,7 +20,7 @@ pub mod dao {
         min_quorum: u8,
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         proposal_program: Pubkey,
         voting_program:Pubkey,
         staking_program: Pubkey,
@@ -37,7 +37,7 @@ pub mod dao {
             min_quorum, 
             min_threshold, 
             max_expiry,  
-            min_prevoting_period,
+            evaluation_phase_period,
             proposal_program, 
             voting_program,
             staking_program,
@@ -55,7 +55,7 @@ pub mod dao {
         min_quorum: u8,
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         mint: Pubkey,
         min_staked_required_proposal: u64
     ) -> Result<()> {
@@ -66,7 +66,7 @@ pub mod dao {
             min_quorum, 
             min_threshold, 
             max_expiry,  
-            min_prevoting_period,
+            evaluation_phase_period,
             mint,
             min_staked_required_proposal
         )
@@ -78,7 +78,7 @@ pub mod dao {
         min_quorum: u8,
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         mint: Pubkey,
         min_staked_required_proposal: u64
     ) -> Result<()> {
@@ -89,7 +89,7 @@ pub mod dao {
             min_quorum, 
             min_threshold, 
             max_expiry,  
-            min_prevoting_period,
+            evaluation_phase_period,
             mint,
             min_staked_required_proposal
         )

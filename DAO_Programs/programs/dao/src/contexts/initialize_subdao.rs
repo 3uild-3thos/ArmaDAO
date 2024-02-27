@@ -85,7 +85,7 @@ impl<'info> InitializeSubdao<'info> {
         min_quorum: u8,//0-100
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         mint: Pubkey,
         min_staked_required_proposal : u64,
     ) -> Result<()> {
@@ -103,7 +103,7 @@ impl<'info> InitializeSubdao<'info> {
                 min_quorum, 
                 min_threshold, 
                 max_expiry, 
-                min_prevoting_period, 
+                evaluation_phase_period, 
                 proposal_count: 0, 
                 proposal_program: self.config.proposal_program, 
                 voting_program: self.config.voting_program, 
@@ -170,7 +170,7 @@ impl<'info> InitializeSubdaoToken<'info> {
         min_quorum: u8,//0-100
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         mint: Pubkey,
         min_staked_required_proposal : u64,
     ) -> Result<()> {
@@ -185,7 +185,7 @@ impl<'info> InitializeSubdaoToken<'info> {
                 min_quorum, 
                 min_threshold, 
                 max_expiry, 
-                min_prevoting_period, 
+                evaluation_phase_period, 
                 proposal_count: 0, 
                 proposal_program: self.config.proposal_program, 
                 voting_program: self.config.voting_program, 

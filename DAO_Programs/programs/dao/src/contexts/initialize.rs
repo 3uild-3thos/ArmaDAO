@@ -38,7 +38,7 @@ impl<'info> Initialize<'info> {
         min_quorum: u8,//0-100
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         proposal_program: Pubkey,
         voting_program: Pubkey,
         staking_program: Pubkey,
@@ -58,7 +58,7 @@ impl<'info> Initialize<'info> {
                 min_quorum,
                 min_threshold,
                 max_expiry,
-                min_prevoting_period,
+                evaluation_phase_period,
                 //Programs
                 proposal_program,
                 voting_program, 

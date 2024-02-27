@@ -29,7 +29,7 @@ pub struct DaoConfig {
     pub min_quorum: u8,
     pub min_threshold: u64,
     pub max_expiry: u64,
-    pub min_prevoting_period: u64,
+    pub evaluation_phase_period: u64,
     pub proposal_count: u64,
     pub proposal_program: Pubkey,
     pub voting_program: Pubkey,
@@ -72,7 +72,7 @@ impl DaoConfig {
         min_quorum: u8,
         min_threshold: u64,
         max_expiry: u64,
-        min_prevoting_period: u64,
+        evaluation_phase_period: u64,
         proposal_program: Pubkey,
         voting_program: Pubkey,
         staking_program: Pubkey,
@@ -91,7 +91,7 @@ impl DaoConfig {
         self.min_quorum = min_quorum;
         self.min_threshold = min_threshold;
         self.max_expiry = max_expiry;
-        self.min_prevoting_period = min_prevoting_period;
+        self.evaluation_phase_period = evaluation_phase_period;
         self.proposal_count = 0;
         self.proposal_program = proposal_program;
         self.voting_program = voting_program;
@@ -143,8 +143,8 @@ impl DaoConfig {
         Ok(())
     }
     // Check min pre-voting
-    pub fn check_min_pre_voting(&self, prevoting_period: u64)-> Result<()> {
-        require!(self.min_prevoting_period <= prevoting_period, CoreError::InvalidExpiry);
+    pub fn check_evaluation_phase_period(&self, evaluation_period: u64)-> Result<()> {
+        require!(self.evaluation_phase_period <= evaluation_period, CoreError::InvalidExpiry);
         Ok(())
     }
      //Set Allowence Sub Dao
@@ -174,18 +174,19 @@ impl DaoConfig {
     }
     //Quorum
     pub fn set_quorum(&mut self, amount: u8) -> Result<()> {
+        require!(
+            amount <= 100,
+            CoreError::InvalidQuorum
+        );
         self.min_quorum = amount;
         //VALIDATIONS
-        Ok(())
-    
+        Ok(())  
     }
-
     //Analyzing Proposal Period
-    pub fn set_prevoting_period(&mut self, amount: u64) -> Result<()> {
-        self.min_prevoting_period = amount;
+    pub fn set_evaluation_phase_period(&mut self, amount: u64) -> Result<()> {
+        self.evaluation_phase_period = amount;
         //VALIDATIONS
-        Ok(())
-    
+        Ok(()) 
     }
 
 }
