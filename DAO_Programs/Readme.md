@@ -1,4 +1,4 @@
-# MMM DAO
+# ArmaDAO
 A Modern, Modular, Membership Anchor-based DAO
 ## Features
 
