@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use daoist_programs::modules::{add_account, add_account_sub_dao, add_vote_sub_dao, DaoConfig, Proposal, ProposalProgram, StakeState, StakingProgram, SubDaoProposalHandler, SubDaoStakeHandler};
+use daoist_programs::modules::{add_account_sub_dao, add_vote_sub_dao, DaoConfig, Proposal, ProposalProgram, StakeState, StakingProgram, SubDaoProposalHandler, SubDaoStakeHandler};
 use crate::state::VoteState;
 
 #[derive(Accounts)]
