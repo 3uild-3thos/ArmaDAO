@@ -14,9 +14,9 @@ A Modern, Modular, Membership Anchor-based DAO
 - **SubDAOs - Membership:**
   - Token-based membership
 
-## **Proposals**
+# **Proposals**
 
-# Proposal Life Cycle:
+## Proposal Life Cycle:
 Proposals in the ArmaDAO system go through different phases during their lifetime. Here's an overview of the stages a proposal may undergo:
   - **Evaluation Phase:** The proposal is under evaluation, undergoing analysis by the community members.
   - **Open:** After evaluation, the proposal is open for voting by the community.
