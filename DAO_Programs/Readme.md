@@ -13,6 +13,7 @@ A Modern, Modular, Membership Anchor-based DAO
 
 - **SubDAOs - Membership:**
   - Token-based membership
+  - NFT-based membership
 
 # **Proposals**
 
