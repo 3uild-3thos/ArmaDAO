@@ -32,6 +32,9 @@ There are different types of proposals that can be created in the ArmaDAO system
 
 These are the common proposal types in our system, each serving its own purpose and functionality.  
 
+## **Voting**
+- **Staked-based Voting:** Our voting mechanism is staked-based, meaning that voters must stake a certain amount of tokens or nfts to participate in the decision-making process. This staked-based approach adds an additional layer of security to the voting process, making it resistant to flash loan attacks and ensuring that only committed participants have a say in the DAO's governance.
+
 # **Setup**
 Some basic ground rules in order to keep our tests, `Anchor.toml` and `lib.rs` in sync:
 
