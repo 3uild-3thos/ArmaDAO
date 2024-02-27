@@ -198,8 +198,16 @@
           "type": "u64"
         },
         {
+          "name": "collectionMint",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
           "name": "mint",
-          "type": "publicKey"
+          "type": {
+            "option": "publicKey"
+          }
         },
         {
           "name": "minStakedRequiredProposal",
@@ -277,8 +285,16 @@
           "type": "u64"
         },
         {
+          "name": "collectionMint",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
           "name": "mint",
-          "type": "publicKey"
+          "type": {
+            "option": "publicKey"
+          }
         },
         {
           "name": "minStakedRequiredProposal",

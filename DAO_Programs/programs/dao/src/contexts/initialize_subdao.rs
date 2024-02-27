@@ -86,7 +86,8 @@ impl<'info> InitializeSubdao<'info> {
         min_threshold: u64,
         max_expiry: u64,
         evaluation_phase_period: u64,
-        mint: Pubkey,
+        collection_mint: Option<Pubkey>,
+        mint: Option<Pubkey>,
         min_staked_required_proposal : u64,
     ) -> Result<()> {
         
@@ -111,8 +112,8 @@ impl<'info> InitializeSubdao<'info> {
                 auth_bump: self.config.auth_bump, 
                 config_bump: bumps.config_sub_dao, 
                 treasury_bump: bumps.treasury,
-                collection_mint: self.config.collection_mint, 
-                mint: Some(mint),
+                collection_mint,
+                mint,
                 min_staked_required_proposal: Some(min_staked_required_proposal),
                 allow_sub_dao: false,
                 min_staked_create_subdao: None
@@ -171,7 +172,8 @@ impl<'info> InitializeSubdaoToken<'info> {
         min_threshold: u64,
         max_expiry: u64,
         evaluation_phase_period: u64,
-        mint: Pubkey,
+        collection_mint: Option<Pubkey>,
+        mint: Option<Pubkey>,
         min_staked_required_proposal : u64,
     ) -> Result<()> {
         
@@ -193,8 +195,8 @@ impl<'info> InitializeSubdaoToken<'info> {
                 auth_bump: self.config.auth_bump, 
                 config_bump: bumps.config_sub_dao, 
                 treasury_bump: bumps.treasury,
-                collection_mint: self.config.collection_mint, 
-                mint: Some(mint),
+                collection_mint, 
+                mint,
                 min_staked_required_proposal: Some(min_staked_required_proposal),
                 allow_sub_dao: false,
                 min_staked_create_subdao: None

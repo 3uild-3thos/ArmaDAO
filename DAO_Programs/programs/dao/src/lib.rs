@@ -56,7 +56,8 @@ pub mod dao {
         min_threshold: u64,
         max_expiry: u64,
         evaluation_phase_period: u64,
-        mint: Pubkey,
+        collection_mint: Option<Pubkey>,
+        mint: Option<Pubkey>, 
         min_staked_required_proposal: u64
     ) -> Result<()> {
         ctx.accounts.init(
@@ -67,6 +68,7 @@ pub mod dao {
             min_threshold, 
             max_expiry,  
             evaluation_phase_period,
+            collection_mint,
             mint,
             min_staked_required_proposal
         )
@@ -79,7 +81,8 @@ pub mod dao {
         min_threshold: u64,
         max_expiry: u64,
         evaluation_phase_period: u64,
-        mint: Pubkey,
+        collection_mint: Option<Pubkey>,
+        mint: Option<Pubkey>, 
         min_staked_required_proposal: u64
     ) -> Result<()> {
         ctx.accounts.init(
@@ -90,6 +93,7 @@ pub mod dao {
             min_threshold, 
             max_expiry,  
             evaluation_phase_period,
+            collection_mint,
             mint,
             min_staked_required_proposal
         )

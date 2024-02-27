@@ -35,6 +35,9 @@ These are the common proposal types in our system, each serving its own purpose 
 ## **Voting**
 - **Staked-based Voting:** Our voting mechanism is staked-based, meaning that voters must stake a certain amount of tokens or nfts to participate in the decision-making process. This staked-based approach adds an additional layer of security to the voting process, making it resistant to flash loan attacks and ensuring that only committed participants have a say in the DAO's governance.
 
+## **SubDAOs**
+- **SubDAOs:** SubDAOs, are a key feature of our ArmaDAO system, designed to promote modularity, scalability, and community engagement. SubDAOs enable members to create specialized branches within the main DAO, each with its own governance structure, membership requirements, and decision-making processes. These SubDAOs are token-based or NFT-based, allowing for diverse membership models and participation mechanisms. By allowing the creation of SubDAOs, our system fosters innovation, empowers community-driven initiatives, and accommodates a wide range of interests and objectives within the ArmaDAO ecosystem.
+
 # **Setup**
 Some basic ground rules in order to keep our tests, `Anchor.toml` and `lib.rs` in sync:
 

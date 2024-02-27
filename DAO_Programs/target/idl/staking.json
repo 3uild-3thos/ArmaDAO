@@ -592,6 +592,82 @@
       "args": []
     },
     {
+      "name": "initStakeSubDaoNft",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "ownerAta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeAuth",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collection",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "stakeTokensSubDao",
       "accounts": [
         {
@@ -631,6 +707,92 @@
         },
         {
           "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "stakeNftSubDao",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "ownerAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auth",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collection",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -724,6 +886,92 @@
       ]
     },
     {
+      "name": "unstakeNftSubDao",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "ownerAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auth",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collection",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "closeStakeSubDao",
       "accounts": [
         {
@@ -743,6 +991,72 @@
         },
         {
           "name": "mint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeStakeNftSubDao",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stakeAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeAuth",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collection",
           "isMut": false,
           "isSigner": false
         },
