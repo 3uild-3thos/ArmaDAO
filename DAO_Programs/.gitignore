@@ -1,0 +1,14 @@
+.anchor
+.DS_Store
+target/*
+!target/deploy
+target/deploy/*
+!target/deploy/*-keypair.json
+!target/idl
+**/*.rs.bk
+node_modules
+contexts_
+test-ledger
+.yarn
+wallet.json
+daonftwallet.json
