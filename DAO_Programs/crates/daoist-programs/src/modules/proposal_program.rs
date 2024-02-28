@@ -57,7 +57,7 @@ impl anchor_lang::AccountDeserialize for Proposal {
 impl anchor_lang::AccountSerialize for Proposal {}
 
 impl Proposal {
-    pub const LEN: usize = 8 + 32 + 72 + ENUM_L * 2 + U8_L * 3 + U64_L * 6 + U64_L * 3 ;
+    pub const LEN: usize = 8 + 32 + 72 + (ENUM_L * 2) + (U8_L * 3) + (U64_L * 6) + 4 + (U64_L * 3) ;
     pub fn init(
         &mut self,
         id: u64,

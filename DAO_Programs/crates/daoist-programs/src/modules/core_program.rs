@@ -63,7 +63,7 @@ impl anchor_lang::AccountDeserialize for DaoConfig {
 impl anchor_lang::AccountSerialize for DaoConfig {}
 
 impl DaoConfig {
-    pub const LEN: usize = 8 + 6 * U64_L + 4 * U8_L + 3 * PUBKEY_L + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L)  ;
+    pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L)  ;
 
     pub fn init(
         &mut self,

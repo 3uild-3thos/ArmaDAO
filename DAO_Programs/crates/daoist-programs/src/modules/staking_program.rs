@@ -55,7 +55,7 @@ impl anchor_lang::Owner for StakeState {
 
 
 impl StakeState {
-    pub const LEN: usize = 8 + PUBKEY_L + 3 * U64_L + 3 * U8_L;
+    pub const LEN: usize = 8 + PUBKEY_L + (3 * U64_L) + (3 * U8_L);
 
     pub fn init(
         &mut self,  

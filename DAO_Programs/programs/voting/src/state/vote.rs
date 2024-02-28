@@ -10,6 +10,6 @@ pub struct VoteState {
 }
 
 impl VoteState {
-    pub const LEN: usize = 8 + PUBKEY_L + U64_L + 2 * U8_L;
+    pub const LEN: usize = 8 + PUBKEY_L + U64_L + (2 * U8_L);
 }
 

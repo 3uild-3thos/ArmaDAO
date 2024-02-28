@@ -1,7 +1,6 @@
 use anchor_lang::prelude::*;
 mod contexts;
 use contexts::*;
-mod constants;
 mod errors;
 mod helpers;
 
