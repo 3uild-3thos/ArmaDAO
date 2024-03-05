@@ -1,7 +1,6 @@
 use anchor_lang::prelude::*;
 pub mod contexts;
 pub use contexts::*;
-pub mod constants;
 mod errors;
 mod helpers;
 use daoist_programs::modules::ProposalType;

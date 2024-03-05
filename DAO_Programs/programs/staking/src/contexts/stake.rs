@@ -24,7 +24,7 @@ pub struct Stake<'info> {
         seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = mint,
-        token::authority = auth
+        token::authority = stake_auth
     )]
     stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
@@ -32,7 +32,7 @@ pub struct Stake<'info> {
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
-    auth: UncheckedAccount<'info>,
+    stake_auth: UncheckedAccount<'info>,
     #[account(constraint = mint.key() == core_config.mint.expect("Mint not initialized"))]
     mint: InterfaceAccount<'info, Mint>,
     #[account(
@@ -83,7 +83,7 @@ impl<'info> Stake<'info> {
         let accounts = TransferChecked {
             from: self.stake_ata.to_account_info(),
             to: self.owner_ata.to_account_info(),
-            authority: self.auth.to_account_info(),
+            authority: self.stake_auth.to_account_info(),
             mint: self.mint.to_account_info()
         };
 
@@ -122,7 +122,7 @@ pub struct StakeNft<'info> {
         seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = nft,
-        token::authority = auth
+        token::authority = stake_auth
     )]
     stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
@@ -130,7 +130,7 @@ pub struct StakeNft<'info> {
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
-    auth: UncheckedAccount<'info>,
+    stake_auth: UncheckedAccount<'info>,
     #[account(constraint = collection.key() == core_config.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     nft: InterfaceAccount<'info, Mint>,
@@ -211,7 +211,7 @@ impl<'info> StakeNft<'info> {
         let accounts = TransferChecked {
             from: self.stake_ata.to_account_info(),
             to: self.owner_ata.to_account_info(),
-            authority: self.auth.to_account_info(),
+            authority: self.stake_auth.to_account_info(),
             mint: self.nft.to_account_info()
         };
 
