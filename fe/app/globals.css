@@ -2,17 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+  :root {
+    --background: 180 37.5% 96.86%;
+    --foreground: 180 16.13% 6.08%;
+
+    --card: 180 37.5% 96.86%;
+    --card-foreground: 180 16.13% 6.08%;
+
+    --popover: 180 37.5% 96.86%;
+    --popover-foreground: 180 16.13% 6.08%;
+
+    --cyan: 180 86.56% 50.39%;
+    --cyan-foreground: 210 40% 98%;
+    --cyan-light: 170 86.56% 75%;
+
+    --yellow: 60 85.1% 50%;
+    --yellow-foreground: 210 40% 98%;
+    --yellow-light: 50 95% 69%;
+
+    --magenta: 300 85.66% 50.78%;
+    --magenta-foreground: 210 40% 98%;
+    --magenta-light: 289 93.66% 64.78%;
+
+    --muted: 180 37.5% 96.86%;
+    --muted-foreground: 180 16.13% 6.08%;
+
+    --success: 89.71 81.75% 49.41%;
+    --success-foreground: 210 40% 98%;
+
+    --destructive: 0 86.56% 50.39%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 180 37.5% 96.86%;
+    --input: 180 37.5% 96.86%;
+    --ring: 180 16.13% 6.08%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 180 16.13% 6.08%;
+    --foreground: 180 37.5% 96.86%;
+
+    --card: 180 16.13% 6.08%;
+    --card-foreground: 180 37.5% 96.86%;
+
+    --popover: 180 16.13% 6.08%;
+    --popover-foreground: 180 37.5% 96.86%;
+
+    --cyan: 180 86.56% 50.39%;
+    --cyan-foreground: 180 16.13% 6.08%;
+
+    --yellow: 60 85.1% 50%;
+    --yellow-foreground: 180 16.13% 6.08%;
+
+    --magenta: 300 85.66% 50.78%;
+    --magenta-foreground: 180 16.13% 6.08%;
+
+    --muted: 180 37.5% 96.86%;
+    --muted-foreground: 180 37.5% 96.86%;
+
+    --success: 89.71 81.75% 49.41%;
+    --success-foreground: 180 16.13% 6.08%;
+
+    --destructive: 0 86.56% 50.39%;
+    --destructive-foreground: 180 16.13% 6.08%;
+
+    --border: 180 37.5% 96.86%;
+    --input: 180 37.5% 96.86%;
+    --ring: 180 37.5% 96.86%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply h-full font-gordita px-8 md:px-16 lg:px-24 2xl:px-40;
+    scrollbar-width: thin; /* Make it thin */
+    scrollbar-color: hsl(180 100% 50%) transparent; /* Thumb gray and track transparent */
+  }
+
+  /* Hide scrollbar for Internet Explorer and Edge */
+  body::-ms-overflow-style {
+    display: none; /* Hide scrollbar */
+  }
+
+  /* Hide default scrollbar for Webkit browsers (Chrome, Safari) */
+  ::-webkit-scrollbar {
+    width: 2px; /* Width of the vertical scrollbar */
+  }
+
+  /* Remove scrollbar buttons for Webkit browsers */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* Scrollbar track (background) */
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* Make the track transparent */
+  }
+
+  /* Scrollbar handle (the moving part) */
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(180 100% 50%); /* Gray color */
+    border-radius: 2px; /* Slightly rounded corners */
+  }
 }
 
-body {
-}
+@layer components {
+  .text-gradient-magenta {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-magenta to-[#A014ED] w-fit;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-gradient-blue {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-cyan via-blue via-40% to-[#2A5BB7] w-fit;
+  }
+
+  .bg-gradient-magenta {
+    @apply bg-gradient-to-r from-magenta to-[#A014ED];
+  }
+
+  .bg-gradient-blue {
+    @apply bg-gradient-to-r from-cyan via-blue via-40% to-[#2A5BB7];
   }
 }
