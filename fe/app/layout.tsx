@@ -1,8 +1,17 @@
-import "@/app/globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { WalletConnectProvider } from "@/lib/providers";
-import "@solana/wallet-adapter-react-ui/styles.css";
+// font
 import localFont from "next/font/local";
+
+// styles
+import "@/app/globals.css";
+import "@solana/wallet-adapter-react-ui/styles.css";
+
+// provider
+import { WalletConnectProvider } from "@/lib/providers";
+
+// components
+import { Navbar } from "@/app/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const gordita = localFont({
   src: [
@@ -41,9 +50,11 @@ export default function RootLayout({
       <body className={gordita.variable}>
         <WalletConnectProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
+            <Navbar />
             <main className="flex flex-col h-full min-h-screen">
               {children}
             </main>
+            <Toaster />
           </ThemeProvider>
         </WalletConnectProvider>
       </body>
