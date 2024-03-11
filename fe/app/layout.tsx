@@ -40,24 +40,24 @@ const gordita = localFont({
   display: "swap",
 });
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body className={gordita.variable}>
         <WalletConnectProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar />
-            <main className="flex flex-col h-full min-h-screen">
-              {children}
-            </main>
+            <main className="flex flex-col h-full py-24">{children}</main>
             <Toaster />
           </ThemeProvider>
         </WalletConnectProvider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

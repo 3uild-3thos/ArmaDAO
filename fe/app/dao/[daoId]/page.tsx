@@ -1,5 +1,5 @@
-const DAOPage = () => {
-  return <div>DAOPage</div>;
+const DAODetailpage = () => {
+  return <div>DAODetailpage</div>;
 };
 
-export default DAOPage;
+export default DAODetailpage;
