@@ -51,7 +51,7 @@ const RootLayout = ({
         <WalletConnectProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar />
-            <main className="flex flex-col h-full py-24">{children}</main>
+            <main className="flex flex-col h-full py-32">{children}</main>
             <Toaster />
           </ThemeProvider>
         </WalletConnectProvider>
