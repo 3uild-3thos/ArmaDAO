@@ -890,6 +890,9 @@
           },
           {
             "name": "Vote"
+          },
+          {
+            "name": "VoteMultipleChoice"
           }
         ]
       }

@@ -30,6 +30,7 @@ There are different types of proposals that can be created in the ArmaDAO system
 - **Bounty:** Proposals to pay a certain amount to a specific address.
 - **Executable:** Proposals to execute specific instructions on the blockchain. This can include setting fees, adjusting thresholds, and more.
 - **Vote:** Proposals intended solely to gather community opinions, without involving financial transactions.
+- **MultiChoiceVote:** MultiChoice Proposals intended solely to gather community opinions, without involving financial transactions.
 
 These are the common proposal types in our system, each serving its own purpose and functionality.  
 

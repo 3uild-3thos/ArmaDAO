@@ -57,7 +57,10 @@ impl anchor_lang::AccountDeserialize for Proposal {
 impl anchor_lang::AccountSerialize for Proposal {}
 
 impl Proposal {
-    pub const LEN: usize = 8 + 32 + 72 + (ENUM_L * 2) + (U8_L * 3) + (U64_L * 6) +(4 + U64_L * 3) ;
+    //41+1 Enums
+    //ProposalType enum  41 bytes
+    //ProposalStatus enum 1 byte
+    pub const LEN: usize = 8 + 32 + 72 + (41+1) + (U8_L * 3) + (U64_L * 6) +(4 + U64_L * 7) ;
     pub fn init(
         &mut self,
         id: u64,
@@ -100,9 +103,44 @@ impl Proposal {
         }
     }
     pub fn try_finalize(&mut self) {
+        match self.proposal {
+            ProposalType::VoteMultipleChoice => {
+                // Handle the multiple-choice scenario
+                self.finalize_multiple_choice();
+            },
+            _ => {
+                // Handle the preset choice scenario (For, Against, Abstain)
+                self.finalize_preset_choice();
+            },
+        }
+    }
+
+    pub fn finalize_multiple_choice(&mut self) {
+        // First, check if the proposal has expired.
+        if self.check_expiry().is_err() {
+            // If the proposal has expired, it fails regardless of the votes.
+            self.result = ProposalStatus::Failed;
+            return;
+        }
+        // Assuming the proposal has not expired, proceed to check for the winning choice.
+        if let Some((_choice, &votes)) = self.vote_counts.iter().enumerate().max_by_key(|&(_idx, &votes)| votes) {
+            // Calculate the quorum.
+            let quorum_votes = (self.votes as u128 * (self.quorum / 100) as u128) as u64 ;
+
+            // Check if the winning choice meets or exceeds the quorum.
+            if votes >= quorum_votes && self.votes >= self.threshold {
+                // If the winning choice meets the quorum, the proposal succeeds.
+                self.result = ProposalStatus::Succeeded;
+        }
+        }
+    }
+
+    pub fn finalize_preset_choice(&mut self) {
         //vote_counts[0] = for, vote_counts[1] = Against vote_counts[2]  = Abstain
+        // Calculate the quorum.
         let quorum: u64 =
             ((self.votes - self.vote_counts[2]) as u128 * (self.quorum / 100) as u128) as u64;
+        // Check if the winning choice meets or exceeds the quorum.    
         if self.votes >= self.threshold
             && self.vote_counts[0] >= quorum
             && self.check_expiry().is_ok()
@@ -114,6 +152,8 @@ impl Proposal {
             self.result = ProposalStatus::Failed
         }
     }
+
+
     pub fn check_expiry(&self) -> Result<()> {
         require!(Clock::get()?.slot < self.expiry, CoreError::Expired);
         Ok(())
@@ -156,16 +196,31 @@ impl Proposal {
         Ok(())
     }
     pub fn check_choices(&self) -> Result<()> {
-        require!(self.choices >= 1, CoreError::InvalidProposalStatus);
-        Ok(())
+        match self.proposal {
+            ProposalType::Bounty(_, _) | ProposalType::Executable(_) | ProposalType::Vote => {
+                if self.choices >= 1 && self.choices <= 3 {
+                    Ok(())
+                } else {
+                    err!(CoreError::InvalidChoicesAmount)
+                }
+            },
+            ProposalType::VoteMultipleChoice => {
+                if self.choices >= 1 && self.choices <= 6 {
+                    Ok(())
+                } else {
+                    err!(CoreError::InvalidChoicesAmount)
+                }
+            },
+        }
     }
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Copy, Clone, Debug, PartialEq, Eq)]
 pub enum ProposalType {
     Bounty(Pubkey, u64), // Pay an address some amount of SOL
-    Executable(ExecutableProposal),          // Sign some kind of instruction(s) with an accounts struct, etc
-    Vote,                // We just want to know what people think. No money involved
+    Executable(ExecutableProposal),// Sign some kind of instruction(s) with an accounts struct, etc
+    Vote, // We just want to know what people think. No money involved
+    VoteMultipleChoice, // We just want to know what people think. No money involved
 }
 
 impl Default for ProposalType {

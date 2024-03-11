@@ -61,11 +61,11 @@ impl<'info> CreateProposalSubDao<'info> {
         // Make sure quorum is valid
         self.config_sub_dao.check_valid_quorum(quorum)?;               
         // Check Minimum threshold
-        self.core_config.check_min_threshold(threshold)?;
+        self.config_sub_dao.check_min_threshold(threshold)?;
         // Check Max Expiry
-        self.core_config.check_max_expiry(expiry)?;
+        self.config_sub_dao.check_max_expiry(expiry)?;
         // Check Min Pre Voting Period
-        self.core_config.check_evaluation_phase_period(evaluation_period)?;
+        self.config_sub_dao.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
         self.proposal.check_choices()?; 
         // Check ID and add proposal change state

@@ -50,6 +50,7 @@ impl<'info> CleanupProposal<'info> {
             ProposalType::Bounty(payee, payout) => self.payout_bounty(payee, payout),
             ProposalType::Executable(executable_proposal)  => self.execute_tx(executable_proposal),
             ProposalType::Vote => self.finalize_vote(),
+            ProposalType::VoteMultipleChoice => self.finalize_vote(),
         }
     }
 
