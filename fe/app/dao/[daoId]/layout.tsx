@@ -49,7 +49,7 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* DAO Page Tabs */}
-      <div className="my-8 flex gap-8">
+      <div className="my-4 flex gap-4">
         {DAOTabs.map(({ label, href }) => {
           const matchedHref = daoId
             ? href.replace("[daoId]", daoId as string)
