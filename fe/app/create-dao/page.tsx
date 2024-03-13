@@ -1,3 +1,4 @@
+"use client";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,10 +11,37 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronLeft, ChevronRight, ImagePlus, Star } from "lucide-react";
+import { createContext, useContext, useState } from "react";
+
+const CreateDaoContext = createContext<number>(0);
 
 export default function CreateDao() {
+  const [page, setPage] = useState(0);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    category: "",
+    location: "",
+    pitchdeck: "",
+    demoVideo: "",
+    twitter: "",
+    linkedIn: "",
+    github: "",
+    website: "",
+  });
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((state) => ({ ...state, [name]: value }));
+  };
+
+  const next = () => {
+    localStorage.setItem(page.toString(), JSON.stringify(formData));
+    setPage((state) => state + 1);
+  };
+
   return (
-    <>
+    <CreateDaoContext.Provider value={page}>
       <div className="flex items-center gap-3">
         <ChevronLeft />
         <p>Back</p>
@@ -75,23 +103,39 @@ export default function CreateDao() {
                 <p className="text-sm text-gray-500">Basic Information</p>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <p>Title</p>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="title"
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <p>Category</p>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="category"
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <div className="flex flex-col gap-2">
                     <p>Location</p>
                     <p className="text-xs font-light text-gray-500">Optional</p>
                   </div>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="location"
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <div className="grid grid-cols-4 gap-3">
                   <p>Description</p>
-                  <Textarea className="col-span-3" />
+                  <Textarea
+                    className="col-span-3"
+                    name="description"
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
 
@@ -99,14 +143,22 @@ export default function CreateDao() {
                 <p className="text-sm text-gray-500">Links</p>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <p>Pitchdeck</p>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="pitchdeck"
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <div className="flex flex-col gap-2">
                     <p>Demo Video</p>
                     <p className="text-xs font-light text-gray-500">Optional</p>
                   </div>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="demoVideo"
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <div className="grid grid-cols-4 gap-3 items-center">
@@ -114,7 +166,11 @@ export default function CreateDao() {
                     <p>Twitter / X</p>
                     <p className="text-xs font-light text-gray-500">Optional</p>
                   </div>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="twitter"
+                    onChange={handleChange}
+                  />
                 </div>
 
                 <div className="grid grid-cols-4 gap-3 items-center">
@@ -122,35 +178,51 @@ export default function CreateDao() {
                     <p>Linked In</p>
                     <p className="text-xs font-light text-gray-500">Optional</p>
                   </div>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="linkedIn"
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <div className="flex flex-col gap-2">
                     <p>Github</p>
                     <p className="text-xs font-light text-gray-500">Optional</p>
                   </div>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="github"
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="grid grid-cols-4 gap-3 items-center">
                   <div className="flex flex-col gap-2">
                     <p>Website</p>
                     <p className="text-xs font-light text-gray-500">Optional</p>
                   </div>
-                  <Input className="col-span-3" />
+                  <Input
+                    className="col-span-3"
+                    name="website"
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="flex items-center justify-end">
-          <Button variant={"ghost"}>Next</Button>
+          <Button variant={"ghost"} onClick={next}>
+            Next
+          </Button>
         </div>
       </div>
-    </>
+    </CreateDaoContext.Provider>
   );
 }
 
 function CreateProjectStepper() {
+  const page = useContext(CreateDaoContext);
+
   const STEPS = [
     {
       title: "SubDao Info",
@@ -178,7 +250,11 @@ function CreateProjectStepper() {
     <div className="flex flex-col gap-20">
       {STEPS.map((e: any, index: number) => (
         <div className="grid grid-cols-10 gap-3" key={e.title}>
-          <div className="rounded-full bg-gray-500 h-6 w-6 p-2 flex justify-center items-center">
+          <div
+            className={`${
+              index == page && "rounded-full bg-gray-500"
+            } h-6 w-6 p-2 flex justify-center items-center`}
+          >
             <p>{index + 1}</p>
           </div>
           <div className="flex justify-center">
