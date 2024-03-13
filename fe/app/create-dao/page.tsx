@@ -14,7 +14,7 @@ import { ChevronLeft, ChevronRight, ImagePlus, Star } from "lucide-react";
 export default function CreateDao() {
   return (
     <>
-      <div className="flex items-center gap-3 py-10">
+      <div className="flex items-center gap-3">
         <ChevronLeft />
         <p>Back</p>
         <div className="max-h-full h-8 w-[1px] bg-gray-700"></div>
@@ -22,7 +22,13 @@ export default function CreateDao() {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/components" className="text-white">
-                Creator Dashboard
+                Home
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="text-white" />{" "}
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/components" className="text-white">
+                DAO
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="text-white" />
@@ -35,7 +41,7 @@ export default function CreateDao() {
         </Breadcrumb>
       </div>
 
-      <div className="flex flex-col gap-10 p-10">
+      <div className="flex flex-col gap-5 py-10">
         <p className="font-medium text-xl">Create a Project</p>
 
         <div className="grid grid-cols-3 p-5 gap-10">
