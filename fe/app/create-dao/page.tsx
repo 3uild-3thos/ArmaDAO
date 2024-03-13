@@ -106,42 +106,45 @@ export default function CreateDao() {
 function CreateProjectStepper() {
   const STEPS = [
     {
-      title: "Project Info",
+      title: "SubDao Info",
       description:
-        "Provide the Backers with the basic information of what the project is about.",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
     },
     {
-      title: "Project Info",
+      title: "Team Details",
       description:
-        "Provide the Backers with the basic information of what the project is about.",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
     },
     {
-      title: "Project Info",
+      title: "SubDao Config",
       description:
-        "Provide the Backers with the basic information of what the project is about.",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
     },
     {
-      title: "Project Info",
+      title: "Review / Confirmation",
       description:
-        "Provide the Backers with the basic information of what the project is about.",
-    },
-    {
-      title: "Project Info",
-      description:
-        "Provide the Backers with the basic information of what the project is about.",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
     },
   ];
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-20">
       {STEPS.map((e: any, index: number) => (
-        <div className="grid grid-cols-7">
-          <div className="">{index + 1}</div>
-          <div className="">{/* TODO: Add icon */}</div>
-          <div className="flex flex-col gap-2 col-span-4">
-            <p>{e.title}</p>
-            <p>{e.description}</p>
+        <div className="grid grid-cols-10 gap-3">
+          <div className="rounded-full bg-gray-500 h-6 w-6 p-2 flex justify-center items-center">
+            <p>{index + 1}</p>
           </div>
-          <div className="">{/* TODO: Add next icon */}</div>
+          <div className="flex justify-center">
+            <Star size={20} />
+          </div>
+          <div className="flex flex-col gap-2 col-span-7">
+            <p className="font-medium">{e.title}</p>
+            {/* TODO: Add proper text color */}
+            <p className="font-normal text-gray-500">{e.description}</p>
+          </div>
+          <div>
+            <ChevronRight size={30} />
+          </div>
         </div>
       ))}
     </div>
