@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ConnectWallet } from "@/components/ui/connect-wallet";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Home, Menu, Plus } from "lucide-react";
+import { Home, Menu, Star } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 interface INavItem {
@@ -45,13 +45,18 @@ export const Navbar = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <Home size={15} />
-              <p className="text-sm font-medium">Explore</p>
+              <Star size={15} />
+              <p className="text-sm font-medium">Mint</p>
             </div>
 
-            <div className="flex items-center gap-2 bg-white py-1 px-3 rounded">
-              <Plus size={15} className="bg-black rounded" />
-              <p className="text-sm font-medium text-black">My Projects</p>
+            <div className="flex items-center gap-2">
+              <Star size={15} />
+              <p className="text-sm font-medium">DAO</p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Star size={15} />
+              <p className="text-sm font-medium">Proposals</p>
             </div>
           </div>
         </div>
