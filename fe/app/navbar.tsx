@@ -36,7 +36,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-3">
             {/* <Smile /> */}
-            <p className="font-bold text-2xl">Armda</p>
+            <p className="font-bold text-2xl">Armdao</p>
           </div>
           <div className="flex items-center gap-7">
             <div className="flex items-center gap-2">
