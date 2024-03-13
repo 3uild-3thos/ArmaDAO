@@ -61,6 +61,7 @@ const config = {
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
+          light: "hsl(var(--muted-light))",
           foreground: "hsl(var(--muted-foreground))",
         },
         success: {
