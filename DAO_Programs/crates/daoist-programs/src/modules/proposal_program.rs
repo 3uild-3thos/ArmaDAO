@@ -84,6 +84,7 @@ impl Proposal {
         self.quorum = quorum;
         self.threshold = threshold;
         self.bump = bump;
+        self.votes = 0;
         self.expiry = Clock::get()?
             .slot
             .checked_add(expiry)
