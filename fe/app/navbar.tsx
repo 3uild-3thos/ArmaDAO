@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react";
 // next
-import Link from "next/link";
 // components
 import { ConnectWallet } from "@/components/ui/connect-wallet";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Menu } from "lucide-react";
-import Image from "next/image";
+import { Home, Menu, Star } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 interface INavItem {
   title: string;
@@ -34,15 +33,33 @@ export const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="relative flex items-center justify-between px-4 py-4 text-lg md:px-20 backdrop-blur-sm">
-        <Link href="/" passHref>
-          <Image
-            src={"/vercel.svg"}
-            alt={"Logo"}
-            width={1000}
-            height={1000}
-            className="w-auto h-8"
-          />
-        </Link>
+        <div className="flex items-center gap-10">
+          <div className="flex items-center gap-3">
+            {/* <Smile /> */}
+            <p className="font-bold text-2xl">Armdao</p>
+          </div>
+          <div className="flex items-center gap-7">
+            <div className="flex items-center gap-2">
+              <Home size={15} />
+              <p className="text-sm font-medium">Home</p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Star size={15} />
+              <p className="text-sm font-medium">Mint</p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Star size={15} />
+              <p className="text-sm font-medium">DAO</p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Star size={15} />
+              <p className="text-sm font-medium">Proposals</p>
+            </div>
+          </div>
+        </div>
 
         <div className="relative flex items-center justify-end h-full gap-4">
           <div className="md:hidden">
@@ -54,9 +71,7 @@ export const Navbar = () => {
               menuOpen ? "translate-x-0" : "translate-x-full"
             } md:static md:w-auto md:bg-transparent md:flex-row md:transform-none md:text-sm bg-black backdrop-blur-md sm:bg-transparent sm:backdrop-blur-none`}
           >
-            {/* <Button variant={"white"} size={"sm"}>
-              Join Waitlist
-            </Button> */}
+            <Input />
             <ConnectWallet />
             <ThemeToggle />
           </div>
