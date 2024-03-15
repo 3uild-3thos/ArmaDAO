@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Star } from "lucide-react";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const CreateDaoContext = createContext<number>(0);
 
