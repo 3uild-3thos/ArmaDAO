@@ -26,7 +26,7 @@ const RootLayout = ({
         <p className="font-medium text-xl">Create a Project</p>
 
         <div className="grid grid-cols-3 p-5 gap-10">
-          <CreateProjectStepper />
+          <CreateProjectStepper page={page} />
           <div className="col-span-2 flex flex-col gap-10">
             {children}
             <div className="flex justify-between">
@@ -46,9 +46,11 @@ const RootLayout = ({
 
 export default RootLayout;
 
-function CreateProjectStepper() {
-  const page = useContext(CreateDaoContext);
+interface ICreateProjectStepperProps {
+  page: number;
+}
 
+function CreateProjectStepper({ page }: ICreateProjectStepperProps) {
   const STEPS = [
     {
       title: "SubDao Info",
