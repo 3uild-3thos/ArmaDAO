@@ -18,8 +18,10 @@ function DaoInfo() {
     website: "",
   });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
     setFormData((state) => ({ ...state, [name]: value }));
   };
 
