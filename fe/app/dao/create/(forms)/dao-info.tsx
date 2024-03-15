@@ -129,7 +129,7 @@ function DaoInfo() {
 
             <div className="grid grid-cols-4 gap-3 items-center">
               <div className="flex flex-col gap-2">
-                <p>Linked In</p>
+                <p>LinkedIn</p>
                 <p className="text-xs font-light text-gray-500">Optional</p>
               </div>
               <Input
