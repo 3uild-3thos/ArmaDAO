@@ -55,6 +55,7 @@ const RootLayout = ({
             <main className="flex flex-col h-full min-h-screen">
               {children}
             </main>
+            <div className="w-full h-24"></div>
             <Toaster />
           </ThemeProvider>
         </WalletConnectProvider>
