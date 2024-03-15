@@ -1,6 +1,7 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Star } from "lucide-react";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const CreateDaoContext = createContext<number>(0);
 
@@ -11,8 +12,12 @@ const RootLayout = ({
 }>) => {
   const [page, setPage] = useState(0);
 
-  const next = () => {
+  const handleNext = () => {
     setPage((state) => state + 1);
+  };
+
+  const handleBack = () => {
+    setPage((state) => state - 1);
   };
 
   return (
@@ -21,13 +26,18 @@ const RootLayout = ({
         <p className="font-medium text-xl">Create a Project</p>
 
         <div className="grid grid-cols-3 p-5 gap-10">
-          <CreateProjectStepper />
-          {children}
-        </div>
-        <div className="flex items-center justify-end">
-          <Button variant={"ghost"} onClick={next}>
-            Next
-          </Button>
+          <CreateProjectStepper page={page} />
+          <div className="col-span-2 flex flex-col gap-10">
+            {children}
+            <div className="flex justify-between">
+              <Button variant={"ghost"} onClick={handleBack}>
+                Back
+              </Button>
+              <Button variant={"ghost"} onClick={handleNext}>
+                Next
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </CreateDaoContext.Provider>
@@ -36,9 +46,11 @@ const RootLayout = ({
 
 export default RootLayout;
 
-function CreateProjectStepper() {
-  const page = useContext(CreateDaoContext);
+interface ICreateProjectStepperProps {
+  page: number;
+}
 
+function CreateProjectStepper({ page }: ICreateProjectStepperProps) {
   const STEPS = [
     {
       title: "SubDao Info",
