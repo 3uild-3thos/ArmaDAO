@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Star } from "lucide-react";
 import { createContext, useContext, useState } from "react";
@@ -14,7 +15,9 @@ const RootLayout = ({
   const next = () => {
     setPage((state) => state + 1);
   };
-
+  const back = () => {
+    setPage((state) => state - 1);
+  };
   return (
     <CreateDaoContext.Provider value={page}>
       <div className="flex flex-col gap-5">
@@ -22,12 +25,17 @@ const RootLayout = ({
 
         <div className="grid grid-cols-3 p-5 gap-10">
           <CreateProjectStepper />
-          {children}
-        </div>
-        <div className="flex items-center justify-end">
-          <Button variant={"ghost"} onClick={next}>
-            Next
-          </Button>
+          <div className="col-span-2 flex flex-col gap-10">
+            {children}
+            <div className="flex justify-between">
+              <Button variant={"ghost"} onClick={back}>
+                Back
+              </Button>
+              <Button variant={"ghost"} onClick={next}>
+                Next
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </CreateDaoContext.Provider>
