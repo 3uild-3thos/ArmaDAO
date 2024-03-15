@@ -4,64 +4,141 @@ import { ImagePlus } from "lucide-react";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  ITeamInfo,
+  TeamInfoDefaults,
+  TeamInfoSchema,
+} from "@/lib/schema/team-info.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 
 function TeamInfo() {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    category: "",
-    location: "",
-    pitchdeck: "",
-    demoVideo: "",
-    twitter: "",
-    linkedIn: "",
-    github: "",
-    website: "",
+  const form = useForm<ITeamInfo>({
+    resolver: zodResolver(TeamInfoSchema),
+    defaultValues: TeamInfoDefaults,
   });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((state) => ({ ...state, [name]: value }));
-  };
+  function onSubmit(values: ITeamInfo) {
+    console.log(values);
+  }
+
+  const handleChange = (e: any) => {};
   return (
     <>
-      <div className="grid grid-cols-2 gap-8">
-        <p className="text-sm text-gray-500 col-span-2">Team Information</p>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="grid grid-cols-2 gap-8">
+            <p className="text-sm text-gray-500 col-span-2">Team Information</p>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex flex-col justify-center gap-3">
+                      <p>Team Name</p>
+                      <Input
+                        className="col-span-3"
+                        placeholder="name"
+                        {...field}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="linkedIn"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex flex-col justify-center gap-3">
+                      <div className="flex items-center gap-2">
+                        <p>LinkedIn Profile</p>
+                        <p className="text-xs font-light text-gray-500">
+                          Optional
+                        </p>
+                      </div>
+                      <Input
+                        className="col-span-3"
+                        placeholder="linkedIn"
+                        {...field}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="twitter"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex flex-col justify-center gap-3">
+                      <p>Twitter / X Profile</p>
+                      <Input
+                        className="col-span-3"
+                        placeholder="twitter"
+                        {...field}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="github"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex flex-col justify-center gap-3">
+                      <div className="flex items-center gap-2">
+                        <p>Github Profile</p>
+                        <p className="text-xs font-light text-gray-500">
+                          Optional
+                        </p>
+                      </div>
+                      <Input
+                        className="col-span-3"
+                        placeholder="github"
+                        {...field}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-        <div className="flex flex-col justify-center gap-3">
-          <p>Team Name</p>
-          <Input name="title" onChange={handleChange} />
-        </div>
-
-        <div className="flex flex-col justify-center gap-3">
-          <div className="flex items-center gap-2">
-            <p>LinkedIn Profile</p>
-            <p className="text-xs font-light text-gray-500">Optional</p>
+            <FormField
+              control={form.control}
+              name="website"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div className="flex flex-col justify-center gap-3">
+                      <div className="flex items-center gap-2">
+                        <p>Website</p>
+                        <p className="text-xs font-light text-gray-500">
+                          Optional
+                        </p>
+                      </div>
+                      <Input
+                        className="col-span-3"
+                        placeholder="website"
+                        {...field}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
           </div>
-          <Input className="col-span-3" name="title" onChange={handleChange} />
-        </div>
-
-        <div className="flex flex-col justify-center gap-3">
-          <p>Twitter / X Profile</p>
-          <Input name="title" onChange={handleChange} />
-        </div>
-
-        <div className="flex flex-col justify-center gap-3">
-          <div className="flex items-center gap-2">
-            <p>Github Profile</p>
-            <p className="text-xs font-light text-gray-500">Optional</p>
-          </div>
-          <Input className="col-span-3" name="title" onChange={handleChange} />
-        </div>
-
-        <div className="flex flex-col justify-center gap-3">
-          <div className="flex items-center gap-2">
-            <p>Website</p>
-            <p className="text-xs font-light text-gray-500">Optional</p>
-          </div>
-          <Input className="col-span-3" name="title" onChange={handleChange} />
-        </div>
-      </div>
+        </form>
+      </Form>
 
       <div className="grid grid-cols-2 gap-8 border border-gray-500 py-3 px-4 rounded-xl">
         <div className="col-span-2 flex items-center justify-between">
@@ -146,7 +223,6 @@ function TeamInfo() {
           </div>
         </div>
       </div>
-
       <div className="flex justify-center">
         <Button variant={"ghost"}>Add a team member</Button>
       </div>
