@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 // next
 // components
 import { ConnectWallet } from "@/components/ui/connect-wallet";
+import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Home, Menu, Star } from "lucide-react";
-import { Input } from "@/components/ui/input";
 
 interface INavItem {
   title: string;
@@ -36,7 +36,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-3">
             {/* <Smile /> */}
-            <p className="font-bold text-2xl">Armdao</p>
+            <p className="font-bold text-2xl">Armada</p>
           </div>
           <div className="flex items-center gap-7">
             <div className="flex items-center gap-2">

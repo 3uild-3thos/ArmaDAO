@@ -49,7 +49,7 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* DAO Page Tabs */}
-      <div className="my-4 flex gap-4">
+      <div className="flex gap-4 my-4">
         {DAOTabs.map(({ label, href }) => {
           const matchedHref = daoId
             ? href.replace("[daoId]", daoId as string)
@@ -67,7 +67,7 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
             >
               {label}
               {pathname.includes(matchedHref) && (
-                <div className="absolute top-2 right-2 rounded-full p-1 bg-cyan" />
+                <div className="absolute p-1 rounded-full top-2 right-2 bg-cyan" />
               )}
             </Link>
           );
@@ -75,7 +75,7 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* DAO Detail Pages */}
-      {children}
+      <div className="flex flex-col gap-8">{children}</div>
     </div>
   );
 };
