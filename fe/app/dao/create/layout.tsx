@@ -12,12 +12,14 @@ const RootLayout = ({
 }>) => {
   const [page, setPage] = useState(0);
 
-  const next = () => {
+  const handleNext = () => {
     setPage((state) => state + 1);
   };
-  const back = () => {
+
+  const handleBack = () => {
     setPage((state) => state - 1);
   };
+
   return (
     <CreateDaoContext.Provider value={page}>
       <div className="flex flex-col gap-5">
@@ -28,10 +30,10 @@ const RootLayout = ({
           <div className="col-span-2 flex flex-col gap-10">
             {children}
             <div className="flex justify-between">
-              <Button variant={"ghost"} onClick={back}>
+              <Button variant={"ghost"} onClick={handleBack}>
                 Back
               </Button>
-              <Button variant={"ghost"} onClick={next}>
+              <Button variant={"ghost"} onClick={handleNext}>
                 Next
               </Button>
             </div>
