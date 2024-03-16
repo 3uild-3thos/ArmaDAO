@@ -1,5 +1,5 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
-use daoist_programs::modules::{CoreProgram, DaoConfig, /* StakingProgram, StakeState */ CoreHandler, Proposal, ProposalType, add_proposal};
+use daoist_programs::modules::{CoreProgram, DaoConfig, StakingProgram, StakeState, CoreHandler, Proposal, ProposalType, add_proposal};
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
@@ -61,14 +61,6 @@ pub struct CreateProposal<'info> {
         bump = core_config.config_bump,
     )]
     core_config: Account<'info, DaoConfig>,
-/*     #[account(constraint = staking_program.key() == core_config.staking_program)]
-    staking_program: Program<'info, StakingProgram>,
-    #[account(
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
-        seeds::program = staking_program.key(),
-        bump = stake_state.state_bump,
-    )]
-    stake_state: Account<'info, StakeState>, */
     #[account(
         seeds=[b"treasury", core_config.key().as_ref()],
         bump = core_config.treasury_bump
@@ -98,6 +90,8 @@ impl<'info> CreateProposal<'info> {
             self.metadata.collection, 
             self.collection
             );
+                //Check hybridness
+        self.core_config.check_hybrid()?;    
         // Make sure quorum is valid    
         self.core_config.check_valid_quorum(quorum)?;                 
         // Check Minimum threshold
@@ -149,7 +143,7 @@ impl<'info> CreateProposal<'info> {
     }
 }
 
-/* #[derive(Accounts)]
+#[derive(Accounts)]
 #[instruction(id: u64)]
 pub struct StakeCreateProposal<'info> {
     #[account(mut)]
@@ -198,6 +192,8 @@ impl<'info> StakeCreateProposal<'info> {
         evaluation_period: u64,
         bumps: &StakeCreateProposalBumps,
     ) -> Result<()> {
+        // Make sure its a staked based DAO
+        self.core_config.ensure_not_hybrid ()?;
         // Make sure user has staked the required amount
         self.core_config.check_min_staked_required_proposal(self.stake_state.amount)?;
         // Make sure quorum is valid
@@ -248,4 +244,4 @@ impl<'info> StakeCreateProposal<'info> {
         );
         transfer(ctx, self.core_config.proposal_fee)
     }
-} */
+}

@@ -52,6 +52,7 @@ pub mod dao {
             is_hybrid
         )
     }
+    // Instantiate a new SubDAO Config ACC for Hybrid DAOS
     pub fn initialize_sub_dao(
         ctx: Context<InitializeSubdao>,
         seed: u64,
@@ -79,7 +80,8 @@ pub mod dao {
             is_hybrid
         )
     }
-   /*  pub fn initialize_sub_dao_token(
+    // Instantiate a new SubDAO Config ACC for FT/NFT DAOs
+    pub fn initialize_sub_dao_token(
         ctx: Context<InitializeSubdaoToken>,
         seed: u64,
         proposal_fee: u64,
@@ -89,7 +91,8 @@ pub mod dao {
         evaluation_phase_period: u64,
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
-        min_staked_required_proposal: u64
+        min_staked_required_proposal: u64,
+        is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -101,9 +104,10 @@ pub mod dao {
             evaluation_phase_period,
             collection_mint,
             mint,
-            min_staked_required_proposal
+            min_staked_required_proposal,
+            is_hybrid
         )
-    } */
+    } 
     // Instruction CPI
     // ADD PROPOSAL
     pub fn add_proposal(

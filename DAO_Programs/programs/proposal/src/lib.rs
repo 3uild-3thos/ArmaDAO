@@ -42,7 +42,7 @@ pub mod proposal {
             &ctx.bumps
         )
     }
-/*     // Create a proposal staked based
+    // Create a proposal staked based
     pub fn create_proposal_staked(
         ctx: Context<StakeCreateProposal>, 
         id: u64, 
@@ -71,7 +71,7 @@ pub mod proposal {
             evaluation_period,
             &ctx.bumps
         )
-    } */
+    }
     // Cleanup a proposal
     pub fn cleanup_proposal(
         ctx: Context<CleanupProposal>,

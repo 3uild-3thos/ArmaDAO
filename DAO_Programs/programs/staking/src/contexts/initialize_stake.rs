@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface},  
     associated_token::AssociatedToken,
-   /*  metadata::{Metadata, MetadataAccount},  */
+    metadata::{Metadata, MetadataAccount}, 
 };
 use daoist_programs::modules::{StakeState,DaoConfig};
 
@@ -67,7 +67,7 @@ impl<'info> InitializeStake<'info> {
     }
 }
 
-/* #[derive(Accounts)]
+#[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeStakeNft<'info> {
     #[account(mut)]
@@ -139,4 +139,4 @@ impl<'info> InitializeStakeNft<'info> {
             bumps.stake_auth
         )
     }
-} */
+}

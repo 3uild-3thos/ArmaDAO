@@ -118,6 +118,91 @@
       ]
     },
     {
+      "name": "createProposalStaked",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "proposal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "coreConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakingProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "id",
+          "type": "u64"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "metadata",
+          "type": "string"
+        },
+        {
+          "name": "proposal",
+          "type": {
+            "defined": "ProposalType"
+          }
+        },
+        {
+          "name": "quorum",
+          "type": "u8"
+        },
+        {
+          "name": "threshold",
+          "type": "u64"
+        },
+        {
+          "name": "expiry",
+          "type": "u64"
+        },
+        {
+          "name": "choices",
+          "type": "u8"
+        },
+        {
+          "name": "evaluationPeriod",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "cleanupProposal",
       "accounts": [
         {
