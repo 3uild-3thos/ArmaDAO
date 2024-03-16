@@ -89,7 +89,7 @@ impl<'info> CleanupStake<'info> {
 
 
 }
-#[derive(Accounts)]
+/* #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct CleanupStakeNft<'info> {
     #[account(mut)]
@@ -175,3 +175,4 @@ impl<'info> CleanupStakeNft<'info> {
 
 
 }
+ */

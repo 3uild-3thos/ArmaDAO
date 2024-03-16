@@ -50,6 +50,8 @@ pub enum CoreError {
     InvalidChoice,
     #[msg("Subdao Disabled")]
     InvalidAllowSubDao,
+    #[msg("InvalidDaoType")]
+    InvalidDaoType,
 }
 
 

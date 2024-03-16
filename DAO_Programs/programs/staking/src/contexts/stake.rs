@@ -2,11 +2,11 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface, TransferChecked, transfer_checked}, 
     associated_token::AssociatedToken,
-    metadata::{Metadata, MetadataAccount, MasterEditionAccount}, 
+   /*  metadata::{Metadata, MetadataAccount, MasterEditionAccount} */
 };
 use daoist_programs::modules::{StakeState, DaoConfig};
-use crate::validate_nft;
-use crate::errors::StakeError;
+/* use crate::validate_nft;
+use crate::errors::StakeError; */
 
 #[derive(Accounts)]
 #[instruction(seed: u64)]
@@ -106,7 +106,7 @@ impl<'info> Stake<'info> {
     }
 }
 
-#[derive(Accounts)]
+/* #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct StakeNft<'info> {
     #[account(mut)]
@@ -232,4 +232,4 @@ impl<'info> StakeNft<'info> {
 
         transfer_checked(ctx, amount, self.nft.decimals)
     }
-}
+} */

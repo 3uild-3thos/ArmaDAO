@@ -1,5 +1,5 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
-use daoist_programs::modules::{CoreProgram, DaoConfig, StakingProgram, StakeState, CoreHandler, Proposal, ProposalType, add_proposal};
+use daoist_programs::modules::{CoreProgram, DaoConfig, /* StakingProgram, StakeState */ CoreHandler, Proposal, ProposalType, add_proposal};
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
@@ -61,14 +61,14 @@ pub struct CreateProposal<'info> {
         bump = core_config.config_bump,
     )]
     core_config: Account<'info, DaoConfig>,
-    #[account(constraint = staking_program.key() == core_config.staking_program)]
+/*     #[account(constraint = staking_program.key() == core_config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
         seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
         seeds::program = staking_program.key(),
         bump = stake_state.state_bump,
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Account<'info, StakeState>, */
     #[account(
         seeds=[b"treasury", core_config.key().as_ref()],
         bump = core_config.treasury_bump
@@ -84,7 +84,7 @@ impl<'info> CreateProposal<'info> {
         &mut self,
         id: u64,
         name: String,
-        gist: String,
+        metadata: String,
         proposal: ProposalType,
         quorum: u8,
         threshold: u64,
@@ -124,7 +124,7 @@ impl<'info> CreateProposal<'info> {
        self.proposal.init(
             id,
             name, // A proposal name
-            gist, // 72 bytes (39 bytes + / + 32 byte ID)
+            metadata, // 72 bytes (39 bytes + / + 32 byte ID)
             proposal,
             quorum,
             threshold,
@@ -148,7 +148,8 @@ impl<'info> CreateProposal<'info> {
         transfer(ctx, self.core_config.proposal_fee)
     }
 }
-#[derive(Accounts)]
+
+/* #[derive(Accounts)]
 #[instruction(id: u64)]
 pub struct StakeCreateProposal<'info> {
     #[account(mut)]
@@ -188,7 +189,7 @@ impl<'info> StakeCreateProposal<'info> {
         &mut self,
         id: u64,
         name: String,
-        gist: String,
+        metadata: String,
         proposal: ProposalType,
         quorum: u8,
         threshold: u64,
@@ -224,7 +225,7 @@ impl<'info> StakeCreateProposal<'info> {
        self.proposal.init(
             id,
             name, // A proposal name
-            gist, // 72 bytes (39 bytes + / + 32 byte ID)
+            metadata, // 72 bytes (39 bytes + / + 32 byte ID)
             proposal,
             quorum,
             threshold,
@@ -247,4 +248,4 @@ impl<'info> StakeCreateProposal<'info> {
         );
         transfer(ctx, self.core_config.proposal_fee)
     }
-}
+} */

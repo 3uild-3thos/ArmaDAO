@@ -17,30 +17,30 @@ pub mod staking {
     }
     
     // Initialize a stake account for adding DAO NFTS
-    pub fn init_stake_nft(ctx: Context<InitializeStakeNft>) -> Result<()> {
+/*     pub fn init_stake_nft(ctx: Context<InitializeStakeNft>) -> Result<()> {
         // Create a stake account
         ctx.accounts.init(&ctx.bumps)
-    }      
+    }      */ 
     // Stake DAO tokens
     pub fn stake_tokens(ctx: Context<Stake>, amount: u64) -> Result<()> {
         // Deposit tokens, add stake
         ctx.accounts.deposit_tokens(amount)
     }
     // Stake DAO NFTs
-    pub fn stake_nft(ctx: Context<StakeNft>, amount: u64) -> Result<()> {
+/*     pub fn stake_nft(ctx: Context<StakeNft>, amount: u64) -> Result<()> {
     // Deposit tokens, add stake
         ctx.accounts.deposit_tokens(amount)
-    }
+    } */
     // UnStake DAO tokens
     pub fn unstake_tokens(ctx: Context<Stake>, amount: u64) -> Result<()> {
         // Withdraw tokens, remove stake
         ctx.accounts.withdraw_tokens(amount)
     }
     // UnStake DAO NFTs
-    pub fn unstake_nft(ctx: Context<StakeNft>, amount: u64) -> Result<()> {
+/*     pub fn unstake_nft(ctx: Context<StakeNft>, amount: u64) -> Result<()> {
     // Withdraw tokens, remove stake
         ctx.accounts.withdraw_tokens(amount)
-    }
+    } */
 
     // Close a stake account when you're done with it
     pub fn close_stake(ctx: Context<CleanupStake>) -> Result<()> {
@@ -48,10 +48,10 @@ pub mod staking {
         ctx.accounts.cleanup_stake(&ctx.bumps)
     }
     // Close a Nft stake account when you're done with it
-    pub fn close_stake_nft(ctx: Context<CleanupStakeNft>) -> Result<()> {
+/*     pub fn close_stake_nft(ctx: Context<CleanupStakeNft>) -> Result<()> {
     // Create a stake account
         ctx.accounts.cleanup_stake(&ctx.bumps)
-    }
+    } */
 
     // SubDAO //
     // Initialize a stake account for adding SubDAO tokens

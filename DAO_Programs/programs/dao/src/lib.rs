@@ -27,7 +27,8 @@ pub mod dao {
         mint: Option<Pubkey>, 
         min_staked_required_proposal: Option<u64>,
         allow_sub_dao: bool,
-        min_staked_create_subdao: Option<u64>
+        min_staked_create_subdao: Option<u64>,
+        is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -44,7 +45,8 @@ pub mod dao {
             mint,
             min_staked_required_proposal,
             allow_sub_dao,
-            min_staked_create_subdao
+            min_staked_create_subdao,
+            is_hybrid
         )
     }
     pub fn initialize_sub_dao(
@@ -57,7 +59,8 @@ pub mod dao {
         evaluation_phase_period: u64,
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
-        min_staked_required_proposal: u64
+        min_staked_required_proposal: Option<u64>,
+        is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -69,10 +72,11 @@ pub mod dao {
             evaluation_phase_period,
             collection_mint,
             mint,
-            min_staked_required_proposal
+            min_staked_required_proposal,
+            is_hybrid
         )
     }
-    pub fn initialize_sub_dao_token(
+   /*  pub fn initialize_sub_dao_token(
         ctx: Context<InitializeSubdaoToken>,
         seed: u64,
         proposal_fee: u64,
@@ -96,7 +100,7 @@ pub mod dao {
             mint,
             min_staked_required_proposal
         )
-    }
+    } */
     // Instruction CPI
     // ADD PROPOSAL
     pub fn add_proposal(

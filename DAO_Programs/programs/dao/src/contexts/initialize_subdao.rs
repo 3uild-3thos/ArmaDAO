@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+/* use anchor_lang::prelude::*;
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
@@ -7,7 +7,7 @@ use anchor_spl::{
 use crate::validate_nft;
 use crate::errors::DaoError;
 
-use daoist_programs::modules::{DaoConfig, StakeState, StakingProgram};
+use daoist_programs::modules::{DaoConfig, /* StakeState, StakingProgram */};
 
 #[derive(Accounts)]
 #[instruction(seed: u64)]
@@ -86,9 +86,11 @@ impl<'info> InitializeSubdao<'info> {
         min_threshold: u64,
         max_expiry: u64,
         evaluation_phase_period: u64,
+        //DAO TYPE
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>,
-        min_staked_required_proposal : u64,
+        min_staked_required_proposal : Option<u64>,
+        is_hybrid: bool
     ) -> Result<()> {
         
         validate_nft!(
@@ -114,14 +116,17 @@ impl<'info> InitializeSubdao<'info> {
                 treasury_bump: bumps.treasury,
                 collection_mint,
                 mint,
-                min_staked_required_proposal: Some(min_staked_required_proposal),
+                min_staked_required_proposal,
                 allow_sub_dao: false,
-                min_staked_create_subdao: None
+                min_staked_create_subdao: None,
+                is_hybrid
             });
                 Ok(()) 
    
     }
-}
+} */
+
+/* 
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdaoToken<'info> {
@@ -204,4 +209,4 @@ impl<'info> InitializeSubdaoToken<'info> {
                 Ok(()) 
    
     }
-}
+} */

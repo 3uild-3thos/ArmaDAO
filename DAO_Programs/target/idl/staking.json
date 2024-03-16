@@ -59,77 +59,6 @@
       "args": []
     },
     {
-      "name": "initStakeNft",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "ownerAta",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAuth",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "collection",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadataProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "stakeTokens",
       "accounts": [
         {
@@ -164,87 +93,6 @@
         },
         {
           "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    },
-    {
-      "name": "stakeNft",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "ownerAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAuth",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "collection",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "masterEdition",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -333,87 +181,6 @@
       ]
     },
     {
-      "name": "unstakeNft",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "ownerAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAuth",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "collection",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadata",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "masterEdition",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "metadataProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    },
-    {
       "name": "closeStake",
       "accounts": [
         {
@@ -433,67 +200,6 @@
         },
         {
           "name": "mint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "treasury",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "closeStakeNft",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stakeAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeAuth",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "collection",
           "isMut": false,
           "isSigner": false
         },
@@ -1298,6 +1004,10 @@
             "type": {
               "option": "u64"
             }
+          },
+          {
+            "name": "isHybrid",
+            "type": "bool"
           }
         ]
       }

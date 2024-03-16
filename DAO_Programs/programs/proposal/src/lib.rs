@@ -16,7 +16,7 @@ pub mod proposal {
         ctx: Context<CreateProposal>, 
         id: u64, 
         name: String, 
-        gist: String, 
+        metadata: String, 
         proposal: ProposalType,
         quorum: u8, 
         threshold: u64,
@@ -32,7 +32,7 @@ pub mod proposal {
         ctx.accounts.create_proposal(
             id, 
             name, 
-            gist,
+            metadata,
             proposal,
             quorum,
             threshold,
@@ -42,12 +42,12 @@ pub mod proposal {
             &ctx.bumps
         )
     }
-    // Create a proposal staked based
+/*     // Create a proposal staked based
     pub fn create_proposal_staked(
         ctx: Context<StakeCreateProposal>, 
         id: u64, 
         name: String, 
-        gist: String, 
+        metadata: String, 
         proposal: ProposalType,
         quorum: u8, 
         threshold: u64,
@@ -62,7 +62,7 @@ pub mod proposal {
         ctx.accounts.create_proposal(
             id, 
             name, 
-            gist,
+            metadata,
             proposal,
             quorum,
             threshold,
@@ -71,7 +71,7 @@ pub mod proposal {
             evaluation_period,
             &ctx.bumps
         )
-    }
+    } */
     // Cleanup a proposal
     pub fn cleanup_proposal(
         ctx: Context<CleanupProposal>,
@@ -86,11 +86,12 @@ pub mod proposal {
         ctx.accounts.execute_proposal()
     }   
     // Create a SubDao Proposal
+    // Staked Based
     pub fn create_proposal_sub_dao(
         ctx: Context<CreateProposalSubDao>, 
         id: u64, 
         name: String, 
-        gist: String, 
+        metadata: String, 
         proposal: ProposalType,
         quorum: u8, 
         threshold: u64,
@@ -106,7 +107,7 @@ pub mod proposal {
         ctx.accounts.create_proposal_sub_dao(
             id, 
             name, 
-            gist,
+            metadata,
             proposal,
             quorum,
             threshold,
@@ -115,7 +116,39 @@ pub mod proposal {
             evaluation_period,
             &ctx.bumps
         )
-    } 
+    }
+    // Create a SubDao Proposal
+    // NFT Holding Based
+    pub fn create_proposal_sub_dao_hybrid(
+        ctx: Context<CreateProposalSubDaoHybrid>, 
+        id: u64, 
+        name: String, 
+        metadata: String, 
+        proposal: ProposalType,
+        quorum: u8, 
+        threshold: u64,
+        expiry: u64,
+        choices:u8,
+        evaluation_period:u64,
+
+    ) -> Result<()> {
+        // Pay a proposal fee to DAO treasury
+        ctx.accounts.pay_proposal_fee()?;
+
+        // Ensure user has actually got tokens staked and create a new proposal
+        ctx.accounts.create_proposal_sub_dao_hybrid(
+            id, 
+            name, 
+            metadata,
+            proposal,
+            quorum,
+            threshold,
+            expiry,
+            choices,
+            evaluation_period,
+            &ctx.bumps
+        )
+    }      
     // Cleanup a proposal
     pub fn cleanup_proposal_sub_dao(
         ctx: Context<CleanupProposalSubDao>,
