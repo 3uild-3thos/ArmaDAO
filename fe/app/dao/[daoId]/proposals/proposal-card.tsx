@@ -39,17 +39,17 @@ const ProposalCard = ({
   const { daoId } = useParams();
   return (
     <Link href={`/dao/${daoId}/proposals/${id}`}>
-      <Card className="hover:border-muted-light duration-200">
+      <Card className="duration-200 hover:border-muted-light">
         <CardContent className="flex flex-col gap-2">
           {/* TODO: Add the type as badge of the card??? */}
           {/* Title and Status */}
           <div className="grid grid-cols-12">
-            <div className="flex gap-4 items-start col-span-8">
-              <div className="text-2xl">{title}</div>
+            <div className="flex items-start col-span-8 gap-4">
+              <div className="text-2xl font-medium">{title}</div>
               <ProposalStatusBadge status={status} />
             </div>
-            <div className="flex flex-col gap-2 items-end col-span-4">
-              <div className="text-muted-light text-base">
+            <div className="flex flex-col items-end col-span-4 gap-2">
+              <div className="text-base text-muted-light">
                 Posted {timeAgo(postedAt)} by {shortenAddress(postedBy)}
               </div>
             </div>

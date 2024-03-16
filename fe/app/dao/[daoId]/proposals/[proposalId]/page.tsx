@@ -5,16 +5,17 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import ProposalDateComponent from "@/proposals/[proposalId]/proposal-date";
 import ProposalInfoComponent from "@/proposals/[proposalId]/proposal-info";
+import ProposalLatestForum from "@/proposals/[proposalId]/proposal-latest-forum";
+import ProposalResultsComponent from "./proposal-results";
 
 // lib
+import findLatestForum from "@/lib/helpers/findLatestForum";
 import shortenAddress from "@/lib/helpers/shortenAddress";
 import { IChoice } from "@/lib/schema/proposals.schema";
 
 // mock
-import findLatestForum from "@/lib/helpers/findLatestForum";
 import { forums } from "@/mock/forums";
 import { proposals } from "@/mock/proposals";
-import ProposalLatestForum from "./proposal-latest-forum";
 
 interface IDAOProposalDetailPageProps {
   params: { proposalId: string; daoId: string };
@@ -37,11 +38,11 @@ const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPageProps) => {
 
   return (
     <>
-      <h3 className="text-2xl text-muted">
+      <h3 className="text-2xl font-medium text-muted">
         Proposal: {shortenAddress(proposalId)}
       </h3>
       <div className="grid grid-cols-12 gap-8">
-        <div className="flex flex-col col-span-9 gap-8">
+        <div className="flex flex-col col-span-8 gap-8">
           <ProposalInfoComponent proposalId={proposalId} proposal={proposal} />
           <Card>
             <CardContent className="flex flex-col gap-8">
@@ -78,7 +79,7 @@ const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPageProps) => {
             </CardContent>
           </Card>
         </div>
-        <div className="flex flex-col col-span-3 gap-8">
+        <div className="flex flex-col col-span-4 gap-8">
           <ProposalDateComponent
             startDate={proposal.startDate}
             endDate={proposal.endDate}
@@ -88,6 +89,7 @@ const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPageProps) => {
             daoId={daoId}
             proposalId={proposalId}
           />
+          <ProposalResultsComponent />
         </div>
       </div>
     </>
