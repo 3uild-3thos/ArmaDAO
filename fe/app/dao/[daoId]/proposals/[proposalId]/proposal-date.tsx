@@ -13,7 +13,7 @@ const ProposalDateComponent = ({
   return (
     <Card>
       <CardContent className="flex flex-col gap-8 text-muted">
-        <div className="text-2xl">Date</div>
+        <div className="text-xl font-medium">Date</div>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2 text-base">
             <Calendar size={16} /> Start: {startDate}
