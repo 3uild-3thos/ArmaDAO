@@ -6,7 +6,7 @@ use anchor_spl::{
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
     associated_token::AssociatedToken
 };
-use crate::validate_nft;
+use crate::{validate_nft, REQUIRED_COLLECTION_MINT};
 use crate::errors::DaoError;
 
 
@@ -15,6 +15,38 @@ use crate::errors::DaoError;
 pub struct Initialize<'info> {
     #[account(mut)]
     initializer: Signer<'info>,
+    #[account(
+        mut,
+        associated_token::mint = nft,
+        associated_token::authority = initializer
+    )]
+    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    nft: InterfaceAccount<'info, Mint>,
+    #[account(constraint = collection.key() == REQUIRED_COLLECTION_MINT)]
+    collection: InterfaceAccount<'info, Mint>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref()
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+        constraint = metadata.collection.as_ref().unwrap().key.as_ref() == collection.key().as_ref(),
+        constraint = metadata.collection.as_ref().unwrap().verified == true,
+    )]
+    metadata: Account<'info, MetadataAccount>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref(),
+            b"edition"
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+    )]
+    master_edition: Account<'info, MasterEditionAccount>,
     #[account(
         seeds=[b"auth", config.key().as_ref()],
         bump
@@ -34,6 +66,9 @@ pub struct Initialize<'info> {
         space = DaoConfig::LEN
     )]
     config: Account<'info, DaoConfig>,
+    metadata_program: Program<'info, Metadata>,
+    token_program: Interface<'info, TokenInterface>,
+    associated_token_program: Program<'info, AssociatedToken>,
     system_program: Program<'info, System>
 }
 
@@ -93,7 +128,7 @@ impl<'info> Initialize<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
+#[instruction(name: String, seed: u64)]
 pub struct InitializeSubdao<'info> {
     #[account(mut)]
     owner: Signer<'info>,

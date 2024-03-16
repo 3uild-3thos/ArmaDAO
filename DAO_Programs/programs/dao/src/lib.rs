@@ -9,7 +9,10 @@ declare_id!("daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
 #[program]
 pub mod dao {
 
+    use solana_program::pubkey;
+
     use super::*;
+    pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("daoNFTGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
 
     // Instantiate a new DAO Config ACC using the DAO2023 program
     pub fn initialize(
