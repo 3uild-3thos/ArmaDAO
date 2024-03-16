@@ -21,7 +21,6 @@ function TeamInfo() {
     console.log(values);
   }
 
-  const handleChange = (e: any) => {};
   return (
     <>
       <Form {...form}>

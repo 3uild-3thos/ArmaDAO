@@ -24,9 +24,16 @@ function Config() {
 
   const [mintId, setMintId] = useState("");
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((state) => ({ ...state, [name]: value }));
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | undefined
+  ) => {
+    if (e) {
+      const { name, value } = e.target;
+      setFormData((state) => ({ ...state, [name]: value }));
+    }
   };
 
   return (
