@@ -7,21 +7,21 @@ import { ArrowDownSquare, ArrowRight, ArrowUpSquare } from "lucide-react";
 import { IForum } from "@/lib/schema/forums.schema";
 import Link from "next/link";
 
-interface IProposalLatestForum {
+interface IProposalLatestForumComponent {
   forum: IForum;
   daoId: string;
   proposalId: string;
 }
 
-const ProposalLatestForum = ({
+const ProposalLatestForumComponent = ({
   forum,
   daoId,
   proposalId,
-}: IProposalLatestForum) => {
+}: IProposalLatestForumComponent) => {
   return (
     <Card>
       <CardContent className="flex flex-col gap-8 text-muted">
-        <div className="text-2xl">Latest Forum</div>
+        <div className="text-xl font-medium">Latest Forum</div>
         <div className="flex flex-col gap-4">
           <div className="text-base text-muted line-clamp-3">{forum.title}</div>
           <div className="flex items-center justify-between">
@@ -50,4 +50,4 @@ const ProposalLatestForum = ({
   );
 };
 
-export default ProposalLatestForum;
+export default ProposalLatestForumComponent;

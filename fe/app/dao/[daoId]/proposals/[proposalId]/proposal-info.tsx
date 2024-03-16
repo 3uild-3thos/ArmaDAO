@@ -33,14 +33,14 @@ const ProposalInfoComponent = ({
 
   return (
     <Card>
-      <CardContent className="flex flex-col text-muted gap-8">
+      <CardContent className="flex flex-col gap-8 text-muted">
         <div className="grid grid-cols-12">
-          <div className="flex gap-4 items-start col-span-8">
-            <div className="text-2xl">{title}</div>
+          <div className="flex items-start col-span-8 gap-4">
+            <div className="text-2xl font-medium">{title}</div>
             <ProposalStatusBadge status={status} />
           </div>
-          <div className="flex flex-col gap-2 items-end col-span-4">
-            <div className="text-muted-light text-base">
+          <div className="flex flex-col items-end col-span-4 gap-2">
+            <div className="text-base text-muted-light">
               Posted {timeAgo(postedAt)} by {shortenAddress(postedBy)}
             </div>
           </div>
@@ -56,7 +56,7 @@ const ProposalInfoComponent = ({
         <div className="flex justify-end">
           <Button
             variant={"ghost"}
-            className="p-0 gap-2"
+            className="gap-2 p-0"
             onClick={handleShouldReadMore}
           >
             {shouldReadMore ? (
