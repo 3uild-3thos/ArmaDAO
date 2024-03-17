@@ -6,6 +6,7 @@ import shortenAddress from "@/lib/helpers/shortenAddress";
 import { PATH, replacePathKey } from "@/lib/routes";
 import { EProposalStatus, EProposalType } from "@/lib/schema/proposals.schema";
 import ProposalStatusBadge from "@/proposals/proposal-status-badge";
+import ProposalTypeBadge from "@/proposals/proposal-type-badge";
 import { formatDistance } from "date-fns";
 import Link from "next/link";
 import { useParams } from "next/navigation";
