@@ -3,13 +3,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import LabelValue from "@/components/ui/label-value";
 import shortenAddress from "@/lib/helpers/shortenAddress";
-import timeAgo from "@/lib/helpers/timeAgo";
 import { PATH, replacePathKey } from "@/lib/routes";
 import { EProposalStatus, EProposalType } from "@/lib/schema/proposals.schema";
+import ProposalStatusBadge from "@/proposals/proposal-status-badge";
+import { formatDistance } from "date-fns";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import ProposalStatusBadge from "./proposal-status-badge";
-import ProposalTypeBadge from "./proposal-type-badge";
 
 interface IProposalCard {
   id: string;
@@ -45,6 +44,8 @@ const ProposalCard = ({
     proposalId: id,
   });
 
+  const postedDate = formatDistance(postedAt, new Date(), { addSuffix: true });
+
   return (
     <Link href={proposalHref}>
       <Card className="duration-200 hover:border-muted-light">
@@ -61,7 +62,7 @@ const ProposalCard = ({
             </div>
             <div className="flex flex-col items-end col-span-4 gap-2">
               <div className="text-base text-muted-light">
-                Posted {timeAgo(postedAt)} by {shortenAddress(postedBy)}
+                Posted {postedDate} by {shortenAddress(postedBy)}
               </div>
             </div>
           </div>
