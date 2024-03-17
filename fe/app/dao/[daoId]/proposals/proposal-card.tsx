@@ -5,9 +5,10 @@ import LabelValue from "@/components/ui/label-value";
 import shortenAddress from "@/lib/helpers/shortenAddress";
 import timeAgo from "@/lib/helpers/timeAgo";
 import { EProposalStatus, EProposalType } from "@/lib/schema/proposals.schema";
-import ProposalStatusBadge from "@/proposals/proposal-status-badge";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import ProposalStatusBadge from "./proposal-status-badge";
+import ProposalTypeBadge from "./proposal-type-badge";
 
 interface IProposalCard {
   id: string;
@@ -40,13 +41,16 @@ const ProposalCard = ({
   return (
     <Link href={`/dao/${daoId}/proposals/${id}`}>
       <Card className="duration-200 hover:border-muted-light">
-        <CardContent className="flex flex-col gap-2">
+        <CardContent className="flex flex-col gap-4">
           {/* TODO: Add the type as badge of the card??? */}
           {/* Title and Status */}
           <div className="grid grid-cols-12">
-            <div className="flex items-start col-span-8 gap-4">
+            <div className="flex flex-col items-start col-span-8 gap-2">
               <div className="text-2xl font-medium">{title}</div>
-              <ProposalStatusBadge status={status} />
+              <div className="flex gap-4">
+                <ProposalTypeBadge type={type} />
+                <ProposalStatusBadge status={status} />
+              </div>
             </div>
             <div className="flex flex-col items-end col-span-4 gap-2">
               <div className="text-base text-muted-light">

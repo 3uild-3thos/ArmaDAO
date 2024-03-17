@@ -3,12 +3,9 @@
 // react
 import { useState } from "react";
 
-// next
-
 // components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import ProposalStatusBadge from "@/proposals/proposal-status-badge";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 // lib
@@ -18,14 +15,10 @@ import { IProposal } from "@/lib/schema/proposals.schema";
 import { cn } from "@/lib/utils";
 
 interface IProposalInfoComponent {
-  proposalId: string;
   proposal: IProposal;
 }
 
-const ProposalInfoComponent = ({
-  proposal,
-  proposalId,
-}: IProposalInfoComponent) => {
+const ProposalInfoComponent = ({ proposal }: IProposalInfoComponent) => {
   const [shouldReadMore, setShouldReadMore] = useState(false);
   const handleShouldReadMore = () => setShouldReadMore(!shouldReadMore);
 
@@ -37,7 +30,6 @@ const ProposalInfoComponent = ({
         <div className="grid grid-cols-12">
           <div className="flex items-start col-span-8 gap-4">
             <div className="text-2xl font-medium">{title}</div>
-            <ProposalStatusBadge status={status} />
           </div>
           <div className="flex flex-col items-end col-span-4 gap-2">
             <div className="text-base text-muted-light">
