@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { EMembershipType } from "@/lib/schema/subdao.schema";
 
 function Config() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ function Config() {
     website: "",
   });
 
-  const [type, setType] = useState("fungible");
+  const [type, setType] = useState<EMembershipType>(EMembershipType.Fungible);
 
   const [mintId, setMintId] = useState("");
 
@@ -60,7 +61,7 @@ function Config() {
               <RadioGroup
                 defaultValue="fungible"
                 onValueChange={(e) => {
-                  setType(e);
+                  setType(e as EMembershipType);
                 }}
               >
                 <div className="flex items-center space-x-2">
@@ -73,7 +74,7 @@ function Config() {
                 </div>
               </RadioGroup>
             </div>
-            {type === "fungible" && mintId !== "" && (
+            {type === EMembershipType.Fungible && mintId !== "" && (
               <div className="flex flex-col gap-3 ">
                 <p>Holding amount</p>
                 <Input
@@ -85,7 +86,7 @@ function Config() {
               </div>
             )}
 
-            {type === "nft" && mintId === "" && (
+            {type === EMembershipType.NFT && mintId === "" && (
               <div className="col-span-2 grid grid-cols-2 gap-8 border border-gray-500 py-6 px-4 rounded-xl">
                 <div className="col-span-2">
                   <p className="text-xl font-medium">NFT Creation</p>
@@ -146,7 +147,7 @@ function Config() {
                 </div>
               </div>
             )}
-            {type === "fungible" && mintId === "" && (
+            {type === EMembershipType.Fungible && mintId === "" && (
               <div className="col-span-2 grid grid-cols-2 gap-8 border border-gray-500 py-6 px-4 rounded-xl">
                 <div className="col-span-2">
                   <p className="text-xl font-medium">Fungible Token Creation</p>
