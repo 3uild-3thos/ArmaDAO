@@ -3,6 +3,7 @@ use anchor_lang::solana_program::instruction::Instruction;
 use crate::constants::*;
 use crate::errors::CoreError;
 
+
 #[derive(Clone)]
 pub struct CoreProgram;
 
@@ -41,7 +42,8 @@ pub struct DaoConfig {
     pub mint:Option<Pubkey>,
     pub min_staked_required_proposal: Option<u64>,
     pub allow_sub_dao: bool,
-    pub min_staked_create_subdao: Option<u64>
+    pub min_staked_create_subdao: Option<u64>,
+    pub is_hybrid: bool,
 }
 
 impl anchor_lang::Owner for DaoConfig {
@@ -63,7 +65,7 @@ impl anchor_lang::AccountDeserialize for DaoConfig {
 impl anchor_lang::AccountSerialize for DaoConfig {}
 
 impl DaoConfig {
-    pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L)  ;
+    pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L) + 1  ;
 
     pub fn init(
         &mut self,
@@ -83,7 +85,8 @@ impl DaoConfig {
         mint: Option<Pubkey>,
         min_staked_required_proposal: Option<u64>, 
         allow_sub_dao: bool,
-        min_staked_create_subdao: Option<u64>
+        min_staked_create_subdao: Option<u64>,
+        is_hybrid: bool
                 
     ) -> Result<()> {
         self.seed = seed;
@@ -104,6 +107,21 @@ impl DaoConfig {
         self.min_staked_required_proposal = min_staked_required_proposal;
         self.allow_sub_dao = allow_sub_dao;
         self.min_staked_create_subdao = min_staked_create_subdao;
+        self.is_hybrid = is_hybrid;
+        Ok(())
+    }
+    pub fn check_hybrid(&self) -> Result<()> {
+        require!(
+            self.is_hybrid == true,
+            CoreError::InvalidDaoType
+        );
+        Ok(())
+    }
+    pub fn ensure_not_hybrid(&self) -> Result<()> {
+        require!(
+            self.is_hybrid == false,
+            CoreError::InvalidDaoType
+        );
         Ok(())
     }
 

@@ -27,7 +27,7 @@ pub struct SubDaoProposalHandler<'info> {
 pub struct Proposal {
     pub id: u64,      // A unique ID. Can be sequential or random.
     pub name: String, // A proposal name
-    pub gist: String, // 72 bytes (39 bytes + / + 32 char ID)
+    pub metadata: String, // 112 bytes (39 bytes + / + 73 char ID)
     pub proposal: ProposalType,
     pub result: ProposalStatus,
     pub quorum: u8,
@@ -60,12 +60,12 @@ impl Proposal {
     //41+1 Enums
     //ProposalType enum  41 bytes
     //ProposalStatus enum 1 byte
-    pub const LEN: usize = 8 + 32 + 72 + (41+1) + (U8_L * 3) + (U64_L * 6) +(4 + U64_L * 7) ;
+    pub const LEN: usize = 8 + 32 + 112 + (41+1) + (U8_L * 3) + (U64_L * 6) +(4 + U64_L * 7) ;
     pub fn init(
         &mut self,
         id: u64,
         name: String,
-        gist: String,
+        metadata: String,
         proposal: ProposalType,
         quorum: u8,
         threshold: u64,
@@ -75,10 +75,10 @@ impl Proposal {
         bump: u8,
     ) -> Result<()> {
         require!(name.len() < 33, CoreError::InvalidName);
-        require!(gist.len() < 73, CoreError::InvalidGist);
+        require!(metadata.len() < 113, CoreError::InvalidGist);
         self.id = id;
         self.name = name;
-        self.gist = gist;
+        self.metadata = metadata;
         self.proposal = proposal;
         self.result = Default::default();
         self.quorum = quorum;

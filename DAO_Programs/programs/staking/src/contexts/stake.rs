@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface, TransferChecked, transfer_checked}, 
     associated_token::AssociatedToken,
-    metadata::{Metadata, MetadataAccount, MasterEditionAccount}, 
+    metadata::{Metadata, MetadataAccount, MasterEditionAccount}
 };
 use daoist_programs::modules::{StakeState, DaoConfig};
 use crate::validate_nft;

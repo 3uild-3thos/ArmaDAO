@@ -11,6 +11,31 @@
           "isSigner": true
         },
         {
+          "name": "ownerAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "collection",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "auth",
           "isMut": false,
           "isSigner": false
@@ -23,6 +48,21 @@
         {
           "name": "config",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -95,6 +135,10 @@
           "type": {
             "option": "u64"
           }
+        },
+        {
+          "name": "isHybrid",
+          "type": "bool"
         }
       ]
     },
@@ -211,7 +255,13 @@
         },
         {
           "name": "minStakedRequiredProposal",
-          "type": "u64"
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "isHybrid",
+          "type": "bool"
         }
       ]
     },
@@ -299,6 +349,10 @@
         {
           "name": "minStakedRequiredProposal",
           "type": "u64"
+        },
+        {
+          "name": "isHybrid",
+          "type": "bool"
         }
       ]
     },
@@ -445,6 +499,10 @@
             "type": {
               "option": "u64"
             }
+          },
+          {
+            "name": "isHybrid",
+            "type": "bool"
           }
         ]
       }

@@ -1298,6 +1298,10 @@
             "type": {
               "option": "u64"
             }
+          },
+          {
+            "name": "isHybrid",
+            "type": "bool"
           }
         ]
       }

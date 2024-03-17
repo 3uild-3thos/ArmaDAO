@@ -1,5 +1,12 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
 use daoist_programs::modules::{CoreProgram, DaoConfig, StakingProgram, StakeState, SubDaoHandler, Proposal, ProposalType, add_proposal_sub_dao};
+use anchor_spl::{
+    token_interface::{TokenAccount, Mint, TokenInterface}, 
+    metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
+    associated_token::AssociatedToken
+};
+use crate::validate_nft;
+use crate::errors::ProposalError;
 
 #[derive(Accounts)]
 #[instruction(id: u64)]
@@ -56,6 +63,8 @@ impl<'info> CreateProposalSubDao<'info> {
         evaluation_period: u64,
         bumps: &CreateProposalSubDaoBumps,
     ) -> Result<()> {
+        // Make sure its a staked based DAO
+        self.config_sub_dao.ensure_not_hybrid ()?;
         // Make sure user has staked the required amount
         self.config_sub_dao.check_min_staked_required_proposal(self.stake_state.amount)?;
         // Make sure quorum is valid
@@ -85,6 +94,147 @@ impl<'info> CreateProposalSubDao<'info> {
             id,
             name, // A proposal name
             gist, // 72 bytes (39 bytes + / + 32 byte ID)
+            proposal,
+            quorum,
+            threshold,
+            expiry,
+            choices,
+            evaluation_period,
+            bumps.proposal
+        )
+    }
+    pub fn pay_proposal_fee(
+        &mut self
+    ) -> Result<()> {       
+        let accounts = Transfer {
+            from: self.owner.to_account_info(),
+            to: self.treasury.to_account_info()
+        };
+        let ctx = CpiContext::new(
+            self.system_program.to_account_info(),
+            accounts
+        );
+        transfer(ctx, self.config_sub_dao.proposal_fee)
+    }
+}
+
+#[derive(Accounts)]
+#[instruction(id: u64)]
+pub struct CreateProposalSubDaoHybrid<'info> {
+    #[account(mut)]
+    owner: Signer<'info>,
+    #[account(
+        mut,
+        associated_token::mint = nft,
+        associated_token::authority = owner
+    )]
+    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    nft: InterfaceAccount<'info, Mint>,
+    #[account(
+        init,
+        payer = owner,
+        seeds=[b"proposal", config_sub_dao.key().as_ref(), id.to_le_bytes().as_ref()],
+        bump,
+        space = Proposal::LEN
+    )]
+    proposal: Account<'info, Proposal>,
+    #[account(constraint = collection.key() == config_sub_dao.collection_mint.expect("Collection mint not initialized"))]
+    collection: InterfaceAccount<'info, Mint>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref()
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+        constraint = metadata.collection.as_ref().unwrap().key.as_ref() == collection.key().as_ref(),
+        constraint = metadata.collection.as_ref().unwrap().verified == true,
+    )]
+    metadata: Account<'info, MetadataAccount>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref(),
+            b"edition"
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+    )]
+    master_edition: Account<'info, MasterEditionAccount>,
+    core_program: Program<'info, CoreProgram>,
+    #[account(
+        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds::program = daoist_programs::modules::core_program::ID,
+        bump = core_config.config_bump,
+    )]
+    core_config: Account<'info, DaoConfig>,
+    #[account(
+        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds::program = daoist_programs::modules::core_program::ID,
+        bump = config_sub_dao.config_bump,
+    )]
+    config_sub_dao: Account<'info, DaoConfig>,
+    #[account(
+        seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        bump = config_sub_dao.treasury_bump
+    )]
+    treasury: SystemAccount<'info>,
+    metadata_program: Program<'info, Metadata>,
+    token_program: Interface<'info, TokenInterface>,
+    associated_token_program: Program<'info, AssociatedToken>,
+    system_program: Program<'info, System>,
+    
+}
+impl<'info> CreateProposalSubDaoHybrid<'info> {    
+    pub fn create_proposal_sub_dao_hybrid(
+        &mut self,
+        id: u64,
+        name: String,
+        metadata: String,
+        proposal: ProposalType,
+        quorum: u8,
+        threshold: u64,
+        expiry: u64,
+        choices:u8,
+        evaluation_period: u64,
+        bumps: &CreateProposalSubDaoHybridBumps,
+    ) -> Result<()> {
+        // Check if NFT is Verified
+        validate_nft!(
+            self.metadata.collection, 
+            self.collection
+            );
+        //Check hybridness
+        self.config_sub_dao.check_hybrid()?;
+        // Make sure quorum is valid
+        self.config_sub_dao.check_valid_quorum(quorum)?;               
+        // Check Minimum threshold
+        self.config_sub_dao.check_min_threshold(threshold)?;
+        // Check Max Expiry
+        self.config_sub_dao.check_max_expiry(expiry)?;
+        // Check Min Pre Voting Period
+        self.config_sub_dao.check_evaluation_phase_period(evaluation_period)?;
+        // Check Minimum Choices
+        self.proposal.check_choices()?; 
+        // Check ID and add proposal change state
+        let check_id_add_proposal_accounts = SubDaoHandler {
+            owner: self.owner.to_account_info(),
+            config: self.core_config.to_account_info(),
+            config_sub_dao: self.config_sub_dao.to_account_info(),
+            system_program: self.system_program.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+        self.core_program.to_account_info(),
+        check_id_add_proposal_accounts
+        );
+        add_proposal_sub_dao(cpi_context, id)?;                                        
+        // Initialize the proposal
+       self.proposal.init(
+            id,
+            name, // A proposal name
+            metadata, // 72 bytes (39 bytes + / + 32 byte ID)
             proposal,
             quorum,
             threshold,

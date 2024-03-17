@@ -435,6 +435,10 @@
             "type": {
               "option": "u64"
             }
+          },
+          {
+            "name": "isHybrid",
+            "type": "bool"
           }
         ]
       }
@@ -453,7 +457,7 @@
             "type": "string"
           },
           {
-            "name": "gist",
+            "name": "metadata",
             "type": "string"
           },
           {

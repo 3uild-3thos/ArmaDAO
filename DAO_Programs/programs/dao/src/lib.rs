@@ -9,7 +9,10 @@ declare_id!("daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
 #[program]
 pub mod dao {
 
+    use solana_program::pubkey;
+
     use super::*;
+    pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("daoNFTGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
 
     // Instantiate a new DAO Config ACC using the DAO2023 program
     pub fn initialize(
@@ -27,7 +30,8 @@ pub mod dao {
         mint: Option<Pubkey>, 
         min_staked_required_proposal: Option<u64>,
         allow_sub_dao: bool,
-        min_staked_create_subdao: Option<u64>
+        min_staked_create_subdao: Option<u64>,
+        is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -44,9 +48,11 @@ pub mod dao {
             mint,
             min_staked_required_proposal,
             allow_sub_dao,
-            min_staked_create_subdao
+            min_staked_create_subdao,
+            is_hybrid
         )
     }
+    // Instantiate a new SubDAO Config ACC for Hybrid DAOS
     pub fn initialize_sub_dao(
         ctx: Context<InitializeSubdao>,
         seed: u64,
@@ -57,7 +63,8 @@ pub mod dao {
         evaluation_phase_period: u64,
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
-        min_staked_required_proposal: u64
+        min_staked_required_proposal: Option<u64>,
+        is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -69,9 +76,11 @@ pub mod dao {
             evaluation_phase_period,
             collection_mint,
             mint,
-            min_staked_required_proposal
+            min_staked_required_proposal,
+            is_hybrid
         )
     }
+    // Instantiate a new SubDAO Config ACC for FT/NFT DAOs
     pub fn initialize_sub_dao_token(
         ctx: Context<InitializeSubdaoToken>,
         seed: u64,
@@ -82,7 +91,8 @@ pub mod dao {
         evaluation_phase_period: u64,
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
-        min_staked_required_proposal: u64
+        min_staked_required_proposal: u64,
+        is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -94,9 +104,10 @@ pub mod dao {
             evaluation_phase_period,
             collection_mint,
             mint,
-            min_staked_required_proposal
+            min_staked_required_proposal,
+            is_hybrid
         )
-    }
+    } 
     // Instruction CPI
     // ADD PROPOSAL
     pub fn add_proposal(
