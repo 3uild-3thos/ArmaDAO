@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import LabelValue from "@/components/ui/label-value";
 import shortenAddress from "@/lib/helpers/shortenAddress";
 import timeAgo from "@/lib/helpers/timeAgo";
+import { PATH, replacePathKey } from "@/lib/routes";
 import { EProposalStatus, EProposalType } from "@/lib/schema/proposals.schema";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -38,8 +39,14 @@ const ProposalCard = ({
   status,
 }: IProposalCard) => {
   const { daoId } = useParams();
+
+  const proposalHref = replacePathKey(PATH.fleetProposalDetail, {
+    daoId: daoId as string,
+    proposalId: id,
+  });
+
   return (
-    <Link href={`/dao/${daoId}/proposals/${id}`}>
+    <Link href={proposalHref}>
       <Card className="duration-200 hover:border-muted-light">
         <CardContent className="flex flex-col gap-4">
           {/* TODO: Add the type as badge of the card??? */}
