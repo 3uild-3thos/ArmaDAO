@@ -30,12 +30,21 @@ const RootLayout = ({
           <div className="col-span-2 flex flex-col gap-10">
             {children}
             <div className="flex justify-between">
-              <Button variant={"ghost"} onClick={handleBack}>
-                Back
-              </Button>
-              <Button variant={"ghost"} onClick={handleNext}>
-                Next
-              </Button>
+              {page > 0 ? (
+                <Button variant={"ghost"} onClick={handleBack}>
+                  Back
+                </Button>
+              ) : (
+                <div className=""></div>
+              )}
+
+              {page < 3 ? (
+                <Button variant={"ghost"} onClick={handleNext}>
+                  Next
+                </Button>
+              ) : (
+                <Button onClick={handleNext}>Create</Button>
+              )}
             </div>
           </div>
         </div>
