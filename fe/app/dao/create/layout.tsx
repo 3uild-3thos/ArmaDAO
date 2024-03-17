@@ -13,11 +13,11 @@ const RootLayout = ({
   const [page, setPage] = useState(0);
 
   const handleNext = () => {
-    setPage((state) => state + 1);
+    if (page < 3) setPage((state) => state + 1);
   };
 
   const handleBack = () => {
-    setPage((state) => state - 1);
+    if (page > 0) setPage((state) => state - 1);
   };
 
   return (
