@@ -6,7 +6,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import ProposalDateComponent from "@/proposals/[proposalId]/proposal-date";
 import ProposalInfoComponent from "@/proposals/[proposalId]/proposal-info";
 import ProposalLatestForum from "@/proposals/[proposalId]/proposal-latest-forum";
-import ProposalResultsComponent from "./proposal-results";
+import ProposalResultsComponent from "@/proposals/[proposalId]/proposal-results";
+import ProposalStatusBadge from "@/proposals/proposal-status-badge";
 
 // lib
 import findLatestForum from "@/lib/helpers/findLatestForum";
@@ -16,6 +17,7 @@ import { IChoice } from "@/lib/schema/proposals.schema";
 // mock
 import { forums } from "@/mock/forums";
 import { proposals } from "@/mock/proposals";
+import ProposalTypeBadge from "../proposal-type-badge";
 
 interface IDAOProposalDetailPageProps {
   params: { proposalId: string; daoId: string };
@@ -38,12 +40,18 @@ const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPageProps) => {
 
   return (
     <>
-      <h3 className="text-2xl font-medium text-muted">
-        Proposal: {shortenAddress(proposalId)}
-      </h3>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-2xl font-medium text-muted">
+          Proposal: {shortenAddress(proposalId)}
+        </h3>
+        <div className="flex gap-4">
+          <ProposalTypeBadge type={proposal.type} />
+          <ProposalStatusBadge status={proposal.status} />
+        </div>
+      </div>
       <div className="grid grid-cols-12 gap-8">
         <div className="flex flex-col col-span-8 gap-8">
-          <ProposalInfoComponent proposalId={proposalId} proposal={proposal} />
+          <ProposalInfoComponent proposal={proposal} />
           <Card>
             <CardContent className="flex flex-col gap-8">
               <div className="flex items-center justify-between text-muted">
