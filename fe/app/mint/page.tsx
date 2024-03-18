@@ -6,6 +6,9 @@ import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowRightToLine } from "lucide-react";
 import shortenAddress from "@/lib/helpers/shortenAddress";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { PATH } from "@/lib/routes";
+import Link from "next/link";
 
 function Mint() {
   return (
@@ -65,9 +68,7 @@ function Mint() {
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant={"outline"} size={"lg"} className="min-w-full">
-                Private Mint
-              </Button>
+              <MintButton />
             </CardFooter>
           </Card>
         </div>
@@ -126,5 +127,37 @@ function Countdown() {
       <p>16</p>
       <p>03</p>
     </div>
+  );
+}
+
+function MintButton() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant={"outline"} size={"lg"} className="min-w-full">
+          Private Mint
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <div className="flex flex-col items-center gap-5 text-center">
+          <Image
+            src={"https://placehold.co/200x200"}
+            alt={"DAO Banner"}
+            width={200}
+            height={200}
+            className="max-h-[40rem] rounded-2xl object-cover shadow-2xl"
+          />
+          <p className="text-xl font-semibold">Thank you for minting</p>
+          <p className="text-sm">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo sit
+            unde in quos excepturi, eos deleniti! Voluptate cumque odit
+            asperiores
+          </p>
+          <Link href={PATH.fleetCreate}>
+            <Button variant={"outline"}>Create your Fleet</Button>
+          </Link>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
