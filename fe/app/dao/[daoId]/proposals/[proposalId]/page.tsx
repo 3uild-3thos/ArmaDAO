@@ -19,11 +19,11 @@ import { forums } from "@/mock/forums";
 import { proposals } from "@/mock/proposals";
 import ProposalTypeBadge from "../proposal-type-badge";
 
-interface IDAOProposalDetailPageProps {
+interface IDAOProposalDetailPage {
   params: { proposalId: string; daoId: string };
 }
 
-const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPageProps) => {
+const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPage) => {
   const { daoId, proposalId } = params;
   const proposal = proposals.find((p) => p.id === proposalId);
 
