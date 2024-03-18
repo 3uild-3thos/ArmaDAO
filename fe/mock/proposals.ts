@@ -151,3 +151,5 @@ export const proposals: Array<IProposal> = [
     ],
   },
 ];
+
+export const proposalsNoData = [];
