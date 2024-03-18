@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowDownSquare, ArrowRight, ArrowUpSquare } from "lucide-react";
 
 // lib
+import { PATH, replacePathKey } from "@/lib/routes";
 import { IForum } from "@/lib/schema/forums.schema";
 import Link from "next/link";
 
@@ -18,6 +19,12 @@ const ProposalLatestForumComponent = ({
   daoId,
   proposalId,
 }: IProposalLatestForumComponent) => {
+  const forumDetailHref = replacePathKey(PATH.fleetForumDetail, {
+    daoId,
+    proposalId,
+    forumId: forum.id,
+  });
+
   return (
     <Card>
       <CardContent className="flex flex-col gap-8 text-muted">
@@ -35,9 +42,7 @@ const ProposalLatestForumComponent = ({
                 {forum.downVotes}
               </div>
             </div>
-            <Link
-              href={`/dao/${daoId}/proposals/${proposalId}/forum/${forum.id}}`}
-            >
+            <Link href={forumDetailHref}>
               <Button variant={"ghost"} className="gap-2 p-0">
                 See Post
                 <ArrowRight size={16} />

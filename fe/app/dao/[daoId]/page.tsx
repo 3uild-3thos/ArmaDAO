@@ -1,5 +1,5 @@
 const DAODetailpage = () => {
-  return <div>DAODetailpage</div>;
+  return <></>;
 };
 
 export default DAODetailpage;
