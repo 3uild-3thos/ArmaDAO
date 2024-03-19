@@ -23,8 +23,8 @@ export const ChoiceSchema = z.object({
 export const ProposalSchema = z
   .object({
     id: z.string(),
-    title: z.string(),
-    description: z.string(),
+    title: z.string().min(3),
+    description: z.string().min(50),
     type: z.nativeEnum(EProposalType),
     totalVotes: z.number(),
     pendingVotes: z.number(),

@@ -134,6 +134,7 @@ const DAOProposalCreatePage = () => {
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <TiptapEditor
+                          {...field}
                           description={field.value}
                           onChange={field.onChange}
                         />
