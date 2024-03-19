@@ -1,14 +1,16 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+
+// components
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowRightToLine } from "lucide-react";
+import MintButton from "@/mint/mint-button";
+
+// lib
 import shortenAddress from "@/lib/helpers/shortenAddress";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { PATH } from "@/lib/routes";
-import Link from "next/link";
 
 function Mint() {
   return (
@@ -119,35 +121,3 @@ function Mint() {
 }
 
 export default Mint;
-
-function MintButton() {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={"outline"} size={"lg"} className="min-w-full">
-          Private Mint
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <div className="flex flex-col items-center gap-5 text-center">
-          <Image
-            src={"https://placehold.co/200x200"}
-            alt={"DAO Banner"}
-            width={200}
-            height={200}
-            className="max-h-[40rem] rounded-2xl object-cover shadow-2xl"
-          />
-          <p className="text-xl font-semibold">Thank you for minting</p>
-          <p className="text-sm">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo sit
-            unde in quos excepturi, eos deleniti! Voluptate cumque odit
-            asperiores
-          </p>
-          <Link href={PATH.fleetCreate}>
-            <Button variant={"outline"}>Create your Fleet</Button>
-          </Link>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
