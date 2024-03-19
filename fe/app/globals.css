@@ -146,4 +146,8 @@
   .bg-gradient-blue {
     @apply bg-gradient-to-r from-cyan via-blue via-40% to-[#2A5BB7];
   }
+
+  .border-default {
+    @apply border-[0.5px] border-muted-light rounded-lg;
+  }
 }

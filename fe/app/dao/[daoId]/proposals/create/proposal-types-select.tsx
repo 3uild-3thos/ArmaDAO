@@ -26,7 +26,7 @@ const ProposalTypesSelectComponent = ({
           key={`proposal-type-${type}`}
           variant={"ghost"}
           className={cn(
-            "flex flex-col justify-start hover:bg-gray-400/5 w-32 gap-4 h-32 break-words text-wrap p-8 rounded-xl border-[0.5px] border-muted-light"
+            "flex flex-col justify-start hover:bg-gray-400/5 w-32 gap-4 h-32 break-words text-wrap p-8 rounded-xl border-default"
           )}
           onClick={(event) => handleTypeSelect(event, type)}
         >
@@ -34,7 +34,7 @@ const ProposalTypesSelectComponent = ({
             className={cn(
               "rounded-full w-4 h-4 p-2",
               selected === type && "bg-cyan",
-              selected !== type && "border-[0.5px] border-muted-light"
+              selected !== type && "border-default"
             )}
           />
           <div className="text-muted">{type}</div>

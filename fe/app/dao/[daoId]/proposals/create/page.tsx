@@ -22,6 +22,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import TiptapEditor from "@/components/ui/tiptap-editor";
 import { useToast } from "@/components/ui/use-toast";
 import {
   EProposalType,
@@ -124,6 +125,24 @@ const DAOProposalCreatePage = () => {
                   )}
                 />
 
+                {/* Description */}
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem autoFocus>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <TiptapEditor
+                          description={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <div className="flex gap-8 w-full">
                   {/* Start Date */}
                   <FormField
@@ -139,7 +158,7 @@ const DAOProposalCreatePage = () => {
                                 variant={"outline"}
                                 size={"lg"}
                                 className={cn(
-                                  "text-left px-3 border-[0.5px] text-base bg-background border-muted-light",
+                                  "text-left px-3 text-base bg-background border-default",
                                   !field.value && "text-muted-light"
                                 )}
                               >
@@ -181,7 +200,7 @@ const DAOProposalCreatePage = () => {
                                 variant={"outline"}
                                 size={"lg"}
                                 className={cn(
-                                  "text-left px-3 border-[0.5px] text-base bg-background border-muted-light",
+                                  "text-left px-3 border-default text-base bg-background",
                                   !field.value && "text-muted-light"
                                 )}
                               >
@@ -267,7 +286,7 @@ const DAOProposalCreatePage = () => {
                                 variant={"outline"}
                                 size={"lg"}
                                 className={cn(
-                                  "text-left px-3 border-[0.5px] text-base bg-background border-muted-light",
+                                  "text-left px-3 border-default text-base bg-background",
                                   !field.value && "text-muted-light"
                                 )}
                               >
@@ -309,7 +328,7 @@ const DAOProposalCreatePage = () => {
                                 variant={"outline"}
                                 size={"lg"}
                                 className={cn(
-                                  "text-left px-3 border-[0.5px] text-base bg-background border-muted-light",
+                                  "text-left px-3 border-default text-base bg-background",
                                   !field.value && "text-muted-light"
                                 )}
                               >
