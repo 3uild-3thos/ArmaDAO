@@ -60,9 +60,12 @@ function Mint() {
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     I agree to the{" "}
-                    <span className="underline font-medium">
-                      General Terms of Service
-                    </span>
+                    <Link href="/terms">
+                      {" "}
+                      <span className="underline font-medium">
+                        General Terms of Service
+                      </span>
+                    </Link>
                   </label>
                 </div>
               </div>
