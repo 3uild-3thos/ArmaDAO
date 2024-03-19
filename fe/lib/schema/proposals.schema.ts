@@ -23,12 +23,15 @@ export const ChoiceSchema = z.object({
 export const ProposalSchema = z
   .object({
     id: z.string(),
-    title: z.string().min(3),
-    description: z.string().min(50),
+    title: z.string().min(3, "Title must be at least 3 characters."),
+    description: z
+      .string()
+      .min(50, "Description must be at least 50 characters."),
     type: z.nativeEnum(EProposalType),
-    totalVotes: z.number(),
-    pendingVotes: z.number(),
+    totalVotes: z.number().min(1, "Total votes must be more than 1."),
+    pendingVotes: z.number().min(1, "Total votes must be more than 1."),
     startDate: z.string().datetime(),
+    // endDate must not be before the start date
     endDate: z.string().datetime(),
     postedAt: z.string(),
     postedBy: z.string(),
