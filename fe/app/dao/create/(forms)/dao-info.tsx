@@ -1,9 +1,18 @@
 "use client";
-import { Textarea } from "@/components/ui/textarea";
-import { ImagePlus } from "lucide-react";
+
 import React from "react";
-import { Input } from "@/components/ui/input";
+
+// lib
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ISubDaoInfo,
+  SubDaoInfoDefaults,
+  SubDaoInfoSchema,
+} from "@/lib/schema/subdao-info.schema";
 import { useForm } from "react-hook-form";
+
+// components
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,13 +20,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import {
-  ISubDaoInfo,
-  SubDaoInfoDefaults,
-  SubDaoInfoSchema,
-} from "@/lib/schema/subdao-info.schema";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { ImagePlus } from "lucide-react";
 
 function DaoInfo() {
   const form = useForm<ISubDaoInfo>({

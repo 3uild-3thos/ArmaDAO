@@ -1,5 +1,7 @@
 "use client";
 import { useContext } from "react";
+
+// Components
 import { CreateDaoContext } from "@/create/layout";
 import DaoInfo from "@/create/(forms)/dao-info";
 import TeamInfo from "@/create/(forms)/team-info";
@@ -10,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
 export default function CreateDao() {
   const page = useContext(CreateDaoContext);
 

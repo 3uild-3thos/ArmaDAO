@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { Input } from "@/components/ui/input";
+
+// lib
 import {
   ITeamInfo,
   TeamInfoDefaults,
@@ -8,6 +9,9 @@ import {
 } from "@/lib/schema/team-info.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
+// components
+import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import TeamMember from "@/create/(forms)/team-member";
 

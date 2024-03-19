@@ -1,7 +1,9 @@
 "use client";
+import React, { useState } from "react";
+
+// components
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus } from "lucide-react";
-import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
