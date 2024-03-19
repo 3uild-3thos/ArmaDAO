@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/popover";
 import TiptapEditor from "@/components/ui/tiptap-editor";
 import { useToast } from "@/components/ui/use-toast";
+import ProposalSuccessCardComponent from "@/proposals/create/proposal-success-card";
 import ProposalTypesSelectComponent from "@/proposals/create/proposal-types-select";
 
 // lib
@@ -47,6 +48,7 @@ const DAOProposalCreatePage = () => {
     EProposalType.VOTE
   );
   const [choiceValue, setChoiceValue] = useState<string>("");
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState<boolean>(false);
   const { toast } = useToast();
 
   const form = useForm<IProposal>({
@@ -127,8 +129,18 @@ const DAOProposalCreatePage = () => {
     }
   };
 
+  const handleSuccessModalClose = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    setIsSuccessModalOpen(false);
+  };
+
   return (
     <>
+      {isSuccessModalOpen && (
+        <ProposalSuccessCardComponent onClose={handleSuccessModalClose} />
+      )}
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-medium text-muted">Create a Proposal</h3>
       </div>
