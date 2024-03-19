@@ -32,7 +32,6 @@ function Mint() {
                 <CardContent className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
                     <p>Mint Stages</p>
-                    <Countdown />
                   </div>
                   <p className="text-sm text-gray-500">
                     MAX 1 TOKEN | Free Mint
@@ -120,18 +119,6 @@ function Mint() {
 }
 
 export default Mint;
-
-function Countdown() {
-  return (
-    <div className="flex items-center gap-4">
-      <p>Ends In</p>
-      <p>02</p>
-      <p>16</p>
-      <p>16</p>
-      <p>03</p>
-    </div>
-  );
-}
 
 function MintButton() {
   return (
