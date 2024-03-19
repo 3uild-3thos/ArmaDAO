@@ -1,7 +1,8 @@
 import React from "react";
 
 // Components
-import { BadgeAlert, Sparkles } from "lucide-react";
+import { BadgeAlert } from "lucide-react";
+import AiSuggestion from "@/forums//ai-suggestion";
 
 function DAOForumPage() {
   return (
@@ -11,16 +12,7 @@ function DAOForumPage() {
         <p className="text-sm font-medium text-gray-500">
           No current updates and discussions.
         </p>
-        <div className="bg-purple-900 px-3 py-1 rounded-3xl flex items-center gap-2">
-          {/* TODO: Add appropriate fill color */}
-          <Sparkles size={15} fill="bg-pink-900" />
-          <p className="text-sm font-medium">
-            AI Suggestion:{" "}
-            <span className="text-gray-300 font-normal">
-              Create a discussion to your community
-            </span>
-          </p>
-        </div>
+        <AiSuggestion suggestion="Create a discussion to your community" />
       </div>
     </div>
   );
