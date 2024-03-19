@@ -20,7 +20,12 @@ interface ITiptapEditor {
   className?: string;
 }
 
-const TiptapEditor = ({ description, className, onChange }: ITiptapEditor) => {
+const TiptapEditor = ({
+  description,
+  className,
+  onChange,
+  ...props
+}: ITiptapEditor) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -119,7 +124,7 @@ const TiptapEditor = ({ description, className, onChange }: ITiptapEditor) => {
         </Toggle>
       </div>
 
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} {...props} />
     </div>
   );
 };
