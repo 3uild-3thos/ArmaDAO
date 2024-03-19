@@ -1,8 +1,9 @@
 "use client";
 
 // react
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRef, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 
 // components
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,9 @@ import {
 } from "@/components/ui/popover";
 import TiptapEditor from "@/components/ui/tiptap-editor";
 import { useToast } from "@/components/ui/use-toast";
+import ProposalTypesSelectComponent from "@/proposals/create/proposal-types-select";
+
+// lib
 import {
   EProposalType,
   IProposal,
@@ -31,24 +35,18 @@ import {
   ProposalSchema,
 } from "@/lib/schema/proposals.schema";
 import { cn } from "@/lib/utils";
-import ProposalTypesSelectComponent from "@/proposals/create/proposal-types-select";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Plus, XSquareIcon } from "lucide-react";
 
 const DAOProposalCreatePage = () => {
   /* * * * * *
    * States
    * * * * * */
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null | undefined>(
-    ""
-  );
-  const [isPageReady, setIsPageReady] = useState<boolean>(false);
-  const [hasAlreadySubmitted, setHasAlreadySubmitted] = useState(false);
   const [selectedType, setSelectedType] = useState<EProposalType>(
     EProposalType.VOTE
   );
+  const [choiceValue, setChoiceValue] = useState<string>("");
   const { toast } = useToast();
 
   const form = useForm<IProposal>({
@@ -56,12 +54,22 @@ const DAOProposalCreatePage = () => {
     defaultValues: ProposalDefaults,
   });
 
+  const choiceRef = useRef(null);
+
+  const {
+    fields: choicesFields,
+    append: choicesAppend,
+    remove: choicesRemove,
+  } = useFieldArray({
+    name: "choices",
+    control: form.control,
+  });
+
   /* * * * * *
    * Functions
    * * * * * */
   const onSubmit = async (values: IProposal) => {
     setIsLoading(true);
-    setErrorMessage("");
 
     try {
       const {} = values;
@@ -89,6 +97,35 @@ const DAOProposalCreatePage = () => {
 
   const handleProposalTypeSelect = (type: EProposalType) =>
     setSelectedType(type);
+
+  // TODO: Add debounce
+  const handleChoiceOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChoiceValue(event?.target?.value || "");
+  };
+
+  const handleChoiceRemove = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    choiceIndex: number
+  ) => {
+    event.preventDefault();
+    choicesRemove(choiceIndex);
+  };
+
+  const handleAddChoice = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+
+    if (choiceValue !== "") {
+      choicesAppend({
+        id: crypto.randomUUID(),
+        name: choiceValue,
+        votes: 0,
+      });
+
+      setChoiceValue("");
+    }
+  };
 
   return (
     <>
@@ -356,6 +393,91 @@ const DAOProposalCreatePage = () => {
                       </FormItem>
                     )}
                   />
+                </div>
+
+                {/* === BOUNTY === */}
+                {selectedType === EProposalType.BOUNTY && (
+                  <>
+                    {/* Bounty Recipient */}
+                    <FormField
+                      control={form.control}
+                      name="bountyRecipient"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Bounty Recipient</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="5vkS...S0kl"
+                              required
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Bounty Amount */}
+                    <FormField
+                      control={form.control}
+                      name="bountyAmount"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Bounty Amount (in SOL)</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="1000"
+                              required
+                              type="number"
+                              {...field}
+                              value={field?.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </>
+                )}
+                <FormLabel>Choices</FormLabel>
+                <div className="flex items-center">
+                  <Input
+                    ref={choiceRef}
+                    placeholder="Choice A"
+                    value={choiceValue}
+                    onChange={handleChoiceOnChange}
+                  />
+                  <Button
+                    variant={"ghost"}
+                    disabled={isLoading}
+                    onClick={handleAddChoice}
+                    className="h-full text-muted-light"
+                  >
+                    <Plus />
+                  </Button>
+                </div>
+                <FormMessage>
+                  {form?.formState?.errors?.choices?.message}
+                </FormMessage>
+
+                <div className="flex gap-4">
+                  {choicesFields.map((choice, index) => {
+                    return (
+                      <div
+                        key={`choice-${index}`}
+                        className="bg-muted text-muted-foreground px-3 flex justify-between gap-2 text-center items-center"
+                      >
+                        {choice?.name}
+                        <Button
+                          variant={"ghost"}
+                          onClick={(event) => handleChoiceRemove(event, index)}
+                          className="p-0"
+                        >
+                          <XSquareIcon className="text-destructive" />
+                        </Button>
+                      </div>
+                    );
+                  })}
                 </div>
               </form>
             </Form>

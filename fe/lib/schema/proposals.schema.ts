@@ -28,15 +28,14 @@ export const ProposalSchema = z
       .string()
       .min(50, "Description must be at least 50 characters."),
     type: z.nativeEnum(EProposalType),
-    totalVotes: z.number().min(1, "Total votes must be more than 1."),
-    pendingVotes: z.number().min(1, "Total votes must be more than 1."),
+    totalVotes: z.coerce.number(),
+    pendingVotes: z.coerce.number(),
     startDate: z.string().datetime(),
-    // endDate must not be before the start date
     endDate: z.string().datetime(),
     postedAt: z.string(),
     postedBy: z.string(),
     status: z.nativeEnum(EProposalStatus),
-    choices: z.array(ChoiceSchema),
+    choices: z.array(ChoiceSchema).min(2, "Must have at least 2 choices"),
     quorum: z.coerce
       .number()
       .min(1, "Quorum must be greater than 0")
@@ -47,6 +46,26 @@ export const ProposalSchema = z
       .nullable(),
     expiry: z.string().datetime(),
     evaluationPeriod: z.string().datetime(),
+
+    // For Bounty
+    bountyRecipient: z.string().optional(),
+    bountyAmount: z.coerce.number().optional(),
+
+    // For Executable
+    fleetProposalFee: z.coerce.number().optional(),
+    fleetExpiry: z.string().datetime().optional(),
+    fleetThreshold: z.coerce
+      .number()
+      .min(1, "Threshold must be greater than 0")
+      .nullable()
+      .optional(),
+    fleetQuorum: z.coerce
+      .number()
+      .min(1, "Quorum must be greater than 0")
+      .nullable()
+      .optional(),
+    fleetEvaluationPeriod: z.string().datetime().optional(),
+    fleetAllowSubdao: z.boolean().optional(),
   })
   .required();
 
@@ -68,4 +87,16 @@ export const ProposalDefaults: IProposalDefaults = {
   threshold: 0,
   expiry: "",
   evaluationPeriod: "",
+
+  // For Bounty
+  bountyRecipient: "",
+  bountyAmount: 0,
+
+  // For Executable
+  fleetProposalFee: 0,
+  fleetExpiry: "",
+  fleetThreshold: 0,
+  fleetQuorum: 0,
+  fleetEvaluationPeriod: "",
+  fleetAllowSubdao: false,
 };

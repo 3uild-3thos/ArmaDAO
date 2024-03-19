@@ -10,28 +10,27 @@ declare_id!("propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV");
 #[program]
 pub mod proposal {
     use super::*;
-     
+
     // Create a proposal Hybrid
     pub fn create_proposal(
-        ctx: Context<CreateProposal>, 
-        id: u64, 
-        name: String, 
-        metadata: String, 
+        ctx: Context<CreateProposal>,
+        id: u64,
+        name: String,
+        metadata: String,
         proposal: ProposalType,
-        quorum: u8, 
+        quorum: u8,
         threshold: u64,
         expiry: u64,
-        choices:u8,
-        evaluation_period:u64,
-
+        choices: u8,
+        evaluation_period: u64
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
         ctx.accounts.pay_proposal_fee()?;
 
         // Ensure user has actually got tokens staked and create a new proposal
         ctx.accounts.create_proposal(
-            id, 
-            name, 
+            id,
+            name,
             metadata,
             proposal,
             quorum,
@@ -44,24 +43,24 @@ pub mod proposal {
     }
     // Create a proposal staked based
     pub fn create_proposal_staked(
-        ctx: Context<StakeCreateProposal>, 
-        id: u64, 
-        name: String, 
-        metadata: String, 
+        ctx: Context<StakeCreateProposal>,
+        id: u64,
+        name: String,
+        metadata: String,
         proposal: ProposalType,
-        quorum: u8, 
+        quorum: u8,
         threshold: u64,
         expiry: u64,
-        choices:u8,
-        evaluation_period:u64,
+        choices: u8,
+        evaluation_period: u64
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
         ctx.accounts.pay_proposal_fee()?;
 
         // Ensure user has actually got tokens staked and create a new proposal
         ctx.accounts.create_proposal(
-            id, 
-            name, 
+            id,
+            name,
             metadata,
             proposal,
             quorum,
@@ -73,40 +72,35 @@ pub mod proposal {
         )
     }
     // Cleanup a proposal
-    pub fn cleanup_proposal(
-        ctx: Context<CleanupProposal>,
-    ) -> Result<()> {
+    pub fn cleanup_proposal(ctx: Context<CleanupProposal>) -> Result<()> {
         ctx.accounts.cleanup_proposal()
     }
 
     // execute a proposal
-    pub fn execute_proposal(
-        ctx: Context<CleanupProposal>,
-    ) -> Result<()> {   
+    pub fn execute_proposal(ctx: Context<CleanupProposal>) -> Result<()> {
         ctx.accounts.execute_proposal()
-    }   
+    }
     // Create a SubDao Proposal
     // Staked Based
     pub fn create_proposal_sub_dao(
-        ctx: Context<CreateProposalSubDao>, 
-        id: u64, 
-        name: String, 
-        metadata: String, 
+        ctx: Context<CreateProposalSubDao>,
+        id: u64,
+        name: String,
+        metadata: String,
         proposal: ProposalType,
-        quorum: u8, 
+        quorum: u8,
         threshold: u64,
         expiry: u64,
-        choices:u8,
-        evaluation_period:u64,
-
+        choices: u8,
+        evaluation_period: u64
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
         ctx.accounts.pay_proposal_fee()?;
 
         // Ensure user has actually got tokens staked and create a new proposal
         ctx.accounts.create_proposal_sub_dao(
-            id, 
-            name, 
+            id,
+            name,
             metadata,
             proposal,
             quorum,
@@ -120,25 +114,24 @@ pub mod proposal {
     // Create a SubDao Proposal
     // NFT Holding Based
     pub fn create_proposal_sub_dao_hybrid(
-        ctx: Context<CreateProposalSubDaoHybrid>, 
-        id: u64, 
-        name: String, 
-        metadata: String, 
+        ctx: Context<CreateProposalSubDaoHybrid>,
+        id: u64,
+        name: String,
+        metadata: String,
         proposal: ProposalType,
-        quorum: u8, 
+        quorum: u8,
         threshold: u64,
         expiry: u64,
-        choices:u8,
-        evaluation_period:u64,
-
+        choices: u8,
+        evaluation_period: u64
     ) -> Result<()> {
         // Pay a proposal fee to DAO treasury
         ctx.accounts.pay_proposal_fee()?;
 
         // Ensure user has actually got tokens staked and create a new proposal
         ctx.accounts.create_proposal_sub_dao_hybrid(
-            id, 
-            name, 
+            id,
+            name,
             metadata,
             proposal,
             quorum,
@@ -148,40 +141,28 @@ pub mod proposal {
             evaluation_period,
             &ctx.bumps
         )
-    }      
+    }
     // Cleanup a proposal
-    pub fn cleanup_proposal_sub_dao(
-        ctx: Context<CleanupProposalSubDao>,
-    ) -> Result<()> {
+    pub fn cleanup_proposal_sub_dao(ctx: Context<CleanupProposalSubDao>) -> Result<()> {
         ctx.accounts.cleanup_proposal_sub_dao()
     }
     // execute a proposal_sub_dao
-    pub fn execute_proposal_sub_dao(
-        ctx: Context<CleanupProposalSubDao>,
-    ) -> Result<()> {   
+    pub fn execute_proposal_sub_dao(ctx: Context<CleanupProposalSubDao>) -> Result<()> {
         ctx.accounts.execute_proposal()
-    } 
+    }
     // INSTRUCTIONS CPIS
     // ADD VOTE
-    pub fn add_vote(
-        ctx: Context<ProposalHandler>,
-        amount: u64, 
-        choice: u8
-    ) -> Result<()> {
+    pub fn add_vote(ctx: Context<ProposalHandler>, amount: u64, choice: u8) -> Result<()> {
         ctx.accounts.add_vote(amount, choice)
     }
     // REMOVE VOTE
-    pub fn remove_vote(
-        ctx: Context<ProposalHandler>,
-        amount: u64, 
-        choice: u8
-    ) -> Result<()> {
+    pub fn remove_vote(ctx: Context<ProposalHandler>, amount: u64, choice: u8) -> Result<()> {
         ctx.accounts.remove_vote(amount, choice)
     }
     // ADD VOTE
     pub fn add_vote_sub_dao(
         ctx: Context<SubDaoProposalHandler>,
-        amount: u64, 
+        amount: u64,
         choice: u8
     ) -> Result<()> {
         ctx.accounts.add_vote_sub_dao(amount, choice)
@@ -189,10 +170,9 @@ pub mod proposal {
     // REMOVE VOTE
     pub fn remove_vote_sub_dao(
         ctx: Context<SubDaoProposalHandler>,
-        amount: u64, 
+        amount: u64,
         choice: u8
     ) -> Result<()> {
         ctx.accounts.remove_vote_sub_dao(amount, choice)
     }
 }
-
