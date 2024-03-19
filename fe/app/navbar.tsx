@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Home, Menu, Star } from "lucide-react";
+import Link from "next/link";
 
 interface INavItem {
   title: string;
@@ -36,27 +37,38 @@ export const Navbar = () => {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-3">
             {/* <Smile /> */}
-            <p className="font-bold text-2xl">Armada</p>
+            <Link href={"/"}>
+              <p className="font-bold text-2xl">Armada</p>
+            </Link>
           </div>
           <div className="flex items-center gap-7">
             <div className="flex items-center gap-2">
               <Home size={15} />
-              <p className="text-sm font-medium">Home</p>
+
+              <Link href={"/"}>
+                <p className="text-sm font-medium">Home</p>
+              </Link>
             </div>
 
             <div className="flex items-center gap-2">
               <Star size={15} />
-              <p className="text-sm font-medium">Mint</p>
+              <Link href={"/mint"}>
+                <p className="text-sm font-medium">Mint</p>
+              </Link>
             </div>
 
             <div className="flex items-center gap-2">
               <Star size={15} />
-              <p className="text-sm font-medium">DAO</p>
+              <Link href={"/dao"}>
+                <p className="text-sm font-medium">DAO</p>
+              </Link>
             </div>
 
             <div className="flex items-center gap-2">
               <Star size={15} />
-              <p className="text-sm font-medium">Proposals</p>
+              <Link href={"/proposals"}>
+                <p className="text-sm font-medium">Proposals</p>
+              </Link>
             </div>
           </div>
         </div>
