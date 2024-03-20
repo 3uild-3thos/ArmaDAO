@@ -22,7 +22,10 @@
       "@/dao/*": ["./app/dao/*"],
       "@/[daoId]/*": ["./app/dao/[daoId]/*"],
       "@/proposals/*": ["./app/dao/[daoId]/proposals/*"],
-      "@/create/*": ["./app/dao/create/*"]
+      "@/forums/*": ["./app/dao/[daoId]/forums/*"],
+      "@/create/*": ["./app/dao/create/*"],
+      "@/mint/*": ["./app/mint/*"],
+
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,9 +1,7 @@
 "use client";
-import { Textarea } from "@/components/ui/textarea";
-import { ImagePlus } from "lucide-react";
 import React from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
+// lib
 import {
   ITeamMember,
   TeamMemberDefaults,
@@ -11,7 +9,13 @@ import {
 } from "@/lib/schema/team-member.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
+// components
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ImagePlus } from "lucide-react";
 
 function TeamMember() {
   const form = useForm<ITeamMember>({
