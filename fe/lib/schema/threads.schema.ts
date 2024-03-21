@@ -5,7 +5,7 @@ export const CommentSchema = z.object({
   pinned: z.boolean(),
   content: z.string(),
   name: z.string(),
-  createdAt: z.string(),
+  createdAt: z.string().datetime(),
 });
 
 export type IComment = z.infer<typeof CommentSchema>;
@@ -15,8 +15,8 @@ export const ThreadSchema = z.object({
   type: z.string(),
   title: z.string(),
   description: z.string(),
-  updatedAt: z.string(),
-  createdAt: z.string(),
+  updatedAt: z.string().datetime(),
+  createdAt: z.string().datetime(),
   changesTitle: z.string().optional(),
   like: z.number(),
   dislike: z.number(),
