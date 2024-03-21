@@ -8,6 +8,7 @@ export const PATH = {
   mothershipProposalDetail: "/proposals/[proposalId]",
 
   // Fleet
+  fleets: "/dao",
   fleetCreate: "/dao/create",
   fleetDetail: "/dao/[daoId]",
   fleetProposals: "/dao/[daoId]/proposals",

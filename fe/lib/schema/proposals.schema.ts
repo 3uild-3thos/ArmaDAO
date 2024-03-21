@@ -14,6 +14,15 @@ export enum EProposalType {
   MULTIPLE_CHOICE = "Multiple Choice",
 }
 
+export enum EExecutableType {
+  SET_PROPOSAL_FEE = "Proposal Fee",
+  SET_MAX_EXPIRY = "Max Expiry",
+  SET_THRESHOLD = "Threshold",
+  SET_QUORUM = "Quorum",
+  SET_EVALUATION_PERIOD = "Evaluation Period",
+  SET_ALLOW_SUBDAO = "Allow SubDAO",
+}
+
 export const ChoiceSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -52,6 +61,7 @@ export const ProposalSchema = z
     bountyAmount: z.coerce.number().optional(),
 
     // For Executable
+    executableType: z.nativeEnum(EExecutableType).optional(),
     fleetProposalFee: z.coerce.number().optional(),
     fleetExpiry: z.string().datetime().optional(),
     fleetThreshold: z.coerce
@@ -93,6 +103,7 @@ export const ProposalDefaults: IProposalDefaults = {
   bountyAmount: 0,
 
   // For Executable
+  executableType: EExecutableType.SET_PROPOSAL_FEE,
   fleetProposalFee: 0,
   fleetExpiry: "",
   fleetThreshold: 0,
