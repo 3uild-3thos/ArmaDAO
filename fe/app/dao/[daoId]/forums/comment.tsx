@@ -3,6 +3,7 @@ import Image from "next/image";
 
 // components
 import { Pin } from "lucide-react";
+import timeAgo from "@/lib/helpers/timeAgo";
 
 interface ICommentProps {
   content: string;
@@ -32,7 +33,7 @@ function Comment({ content, pinned = false, createdAt }: ICommentProps) {
             {pinned && (
               <p className="text-[10px] text-gray-400">Pinned Comment</p>
             )}
-            <p className="text-[10px] text-gray-400">{createdAt}</p>
+            <p className="text-[10px] text-gray-400">{timeAgo(createdAt)}</p>
           </div>
 
           {pinned && <Pin size={12} />}
