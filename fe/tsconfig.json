@@ -23,6 +23,7 @@
       "@/[daoId]/*": ["./app/dao/[daoId]/*"],
       "@/proposals/*": ["./app/dao/[daoId]/proposals/*"],
       "@/forums/*": ["./app/dao/[daoId]/forums/*"],
+      "@/team/*": ["./app/dao/[daoId]/team/*"],
       "@/create/*": ["./app/dao/create/*"],
       "@/mint/*": ["./app/mint/*"],
 
