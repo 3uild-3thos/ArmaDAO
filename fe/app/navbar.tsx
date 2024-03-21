@@ -1,14 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
 // next
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
 // components
 import { ConnectWallet } from "@/components/ui/connect-wallet";
-import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ui/theme-toggle";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { Home, Menu, Star } from "lucide-react";
-import Link from "next/link";
+
+// lib
+import { PATH } from "@/lib/routes";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 interface INavItem {
   title: string;
@@ -37,36 +41,42 @@ export const Navbar = () => {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-3">
             {/* <Smile /> */}
-            <Link href={"/"}>
-              <p className="font-bold text-2xl">Armada</p>
+            <Link href={PATH.home}>
+              <Image
+                src={"/logo.png"}
+                alt={"Armada"}
+                width={1000}
+                height={1000}
+                className="w-10 h-fit"
+              />
             </Link>
           </div>
           <div className="flex items-center gap-7">
             <div className="flex items-center gap-2">
               <Home size={15} />
 
-              <Link href={"/"}>
+              <Link href={PATH.home}>
                 <p className="text-sm font-medium">Home</p>
               </Link>
             </div>
 
             <div className="flex items-center gap-2">
               <Star size={15} />
-              <Link href={"/mint"}>
+              <Link href={PATH.mothershipMint}>
                 <p className="text-sm font-medium">Mint</p>
               </Link>
             </div>
 
             <div className="flex items-center gap-2">
               <Star size={15} />
-              <Link href={"/dao"}>
+              <Link href={PATH.fleets}>
                 <p className="text-sm font-medium">DAO</p>
               </Link>
             </div>
 
             <div className="flex items-center gap-2">
               <Star size={15} />
-              <Link href={"/proposals"}>
+              <Link href={PATH.mothershipProposals}>
                 <p className="text-sm font-medium">Proposals</p>
               </Link>
             </div>
@@ -83,7 +93,7 @@ export const Navbar = () => {
               menuOpen ? "translate-x-0" : "translate-x-full"
             } md:static md:w-auto md:bg-transparent md:flex-row md:transform-none md:text-sm bg-black backdrop-blur-md sm:bg-transparent sm:backdrop-blur-none`}
           >
-            <Input />
+            {/* <Input /> */}
             <ConnectWallet />
             <ThemeToggle />
           </div>

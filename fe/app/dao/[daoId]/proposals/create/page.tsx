@@ -23,6 +23,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import TiptapEditor from "@/components/ui/tiptap-editor";
 import { useToast } from "@/components/ui/use-toast";
 import ProposalSuccessCardComponent from "@/proposals/create/proposal-success-card";
@@ -30,6 +37,7 @@ import ProposalTypesSelectComponent from "@/proposals/create/proposal-types-sele
 
 // lib
 import {
+  EExecutableType,
   EProposalType,
   IProposal,
   ProposalDefaults,
@@ -145,10 +153,10 @@ const DAOProposalCreatePage = () => {
         <h3 className="text-2xl font-medium text-muted">Create a Proposal</h3>
       </div>
       <div className="grid grid-cols-12 gap-8">
-        <Card className="col-span-8">
+        <Card className="w-full col-span-8">
           <CardContent className="flex flex-col gap-4">
             <Form {...form}>
-              <form className="flex flex-col col-span-2 gap-6 my-4">
+              <form className="relative flex flex-col col-span-2 gap-6 my-4">
                 <ProposalTypesSelectComponent
                   onSelect={handleProposalTypeSelect}
                   selected={selectedType}
@@ -193,7 +201,7 @@ const DAOProposalCreatePage = () => {
                   )}
                 />
 
-                <div className="flex gap-8 w-full">
+                <div className="flex w-full gap-8">
                   {/* Start Date */}
                   <FormField
                     control={form.control}
@@ -217,7 +225,7 @@ const DAOProposalCreatePage = () => {
                                 ) : (
                                   <span>Pick a date</span>
                                 )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
@@ -259,7 +267,7 @@ const DAOProposalCreatePage = () => {
                                 ) : (
                                   <span>Pick a date</span>
                                 )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
@@ -345,7 +353,7 @@ const DAOProposalCreatePage = () => {
                                 ) : (
                                   <span>Pick a date</span>
                                 )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
@@ -387,7 +395,7 @@ const DAOProposalCreatePage = () => {
                                 ) : (
                                   <span>Pick a date</span>
                                 )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
@@ -451,6 +459,40 @@ const DAOProposalCreatePage = () => {
                     />
                   </>
                 )}
+
+                {/* === EXECUTABLE === */}
+                {selectedType === EProposalType.EXECUTABLE && (
+                  <FormField
+                    control={form.control}
+                    name="executableType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Executable Type</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a configuration to change" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(EExecutableType).map((execType) => (
+                              <SelectItem
+                                key={`exec-type-${execType}`}
+                                value={execType}
+                              >
+                                {execType}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
                 <FormLabel>Choices</FormLabel>
                 <div className="flex items-center">
                   <Input
@@ -477,7 +519,7 @@ const DAOProposalCreatePage = () => {
                     return (
                       <div
                         key={`choice-${index}`}
-                        className="bg-muted text-muted-foreground px-3 flex justify-between gap-2 text-center items-center"
+                        className="flex items-center justify-between gap-2 px-3 text-center bg-muted text-muted-foreground"
                       >
                         {choice?.name}
                         <Button

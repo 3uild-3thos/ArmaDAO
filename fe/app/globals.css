@@ -98,7 +98,6 @@
   }
 
   body {
-    @apply h-full font-gordita px-8 md:px-16 lg:px-24 2xl:px-40;
     scrollbar-width: thin; /* Make it thin */
     scrollbar-color: hsl(180 100% 50%) transparent; /* Thumb gray and track transparent */
   }
