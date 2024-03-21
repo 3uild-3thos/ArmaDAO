@@ -1,5 +1,7 @@
-import { BadgeAlert } from "lucide-react";
 import React from "react";
+
+// components
+import { BadgeAlert } from "lucide-react";
 import AiSuggestion from "@/forums//ai-suggestion";
 
 function NoData() {
