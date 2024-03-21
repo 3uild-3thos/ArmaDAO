@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { IComment } from "@/lib/schema/threads.schema";
 
 // components
-import { ArrowDown, ArrowUp, ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Comment from "@/forums/comment";
 import { Button } from "@/components/ui/button";
 
