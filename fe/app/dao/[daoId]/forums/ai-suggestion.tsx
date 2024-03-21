@@ -1,5 +1,7 @@
-import { Sparkles } from "lucide-react";
 import React from "react";
+
+// components
+import { Sparkles } from "lucide-react";
 
 interface IAiSuggestionProps {
   suggestion: string;
