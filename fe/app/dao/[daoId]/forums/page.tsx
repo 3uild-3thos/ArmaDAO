@@ -51,7 +51,7 @@ function DAOForumPage() {
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
                       <p className="text-gray-500 text-[10px]">
-                        {thread.updatedAt}
+                        Updated {new Date(thread.updatedAt).toUTCString()}
                       </p>
 
                       <div className="flex gap-1 items-center">
