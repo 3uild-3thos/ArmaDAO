@@ -28,7 +28,7 @@ export const threads: Array<IThread> = [
       },
     ],
     title: "We’re going to the moon!",
-    updatedAt: "Updated December 23, 2022 ∙ 12:51 PM UTC",
+    updatedAt: "05/01/2024",
     createdAt: "05/01/2024",
     changesTitle: "We’re going to the mars!",
     like: 150,
@@ -39,7 +39,7 @@ export const threads: Array<IThread> = [
   },
   {
     id: "2",
-    updatedAt: "Updated December 23, 2022 ∙ 12:51 PM UTC",
+    updatedAt: "05/01/2024",
     comments: [
       {
         id: "1",
@@ -99,7 +99,7 @@ export const threads: Array<IThread> = [
         createdAt: "05/01/2024",
       },
     ],
-    updatedAt: "Updated December 23, 2022 ∙ 12:51 PM UTC",
+    updatedAt: "05/01/2024",
     createdAt: "05/01/2024",
     type: "Discussion",
     like: 150,
