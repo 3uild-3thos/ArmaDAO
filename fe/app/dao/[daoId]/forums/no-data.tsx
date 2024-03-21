@@ -2,7 +2,7 @@ import React from "react";
 
 // components
 import { BadgeAlert } from "lucide-react";
-import AiSuggestion from "@/forums//ai-suggestion";
+import AiSuggestion from "@/forums/ai-suggestion";
 
 function NoData() {
   return (
