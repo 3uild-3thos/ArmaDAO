@@ -1,17 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 // mock
 import { IComment } from "@/lib/schema/threads.schema";
 
 // components
-import { ChevronDown } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown, ChevronUp } from "lucide-react";
 import Comment from "@/forums/comment";
+import { Button } from "@/components/ui/button";
 
 interface ICommentsListProps {
   comments: IComment[];
 }
 
 function CommentsList({ comments = [] }: ICommentsListProps) {
+  const [shouldReadMore, setShouldReadMore] = useState(false);
+  const handleShouldReadMore = () => setShouldReadMore(!shouldReadMore);
+
   return (
     <div className="border border-gray-600 p-2 rounded ">
       {comments.map((e) => (
@@ -23,8 +28,23 @@ function CommentsList({ comments = [] }: ICommentsListProps) {
         />
       ))}
       <div className="flex items-center justify-center p-2 gap-3">
-        <ChevronDown size={16} />
-        <p className="text-xs">Load more comments</p>
+        <Button
+          variant={"ghost"}
+          className="gap-2 p-0"
+          onClick={handleShouldReadMore}
+        >
+          {shouldReadMore ? (
+            <>
+              <ChevronUp size={16} />
+              <p className="text-xs">See less</p>
+            </>
+          ) : (
+            <>
+              <ChevronDown size={16} />
+              <p className="text-xs">Load more comments</p>
+            </>
+          )}
+        </Button>
       </div>
     </div>
   );
