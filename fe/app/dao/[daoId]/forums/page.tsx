@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 // mock
@@ -10,6 +11,7 @@ import CommentsList from "@/forums/comments-list";
 import AiSuggestion from "@/forums/ai-suggestion";
 import Stats from "@/forums/stats";
 import NoData from "@/forums/no-data";
+import { Button } from "@/components/ui/button";
 
 function DAOForumPage() {
   if (threads.length === 0) {
@@ -44,7 +46,15 @@ function DAOForumPage() {
                     <p className="text-xl font-medium">{thread.title}</p>
                     {/* TODO: Add appropriate icon */}
                     {/* TODO: Add appropriate color */}
-                    <Pencil size={16} />
+                    <Button
+                      variant={"ghost"}
+                      className="gap-2 p-0"
+                      onClick={() => {
+                        alert("Edit");
+                      }}
+                    >
+                      <Pencil size={16} />
+                    </Button>
                   </div>
                   <p className="text-s m font-normal">{thread.description}</p>
 
@@ -53,11 +63,16 @@ function DAOForumPage() {
                       <p className="text-gray-500 text-[10px]">
                         Updated {new Date(thread.updatedAt).toUTCString()}
                       </p>
-
-                      <div className="flex gap-1 items-center">
+                      <Button
+                        variant={"ghost"}
+                        className="gap-2 p-0"
+                        onClick={() => {
+                          alert("Hide changes");
+                        }}
+                      >
                         <p className="text-[10px]">Hide changes</p>
                         <ChevronUp size={16} />
-                      </div>
+                      </Button>
                     </div>
 
                     <div className="bg-gray-700 p-3 flex flex-col gap-2">
