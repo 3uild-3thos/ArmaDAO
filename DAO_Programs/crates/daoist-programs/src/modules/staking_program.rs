@@ -89,7 +89,6 @@ impl StakeState {
         self.check_accounts()?;
         self.check_slot()?; // Don't allow staking and unstaking in the same slot
         self.check_locked_amount(amount)?;
-
         self.amount = self.amount.checked_sub(amount).ok_or(CoreError::Underflow)?;
         self.update()
     }
@@ -123,11 +122,31 @@ impl StakeState {
         require!(self.accounts == 0, CoreError::AccountsOpen);
         Ok(())
     }
+
     // Make sure the user  users can only unstake tokens that are not currently locked
     pub fn check_locked_amount(&self, amount: u64) -> Result<()> {
         require!(amount <= self.amount - self.locked_amount, CoreError::Overflow);
         Ok(())
     }
+    //Scenario 1: User Stakes 1000 Tokens, Votes with 5 Tokens, and Wants to Unstake 995 Tokens
+    // 995 <= 1000-5 <=> - true 
+    //<=> 995 <= 995 // true 
+
+     //Scenario 2 : In the scenario where the user initially stakes 1000 tokens, removes 300 tokens 
+     //votes with all 1000 tokens// want unstake 300 tokens
+     //and then removes 300 tokens from their votes, resulting in a locked amount of 700 tokens
+    // 300 <= 1000 - 700 // true 
+
+    //Scenario 3 If the user wants to unstake 1000 tokens without removing any amount from their votes
+    // 1000 <= 1000 - 1000<=> 
+    // 1000 <= 0  // false
+
+    //Scenario4 User stakes 1000 tokens // Votes with 500 tokens in Proposal A // Votes with 700 tokens in Proposal B
+    //Total Staked Amount: 1000 tokens
+    //Locked Amount  : 1200
+    //Wants to unstake any amount 
+    //500 <= 1000 - 1200
+    //500 <= -200 // false
 
     // Ensure staked amount > 0
     pub fn check_stake(&self) -> Result<()> {
