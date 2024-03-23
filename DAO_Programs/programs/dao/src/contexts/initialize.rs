@@ -143,7 +143,7 @@ impl<'info> Initialize<'info> {
     }
 }
 
-//Hybrid FLEETS - SUB FLEETS
+//Hybrid SUB FLEETS
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdao<'info> {
@@ -182,8 +182,8 @@ pub struct InitializeSubdao<'info> {
     )]
     master_edition: Account<'info, MasterEditionAccount>,
     #[account(
-        seeds=[b"auth", config.key().as_ref()],
-        bump = config.auth_bump
+        seeds=[b"auth", config_sub_dao.key().as_ref()],
+        bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     auth: UncheckedAccount<'info>,
@@ -246,7 +246,7 @@ impl<'info> InitializeSubdao<'info> {
                 proposal_program: self.config.proposal_program, 
                 voting_program: self.config.voting_program, 
                 staking_program: self.config.staking_program, 
-                auth_bump: self.config.auth_bump, 
+                auth_bump: bumps.auth, 
                 config_bump: bumps.config_sub_dao, 
                 treasury_bump: bumps.treasury,
                 collection_mint,
@@ -268,8 +268,8 @@ pub struct InitializeSubdaoToken<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
-        seeds=[b"auth", config.key().as_ref()],
-        bump = config.auth_bump
+        seeds=[b"auth", config_sub_dao.key().as_ref()],
+        bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     auth: UncheckedAccount<'info>,
@@ -333,7 +333,7 @@ impl<'info> InitializeSubdaoToken<'info> {
                 proposal_program: self.config.proposal_program, 
                 voting_program: self.config.voting_program, 
                 staking_program: self.config.staking_program, 
-                auth_bump: self.config.auth_bump, 
+                auth_bump: bumps.auth, 
                 config_bump: bumps.config_sub_dao, 
                 treasury_bump: bumps.treasury,
                 collection_mint, 
