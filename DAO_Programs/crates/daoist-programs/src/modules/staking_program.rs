@@ -28,6 +28,7 @@ pub struct SubDaoStakeHandler<'info> {
 pub struct StakeState {
     pub owner: Pubkey,
     pub amount: u64,
+    pub locked_amount: u64,
     pub accounts: u64,
     pub updated: u64,
     pub vault_bump: u8,
@@ -66,6 +67,7 @@ impl StakeState {
     ) -> Result<()> {
         self.owner = owner;
         self.amount = 0;
+        self.locked_amount = 0;
         self.accounts = 0;
         self.state_bump = state_bump;
         self.vault_bump = vault_bump;
@@ -86,6 +88,8 @@ impl StakeState {
     ) -> Result<()> {
         self.check_accounts()?;
         self.check_slot()?; // Don't allow staking and unstaking in the same slot
+        self.check_locked_amount(amount)?;
+
         self.amount = self.amount.checked_sub(amount).ok_or(CoreError::Underflow)?;
         self.update()
     }
@@ -117,6 +121,11 @@ impl StakeState {
     // Make sure the user doesn't have any open accounts
     pub fn check_accounts(&self) -> Result<()> {
         require!(self.accounts == 0, CoreError::AccountsOpen);
+        Ok(())
+    }
+    // Make sure the user  users can only unstake tokens that are not currently locked
+    pub fn check_locked_amount(&self, amount: u64) -> Result<()> {
+        require!(amount <= self.amount - self.locked_amount, CoreError::Overflow);
         Ok(())
     }
 

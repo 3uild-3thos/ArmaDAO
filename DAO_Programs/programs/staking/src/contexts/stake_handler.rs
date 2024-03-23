@@ -25,13 +25,15 @@ pub struct StakeHandler<'info> {
 
 impl<'info> StakeHandler<'info> {
     // Add a vote account to the stake state
-    pub fn add_account(&mut self) -> Result<()> {
+    pub fn add_account(&mut self, amount: u64) -> Result<()> {
         self.stake_state.accounts = self.stake_state.accounts.checked_add(1).ok_or(StakeError::Overflow)?;
+        self.stake_state.accounts = self.stake_state.locked_amount.checked_add(amount).ok_or(StakeError::Overflow)?;
         Ok(())
     }
     // Remove a vote account from the stake state
-    pub fn remove_account(&mut self) -> Result<()> {
+    pub fn remove_account(&mut self, amount: u64) -> Result<()> {
         self.stake_state.accounts = self.stake_state.accounts.checked_sub(1).ok_or(StakeError::Underflow)?;
+        self.stake_state.accounts = self.stake_state.locked_amount.checked_sub(amount).ok_or(StakeError::Underflow)?;
         Ok(())
     }    
 

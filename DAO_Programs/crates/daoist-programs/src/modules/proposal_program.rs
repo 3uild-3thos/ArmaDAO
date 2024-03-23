@@ -199,7 +199,7 @@ impl Proposal {
     pub fn check_choices(&self) -> Result<()> {
         match self.proposal {
             ProposalType::Bounty(_, _) | ProposalType::Executable(_) | ProposalType::Vote => {
-                if self.choices >= 1 && self.choices <= 3 {
+                if self.choices >= 1 && self.choices <= 2 {
                     Ok(())
                 } else {
                     err!(CoreError::InvalidChoicesAmount)
