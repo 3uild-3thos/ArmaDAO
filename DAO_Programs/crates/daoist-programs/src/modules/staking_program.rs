@@ -169,11 +169,13 @@ impl anchor_lang::Id for StakingProgram {
 
 // Instructions
 pub fn add_account<'info>(
-    ctx: CpiContext<'_, '_, '_, 'info, StakeHandler<'info>>
+    ctx: CpiContext<'_, '_, '_, 'info, StakeHandler<'info>>,
+    amount: u64,
 ) -> Result<()> {
     
     // let mut data = hash(b"global:add_account").to_bytes()[..8].to_vec();
-    let data = vec![0x34, 0xAC, 0xFC, 0x03, 0x26, 0xa8, 0xD1, 0x09];
+    let mut data = vec![0x34, 0xAC, 0xFC, 0x03, 0x26, 0xa8, 0xD1, 0x09];
+    data.extend_from_slice(&amount.to_le_bytes());
 
     let ix = Instruction::new_with_borsh(ID, &data, ctx.accounts.to_account_metas(None));
 
@@ -191,11 +193,13 @@ pub fn add_account<'info>(
 }
 
 pub fn remove_account<'info>(
-    ctx: CpiContext<'_, '_, '_, 'info, StakeHandler<'info>>
+    ctx: CpiContext<'_, '_, '_, 'info, StakeHandler<'info>>,
+    amount: u64
 ) -> Result<()> {
     
     // let mut data = hash(b"global:remove_account").to_bytes()[..8].to_vec();
-    let data = vec![0x7D, 0xA0, 0xFF, 0xB2, 0xC8, 0xB8, 0x9D, 0x4C];
+    let mut data = vec![0x7D, 0xA0, 0xFF, 0xB2, 0xC8, 0xB8, 0x9D, 0x4C];
+    data.extend_from_slice(&amount.to_le_bytes());
 
     let ix = Instruction::new_with_borsh(ID, &data, ctx.accounts.to_account_metas(None));
 
@@ -215,11 +219,13 @@ pub fn remove_account<'info>(
 //SubDAOS
 // Instructions
 pub fn add_account_sub_dao<'info>(
-    ctx: CpiContext<'_, '_, '_, 'info, SubDaoStakeHandler<'info>>
+    ctx: CpiContext<'_, '_, '_, 'info, SubDaoStakeHandler<'info>>,
+    amount: u64
 ) -> Result<()> {
     
     // let mut data = hash(b"global:add_account_sub_dao").to_bytes()[..8].to_vec();
-    let data = vec![0x8c, 0x90, 0xe0, 0x5c, 0x4c, 0xbe, 0x8e, 0xa2];
+    let mut data = vec![0x8c, 0x90, 0xe0, 0x5c, 0x4c, 0xbe, 0x8e, 0xa2];
+    data.extend_from_slice(&amount.to_le_bytes());
 
     let ix = Instruction::new_with_borsh(ID, &data, ctx.accounts.to_account_metas(None));
 
@@ -236,11 +242,13 @@ pub fn add_account_sub_dao<'info>(
     .map_err(Into::into)
 }
 pub fn remove_account_sub_dao<'info>(
-    ctx: CpiContext<'_, '_, '_, 'info, SubDaoStakeHandler<'info>>
+    ctx: CpiContext<'_, '_, '_, 'info, SubDaoStakeHandler<'info>>,
+    amount: u64
 ) -> Result<()> {
     
     // let mut data = hash(b"global:remove_account_sub_dao").to_bytes()[..8].to_vec();
-    let data = vec![0x54, 0xa1, 0x34, 0xb4, 0xfd, 0xae, 0x08, 0x45];
+    let mut data = vec![0x54, 0xa1, 0x34, 0xb4, 0xfd, 0xae, 0x08, 0x45];
+    data.extend_from_slice(&amount.to_le_bytes());
 
     let ix = Instruction::new_with_borsh(ID, &data, ctx.accounts.to_account_metas(None));
 

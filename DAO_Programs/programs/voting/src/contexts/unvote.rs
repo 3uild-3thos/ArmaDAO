@@ -48,7 +48,8 @@ pub struct Unvote<'info> {
 
 impl<'info> Unvote<'info> {
     pub fn cleanup_vote(
-        &mut self
+        &mut self,
+        amount: u64  
     ) -> Result<()> {
         // check if proposal is open and expiry
         self.proposal.is_open_and_expiry()?;
@@ -65,7 +66,7 @@ impl<'info> Unvote<'info> {
         self.staking_program.to_account_info(),
         remove_account_accounts );
 
-        remove_account(cpi_context)
+        remove_account(cpi_context, amount)
     }
     pub fn remove_vote(
         &mut self,
@@ -101,6 +102,6 @@ impl<'info> Unvote<'info> {
         self.staking_program.to_account_info(),
         remove_account_accounts );
 
-        remove_account(cpi_context)
+        remove_account(cpi_context, amount)
     }
 }

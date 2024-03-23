@@ -97,27 +97,31 @@ pub mod staking {
     // INSTRUCTIONS CPIS //          
     // ADD ACCOUNT STAKE STATE
     pub fn add_account(
-        ctx: Context<StakeHandler>,
+        ctx: Context<StakeHandler>, 
+        amount: u64
     ) -> Result<()> {
-        ctx.accounts.add_account()
+        ctx.accounts.add_account(amount)
     } 
     // REMOVE ACCOUNT STAKE STATE
     pub fn remove_account(
         ctx: Context<StakeHandler>,
+        amount: u64
     ) -> Result<()> {
-        ctx.accounts.remove_account()
+        ctx.accounts.remove_account(amount)
     }
     // ADD ACCOUNT STAKE STATE SUB DAO
     pub fn add_account_sub_dao(
         ctx: Context<SubDaoStakeHandler>,
+        amount: u64
     ) -> Result<()> {
-        ctx.accounts.add_account_sub_dao()
+        ctx.accounts.add_account_sub_dao(amount)
     } 
     // REMOVE ACCOUNT STAKE STATE SUB DAO
     pub fn remove_account_sub_dao(
         ctx: Context<SubDaoStakeHandler>,
+        amount: u64
     ) -> Result<()> {
-        ctx.accounts.remove_account_sub_dao()
+        ctx.accounts.remove_account_sub_dao(amount)
     }          
 }
 
