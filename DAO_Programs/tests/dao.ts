@@ -9,9 +9,10 @@ import { Dao } from "../target/types/dao";
 import { Proposal } from "../target/types/proposal";
 import { Staking } from "../target/types/staking";
 import { Voting } from "../target/types/voting";
-import { ASSOCIATED_TOKEN_PROGRAM_ID, MINT_SIZE, TOKEN_2022_PROGRAM_ID, createAssociatedTokenAccountIdempotentInstruction, createInitializeMint2Instruction, createMintToInstruction, createTransferCheckedInstruction, getAssociatedTokenAddressSync, getMinimumBalanceForRentExemptMint } from "@solana/spl-token";
+import { ASSOCIATED_TOKEN_PROGRAM_ID, MINT_SIZE, TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, createAssociatedTokenAccountIdempotentInstruction, createInitializeMint2Instruction, createMintToInstruction, createTransferCheckedInstruction, getAssociatedTokenAddressSync, getMinimumBalanceForRentExemptMint } from "@solana/spl-token";
 import { randomBytes, randomInt } from "crypto"
-import  daoAdmin from "../aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE.json";
+/* import  daoAdmin from "../aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE.json"; */
+import daoAdmin from "../wallet.json"
 import  daoUser from "../ugaoB7uFPdVQHGLg9vyePbsF1b75snYdUJtMMPqjgGi.json";
 
 const commitment: Commitment = "confirmed"; // processed, confirmed, finalized
@@ -35,6 +36,13 @@ describe("dao", () => {
     });
     return signature;
   };
+  
+  const log = async (signature: string): Promise<string> => {
+    console.log(
+      `Your transaction signature: https://explorer.solana.com/transaction/${signature}?cluster=custom&customUrl=${connection.rpcEndpoint}`
+    );
+    return signature;
+  };
   // DAO ARGUMENTS
   const seed = new BN(randomBytes(8));
   // Proposal Aruments
@@ -51,12 +59,12 @@ describe("dao", () => {
   const evaluationPhasePeriod = new BN(9000); 
 
 
-  const collection = new PublicKey("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7"); 
-  const nft = new PublicKey("6hpB812Gbgj931veJjP4RGetGScsNo9yvXLqJLUmTTR2");
+  const collection = new anchor.web3.PublicKey("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7"); 
+  const nft = new anchor.web3.PublicKey("6hpB812Gbgj931veJjP4RGetGScsNo9yvXLqJLUmTTR2");
   
 //admin address:aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE
   const dao_admin = Keypair.fromSecretKey(new Uint8Array(daoAdmin)); 
-  const ownerAta = getAssociatedTokenAddressSync(nft, dao_admin.publicKey, false, TOKEN_2022_PROGRAM_ID);
+  const ownerAta = getAssociatedTokenAddressSync(nft, dao_admin.publicKey, false, TOKEN_PROGRAM_ID);
 
   const dao_user = Keypair.fromSecretKey(new Uint8Array(daoUser)); 
 
@@ -136,13 +144,6 @@ describe("dao", () => {
   //Vote SubDAO
   const subdao_vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_user.publicKey.toBytes(), subdao_proposal.toBytes()], voting_program.programId)[0];
 
-  const log = async (signature: string): Promise<string> => {
-    console.log(
-      `Your transaction signature: https://explorer.solana.com/transaction/${signature}?cluster=custom&customUrl=${connection.rpcEndpoint}`
-    );
-    return signature;
-  };
-
   const accounts = {
     dao_admin,
     ownerAta, /* Derived or created ATA for dao_admin for the NFT */
@@ -201,7 +202,9 @@ describe("dao", () => {
     )
       .accounts({...accounts})
       .signers([dao_admin])
-      .rpc()
+      .rpc({
+        skipPreflight:true
+      })
       .then(confirm)
       .then(log);
   });
