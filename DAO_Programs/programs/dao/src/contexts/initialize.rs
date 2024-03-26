@@ -84,7 +84,7 @@ impl<'info> Initialize<'info> {
         min_threshold: u64,
         //Maximum expiry time for proposals
         max_expiry: u64,
-        //Evaluation phase period for proposals
+        //Evaluation phase period for proposals Example 216000 - 1 day in slots.
         evaluation_phase_period: u64,
         proposal_program: Pubkey,
         voting_program: Pubkey,

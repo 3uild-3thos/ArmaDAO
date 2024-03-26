@@ -1493,5 +1493,8 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF"
+  }
 }

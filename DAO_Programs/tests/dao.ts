@@ -11,6 +11,8 @@ import { Staking } from "../target/types/staking";
 import { Voting } from "../target/types/voting";
 import { ASSOCIATED_TOKEN_PROGRAM_ID, MINT_SIZE, TOKEN_2022_PROGRAM_ID, createAssociatedTokenAccountIdempotentInstruction, createInitializeMint2Instruction, createMintToInstruction, createTransferCheckedInstruction, getAssociatedTokenAddressSync, getMinimumBalanceForRentExemptMint } from "@solana/spl-token";
 import { randomBytes, randomInt } from "crypto"
+import  daoAdmin from "../aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE.json";
+import  daoUser from "../ugaoB7uFPdVQHGLg9vyePbsF1b75snYdUJtMMPqjgGi.json";
 
 const commitment: Commitment = "confirmed"; // processed, confirmed, finalized
 describe("dao", () => {
@@ -38,61 +40,56 @@ describe("dao", () => {
   // Proposal Aruments
   const id = new BN(randomInt(8)); 
 
-
-/*   const proposalFee = new BN(1e8);
-  const minQuorum = new BN(70);
+  // proposalFee in lamports
+  const proposalFee = new BN(1e8);
+  const minQuorum: number = 70;
   const minThreshold = new BN(1000);
-  const maxExpiry = new BN(432000);
-  const evaluationPhasePeriod = new BN(108000); */
+  //24HOURS 216000 slots 1 HOUR 9000 slots 150 slots
+  //time in slots
+  const maxExpiry = new BN(216000);
+  //time in slots
+  const evaluationPhasePeriod = new BN(9000); 
+
+
+  const collection = new PublicKey("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7"); 
+  const nft = new PublicKey("6hpB812Gbgj931veJjP4RGetGScsNo9yvXLqJLUmTTR2");
   
+//admin address:aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE
+  const dao_admin = Keypair.fromSecretKey(new Uint8Array(daoAdmin)); 
+  const ownerAta = getAssociatedTokenAddressSync(nft, dao_admin.publicKey, false, TOKEN_2022_PROGRAM_ID);
 
-
-/*   const collection_mint = new PublicKey("9v9gYTGVaY7f5RXwHNPd7yMdKJ98HWaq456G6HeaShVA"); */
-/*   const dao_admin = Keypair.fromSecretKey(new Uint8Array(daonftuser)); */
-
+  const dao_user = Keypair.fromSecretKey(new Uint8Array(daoUser)); 
 
  const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
 
-  const [dao_user, dao_user1, mintDao, mintSubDao] = Array.from({ length: 4 }, () =>
+  const [mintDao, mintSubDao] = Array.from({ length: 2 }, () =>
     Keypair.generate()
   );
 
-  const [daouserAtaDao, daouserAtaSubDao, daouser1AtaDao, daouser1AtaSubDao] = [dao_user, dao_user1]
+  const [daoUserATADao, daoUserATASubDao, daoAdminAtaDao, daoAdminATASubDao] = [dao_user, dao_admin]
   .map((a) =>
     [mintDao, mintSubDao].map((m) =>
       getAssociatedTokenAddressSync(m.publicKey, a.publicKey)
     )
   )
   .flat();
-  let collectionMint: PublicKey;
-  let nft: PublicKey;
-  
-  const getMetadata = async (mint: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => {
-    return (
-      anchor.web3.PublicKey.findProgramAddressSync(
-        [
-          Buffer.from("metadata"),
-          TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-          mint.toBuffer(),
-        ],
-        TOKEN_METADATA_PROGRAM_ID
-      )
-    )[0];
-  };
 
-  const getMasterEdition = async (mint: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => {
-    return (
-      anchor.web3.PublicKey.findProgramAddressSync(
-        [
-          Buffer.from("metadata"),
-          TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-          mint.toBuffer(),
-          Buffer.from("edition"),
-        ],
-        TOKEN_METADATA_PROGRAM_ID
-      )
-    )[0];
-  };
+  const metadata = PublicKey.findProgramAddressSync(
+    [
+    Buffer.from("metadata"), 
+    TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+    nft.toBuffer()
+    ], 
+    TOKEN_METADATA_PROGRAM_ID)[0];
+
+  const masterEdition = PublicKey.findProgramAddressSync(
+    [
+    Buffer.from("metadata"), 
+    TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+    nft.toBuffer(),
+    Buffer.from("edition"),
+    ], 
+    TOKEN_METADATA_PROGRAM_ID)[0];
 
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
   //Config PDA
@@ -110,9 +107,12 @@ describe("dao", () => {
   const auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes()], dao_program.programId)[0];
   //SubDao Auth
   const sub_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes()], dao_program.programId)[0];
+  //DAO treasury
+  const treasury = PublicKey.findProgramAddressSync([Buffer.from("treasury"), dao_config_key.toBytes()], dao_program.programId)[0];
+  //SubDao treasury
+  const subdao_treasury = PublicKey.findProgramAddressSync([Buffer.from("treasury"), sub_dao_config_key.toBytes()], dao_program.programId)[0];
 
-
-
+  
   //Staking Program PDAS
   //Stake Auth
   const stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
@@ -125,13 +125,16 @@ describe("dao", () => {
   //Stake ATA
 
   //Proposal Program PDAS
-
+  //Dao proposal
   const proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), dao_config_key.toBytes(), id.toArrayLike(Buffer, "le", 8) ], proposal_program.programId)[0];
+  //SubDao proposal
+  const subdao_proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), sub_dao_config_key.toBytes(), id.toArrayLike(Buffer, "le", 8) ], proposal_program.programId)[0];
 
   //Voting Program PDAS
+  //Vote Dao
   const vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_user.publicKey.toBytes(), proposal.toBytes()], voting_program.programId)[0];
-
-
+  //Vote SubDAO
+  const subdao_vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_user.publicKey.toBytes(), subdao_proposal.toBytes()], voting_program.programId)[0];
 
   const log = async (signature: string): Promise<string> => {
     console.log(
@@ -141,13 +144,14 @@ describe("dao", () => {
   };
 
   const accounts = {
-    initializer: dao_admin.publicKey,
-    initializer_ata:  /* Derived or created ATA for dao_admin for the NFT */,
-    owner_ata: /* Derived or created ATA for dao_user for the NFT */, 
-    nft: /* PublicKey of the NFT mint */,
-    collection: collection_mint,
-    metadata: /* Derived or fetched Metadata account for the NFT */,
-    master_edition: /* Derived or fetched MasterEdition account for the NFT */,
+    dao_admin,
+    ownerAta, /* Derived or created ATA for dao_admin for the NFT */
+    dao_user,
+    /* owner_ata: */ /* Derived or created ATA for dao_user for the NFT */ 
+    nft, /* PublicKey of the NFT mint */
+    collection,
+    metadata,
+    masterEdition,/* Derived or fetched MasterEdition account for the NFT */
     auth,
     sub_auth,
     stake_auth,
@@ -155,35 +159,41 @@ describe("dao", () => {
     stake_state,
     sub_stake_state,
     proposal,
+    subdao_proposal,
     vote,
-    daouserAtaDao,
-    daouserAtaSubDao,
-    daouser1AtaDao,
-    daouser1AtaSubDao,
+    subdao_vote,
+    //FTS ATAS
+    daoUserATADao,
+    daoUserATASubDao,
+    daoAdminAtaDao,
+    daoAdminATASubDao,
+    //FT Mints
     mintDao: mintDao.publicKey,
     mintSubDao: mintSubDao.publicKey,
-    treasury: /* Derived or created treasury account */,
-    config: dao_config_key, // 
-    metadata_program: /* PublicKey of the Metadata program */,
-    token_program: TOKEN_2022_PROGRAM_ID,
-    associated_token_program: ASSOCIATED_TOKEN_PROGRAM_ID,
-    system_program: SystemProgram.programId,
+    treasury,
+    subdao_treasury,
+    config: dao_config_key,  
+    metadataProgram: TOKEN_METADATA_PROGRAM_ID,
+    tokenProgram: TOKEN_2022_PROGRAM_ID,
+    associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+    systemProgram: SystemProgram.programId,
   };
 
-  it("Initialize Dao Config Account", async () => {
+
+  it("Initialize hybrid dao Config Account", async () => {
     const tx = await dao_program.methods
     .initialize(
       seed,
-      new BN(1e8),
-      new BN(70),
-      new BN(1000),
-      new BN(432000),
-      new BN(108000),
+      proposalFee,
+      minQuorum,
+      minThreshold,
+      maxExpiry,
+      evaluationPhasePeriod,
       proposal_keypair.publicKey,
       voting_keypair.publicKey,
       staking_keypair.publicKey,
-      collection_mint,
-      mint.publicKey,
+      collection,
+      mintDao.publicKey,
       null, // null because its hybrid
       false, // allow_sub_dao
       null, // min_staked_create_subdao
