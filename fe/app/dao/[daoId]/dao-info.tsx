@@ -12,14 +12,15 @@ const DAOInfoComponent = ({ className }: { className?: string }) => {
         {/* Socials */}
         <div className=""></div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
         <LabelValue label="Membership Type" value="NFT" />
-        <LabelValue label="Mint Address" value="4Sv...D3k" href="#" />
         <LabelValue label="Deck" value="Link" href="#" />
-        <LabelValue label="Total Proposals" value={5555} />
-        <LabelValue label="Total Forums" value={666} />
+        <LabelValue label="Unique Holders" value={1234} />
+        <LabelValue label="Min. Quorum" value={1234} />
+        <LabelValue label="Min. Threshold" value={5555} />
+        <LabelValue label="Max Expiry" value={666} />
       </div>
-      <div className="text-muted-light text-lg">
+      <div className="text-lg text-muted-light">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam debitis
         suscipit odit! Voluptates quae voluptas, cum iure labore voluptate sit
         beatae dolores consequuntur, architecto inventore saepe delectus

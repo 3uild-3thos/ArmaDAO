@@ -15,7 +15,7 @@ const buttonVariants = cva(
         white: "bg-muted text-muted-foreground",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-transparent hover:bg-muted/25",
+        outline: "border-[0.5px] border-input bg-transparent hover:bg-muted/25",
         secondary: "bg-magenta text-magenta-foreground hover:bg-magenta/80",
         ghost: "hover:text-cyan",
         link: "text-cyan underline-offset-4 hover:underline",
@@ -69,7 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading ? (
           <>
-            <Loader2 className="w-5 h-5 mr-2 animate-spin text-white" />
+            <Loader2 className="w-5 h-5 mr-2 text-white animate-spin" />
             {children}
           </>
         ) : (

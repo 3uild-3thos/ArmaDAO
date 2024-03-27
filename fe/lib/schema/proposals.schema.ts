@@ -11,7 +11,7 @@ export enum EProposalType {
   VOTE = "Vote",
   BOUNTY = "Bounty",
   EXECUTABLE = "Executable",
-  MULTIPLE_CHOICE = "Multiple Choice",
+  MULTIPLE_CHOICE = "Multichoice",
 }
 
 export enum EExecutableType {
