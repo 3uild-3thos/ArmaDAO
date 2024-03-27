@@ -84,7 +84,8 @@ function DaoInfo() {
                     </FormItem>
                   )}
                 />
-                <FormField
+                {/* TODO: Add category of membership model */}
+                {/* <FormField
                   control={form.control}
                   name="category"
                   render={({ field }) => (
@@ -102,7 +103,7 @@ function DaoInfo() {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                /> */}
 
                 <FormField
                   control={form.control}

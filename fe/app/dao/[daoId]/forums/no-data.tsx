@@ -2,7 +2,6 @@ import React from "react";
 
 // components
 import { BadgeAlert } from "lucide-react";
-import AiSuggestion from "@/forums/ai-suggestion";
 
 function NoData() {
   return (
@@ -11,7 +10,6 @@ function NoData() {
       <p className="text-sm font-medium text-gray-500">
         No current updates and discussions.
       </p>
-      <AiSuggestion suggestion="Create a discussion to your community" />
     </div>
   );
 }

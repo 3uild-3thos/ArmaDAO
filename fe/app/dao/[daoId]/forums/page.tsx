@@ -6,11 +6,12 @@ import { threads } from "@/mock/threads";
 
 // components
 import { ChevronUp, Pencil } from "lucide-react";
-import { Input } from "@/components/ui/input";
+
 import CommentsList from "@/forums/comments-list";
-import AiSuggestion from "@/forums/ai-suggestion";
 import Stats from "@/forums/stats";
 import NoData from "@/forums/no-data";
+
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 function DAOForumPage() {
@@ -25,7 +26,6 @@ function DAOForumPage() {
   return (
     <div className="grid grid-cols-12">
       <div className="flex flex-col col-span-8 gap-4">
-        <AiSuggestion suggestion="Create a discussion to your community" />
         {threads.map((thread) => {
           return (
             <div className="flex gap-1 p-4" key={thread.id}>
