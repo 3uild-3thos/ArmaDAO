@@ -7,6 +7,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { projects } from "@/mock/projects";
+import { Bell, MoveRight, ThumbsUp } from "lucide-react";
+
+// lib
 import { IProject } from "@/lib/schema/projects.schema";
 
 // helpers
@@ -31,7 +34,7 @@ interface IProjectCartProps {
 
 function ProjectCard({ project }: IProjectCartProps) {
   return (
-    <div className="flex flex-col p-4 gap-5 border border-gray-500 rounded-lg max-w-72">
+    <div className="flex flex-col p-4 gap-5 border border-gray-500 rounded-lg max-w-96">
       <div className="w-full flex justify-center items-center">
         <div className="h-fit w-fit">
           <Image
@@ -68,7 +71,7 @@ function ProjectCard({ project }: IProjectCartProps) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-5">
         <Progress
           value={getPercentage(project.currentFunds, project.goal)}
           className="h-[2px]"
@@ -84,7 +87,32 @@ function ProjectCard({ project }: IProjectCartProps) {
           </p>
         </div>
 
-        <Button variant={"outline"}>View</Button>
+        {/* TODO: Show this if user does not have the NFT */}
+        {/* <Button variant={"outline"} className="w-full flex items-center gap-2">
+          <p className="font-medium text-sm">View</p>
+          <MoveRight size={16} />
+        </Button> */}
+
+        {/* TODO: Only show this if the user has the NFT */}
+        <div className="grid grid-cols-5 w-full ">
+          <div className="col-span-2 flex items-center gap-2">
+            <div className="p-3">
+              <ThumbsUp size={20} />
+            </div>
+            <div className="p-3">
+              <Bell size={20} />
+            </div>
+          </div>
+          <div className="col-span-3">
+            <Button
+              variant={"outline"}
+              className="w-full flex items-center gap-2"
+            >
+              <p className="font-medium text-sm">View</p>
+              <MoveRight size={16} />
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
