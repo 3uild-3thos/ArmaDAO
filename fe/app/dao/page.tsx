@@ -7,6 +7,7 @@ import Image from "next/image";
 import FundedProjects from "@/dao/funded-projects";
 import ProjectsList from "@/dao/projects-list";
 import { Button } from "@/components/ui/button";
+import FilterButton from "@/dao/filter-button";
 
 const DAOPage = () => {
   return (
@@ -24,6 +25,7 @@ const DAOPage = () => {
         </div>
       </div>
 
+      {/* TODO: Only show this if the user has the NFT */}
       <FundedProjects />
 
       <div className="flex justify-between">
@@ -40,21 +42,25 @@ const DAOPage = () => {
           <Button variant={"ghost"} className="px-3 py-4">
             <p className="text-gray-50 font-medium text-sm">Finished</p>
           </Button>
+
+          {/* TODO: Only show this if the user has the NFT */}
+          <Button variant={"ghost"} className="px-3 py-4">
+            <p className="text-gray-50 font-medium text-sm">Favourites</p>
+          </Button>
+
+          {/* TODO: Only show this if the user has the NFT */}
+          <Button variant={"ghost"} className="px-3 py-4">
+            <p className="text-gray-50 font-medium text-sm">
+              Your Funded Projects
+            </p>
+          </Button>
         </div>
 
         <div className="flex gap-2">
-          <Button variant={"outline"} className="rounded-full">
-            <p className="font-medium text-sm">Oldest</p>
-          </Button>
-          <Button variant={"outline"} className="rounded-full">
-            <p className="font-medium text-sm">Most Funded</p>
-          </Button>
-          <Button variant={"outline"} className="rounded-full">
-            <p className="font-medium text-sm">Most Backers</p>
-          </Button>
-          <Button variant={"outline"} className="rounded-full">
-            <p className="font-medium text-sm">All Categories</p>
-          </Button>
+          <FilterButton title="Oldest" />
+          <FilterButton title="Most Funded" />
+          <FilterButton title="Most Backers" />
+          <FilterButton title="All Categories" />
         </div>
       </div>
       <ProjectsList />
