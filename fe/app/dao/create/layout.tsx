@@ -4,6 +4,7 @@ import { createContext, useState } from "react";
 // components
 import CreateFleetStepper from "@/app/dao/create/(stepper)/stepper";
 import { Button } from "@/components/ui/button";
+import CreateProjectStepper from "@/create/create-project-stepper";
 
 export const CreateDaoContext = createContext<number>(0);
 
