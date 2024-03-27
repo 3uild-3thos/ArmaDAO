@@ -4,7 +4,8 @@
   "symbol": "ARMADAO",
   "sellerFeeBasisPoints": 0,
   "isMutable": true,
-  "isSequential": true,
+  "isSequential": false,
+  "mintAuthority": "EzhM1Anf8sNxMPJwSVdUf5SCtULkhpKDuzWxocBsF2cA",
   "creators": [
     {
       "address": "EzhM1Anf8sNxMPJwSVdUf5SCtULkhpKDuzWxocBsF2cA",
@@ -12,6 +13,7 @@
     }
   ],
   "uploadMethod": "bundlr",
+  "retainAuthority": true,
   "ruleSet": null,
   "awsConfig": null,
   "sdriveApiKey": null,

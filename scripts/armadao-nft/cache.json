@@ -1,0 +1,818 @@
+{
+  "program": {
+    "candyMachine": "H4zfNA8XWEmxe6j7VeoCSJ6ic4iurYx7qxBQAJNA13Ak",
+    "candyGuard": "574TsnhjtcLyQREeAGNs5sTrGfezbs7aK7XApVf2Hh1Q",
+    "candyMachineCreator": "BFm2ZxaQSexz4Q1JmC1bbFvNyRFvZ5NqJpLscQCFp6Un",
+    "collectionMint": "Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7"
+  },
+  "items": {
+    "-1": {
+      "name": "ARMADAO Mothership #0",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/O-zrNYVUUUBi18mubXBOQli6kQMX4TkBP5mgErcFIg4?ext=png",
+      "metadata_hash": "abbd94c4b22ccc0856dd8b18b7737dc372959348dcb9f14c7d6e6a5af076bae5",
+      "metadata_link": "https://arweave.net/sWaYJFisuv8XLY9-02ENf8YiAB12lAiMvVbM7OWLPdU",
+      "onChain": true
+    },
+    "0": {
+      "name": "ARMADAO Mothership #1",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/ZvSofQewzVBiJe_svlpNzQ90PIKBut-smRkASJ1B_4E?ext=png",
+      "metadata_hash": "06ede3f774ff89e05d8cecf2eacdf53fcb4ddfbe1ff5ff11997a195c8ecf9139",
+      "metadata_link": "https://arweave.net/PAOYna-tial2TGtau_o0zKzaX65YgdEghC0FV9WR3vA",
+      "onChain": true
+    },
+    "1": {
+      "name": "ARMADAO Mothership #2",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/MW9dFcjGPmUUfY7LX4Ha-FCAonzlCnL54FYSC8hMWYg?ext=png",
+      "metadata_hash": "389575a1e2dd4303c7254d990982f9634996507354546f0340f28714cc229bec",
+      "metadata_link": "https://arweave.net/IKqH38who1nV8qnCMCtokOlX-VfWue4X19aOydw7t0E",
+      "onChain": true
+    },
+    "2": {
+      "name": "ARMADAO Mothership #3",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/-gmOTozYq8Z3MZh0CA87QoLuSRfgyx5625tHH3vh5sY?ext=png",
+      "metadata_hash": "8ea9bc0a07056a656cf2e50a7940e1d68e619751ebea78794118372722c1624f",
+      "metadata_link": "https://arweave.net/RUuKXd0fy5_7eEptLr5Mgc8DBIZUtkV1GkGpRlqnfR4",
+      "onChain": true
+    },
+    "3": {
+      "name": "ARMADAO Mothership #4",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/qEMU6QT-f5pGleGUpPwJlpMwoRcHhCZpALjLTGjxLkE?ext=png",
+      "metadata_hash": "72300f3a6dd14061f7c4763a4bd8c9f24122a68296507fc4ec02602c218b480a",
+      "metadata_link": "https://arweave.net/7EI6P0cN7ABwwppvvF9SZ02kWDnnZ1qJOROJ2Y9KNgQ",
+      "onChain": true
+    },
+    "4": {
+      "name": "ARMADAO Mothership #5",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/koONoFjaijsb1w_vaD9hXhup4pbzo0TWiOe3YK7quwQ?ext=png",
+      "metadata_hash": "d69df6213d8155a71bf303ce825bc31fd189f9ee04c153908585ada574dec035",
+      "metadata_link": "https://arweave.net/dkwx3s2bJ33f6Kleqo1OX6My-7HjY_qfyxDMShWMGtE",
+      "onChain": true
+    },
+    "5": {
+      "name": "ARMADAO Mothership #6",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/emdxIvhbrLDkY2OqPmHhNT2ypnhc165A2IVG9-KAGO8?ext=png",
+      "metadata_hash": "82826ba9ef768713a73f8100c8811e144cadd4f86e09bc7f5756c5f7a51b6b0f",
+      "metadata_link": "https://arweave.net/myfgcOrWhiR0uNX35ZonOSw8gAyznpNZzuU_ioqNq1s",
+      "onChain": true
+    },
+    "6": {
+      "name": "ARMADAO Mothership #7",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/vuBhBFktSvaGPi5sy3bQA1BBqF_DNv-JQlk2HhZ03UI?ext=png",
+      "metadata_hash": "c567118586127cbbddfd2d3c925760831b51cafaeb16d7e0dd66a6a7a55bef4d",
+      "metadata_link": "https://arweave.net/WiqwrNcGCDYyhtfX842lUUOnVYslTdOGa32QQ66hWU4",
+      "onChain": true
+    },
+    "7": {
+      "name": "ARMADAO Mothership #8",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/Nr0aTMaxuI9Ub-Phtn3aV9oXISPkwdNIDJF2aBYNBzY?ext=png",
+      "metadata_hash": "4af14cafc6d7d9ac19f72676ffc3bb1942d556beab68a3c4dcd2b332518607cb",
+      "metadata_link": "https://arweave.net/-YNwhNWK8db2ecnQ0KhRciFDbQzXAl5IIw4JMdqntPY",
+      "onChain": true
+    },
+    "8": {
+      "name": "ARMADAO Mothership #9",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/t8jCt4DNLE5VFsDFgbMiHV-hkRIVrC9wAHCGutJcv_o?ext=png",
+      "metadata_hash": "71074fbaef45f26c5f2cecef09f5e40aa6759594ee30df9e5de6f87855698cb5",
+      "metadata_link": "https://arweave.net/ssLwdHeX0xHbfD6qlh3LXR4iCZYCsjXFPxUPa_d0ZAw",
+      "onChain": true
+    },
+    "9": {
+      "name": "ARMADAO Mothership #10",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/xRVHj-HLtVNZ3wDh-Uf_4-CMG2R5UQyOYu_HZDuwzAk?ext=png",
+      "metadata_hash": "58aa9b83e26b884988268094a4d150603221f5ff0cf9e48ccee6574be855f666",
+      "metadata_link": "https://arweave.net/5g5fD5f6NU8cCcUpDXuGSfvbcmDgw-LLQKfX-tBALmA",
+      "onChain": true
+    },
+    "10": {
+      "name": "ARMADAO Mothership #11",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/5fkAeu2NArIfoS-028PWdYiNu0jlnTm9IzWrM8G0WVc?ext=png",
+      "metadata_hash": "f610bdc0d6298b354b37ec2abd27a7c43a423e3a7d1d226f6f39dffc07ea0ee5",
+      "metadata_link": "https://arweave.net/XQiujcrI6NniT-cpX5a0-zgKAamd7BeGwe6lJN94wEU",
+      "onChain": true
+    },
+    "11": {
+      "name": "ARMADAO Mothership #12",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/YqXC6uic2q4l0oVBg-uVxXTfYfZuj-YI7EMIfS4-iGA?ext=png",
+      "metadata_hash": "71956ec5112a46b9cfe2528b6b7e26c2860e4995e61ec735badb65fe14814f4a",
+      "metadata_link": "https://arweave.net/bCL_ptmsZIF6Ms7B3I6M10Jbtf6ZNLa6fTNokxwVgDo",
+      "onChain": true
+    },
+    "12": {
+      "name": "ARMADAO Mothership #13",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/S0ZBdwFnLrJTG0IS_Twc3NQ-Mrx1OBu2-UfZzv80N5k?ext=png",
+      "metadata_hash": "b58bd93d59679841be90531d47e8f9c07b7840f5a49eaea787e6c6b88b55c3a4",
+      "metadata_link": "https://arweave.net/LQn38M0711ypwt5wHeyts4KtlIy7j13Z6ley0pWdQjA",
+      "onChain": true
+    },
+    "13": {
+      "name": "ARMADAO Mothership #14",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/qQSasdalbErBIJ0di99Q08AFjXLf0EPCTn2KdJsQMHU?ext=png",
+      "metadata_hash": "91cb71dd7ad21706715e68f1db6a95d1a27efa542a028d636fb292313598e416",
+      "metadata_link": "https://arweave.net/YG7JpC-A38tTZU95i8ZI-hQqc3UdmvgRrVSOqdXLD3w",
+      "onChain": true
+    },
+    "14": {
+      "name": "ARMADAO Mothership #15",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/8iQNEjs2-dZvDmQ3WSQ2Hsqti1n_IPovjHcFDXqkIJQ?ext=png",
+      "metadata_hash": "1df6e9e2c9e1227f646c34cd89b70225889a9b6553effd75c89d8d3807e79ef2",
+      "metadata_link": "https://arweave.net/Pc6HnD9Rt3g9PbCbNbAxer-uD62-BEum8Qtma59Piiw",
+      "onChain": true
+    },
+    "15": {
+      "name": "ARMADAO Mothership #16",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/KNj8mNVYlDZOcej7joM5gd81DtKiLzACgm2imWFP7uE?ext=png",
+      "metadata_hash": "72f8d7a4a9c0404826017c85ef70045a102992c5c1a5f7c6763e1a3755352dab",
+      "metadata_link": "https://arweave.net/6Of9qKHi1ETHBpzF18Tq4x3snOf18IB_mAvul0HfRi8",
+      "onChain": true
+    },
+    "16": {
+      "name": "ARMADAO Mothership #17",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/RbCLb1ZkpUBrDQzy_iTha7L-_31cNYbAnGU_LNAbCHc?ext=png",
+      "metadata_hash": "6b809855ac3084858376675d1f265bbb2fd484e3020bf756bccf9e6817b472b0",
+      "metadata_link": "https://arweave.net/yuHSftER1xVX1Tm0knQPc4vHjlXopb-CtDwN2ZIadjM",
+      "onChain": true
+    },
+    "17": {
+      "name": "ARMADAO Mothership #18",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/MyLQmNkyOWfLYzmVCQZDN5KaJWVBeltC9Rnaw6ZmGWQ?ext=png",
+      "metadata_hash": "a2557a592685c6e63be72af9efaba60244b98faa467a20d0ef8f8bedd66189bc",
+      "metadata_link": "https://arweave.net/wukiBgmmITuF8V-KctwTToYJWgPzo9RRKfux_KDUr1g",
+      "onChain": true
+    },
+    "18": {
+      "name": "ARMADAO Mothership #19",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/jvS5AfGn0y2YaCIlNNYtQpuZZ0kU4sKGZql06qbq1T0?ext=png",
+      "metadata_hash": "ac0f9146515021c5b619bf55ec4bd4c951147b2326342f2dc0c988d04a49b7f7",
+      "metadata_link": "https://arweave.net/xYQyqZy8rYeFhoIT4Z6VPXxbxjTX1GhgVVftq_RXiYI",
+      "onChain": true
+    },
+    "19": {
+      "name": "ARMADAO Mothership #20",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/9PRzgSeOOHU_wI8Wf3OYnoUguuNtiN13lwqwpkbWPwo?ext=png",
+      "metadata_hash": "1ffe7d210ed3ad858ef7afb1f1ccbffc403d8846646fcc9796b3f30b8c40c9a6",
+      "metadata_link": "https://arweave.net/ibck0EBeXGluvzb3e_113wPZSOGRsKXcvHm73NLfsN4",
+      "onChain": true
+    },
+    "20": {
+      "name": "ARMADAO Mothership #21",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/0d4iZcLPEqFXhaGxJ5DWx_6QWWqo-N1HsudpAXyA_aM?ext=png",
+      "metadata_hash": "af049ec01e17b9a2a100f10c2c0b3b293bac2660dec2b912a4a7d377cffac12f",
+      "metadata_link": "https://arweave.net/MGcX67td_lASWLCrBdWjjiOhBjMHsISZIoLFV_OxAL8",
+      "onChain": true
+    },
+    "21": {
+      "name": "ARMADAO Mothership #22",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/FD7P3OsdECo7g1lmnb0QdTsYbeh-sqCHU2p7m0HC3Kc?ext=png",
+      "metadata_hash": "047f9ebda66e62344e32b9ccab3b1b76435f68e503ce37016fe8a29cd099c455",
+      "metadata_link": "https://arweave.net/MOeD_WCR3wnZjBHOoan9pEYFEihO6aEANmipcYvEMF4",
+      "onChain": true
+    },
+    "22": {
+      "name": "ARMADAO Mothership #23",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/e3UiKhJBrK3bY1WQpqMReKTTIld7H66miSAJl4kDgeo?ext=png",
+      "metadata_hash": "0a01a38146497808e5cde300e2c83bcb534bb112b378bb5647b496c026e55e9f",
+      "metadata_link": "https://arweave.net/6zmUphervfuca6nesNF3s5Vq2EAdW-yZRmu5ba9XiR8",
+      "onChain": true
+    },
+    "23": {
+      "name": "ARMADAO Mothership #24",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/oUMnp9JsGCHsE-uzKJ-S3kGNcwi6V9ScN1drXMiOkHU?ext=png",
+      "metadata_hash": "b4405433af58fec3a2bb53faaaf08eefc93075c00cf376dc187d645b2a3fa986",
+      "metadata_link": "https://arweave.net/4Povc_L5b4QUh0W5lx76dxRQvRIZZ5J_BmhkagLGDjI",
+      "onChain": true
+    },
+    "24": {
+      "name": "ARMADAO Mothership #25",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/daLK5_ikbjWYYps6lSNcQCx3rTvw07E0PP7_om-80qk?ext=png",
+      "metadata_hash": "b69dde43d7f8b41d4f4414e3cb6a849be027c340ed29b969f2e4d9f882689c33",
+      "metadata_link": "https://arweave.net/ZCOtvpe5T64PUfJ5LUJ-y1RdTdggOCkkUD5VZClRy2g",
+      "onChain": true
+    },
+    "25": {
+      "name": "ARMADAO Mothership #26",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/6bvyGBb1VoK0lpsTieh-d31bUlaUyGqnkfFUA5iHc50?ext=png",
+      "metadata_hash": "35a44ef5b38505ef21622bf8930f186789e11926eee9322c8ca8db23d3d5ec47",
+      "metadata_link": "https://arweave.net/gKvbfOWCLR3P5j7fWr7wQ3xbVrvCass7BVyXykjEjpM",
+      "onChain": true
+    },
+    "26": {
+      "name": "ARMADAO Mothership #27",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/Xj_F2WdwU_4QUe2grRq_Nh2rm_AwIhqETWf1af_tHng?ext=png",
+      "metadata_hash": "a80d7859bb44d919235a532603bf712dd24831286f71c15f78b33ad81706acca",
+      "metadata_link": "https://arweave.net/NlAaxd3COFC5V7KYHjPf-rXip0gLxhH2jrnyNgNaruM",
+      "onChain": true
+    },
+    "27": {
+      "name": "ARMADAO Mothership #28",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/gnOUgwRMwVrsFQHFbCbgI_gwDwGbp4V5qwbcNmZ1G2M?ext=png",
+      "metadata_hash": "214f9b45ad8acd029c221f4ac66cfaa41d404f2f6e2917e8ddfd1fe1e9b274e1",
+      "metadata_link": "https://arweave.net/jC8ExUuQ9EDuukUg0fFs_aLxKjdDUC1HF5mh474bFQk",
+      "onChain": true
+    },
+    "28": {
+      "name": "ARMADAO Mothership #29",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/_9210haV7OOgl7g3N8Xxlvki3dzKaXRdRpQs_EgUaNU?ext=png",
+      "metadata_hash": "c309dcc18a01e71c42c689d9c04c980c0e11a869e1de6edc6bc0130222770596",
+      "metadata_link": "https://arweave.net/B2WTok2PIBSWveuyHMdhZjeYT_CxN2B64ti1624jT6Y",
+      "onChain": true
+    },
+    "29": {
+      "name": "ARMADAO Mothership #30",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/-fvCxRJtxVHA73kFUPnoiv4BLUtx1Pi3dnS87PKBtXQ?ext=png",
+      "metadata_hash": "f0ea513dd00b27ea31b7c77daa2bbcfe96694a8367fc3ee0f6120e18927819d7",
+      "metadata_link": "https://arweave.net/7TE9OAKo_SiG_AtTO4Vaiwbvl67gsCjbPO7TWmN_qBc",
+      "onChain": true
+    },
+    "30": {
+      "name": "ARMADAO Mothership #31",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/QwgPaPeCPZVwMNEeinx6nTBg67uBomAat_lEekupcLo?ext=png",
+      "metadata_hash": "c2614c2efdca429b95ca6f5e86c02fa7ef69fba7ee6bf883cfd147bca7e0c9b8",
+      "metadata_link": "https://arweave.net/kMIhtXXg5XLQmW95NtQsXaouVta1Q754K3zjTGxoWpQ",
+      "onChain": true
+    },
+    "31": {
+      "name": "ARMADAO Mothership #32",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/-nvEPYDcRqLNk0WJ5V9R9Dyt7qvKQgzuzk4huBl9uR4?ext=png",
+      "metadata_hash": "3b8d9863559b9acc5968101c365fe7aa22379fa2fc5f405052e94b9e7656ed36",
+      "metadata_link": "https://arweave.net/JWv47kOeXj7vEeBslw0mH13VrkWImb5EXvXdpcrite4",
+      "onChain": true
+    },
+    "32": {
+      "name": "ARMADAO Mothership #33",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/8Nzh6wF0uamgZiA7GmyJAXwOVK8vPmyCrs2OomSBcwo?ext=png",
+      "metadata_hash": "55dd0d90dea58b4c3e37b8794764f210d7c53c9f3d31da45c7e2c43f1d7c9f3f",
+      "metadata_link": "https://arweave.net/g0kW_G5FCqmMorZlzpmDKqAkF_gxr9h1GSqc2FkHjvU",
+      "onChain": true
+    },
+    "33": {
+      "name": "ARMADAO Mothership #34",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/ZzO94JripVRmjpft6xTeFgqGg-Q14l-WBVjxXyN_rLE?ext=png",
+      "metadata_hash": "3c326bf4a331362d594c1951727c23df3a5db4d6ef2235d23238785e99e79ffe",
+      "metadata_link": "https://arweave.net/0up0zia6bfDRe-ciEOYrVWdT2Den5D-eYozhxGsyg0I",
+      "onChain": true
+    },
+    "34": {
+      "name": "ARMADAO Mothership #35",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/TfBBq37Y8MIGCwfno4KRXfpdRzFQmc8v-HN0qfve6oI?ext=png",
+      "metadata_hash": "05d8b1252238dca53f99fd1180d22cd7fe543a52e6e3381213cffc53847188fb",
+      "metadata_link": "https://arweave.net/OV3v0XJVZIQThht17X7V_JhA-wYWhsHzleGQfgiHVd8",
+      "onChain": true
+    },
+    "35": {
+      "name": "ARMADAO Mothership #36",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/zHkg0mf_ZfjTEhx2-6m6O2FQFYh-XPCL9ztoeluBe6o?ext=png",
+      "metadata_hash": "2887cdcc21f26af54942319d9487d0469cb1ea2b7e3bae106e891de7424d1f7a",
+      "metadata_link": "https://arweave.net/fBSU8rDZkowGrWD44ectfhIiB3wa8lbtW2RH9uIrkVA",
+      "onChain": true
+    },
+    "36": {
+      "name": "ARMADAO Mothership #37",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/gUPOhQN-oCpsW71fxj9g6VbsbBeBmZpVZNVbDxVjTwM?ext=png",
+      "metadata_hash": "0fea713d274e2378ec568b0de38070b5e3b19f311b6d4c0fe66fd57f7dd36720",
+      "metadata_link": "https://arweave.net/WL1HGsNGxXJw5Z-9ycKFCOSOI2fpAoW48lLvATvzzgg",
+      "onChain": true
+    },
+    "37": {
+      "name": "ARMADAO Mothership #38",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/9zhROrB15skQdFA79Q5Glh7BKxlvVzBXTsYFMFWTBJE?ext=png",
+      "metadata_hash": "01b840bbe1cf9f2d1381632ef8b75d00ed502514184606637d2c8acbf4ec70d6",
+      "metadata_link": "https://arweave.net/5t-XP5_oWKCZVrlcLO2VKh9UKAmDIFuyGwE_oYrgWjc",
+      "onChain": true
+    },
+    "38": {
+      "name": "ARMADAO Mothership #39",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/qFJlhASgSi9Wn2j51LTejMQ-kbrKDfjCKkbkFCkiHp4?ext=png",
+      "metadata_hash": "908490baf95b3df3eed5af1ede05f383214571b625f772db845300622ff5b882",
+      "metadata_link": "https://arweave.net/3iZPM81Wy-dtBQTWSWamDQt7TB_Qd_UGnhak6kTm_mY",
+      "onChain": true
+    },
+    "39": {
+      "name": "ARMADAO Mothership #40",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/e_zFrXQgF0iyJnbH5W84hN-eMHFTfaTGSv0Wa3DEmuw?ext=png",
+      "metadata_hash": "e845ba51ed770602099a7922489d2cd3eff281ead772108cfc4b54f578a8af63",
+      "metadata_link": "https://arweave.net/Q-QADRoRRt0AQwNgd7s9YRxiHU5ArjU1MPqZLOLXBf4",
+      "onChain": true
+    },
+    "40": {
+      "name": "ARMADAO Mothership #41",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/d2786MC8_Gi2vqSFxPjBlIPZfPCvDms71XsCyNBnZSA?ext=png",
+      "metadata_hash": "72894885ffc8ef701b585eaf3edabce283032a1d6304a072c43451ab52bcc5c4",
+      "metadata_link": "https://arweave.net/78pV21VoazSvl5L8Gef3loEbLt-TI1tQDAkfXeAky7A",
+      "onChain": true
+    },
+    "41": {
+      "name": "ARMADAO Mothership #42",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/k7j9srfoltHtWl0_glszZuhxXWNETewuuczuZ4KvM3M?ext=png",
+      "metadata_hash": "49ab21b427fe2f5eadd393898c9d58da055f74863b1233933b37058cd4792dab",
+      "metadata_link": "https://arweave.net/gEOmZJcIabqJMqFrSXbNB0-rYLvK4pLdMBE28Aov3dg",
+      "onChain": true
+    },
+    "42": {
+      "name": "ARMADAO Mothership #43",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/nszZu3ZJe_b1R0h0aRGAuY_-kkQqhCvM0hooi3mGDRc?ext=png",
+      "metadata_hash": "538e3e3fba612c3e4ebcf1a93667e92aff83b7fa142f7f097b73f4945e5ea3d2",
+      "metadata_link": "https://arweave.net/686S8Fk5ozt0Kg9WOMCypAgG9ILUtpPxlNqW7VtZhVM",
+      "onChain": true
+    },
+    "43": {
+      "name": "ARMADAO Mothership #44",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/LX_A_ZIZBQ7ZGEgJ0e51nNYtBA_jSrHQrYKRg71DEoM?ext=png",
+      "metadata_hash": "7b1d63a3cceaa9e36d8c712a09e1a436ecd08a9091d07a7c6bbd8f4a777dc3b9",
+      "metadata_link": "https://arweave.net/GTKx2u-JK4IwWKQ0r4353KzVeF-51etbqXA8S0fzvXA",
+      "onChain": true
+    },
+    "44": {
+      "name": "ARMADAO Mothership #45",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/OmYW7wxUfhvsfEiCZRPj8vBOCygkNSgXeZL5-lkqjf4?ext=png",
+      "metadata_hash": "3861bce8dbae1d38cb507faa48ea6544fca33d5ce42105560f8843e33fe901ae",
+      "metadata_link": "https://arweave.net/Z7cfdz-x6YTbEXTRtW9kKH_osFkcVsSA82sUMKAMohY",
+      "onChain": true
+    },
+    "45": {
+      "name": "ARMADAO Mothership #46",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/3RzqftKRtkFBvHfJeL2KqC90-qa397LybA4tDRDb7ow?ext=png",
+      "metadata_hash": "f002cd118c3b15c4e94f87f315a43303cd506a93f567e0e51a5283001aa6ac39",
+      "metadata_link": "https://arweave.net/yuClhbDuj1sPaFLdM0xgNyBuw4eqpqj8Pq9xJ-CPQf8",
+      "onChain": true
+    },
+    "46": {
+      "name": "ARMADAO Mothership #47",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/ZljCPhQSscMZoURm3tCsE1FK897gm0Sxm4kWYreRobA?ext=png",
+      "metadata_hash": "7505e3e61300ea7df6b1d20590d9d6015240031c677a9d4fc004bdd35449ee1d",
+      "metadata_link": "https://arweave.net/0blCUNTMufaEx2FlI89zJXyJNRbNV26sOPrDUDyPH1Q",
+      "onChain": true
+    },
+    "47": {
+      "name": "ARMADAO Mothership #48",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/KbJO9G9Gv0aaluUPkEnqXHDTASsRQEyLTEl5mbsCACE?ext=png",
+      "metadata_hash": "31901f61a27d65472cbe01530605a03afd1fc64cc01c0255d31f465e8485e87d",
+      "metadata_link": "https://arweave.net/LNzyNzvLRNH8wjyPiSMUihZiFGzcv1Sm8-IQxgY-8PU",
+      "onChain": true
+    },
+    "48": {
+      "name": "ARMADAO Mothership #49",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/iYr8Pi4fK1qb4tw_VIzNhXdwtdjDMllzVAVheUPNGvI?ext=png",
+      "metadata_hash": "b88ba46f152e8c17129a23f37b5ac20f2f5918559f9416792406c7032db1220c",
+      "metadata_link": "https://arweave.net/8JgFYvlBQAJRg4741RW98k3E_68Zi01qSY5vOTzyr0c",
+      "onChain": true
+    },
+    "49": {
+      "name": "ARMADAO Mothership #50",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/Y6M_kp2q2J0WO7mPrx_ylPBRzMvnzuXFnt-OlruNal8?ext=png",
+      "metadata_hash": "b54e33312317540006941ab2c5d211971d8f1c66f0f396d099777de5341b0f2d",
+      "metadata_link": "https://arweave.net/IV7nz6I2EEHB6k-qmSN9T80QUKup3TbLf8J54LxLBUU",
+      "onChain": true
+    },
+    "50": {
+      "name": "ARMADAO Mothership #51",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/BufN2a0JjGmkwNDwEkp7W7AHcWjFDWEKYTDice6DYQ8?ext=png",
+      "metadata_hash": "ad1480dc083ce2424f8503e1afd93c0acd480afe8693a3175ac7681b92618722",
+      "metadata_link": "https://arweave.net/TSZ-Su5btoR4tD41AOLssSgVLsXDiXJAPnQmJnDygFI",
+      "onChain": true
+    },
+    "51": {
+      "name": "ARMADAO Mothership #52",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/besyANWdDLzug9UWD3fJgyN-ilLTFIqNVoVb0t78bI4?ext=png",
+      "metadata_hash": "97d03043c253dc9fab8ab36c033b628a92879d3489f17b2e67880542da396daa",
+      "metadata_link": "https://arweave.net/7azOJCHeWjjHyux3KBm_6XUtZOmMxIDTnmzHRNykonc",
+      "onChain": true
+    },
+    "52": {
+      "name": "ARMADAO Mothership #53",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/MkuvUbloFWLr0uF52ncVpRVsd3bVPvsnhZ0_0hZk36s?ext=png",
+      "metadata_hash": "a930da50f52cd8cc1870503724930604d62e97c8ca551039c4d48f9f07bb4d4a",
+      "metadata_link": "https://arweave.net/x3DOM69m22nIfgrqnaVF7P84SaK8SZdflnufwqOOqgg",
+      "onChain": true
+    },
+    "53": {
+      "name": "ARMADAO Mothership #54",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/BYq-BAW99CkqcGn1clbmnc4ml8ygls9bTy88pPssqJ8?ext=png",
+      "metadata_hash": "41e28f59c394adabea02045643ff9283138ce9cb8a2393b583c1ae2e70fa46ba",
+      "metadata_link": "https://arweave.net/ZnhiDOqNLafnKUcX1JZSZITbAlvq7KcEQwISAOKYbdc",
+      "onChain": true
+    },
+    "54": {
+      "name": "ARMADAO Mothership #55",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/54JmXMwwCwvc92dDOuPsfZhn_ITgDuWcI-XIW6G9kkQ?ext=png",
+      "metadata_hash": "2eea7c0780207e6da7f91f5d6e6a30b97fc9a1777d2fe441e6f7937e498f11bd",
+      "metadata_link": "https://arweave.net/7NYon46IN0Pw50dNrzLKB_zG-jnP9aAycDrwJyC1h6E",
+      "onChain": true
+    },
+    "55": {
+      "name": "ARMADAO Mothership #56",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/z4qKRjiZXnCSmrF-625jHcoxIetmCX-KJrMDOvj9uJk?ext=png",
+      "metadata_hash": "a3db74d2cbeae01c0a0bdab889c29e8f6809ef9a85b8958057f95a7f71452682",
+      "metadata_link": "https://arweave.net/YGtcMXvE6Sm8rLzghPx1eiY4dVRJdtJ6QzX7LWioA5E",
+      "onChain": true
+    },
+    "56": {
+      "name": "ARMADAO Mothership #57",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/k0pNYK0YVllw7n6e5X0TkEhIVXKJxfzH20W8y_gfhHQ?ext=png",
+      "metadata_hash": "23b96904cb51f5500cab3d4360add3636f4a6f5dbe0c9763f26d5a2d527852df",
+      "metadata_link": "https://arweave.net/GtktTg6ke6f-_DrKX9gVBIw3R86_h5GqtSE7kEn_6uE",
+      "onChain": true
+    },
+    "57": {
+      "name": "ARMADAO Mothership #58",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/KI4LQEkJdBirI2o5OESnsHReqPtBtNqEr70H_QWSP-k?ext=png",
+      "metadata_hash": "952194c2a9477f453cc2f0fa659899746a4a1bb4194e315303796a8d74d8ca9c",
+      "metadata_link": "https://arweave.net/SSgcCkiKf13bQPJPTyJn1PH0cc6fxEMmUhyNukgwzZQ",
+      "onChain": true
+    },
+    "58": {
+      "name": "ARMADAO Mothership #59",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/2fBLDm7_ifJfu6BImzucccOOf5XMpl1ETsTWJNx0TI0?ext=png",
+      "metadata_hash": "09829d0903f4ff522c3fd4cc4ffff6c2348a263623469ee0f2d9487b219679d1",
+      "metadata_link": "https://arweave.net/-w8RL8eSroTu6PEahuExLe6NdNRImKEWs8xeICq78Ug",
+      "onChain": true
+    },
+    "59": {
+      "name": "ARMADAO Mothership #60",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/oJ-OC84yQ0BWc8wyrp5WNfW1Ju31tj-CN6yFpYPnTuI?ext=png",
+      "metadata_hash": "0ce99d2d56ae66099eb7af27d5aa46b3c094685e63cf92df06b930e5d03f705e",
+      "metadata_link": "https://arweave.net/p5AoX7976hON2WPjd_BE5a-rdCTdWF_eGyvCCjuznVg",
+      "onChain": true
+    },
+    "60": {
+      "name": "ARMADAO Mothership #61",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/2zaqj3WOFwXQ1Hmm3adTVlDmbdmZj3qfmCOoOp03jeU?ext=png",
+      "metadata_hash": "b96d18049ce36d2971b8edea70db5e4fa480515bffbb413f055076388f92bfa1",
+      "metadata_link": "https://arweave.net/4RG3HYlL6N8Ownoe6MAkc74t6a_8SrHQnEI04J7GuQg",
+      "onChain": true
+    },
+    "61": {
+      "name": "ARMADAO Mothership #62",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/vrCREYCuToXhbngBrr0_BVJX6tIirYiVt2rqmpuheDQ?ext=png",
+      "metadata_hash": "bf21783140b40a0c1a51246de3eccbd5fd5e3e3bbd9e081e77dfa5b7402acc7b",
+      "metadata_link": "https://arweave.net/2zE4npTifAjcXA7FuxGFQDeKhTVB70MUSvEqPNLUqTI",
+      "onChain": true
+    },
+    "62": {
+      "name": "ARMADAO Mothership #63",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/6wANvo1IgQvI17auqC4YxS9XhKYDZL-M6tgF1nLYpy8?ext=png",
+      "metadata_hash": "db72d8ad9d96f5f5b063dda6563e677412ec31e4d0a4e75c9dfbc7d3ccaacc3a",
+      "metadata_link": "https://arweave.net/8eCmpnPH0fmV3wmmudjrRliGwbdxFEs68iOSK63sYCQ",
+      "onChain": true
+    },
+    "63": {
+      "name": "ARMADAO Mothership #64",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/Ipx_847DmnVFxOFnb8-BT51ZTOEGaeaBqriUNMufbl0?ext=png",
+      "metadata_hash": "cc8ccc2499a0a718383514c4b69a43f6236d82e7fa907d1dd7bd625b5cc143e8",
+      "metadata_link": "https://arweave.net/Oi39X7StDmwx460HwvOGYQTJXpuOZ-K4tfLklbjOOHw",
+      "onChain": true
+    },
+    "64": {
+      "name": "ARMADAO Mothership #65",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/n-QfmM6lgN0tSiHRJr45xR5ahe1rUgUEkYlYql12bfY?ext=png",
+      "metadata_hash": "4733e663a4e3a98fd3bf13d58692d1b2fafe3edbe1a6be1a32807d820c0d84ac",
+      "metadata_link": "https://arweave.net/q60Zv0TFjEsegxbzyFLL-4UppzpUzKIOgSAaGZQ2F84",
+      "onChain": true
+    },
+    "65": {
+      "name": "ARMADAO Mothership #66",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/AWXldSXOqi2FbtfkBB8PQEtTsm0GyQ0wmzcx2OhSGLs?ext=png",
+      "metadata_hash": "6ba82e6208c40353f47b138b0242736d2fae43f47efe33047e4aa67963ca1a3a",
+      "metadata_link": "https://arweave.net/gSenPF5sqRQLHienjyvzm40xxohlwnkmxtpE5BwDhNc",
+      "onChain": true
+    },
+    "66": {
+      "name": "ARMADAO Mothership #67",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/6QbY7bovcFGIMnslzanXUX2eL2SI9luaSrKGn3zTnmQ?ext=png",
+      "metadata_hash": "a077a05ea583a8e7d920a2833ab7fbed40d5fb9ea9e063a20bc9c3f72b52a7c1",
+      "metadata_link": "https://arweave.net/2w2Vd_HyPP_ty1BhH8iNlb2wLskdOOaGZ-u2Adq13Tk",
+      "onChain": true
+    },
+    "67": {
+      "name": "ARMADAO Mothership #68",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/v9jkEBkDmbJSLvSTFjvujVHjXXg7xJFP5lqVoAoyhY8?ext=png",
+      "metadata_hash": "47a93ba3f09f55302c9bb4ca03ec8e487049c5e786fdf86d48e5ca224b1cd1e2",
+      "metadata_link": "https://arweave.net/4d_ECVmMzt1p8_TH8S-lWAk-xAztinXH5DWqpLzP8uM",
+      "onChain": true
+    },
+    "68": {
+      "name": "ARMADAO Mothership #69",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/kdr3jqgMmCXvCelBA8jxtYUYWhfP3U5uodjV9GNRmLo?ext=png",
+      "metadata_hash": "c1325206a51dbe82af5f769406bff5370d5c27ce7684b57517d98d2ebf7c8f69",
+      "metadata_link": "https://arweave.net/qdolJKkDMnOmSri0wduKkQrL6LOfGsOf5EdeO7HCrFg",
+      "onChain": true
+    },
+    "69": {
+      "name": "ARMADAO Mothership #70",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/0lInjY7NgllE1dawxfJsJloa8sqL22PgWckhKxgjkNE?ext=png",
+      "metadata_hash": "9f6fd90ad643fdc9500309122eaedeaba5fb586863048995972329e4948feb9e",
+      "metadata_link": "https://arweave.net/2WwNrW07_w3iS1FoNeGykbm3XlgxHb2NEjneJ9RcrUQ",
+      "onChain": true
+    },
+    "70": {
+      "name": "ARMADAO Mothership #71",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/r5dx2jEyDwzOJN5ITIkfMN6NuaTK9afIzw8x8wKo5Ck?ext=png",
+      "metadata_hash": "2208fd80c5e21339aa5e48d5c8551b7025b1996a65b21141dbd009b051bc204e",
+      "metadata_link": "https://arweave.net/5fMAwNrYaXqto3N30YOu7HKHWGJQu_2x7RkR5v4gMpY",
+      "onChain": true
+    },
+    "71": {
+      "name": "ARMADAO Mothership #72",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/ws1k-tO63f9Y_xTJ9DgxmHzf1vIc5uIVKXX0MUQZzv8?ext=png",
+      "metadata_hash": "27bea556bd70692043760cfcbca45ce5a77199ec33cbf9537fe344c00f62822c",
+      "metadata_link": "https://arweave.net/9OS5y3egi_xJC1WwmOuRxQ7Bnq6sD0ti_APM2IAaJpI",
+      "onChain": true
+    },
+    "72": {
+      "name": "ARMADAO Mothership #73",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/xjNUpv-wiP49qgaFGvUYQlzN3-rwtDWcxcuOj5i1AUU?ext=png",
+      "metadata_hash": "700731058407ec6aaae192ac8d9e4b3498a8bfc3e4345b1399b15cbd336cff20",
+      "metadata_link": "https://arweave.net/coM0POz4aujOAgxpWJE7ccrb1oLxAUjGnhNcEPVBFlA",
+      "onChain": true
+    },
+    "73": {
+      "name": "ARMADAO Mothership #74",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/b39mtn_Sxy2XIQPPUCYVRlQwLwN2S4OAokJE0fdh518?ext=png",
+      "metadata_hash": "18775b88ca0c90d30a1a9548ddd82d92505c91acd12a3303d97e0d32539afe31",
+      "metadata_link": "https://arweave.net/L-SN3-dh2NjuHJz2_PFpYzq2xqG0KMdNa1uDGtS8zog",
+      "onChain": true
+    },
+    "74": {
+      "name": "ARMADAO Mothership #75",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/pMLeyBGfsj__U00bCIBkDjsymPTA_jPCslY2qQVnKpg?ext=png",
+      "metadata_hash": "2cbe55c212f57d853d3b6faffce99e4762e5590df8997a04c9d05f5828402501",
+      "metadata_link": "https://arweave.net/hI-jHlcaA74o37jOo1X3aJkmn6lqAjr7viEB0xjvJOU",
+      "onChain": true
+    },
+    "75": {
+      "name": "ARMADAO Mothership #76",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/2-0Atf0fB1XnvMmboU-lbihWf7esLcv_OK0xEd4hV6o?ext=png",
+      "metadata_hash": "0bf27f434146a568589bbfe4d4d3428b7db43a6ff117d932a1c611d7b5f36d06",
+      "metadata_link": "https://arweave.net/NNnbHZ5G9Y5q17wd_4JfaEhbiuTBXHTrS2_ybhrB6aw",
+      "onChain": true
+    },
+    "76": {
+      "name": "ARMADAO Mothership #77",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/nNeN5-c2Qpm4V7X3ZKdLDYoeZdk4lkTM-7iJrfcj8fI?ext=png",
+      "metadata_hash": "f7039f36b230c19f85529554b615cdb9b95c7a693e9b163da19a999a2c8f0518",
+      "metadata_link": "https://arweave.net/saNqvwdPQbRFZwW1CfzydSyOqnMnaQ96wtQVAqpOhDg",
+      "onChain": true
+    },
+    "77": {
+      "name": "ARMADAO Mothership #78",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/DLuZ2PA5M-jBWSxQ92T22V9v2d_zpnl3NmFCPunyASs?ext=png",
+      "metadata_hash": "e0357c15adbc2d1135445bc9da24d35fd1240d43e07c63ecf7020cb5ca3a73e8",
+      "metadata_link": "https://arweave.net/ZW5CAKl3l9cuGYYDlbxHtJH5yyZRTEeAPAGnlTYGUcM",
+      "onChain": true
+    },
+    "78": {
+      "name": "ARMADAO Mothership #79",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/-WjDE8Fd3-V1ynRWZF6quc4tUzUn0y3fOJ5nulSirKs?ext=png",
+      "metadata_hash": "395a09a7815e7b7730fde1b8b0c0760b6c7e71e3a7bda18d5c43f25cc5dc57a3",
+      "metadata_link": "https://arweave.net/Vts-CP9L0Ip23loBt6P8lDIgrlMZQsAhHkLzOrfMfww",
+      "onChain": true
+    },
+    "79": {
+      "name": "ARMADAO Mothership #80",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/sWmAAcfymrUsDzll8hpPOd09QtpcafOPLqsdKJlx0Mo?ext=png",
+      "metadata_hash": "a81795c953646d0c8c1d418638e34721f85831827bb27cd28ddb29bda5710d39",
+      "metadata_link": "https://arweave.net/o0dOhJf9nudz54FFX1WepDHDY6uewz6tCYsJRwp5m8Q",
+      "onChain": true
+    },
+    "80": {
+      "name": "ARMADAO Mothership #81",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/dnjwl7x3hx3jdwFSe824CFaWy1_L0GkDXs_VgpcPzBk?ext=png",
+      "metadata_hash": "d0cbae269f49accaf35253370eca270da80bdbd390cd21bf4c1a1d355488338c",
+      "metadata_link": "https://arweave.net/62Jv3hix5pKBJc6vKBuae2IRdAoUAc8IgmANSL2lor0",
+      "onChain": true
+    },
+    "81": {
+      "name": "ARMADAO Mothership #82",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/vy47oiqiZ_a01PZu-5c-6Kuy9S98s7TlnwjG3Ru7Kaw?ext=png",
+      "metadata_hash": "57aaba674d2df81acbd523e65cbcac83f83f74e042485d4a30224231d11bb8de",
+      "metadata_link": "https://arweave.net/8RRPFLVPs9NFVQ5w8nsBqEXh79YSYhsKkW72M7cpICo",
+      "onChain": true
+    },
+    "82": {
+      "name": "ARMADAO Mothership #83",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/vRNBiB1qhuIkMrx-TXbnF9Bu7k2Eh2GMxFsPclXJluA?ext=png",
+      "metadata_hash": "32f50e2b0122f519218592f51b3c8d27eeada0b7f939296bac7b41ec4506db32",
+      "metadata_link": "https://arweave.net/mCjiN0qwCktghmw8zCcR3AUCJd7w_5RZHxtimIxTMpM",
+      "onChain": true
+    },
+    "83": {
+      "name": "ARMADAO Mothership #84",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/ozgQtzlCOyp1yCjxfcivrj3Y0m7QCdPjgmImvMVEm3g?ext=png",
+      "metadata_hash": "33dff33d4d488e1da5dafabb8e667e8f63cba472b2a6f3a76e60000b84b518d1",
+      "metadata_link": "https://arweave.net/suPpnKFJkX6sVE4J79wMMD94ignGE4Wk2F2YpLgGxNg",
+      "onChain": true
+    },
+    "84": {
+      "name": "ARMADAO Mothership #85",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/NfrCCfRmC3T4rwQC-7kAqKFX08sWAhLFuzWuL1l2Q7I?ext=png",
+      "metadata_hash": "c389802cea766cb305c00fd83573ca5d424166e385eb09470f31490ee51cba0e",
+      "metadata_link": "https://arweave.net/ENUe7cYDA2FkO1iwnkc7bZibmerjtiao9evayV8sUDE",
+      "onChain": true
+    },
+    "85": {
+      "name": "ARMADAO Mothership #86",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/XdKM1zRJYlX--Ma2hy1aAWd2DorvEDC32hIJmkib8R4?ext=png",
+      "metadata_hash": "8cc5dbb54d0dab14c1bd8fcee9a806554ee427fe7780c531027f07df60cf4f34",
+      "metadata_link": "https://arweave.net/mZL8iH85sZcIUa-BcuYGMCLccWZp8tdfMhvEjUCkqPY",
+      "onChain": true
+    },
+    "86": {
+      "name": "ARMADAO Mothership #87",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/jcYH3obK3a6Ety9bAlILG1Rw5XmP8JXcXXR0FEKFqF4?ext=png",
+      "metadata_hash": "bc9acbe1badc790a5f867f26ddc8ffa44b0340d1acd119e8728026dd40c8a4ba",
+      "metadata_link": "https://arweave.net/Z6GvpsLyFtB2Sck4o0kGKvaZJ1PN9VeU8FzP5ZpkfGg",
+      "onChain": true
+    },
+    "87": {
+      "name": "ARMADAO Mothership #88",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/-_fPKJZAblhnLY6-sR70FFXoT46FzftNIirkt5F-AWE?ext=png",
+      "metadata_hash": "dbbdfc0ba33b8766691181a45bf1a28dc54e675892d6d5b01356f39eaf0b56bf",
+      "metadata_link": "https://arweave.net/1YwVCZKmIpNF5RbWeEf0N8WaF0XjUB7ASxLnGdYrQxA",
+      "onChain": true
+    },
+    "88": {
+      "name": "ARMADAO Mothership #89",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/Nus0P4ZcrmoGfAaefK_AE73DDcJxKkX5eigSBBFeQTc?ext=png",
+      "metadata_hash": "cd849c0d599caeae80c234ca55b9d738ab862f6b0eebafde68a2a659921d38c1",
+      "metadata_link": "https://arweave.net/VFQTWkqhcFFr7emgSEvdpgtFvrE0RGSabM7oxt6CkXE",
+      "onChain": true
+    },
+    "89": {
+      "name": "ARMADAO Mothership #90",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/xgUQALxkMgjSNSbmX4-XkCLBtBtj7zIRptA4P1IdTZU?ext=png",
+      "metadata_hash": "fa51dfd7d98b560d2643d5cd73d2226c9f5eb0606d6f1d31bc164fcc9efdf21d",
+      "metadata_link": "https://arweave.net/5BKUra89Z3GLLFtpAcLxtHo1dBfazRRWe565AHmb2K4",
+      "onChain": true
+    },
+    "90": {
+      "name": "ARMADAO Mothership #91",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/G-mivOFoj4YL6PlrdWBv3iv9bgs9nSMLK8yggjYV5zw?ext=png",
+      "metadata_hash": "4ee6f7fa78a67623bafc89d829f5ad98c6ac28c661139257f8ba5f9476315c08",
+      "metadata_link": "https://arweave.net/KD0nDdATuHl-jBnoF1hDKiVxQkWcy7t-Uygd0DqvEZs",
+      "onChain": true
+    },
+    "91": {
+      "name": "ARMADAO Mothership #92",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/PO28RK9hIIAtQ3UnpG4pXF4ENVbG67KvFzVmYMGs5kw?ext=png",
+      "metadata_hash": "7df313f5208fba2efce8d3201acfd16a500734b510f462fe3d65c67b2b71892a",
+      "metadata_link": "https://arweave.net/UMaB4nv8n2KUAaybSsr4WHJXTxfQqT9NR--VCWzjvvY",
+      "onChain": true
+    },
+    "92": {
+      "name": "ARMADAO Mothership #93",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/wxYK8HSAs2tkaC-8g5meSkXtai4jRZ4C3Eea1CggW0M?ext=png",
+      "metadata_hash": "25c34fdaf2123fbd224beb04cab14d39ae64baf28b5893f59da62eb3b49d5868",
+      "metadata_link": "https://arweave.net/93l3IafJI46K16t6TimbAvzuk3qA2KCeZK2BGBZHK5A",
+      "onChain": true
+    },
+    "93": {
+      "name": "ARMADAO Mothership #94",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/0ET2Yty_wDcJWNc1EZTaN6Vzj4Ej3bMrQPN0lMu8xU0?ext=png",
+      "metadata_hash": "5a8b1002b2186b3fe08474854628f47e1c35058ef78ec0dd39da789f820ba2a9",
+      "metadata_link": "https://arweave.net/rcIYXc8g7E_goqOPxfAeP-5lj_9twOGdUdif5zJeGgQ",
+      "onChain": true
+    },
+    "94": {
+      "name": "ARMADAO Mothership #95",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/S0NkKDRX5cteZ_LAeO5ys18-1z07xcwklmFTnVL3E6A?ext=png",
+      "metadata_hash": "ac2b721af9534e2e28f642c2413e9fa80d4fee03da3c55480a118b737c880a18",
+      "metadata_link": "https://arweave.net/qdkDBI8B3qG6Mw1Vgjkkeyp0DGr7xEny_MLL4JyM_pk",
+      "onChain": true
+    },
+    "95": {
+      "name": "ARMADAO Mothership #96",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/cUkfHXUYlUsJE-CidXBHpPkF52VI42R8kwii74Z_Us4?ext=png",
+      "metadata_hash": "0c6d5f8699fb192737388e5ddf1ae67104ba050a3fee64c04cb2f658186a3cae",
+      "metadata_link": "https://arweave.net/UulAIm6_EeEP6DWSCaYDgcm76SvWH25mezgcOoT6gPw",
+      "onChain": true
+    },
+    "96": {
+      "name": "ARMADAO Mothership #97",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/glLurPn7GREWQx4d3vkoRZSlzlA5fCunkewU_fcA-Kc?ext=png",
+      "metadata_hash": "9d3935adea0efd42753805e66801139e655b7f99e688a01bfedbb4db07a577fd",
+      "metadata_link": "https://arweave.net/uSVL3P31qxtO9MjiI97OYPQHGBdoaMlDEt3ViEeL3os",
+      "onChain": true
+    },
+    "97": {
+      "name": "ARMADAO Mothership #98",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/hOBXHz4CsehcsVhFf_Fqj4ManIELdk5dothosYM9h3k?ext=png",
+      "metadata_hash": "bd82a1fff2071cfda2c6a7211d18d0fdaad25de2ebfe4083ce942112fa926a31",
+      "metadata_link": "https://arweave.net/nt-HI5oEpcPiAA6Yk1B4jwuG8zUYdzHj-XSmyG4LFGE",
+      "onChain": true
+    },
+    "98": {
+      "name": "ARMADAO Mothership #99",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/jUHyze3AYuD19oBBL6G6Jz2ebxS5VHZIolLCx2OIqE4?ext=png",
+      "metadata_hash": "67e20bfe22855584fa2f332e18a523f8b38aeb6d6f3e080c87817823bc3bdd06",
+      "metadata_link": "https://arweave.net/cxAtvE790naWm0elly9M1kxc4aa_KtNVLE1w4Z-rOcA",
+      "onChain": true
+    },
+    "99": {
+      "name": "ARMADAO Mothership #100",
+      "image_hash": "0c96aa8e6215a95c50912258bdb21678898e1415c98c64b522f29008491f8778",
+      "image_link": "https://arweave.net/V3Lu6uV0rwUZ_w0_bbt4hMjGD7yZMZdx5n5Y2Ut-uUA?ext=png",
+      "metadata_hash": "f7948e5a37706b9c56d685a55d4ee29fd64364e0e438c9fc2fd689e197980418",
+      "metadata_link": "https://arweave.net/IKuIuQZaIheHUu_Nv9dCgcI1Cf8kP5beERUVSwliGqs",
+      "onChain": true
+    }
+  }
+}
