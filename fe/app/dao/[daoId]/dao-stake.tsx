@@ -1,10 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { MonitorUp, Wallet } from "lucide-react";
+// react next
 import Image from "next/image";
 import { useState } from "react";
+
+// components
+import { Button } from "@/components/ui/button";
+import { MonitorUp, Wallet } from "lucide-react";
+
+// lib
+import { cn } from "@/lib/utils";
 
 const DAOStakeComponent = ({ className }: { className?: string }) => {
   const [selectedNFTs, setSelectedNFTs] = useState<Array<number>>([]);

@@ -1,3 +1,7 @@
+// react
+import { ReactNode } from "react";
+
+// components
 import CompletedNumber from "@/create/(stepper)/completed-number";
 import CurrentNumber from "@/create/(stepper)/current-number";
 import InactiveNumber from "@/create/(stepper)/inactive-number";
@@ -8,7 +12,6 @@ import {
   HammerIcon,
   Settings2Icon,
 } from "lucide-react";
-import { ReactNode } from "react";
 
 interface ICreateFleetStepper {
   page: number;

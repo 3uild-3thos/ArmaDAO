@@ -6,6 +6,8 @@ import {
   SubDaoInfoDefaults,
   SubDaoInfoSchema,
 } from "@/lib/schema/subdao-info.schema";
+
+// hookform
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 

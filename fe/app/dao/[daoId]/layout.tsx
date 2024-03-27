@@ -1,12 +1,17 @@
 "use client";
 
-import DAOInfoComponent from "@/[daoId]/dao-info";
-import DAOStakeComponent from "@/[daoId]/dao-stake";
-import { cn } from "@/lib/utils";
+// react next
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { ReactNode } from "react";
+
+// components
+import DAOInfoComponent from "@/[daoId]/dao-info";
+import DAOStakeComponent from "@/[daoId]/dao-stake";
+
+// lib
+import { cn } from "@/lib/utils";
 
 const DAOTabs = [
   {

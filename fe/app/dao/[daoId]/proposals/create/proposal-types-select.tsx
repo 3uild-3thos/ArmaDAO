@@ -1,7 +1,10 @@
+// components
 import { Button } from "@/components/ui/button";
+import { BadgeCheck, FileTerminal, Gem, SquareStack } from "lucide-react";
+
+// lib
 import { EProposalType } from "@/lib/schema/proposals.schema";
 import { cn } from "@/lib/utils";
-import { BadgeCheck, FileTerminal, Gem, SquareStack } from "lucide-react";
 
 interface IProposalTypesSelectComponent {
   onSelect: (type: EProposalType) => void;
