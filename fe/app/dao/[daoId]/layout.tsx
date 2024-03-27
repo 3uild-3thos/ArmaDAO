@@ -1,12 +1,17 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+// react next
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { ReactNode } from "react";
-import DAOInfoComponent from "./dao-info";
-import DAOStatsComponent from "./dao-stats";
+
+// components
+import DAOInfoComponent from "@/[daoId]/dao-info";
+import DAOStakeComponent from "@/[daoId]/dao-stake";
+
+// lib
+import { cn } from "@/lib/utils";
 
 const DAOTabs = [
   {
@@ -45,7 +50,7 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
         {/* Divider */}
 
         {/* DAO Stats (Right) */}
-        <DAOStatsComponent className="border-t border-gray-200/10 sm:border-l sm:border-t-0 sm:pl-8" />
+        <DAOStakeComponent className="border-t border-gray-200/10 sm:border-l sm:border-t-0 sm:pl-8" />
       </div>
 
       {/* DAO Page Tabs */}

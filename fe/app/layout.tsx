@@ -52,11 +52,11 @@ const RootLayout = ({
         <WalletConnectProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Navbar />
-            <div className="w-full h-24"></div>
-            <main className="flex flex-col h-full min-h-screen px-8 font-gordita md:px-16 lg:px-24 2xl:px-40">
+            <div className="w-full h-24 bg-background"></div>
+            <main className="flex flex-col h-full min-h-screen px-8 font-gordita md:px-16 lg:px-32 2xl:px-64 bg-background">
               {children}
             </main>
-            <div className="w-full h-24"></div>
+            <div className="w-full h-24 bg-background"></div>
             <Toaster />
           </ThemeProvider>
         </WalletConnectProvider>
