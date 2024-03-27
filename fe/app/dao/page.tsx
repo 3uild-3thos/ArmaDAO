@@ -4,15 +4,15 @@ import React from "react";
 import Image from "next/image";
 
 // components
-import FundedProjects from "@/dao/funded-projects";
-import ProjectsList from "@/dao/projects-list";
+import SubDaoCarousel from "@/app/dao/subdao-carousel";
+import SubDaosList from "@/dao/subdaos-list";
 import { Button } from "@/components/ui/button";
 import FilterButton from "@/dao/filter-button";
 
 const DAOPage = () => {
   return (
     <div className="flex flex-col gap-12">
-      <p className="font-medium text-3xl">Explore projects</p>
+      <p className="font-medium text-3xl">Explore Fleets</p>
       <div className="w-full flex justify-center">
         <div className="h-fit w-fit">
           <Image
@@ -26,7 +26,7 @@ const DAOPage = () => {
       </div>
 
       {/* TODO: Only show this if the user has the NFT */}
-      <FundedProjects />
+      <SubDaoCarousel />
 
       <div className="flex justify-between">
         <div className="flex gap-2">
@@ -50,9 +50,7 @@ const DAOPage = () => {
 
           {/* TODO: Only show this if the user has the NFT */}
           <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">
-              Your Funded Projects
-            </p>
+            <p className="text-gray-50 font-medium text-sm">Your Sub-Fleets</p>
           </Button>
         </div>
 
@@ -63,7 +61,7 @@ const DAOPage = () => {
           <FilterButton title="All Categories" />
         </div>
       </div>
-      <ProjectsList />
+      <SubDaosList />
     </div>
   );
 };
