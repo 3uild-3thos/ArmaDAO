@@ -19,7 +19,7 @@ function SubDaoCarouselList() {
         <CarouselContent className="ml-4">
           {daos.map((dao) => {
             return (
-              <CarouselItem key={dao.id} className="basis-1/5">
+              <CarouselItem key={dao.id} className="basis-1/4">
                 <SubdaoCard dao={dao} owned={true} />
               </CarouselItem>
             );
