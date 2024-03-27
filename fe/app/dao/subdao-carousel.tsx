@@ -6,10 +6,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import SubdaoCard from "@/dao/subdao-card";
 
 // mock
 import { daos } from "@/mock/daos";
-import SubdaoCard from "@/dao/subdao-card";
 
 function SubDaoCarouselList() {
   return (
