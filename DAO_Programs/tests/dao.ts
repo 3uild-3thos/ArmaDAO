@@ -44,7 +44,8 @@ describe("dao", () => {
     return signature;
   };
   // DAO ARGUMENTS
-  const seed = new BN(randomBytes(8));
+  /* const seed = new BN(randomBytes(8)); */
+  const seed = new BN(5);
   // Proposal Aruments
   const id = new BN(randomInt(8)); 
 
@@ -200,11 +201,11 @@ describe("dao", () => {
       null, // min_staked_create_subdao
       true // is_hybrid
     )
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 1600000 } as SetComputeUnitLimitParams)
+      ])
       .accounts({...accounts})
       .signers([dao_admin])
-      .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 1500000 } as SetComputeUnitLimitParams)
-      ])
       .rpc({
         skipPreflight:true
       })
