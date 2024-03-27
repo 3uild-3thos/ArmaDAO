@@ -2,10 +2,10 @@
 import { useContext } from "react";
 
 // Components
-import { CreateDaoContext } from "@/create/layout";
+import Config from "@/app/dao/create/(forms)/dao-config";
 import DaoInfo from "@/create/(forms)/dao-info";
 import TeamInfo from "@/create/(forms)/team-info";
-import Config from "@/create/(forms)/config";
+import { CreateDaoContext } from "@/create/layout";
 import Review from "@/create/review";
 
 export default function CreateDao() {

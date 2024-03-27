@@ -147,6 +147,6 @@
   }
 
   .border-default {
-    @apply border-[0.5px] border-muted-light rounded-lg;
+    @apply border-[0.5px] border-muted/30 rounded-lg;
   }
 }

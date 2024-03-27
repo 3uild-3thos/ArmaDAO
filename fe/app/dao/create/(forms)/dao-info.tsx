@@ -1,11 +1,16 @@
 "use client";
 
+// react next
+import Image from "next/image";
+import { useState } from "react";
+
 // lib
+import getBase64 from "@/lib/helpers/getBase64";
 import {
-  ISubDaoInfo,
-  SubDaoInfoDefaults,
-  SubDaoInfoSchema,
-} from "@/lib/schema/subdao-info.schema";
+  FleetInfoDefaults,
+  FleetInfoSchema,
+  IFleetInfo,
+} from "@/lib/schema/fleet.schema";
 
 // hookform
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,14 +29,47 @@ import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus } from "lucide-react";
 
 function DaoInfo() {
-  const form = useForm<ISubDaoInfo>({
-    resolver: zodResolver(SubDaoInfoSchema),
-    defaultValues: SubDaoInfoDefaults,
+  const [uploadedLogo, setUploadedLogo] = useState<string>("");
+  const [uploadedBanner, setUploadedBanner] = useState<string>("");
+
+  const form = useForm<IFleetInfo>({
+    resolver: zodResolver(FleetInfoSchema),
+    defaultValues: FleetInfoDefaults,
   });
 
-  function onSubmit(values: ISubDaoInfo) {
+  function onSubmit(values: IFleetInfo) {
     console.log(values);
   }
+
+  const handleSelectLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!e.target.files || e.target.files.length === 0) {
+      return;
+    }
+    const file = e.target.files[0];
+
+    try {
+      form.setValue("logoUri", file);
+      setUploadedLogo(await getBase64(file));
+    } catch (error: any) {
+      console.error("Error selecting media: ", error);
+    }
+  };
+
+  const handleSelectBanner = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!e.target.files || e.target.files.length === 0) {
+      return;
+    }
+    const file = e.target.files[0];
+
+    try {
+      form.setValue("bannerUri", file);
+      setUploadedBanner(await getBase64(file));
+    } catch (error: any) {
+      console.error("Error selecting media: ", error);
+    }
+  };
 
   return (
     <>
@@ -40,7 +78,7 @@ function DaoInfo() {
           <div className="col-span-2 flex flex-col gap-10">
             <div className="flex flex-col gap-3">
               <p className="text-sm text-gray-500">Files</p>
-              <p className="">Cover Photo</p>
+              <p className="">Fleet Banner</p>
               {/* TODO: Add proper text color */}
               <p className="text-xs font-light text-gray-500">
                 We suggest using 1200px (w) by 250px (h) with a 250px (w) by
@@ -50,7 +88,7 @@ function DaoInfo() {
               {/* TODO: Add proper bg color */}
               {/* TODO: Add proper border color */}
               {/* TODO: Add proper border radius */}
-              <div className="border-dashed border-2 rounded border-gray-500 flex flex-col justify-center items-center gap-3 bg-card p-20 ">
+              <div className="rounded-xl border-dashed border-2 bg-muted/5 border-gray-500 flex flex-col justify-center items-center gap-3 bg-card p-20 ">
                 <div className="">
                   <ImagePlus size={64} />
                 </div>
@@ -61,70 +99,57 @@ function DaoInfo() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-10 ">
+            <div className="grid grid-cols-2 gap-10">
               <div className="flex flex-col gap-7">
                 <p className="text-sm text-gray-500">Basic Information</p>
-                <FormField
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
-                          <p>Title</p>
-                          <Input
-                            className="col-span-3"
-                            placeholder="title"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                {/* TODO: Add category of membership model */}
-                {/* <FormField
-                  control={form.control}
-                  name="category"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
-                          <p>Category</p>
-                          <Input
-                            className="col-span-3"
-                            placeholder="category"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                /> */}
 
                 <FormField
                   control={form.control}
-                  name="location"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
-                          <div className="flex flex-col gap-2">
-                            <p>Location</p>
-                            <p className="text-xs font-light text-gray-500">
-                              Optional
-                            </p>
+                  name="logoUri"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormControl>
+                          <div className="grid grid-cols-4 gap-3 items-center">
+                            <p>Logo</p>
+                            <div className="flex flex-col gap-2 w-full">
+                              <Input
+                                type="file"
+                                className="col-span-3 hover:bg-muted/5 cursor-pointer"
+                                {...field}
+                              />
+                              <Image
+                                src={uploadedLogo}
+                                alt={"Uploaded Logo"}
+                                width={500}
+                                height={500}
+                                className="absolute left-0 object-cover h-16 rounded-tl-lg rounded-bl-lg md:h-24 w-fit"
+                              />
+                            </div>
                           </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="grid grid-cols-4 gap-3 items-center">
+                          <p>Name</p>
                           <Input
                             className="col-span-3"
-                            placeholder="location"
+                            placeholder="Your Fleet's Name"
                             {...field}
                           />
                         </div>
                       </FormControl>
+
                       <FormMessage />
                     </FormItem>
                   )}
@@ -139,7 +164,7 @@ function DaoInfo() {
                         <div className="grid grid-cols-4 gap-3">
                           <p>Description</p>
                           <Textarea
-                            className="col-span-3"
+                            className="col-span-3 max-h-[200px]"
                             placeholder="description"
                             {...field}
                           />
@@ -153,50 +178,6 @@ function DaoInfo() {
 
               <div className="flex flex-col gap-7">
                 <p className="text-sm text-gray-500">Links</p>
-                <FormField
-                  control={form.control}
-                  name="pitchdeck"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
-                          <p>Pitchdeck</p>
-                          <Input
-                            className="col-span-3"
-                            placeholder="pitchdeck"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="demoVideo"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
-                          <div className="flex flex-col gap-2">
-                            <p>Demo Video</p>
-                            <p className="text-xs font-light text-gray-500">
-                              Optional
-                            </p>
-                          </div>
-                          <Input
-                            className="col-span-3"
-                            placeholder="demoVideo"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
                 <FormField
                   control={form.control}
@@ -205,15 +186,15 @@ function DaoInfo() {
                     <FormItem>
                       <FormControl>
                         <div className="grid grid-cols-4 gap-3 items-center">
-                          <div className="flex flex-col gap-2">
-                            <p>Twitter / X</p>
+                          <div className="flex flex-col">
+                            <p>Twitter</p>
                             <p className="text-xs font-light text-gray-500">
                               Optional
                             </p>
                           </div>
                           <Input
                             className="col-span-3"
-                            placeholder="twitter"
+                            placeholder="Twitter"
                             {...field}
                           />
                         </div>
@@ -230,7 +211,7 @@ function DaoInfo() {
                     <FormItem>
                       <FormControl>
                         <div className="grid grid-cols-4 gap-3 items-center">
-                          <div className="flex flex-col gap-2">
+                          <div className="flex flex-col">
                             <p>LinkedIn</p>
                             <p className="text-xs font-light text-gray-500">
                               Optional
@@ -238,7 +219,7 @@ function DaoInfo() {
                           </div>
                           <Input
                             className="col-span-3"
-                            placeholder="linkedIn"
+                            placeholder="LinkedIn"
                             {...field}
                           />
                         </div>
@@ -255,7 +236,7 @@ function DaoInfo() {
                     <FormItem>
                       <FormControl>
                         <div className="grid grid-cols-4 gap-3 items-center">
-                          <div className="flex flex-col gap-2">
+                          <div className="flex flex-col">
                             <p>Github</p>
                             <p className="text-xs font-light text-gray-500">
                               Optional
@@ -263,7 +244,7 @@ function DaoInfo() {
                           </div>
                           <Input
                             className="col-span-3"
-                            placeholder="github"
+                            placeholder="Github"
                             {...field}
                           />
                         </div>
@@ -280,7 +261,7 @@ function DaoInfo() {
                     <FormItem>
                       <FormControl>
                         <div className="grid grid-cols-4 gap-3 items-center">
-                          <div className="flex flex-col gap-2">
+                          <div className="flex flex-col">
                             <p>Website</p>
                             <p className="text-xs font-light text-gray-500">
                               Optional
@@ -288,7 +269,7 @@ function DaoInfo() {
                           </div>
                           <Input
                             className="col-span-3"
-                            placeholder="website"
+                            placeholder="Website"
                             {...field}
                           />
                         </div>

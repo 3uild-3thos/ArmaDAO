@@ -13,6 +13,9 @@ import {
   Settings2Icon,
 } from "lucide-react";
 
+// lib
+import { cn } from "@/lib/utils";
+
 interface ICreateFleetStepper {
   page: number;
 }
@@ -51,7 +54,6 @@ const steps: Array<IStep> = [
 ];
 
 const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
-  console.log("page", page);
   return (
     <div className="flex flex-col gap-12">
       {steps.map((step: IStep, index: number) => (
@@ -64,13 +66,31 @@ const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
             <InactiveNumber className="col-span-2" page={index + 1} />
           )}
 
-          <div className="flex justify-center mt-[0.5px] col-span-1">
+          <div
+            className={cn(
+              "flex justify-center mt-[0.5px] text-muted/30 col-span-1",
+              index <= page && "text-muted"
+            )}
+          >
             {step.icon}
           </div>
           <div className="flex flex-col gap-2 col-span-8">
-            <p className="font-medium text-xl">{step.title}</p>
-            {/* TODO: Add proper text color */}
-            <p className="font-normal text-gray-500">{step.description}</p>
+            <p
+              className={cn(
+                "font-medium text-xl text-muted/30",
+                index <= page && "text-muted"
+              )}
+            >
+              {step.title}
+            </p>
+            <p
+              className={cn(
+                "font-normal text-gray-500/40",
+                index <= page && "text-gray-500"
+              )}
+            >
+              {step.description}
+            </p>
           </div>
           {index == page && (
             <div className="col-span-1 flex items-center">

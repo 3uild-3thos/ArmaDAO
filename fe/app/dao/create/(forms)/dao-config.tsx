@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 
 // components
-import { Textarea } from "@/components/ui/textarea";
-import { ImagePlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { EMembershipType } from "@/lib/schema/subdao.schema";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { EMembershipType } from "@/lib/schema/fleet.schema";
+import { ImagePlus } from "lucide-react";
 
 function Config() {
   const [formData, setFormData] = useState({
