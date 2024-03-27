@@ -10,20 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Progress } from "@/components/ui/progress";
-import {
-  Bell,
-  Coins,
-  HandHelping,
-  Newspaper,
-  ThumbsUp,
-  Users,
-} from "lucide-react";
-
-// lib
-import { IProject } from "@/lib/schema/projects.schema";
-import getRemainingDateTime from "@/lib/helpers/getRemainingDateTime";
-import getPercentage from "@/lib/helpers/getPercentage";
+import { Coins, Newspaper, Users } from "lucide-react";
 
 // mock
 import { daos } from "@/mock/daos";

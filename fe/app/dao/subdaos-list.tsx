@@ -6,23 +6,9 @@ import Image from "next/image";
 
 // components
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { projects } from "@/mock/projects";
-import {
-  Bell,
-  Coins,
-  MoveRight,
-  Newspaper,
-  ThumbsUp,
-  Users,
-} from "lucide-react";
-
-// lib
-import { IProject } from "@/lib/schema/projects.schema";
+import { Coins, MoveRight, Newspaper, Users } from "lucide-react";
 
 // helpers
-import getRemainingDateTime from "@/lib/helpers/getRemainingDateTime";
-import getPercentage from "@/lib/helpers/getPercentage";
 import { ISubDaoInfo } from "@/lib/schema/subdao-info.schema";
 import { daos } from "@/mock/daos";
 import shortenDescription from "@/lib/helpers/shortenDescription";
