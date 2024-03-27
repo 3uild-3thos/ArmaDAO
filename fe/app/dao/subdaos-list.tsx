@@ -8,10 +8,12 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Coins, MoveRight, Newspaper, Users } from "lucide-react";
 
-// helpers
+// lip
 import { ISubDaoInfo } from "@/lib/schema/subdao-info.schema";
-import { daos } from "@/mock/daos";
 import shortenDescription from "@/lib/helpers/shortenDescription";
+
+// mock
+import { daos } from "@/mock/daos";
 
 function SubDaosList() {
   return (

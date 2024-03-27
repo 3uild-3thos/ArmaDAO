@@ -1,4 +1,6 @@
 "use client";
+import { useState } from "react";
+
 // next
 import Image from "next/image";
 
@@ -11,13 +13,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Coins, Newspaper, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+// lib
+import shortenDescription from "@/lib/helpers/shortenDescription";
+import { ISubDaoInfo } from "@/lib/schema/subdao-info.schema";
 
 // mock
 import { daos } from "@/mock/daos";
-import { ISubDaoInfo } from "@/lib/schema/subdao-info.schema";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import shortenDescription from "@/lib/helpers/shortenDescription";
 
 function SubDaoCarouselList() {
   return (
