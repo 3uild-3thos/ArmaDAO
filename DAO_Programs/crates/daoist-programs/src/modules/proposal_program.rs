@@ -11,14 +11,14 @@ declare_id!("propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV");
 pub struct ProposalHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub proposal: AccountInfo<'info>,
-    pub core_config: AccountInfo<'info>,
+    pub config: AccountInfo<'info>,
     pub system_program: AccountInfo<'info>,
 }
 #[derive(Accounts)]
 pub struct SubDaoProposalHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub proposal: AccountInfo<'info>,
-    pub core_config: AccountInfo<'info>,
+    pub config: AccountInfo<'info>,
     pub config_sub_dao: AccountInfo<'info>,
     pub system_program: AccountInfo<'info>,
 }
@@ -47,11 +47,13 @@ impl anchor_lang::Owner for Proposal {
 }
 impl anchor_lang::AccountDeserialize for Proposal {
     fn try_deserialize(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
-        Self::try_deserialize(buf)
+        /* Self::try_deserialize(buf) */
+        Ok(Self::deserialize(buf)?)
     }
 
     fn try_deserialize_unchecked(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
-        Self::try_deserialize_unchecked(buf)
+        /* Self::try_deserialize_unchecked(buf) */
+        Ok(Self::try_deserialize(buf)?)
     }
 }
 impl anchor_lang::AccountSerialize for Proposal {}
@@ -278,7 +280,7 @@ pub fn add_vote<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.proposal.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,
@@ -303,7 +305,7 @@ pub fn remove_vote<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.proposal.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,
@@ -329,7 +331,7 @@ pub fn add_vote_sub_dao<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.proposal.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.config_sub_dao.clone(),
             ctx.accounts.system_program.clone(),
         ],
@@ -354,7 +356,7 @@ pub fn remove_vote_sub_dao<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.proposal.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,

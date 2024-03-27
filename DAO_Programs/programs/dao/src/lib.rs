@@ -34,7 +34,7 @@ pub mod dao {
         is_hybrid: bool
     ) -> Result<()> {
         ctx.accounts.init(
-            seed, 
+            seed,
             &ctx.bumps, 
             proposal_fee, 
             min_quorum, 
@@ -49,7 +49,8 @@ pub mod dao {
             min_staked_required_proposal,
             allow_sub_dao,
             min_staked_create_subdao,
-            is_hybrid
+            is_hybrid,
+            
         )
     }
     // Instantiate a new SubDAO Config ACC for Hybrid DAOS

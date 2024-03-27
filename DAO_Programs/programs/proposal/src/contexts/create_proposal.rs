@@ -21,7 +21,7 @@ pub struct CreateProposal<'info> {
     )]
     owner_ata: InterfaceAccount<'info, TokenAccount>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == core_config.collection_mint.expect("Collection mint not initialized"))]
+    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
@@ -49,21 +49,21 @@ pub struct CreateProposal<'info> {
     #[account(
         init,
         payer = owner,
-        seeds=[b"proposal", core_config.key().as_ref(), id.to_le_bytes().as_ref()],
+        seeds=[b"proposal", config.key().as_ref(), id.to_le_bytes().as_ref()],
         bump,
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
     core_program: Program<'info, CoreProgram>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"core", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     metadata_program: Program<'info, Metadata>,
@@ -91,22 +91,22 @@ impl<'info> CreateProposal<'info> {
             self.collection
             );
                 //Check hybridness
-        self.core_config.check_hybrid()?;    
+        self.config.check_hybrid()?;    
         // Make sure quorum is valid    
-        self.core_config.check_valid_quorum(quorum)?;                 
+        self.config.check_valid_quorum(quorum)?;                 
         // Check Minimum threshold
-        self.core_config.check_min_threshold(threshold)?;
+        self.config.check_min_threshold(threshold)?;
         // Check Max Expiry
-        self.core_config.check_max_expiry(expiry)?;
+        self.config.check_max_expiry(expiry)?;
         // Check Min Pre Voting Period
-        self.core_config.check_evaluation_phase_period(evaluation_period)?;
+        self.config.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
         self.proposal.check_choices()?;
 
         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = CoreHandler {
             owner: self.owner.to_account_info(),
-            config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
         let cpi_context = CpiContext::new(
@@ -139,7 +139,7 @@ impl<'info> CreateProposal<'info> {
             self.system_program.to_account_info(),
             accounts
         );
-        transfer(ctx, self.core_config.proposal_fee)
+        transfer(ctx, self.config.proposal_fee)
     }
 }
 
@@ -151,29 +151,29 @@ pub struct StakeCreateProposal<'info> {
     #[account(
         init,
         payer = owner,
-        seeds=[b"proposal", core_config.key().as_ref(), id.to_le_bytes().as_ref()],
+        seeds=[b"proposal", config.key().as_ref(), id.to_le_bytes().as_ref()],
         bump,
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
     core_program: Program<'info, CoreProgram>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
-    #[account(constraint = staking_program.key() == core_config.staking_program)]
+    config: Account<'info, DaoConfig>,
+    #[account(constraint = staking_program.key() == config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         seeds::program = staking_program.key(),
         bump = stake_state.state_bump,
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     system_program: Program<'info, System>,
@@ -193,23 +193,23 @@ impl<'info> StakeCreateProposal<'info> {
         bumps: &StakeCreateProposalBumps,
     ) -> Result<()> {
         // Make sure its a staked based DAO
-        self.core_config.ensure_not_hybrid ()?;
+        self.config.ensure_not_hybrid ()?;
         // Make sure user has staked the required amount
-        self.core_config.check_min_staked_required_proposal(self.stake_state.amount)?;
+        self.config.check_min_staked_required_proposal(self.stake_state.amount)?;
         // Make sure quorum is valid
-        self.core_config.check_valid_quorum(quorum)?;                 
+        self.config.check_valid_quorum(quorum)?;                 
         // Check Minimum threshold
-        self.core_config.check_min_threshold(threshold)?;
+        self.config.check_min_threshold(threshold)?;
         // Check Max Expiry
-        self.core_config.check_max_expiry(expiry)?;
+        self.config.check_max_expiry(expiry)?;
         // Check Min Pre Voting Period
-        self.core_config.check_evaluation_phase_period(evaluation_period)?;
+        self.config.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
         self.proposal.check_choices()?; 
         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = CoreHandler {
             owner: self.owner.to_account_info(),
-            config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
         let cpi_context = CpiContext::new(
@@ -242,6 +242,6 @@ impl<'info> StakeCreateProposal<'info> {
             self.system_program.to_account_info(),
             accounts
         );
-        transfer(ctx, self.core_config.proposal_fee)
+        transfer(ctx, self.config.proposal_fee)
     }
 }

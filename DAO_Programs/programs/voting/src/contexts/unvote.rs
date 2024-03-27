@@ -15,31 +15,31 @@ pub struct Unvote<'info> {
         bump = vote.bump
         )]
     vote: Account<'info, VoteState>,    
-    #[account(constraint = proposal_program.key() == core_config.proposal_program)]
+    #[account(constraint = proposal_program.key() == config.proposal_program)]
     proposal_program: Program<'info, ProposalProgram>,
     #[account(
-        seeds=[b"proposal", core_config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
+        seeds=[b"proposal", config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
         seeds::program = proposal_program.key(),
         bump = proposal.bump,
     )]
     proposal: Account<'info, Proposal>,
-    #[account(constraint = staking_program.key() == core_config.staking_program)]
+    #[account(constraint = staking_program.key() == config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         seeds::program = staking_program.key(),
         bump = stake_state.state_bump,
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     system_program: Program<'info, System>,
@@ -58,7 +58,7 @@ impl<'info> Unvote<'info> {
         let remove_account_accounts= StakeHandler {
             owner: self.owner.to_account_info(),
             stake_state: self.stake_state.to_account_info(),
-            core_config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
 
@@ -81,7 +81,7 @@ impl<'info> Unvote<'info> {
         let remove_vote_accounts= ProposalHandler {
             owner: self.owner.to_account_info(),
             proposal: self.proposal.to_account_info(),
-            core_config:self.core_config.to_account_info(),
+            config:self.config.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
         let cpi_context = CpiContext::new(
@@ -94,7 +94,7 @@ impl<'info> Unvote<'info> {
         let remove_account_accounts= StakeHandler {
             owner: self.owner.to_account_info(),
             stake_state: self.stake_state.to_account_info(),
-            core_config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
 

@@ -11,19 +11,19 @@ pub struct CleanupProposal<'info> {
     #[account(
         mut,
         close = treasury,
-        seeds=[b"proposal", core_config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
+        seeds=[b"proposal", config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
         bump = proposal.bump
     )]
     proposal: Account<'info, Proposal>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     system_program: Program<'info, System>
@@ -74,8 +74,8 @@ impl<'info> CleanupProposal<'info> {
 
         let seeds = &[
             &b"treasury"[..],
-            &self.core_config.key().to_bytes()[..],
-            &[self.core_config.treasury_bump],
+            &self.config.key().to_bytes()[..],
+            &[self.config.treasury_bump],
         ];
 
         let signer_seeds = &[&seeds[..]];
@@ -95,12 +95,12 @@ impl<'info> CleanupProposal<'info> {
         executable_proposal: ExecutableProposal,
     ) -> Result<()> {
         match executable_proposal {  
-            ExecutableProposal::SetProposalFee(amount) => self.core_config.set_proposal_fee(amount),
-            ExecutableProposal::SetMaxExpiry(amount) => self.core_config.set_max_expiry(amount),
-            ExecutableProposal::SetThreshold(amount) => self.core_config.set_threshold(amount),
-            ExecutableProposal::SetQuorum(amount) => self.core_config.set_quorum(amount),
-            ExecutableProposal::SetEvaluationPeriod(amount) => self.core_config.set_evaluation_phase_period(amount),
-            ExecutableProposal::SetAllowSubDao(value) => self.core_config.set_allow_sub_dao(value)
+            ExecutableProposal::SetProposalFee(amount) => self.config.set_proposal_fee(amount),
+            ExecutableProposal::SetMaxExpiry(amount) => self.config.set_max_expiry(amount),
+            ExecutableProposal::SetThreshold(amount) => self.config.set_threshold(amount),
+            ExecutableProposal::SetQuorum(amount) => self.config.set_quorum(amount),
+            ExecutableProposal::SetEvaluationPeriod(amount) => self.config.set_evaluation_phase_period(amount),
+            ExecutableProposal::SetAllowSubDao(value) => self.config.set_allow_sub_dao(value)
         }
     }
 }
