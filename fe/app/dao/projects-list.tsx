@@ -1,7 +1,11 @@
+import React from "react";
+
+// next
+import Image from "next/image";
+
+// components
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import Image from "next/image";
-import React from "react";
 
 function ProjectsList() {
   return (
