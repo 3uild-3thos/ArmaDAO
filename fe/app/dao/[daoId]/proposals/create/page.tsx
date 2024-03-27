@@ -549,7 +549,7 @@ const DAOProposalCreatePage = () => {
               className="self-end w-fit"
               variant={"white"}
             >
-              Submit
+              Submit Proposal
             </Button>
           </CardContent>
         </Card>

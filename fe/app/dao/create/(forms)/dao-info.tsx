@@ -1,18 +1,15 @@
 "use client";
 
-import React from "react";
-
 // lib
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ISubDaoInfo,
   SubDaoInfoDefaults,
   SubDaoInfoSchema,
 } from "@/lib/schema/subdao-info.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 // components
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -300,7 +297,6 @@ function DaoInfo() {
               </div>
             </div>
           </div>
-          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </>
