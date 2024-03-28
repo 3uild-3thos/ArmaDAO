@@ -101,6 +101,7 @@ impl<'info> CleanupProposal<'info> {
             ExecutableProposal::SetQuorum(amount) => self.config.set_quorum(amount),
             ExecutableProposal::SetEvaluationPeriod(amount) => self.config.set_evaluation_phase_period(amount),
             ExecutableProposal::SetAllowSubDao(value) => self.config.set_allow_sub_dao(value)
+            //Add set mint/collection mint vice versa
         }
     }
 }
