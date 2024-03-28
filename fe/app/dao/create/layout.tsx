@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 
 // components
 import CreateFleetStepper from "@/app/dao/create/(stepper)/stepper";
-import { Button } from "@/components/ui/button";
 
 export const CreateDaoContext = createContext<number>(0);
 
@@ -29,26 +28,7 @@ const RootLayout = ({
 
         <div className="grid grid-cols-3 p-5 gap-10">
           <CreateFleetStepper page={page} />
-          <div className="col-span-2 flex flex-col gap-10">
-            {children}
-            <div className="flex justify-between">
-              {page > 0 ? (
-                <Button variant={"outline"} onClick={handleBack}>
-                  Back
-                </Button>
-              ) : (
-                <div className=""></div>
-              )}
-
-              {page < 3 ? (
-                <Button variant={"white"} onClick={handleNext}>
-                  Next
-                </Button>
-              ) : (
-                <Button onClick={handleNext}>Create</Button>
-              )}
-            </div>
-          </div>
+          <div className="col-span-2 flex flex-col gap-10">{children}</div>
         </div>
       </div>
     </CreateDaoContext.Provider>

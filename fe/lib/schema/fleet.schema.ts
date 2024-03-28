@@ -8,22 +8,31 @@ export enum EMembershipType {
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB in bytes;
 const ACCEPTED_IMAGE_TYPES = ["image/png"];
 
-export const ImageSchema = z
-  .instanceof(File, { message: "Image is required" })
-  .refine((file) => !!file, "Image is required")
-  .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 2 MB`)
-  .refine(
-    (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-    "Only .png images are accepted."
-  );
+export const ImageSchema =
+  typeof window === "undefined"
+    ? z.null()
+    : z
+        .instanceof(File, { message: "Image is required" })
+        .refine((file) => !!file, "Image is required")
+        .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 2 MB`)
+        .refine(
+          (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+          "Only .png images are accepted."
+        );
 
 export const FleetInfoSchema = z
   .object({
     id: z.string(),
-    name: z.string(),
-    logoUri: ImageSchema.nullable(),
-    description: z.string(),
-    bannerUri: ImageSchema,
+    name: z
+      .string()
+      .min(1, "Fleet name is required")
+      .max(24, "Maximum of 24 characters"),
+    logoUri: ImageSchema,
+    description: z
+      .string()
+      .min(1, "Description is required")
+      .max(250, "Maximum of 250 characters"),
+    bannerUri: ImageSchema.nullish(),
     twitter: z.string().optional(),
     linkedIn: z.string().optional(),
     github: z.string().optional(),
