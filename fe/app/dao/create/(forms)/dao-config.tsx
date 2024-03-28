@@ -1,211 +1,117 @@
 "use client";
-import React, { useState } from "react";
 
 // components
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Textarea } from "@/components/ui/textarea";
-import { EMembershipType } from "@/lib/schema/fleet.schema";
-import { ImagePlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import InfoTooltip from "@/components/ui/info-tooltip";
+import FungibleForm from "@/create/(forms)/(membership-types)/fungible-form";
+import HybridForm from "@/create/(forms)/(membership-types)/hybrid-form";
+import MembershipTypes from "@/create/(forms)/(membership-types)/membership-types";
+import NFTForm from "@/create/(forms)/(membership-types)/nft-form";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-function Config() {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    category: "",
-    location: "",
-    pitchdeck: "",
-    demoVideo: "",
-    twitter: "",
-    linkedIn: "",
-    github: "",
-    website: "",
+// zustand
+import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// schema
+import {
+  EMembershipType,
+  FleetConfigSchema,
+  IFleetConfig,
+} from "@/lib/schema/fleet.schema";
+
+function FleetConfig() {
+  const { handleBackPage, handleNextPage, fleetConfig, setFleetConfig } =
+    useCreateFleet();
+
+  const form = useForm<IFleetConfig>({
+    resolver: zodResolver(FleetConfigSchema),
+    defaultValues: fleetConfig,
   });
 
-  const [type, setType] = useState<EMembershipType>(EMembershipType.Fungible);
+  function onSubmit(values: IFleetConfig) {
+    setFleetConfig(values);
+    handleNextPage();
+  }
 
-  const [mintId, setMintId] = useState("");
-
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | undefined
-  ) => {
-    if (e) {
-      const { name, value } = e.target;
-      setFormData((state) => ({ ...state, [name]: value }));
-    }
+  const handleSelectMembershipType = (type: EMembershipType) => {
+    form.setValue("membershipType", type);
   };
+
+  const watchMembershipType = form.watch("membershipType");
+  console.log("form", form.getValues());
 
   return (
     <>
-      <div className="col-span-2  gap-10">
-        <div className="flex flex-col gap-7">
-          <p className="text-sm text-gray-500">Membership Information</p>
+      <Form {...form}>
+        <form className="space-y-8 min-h-[30rem]">
+          <div className="flex flex-col gap-8">
+            <p className="text-sm text-gray-500">
+              How to be a member of your DAO?
+            </p>
 
-          <div className="grid grid-cols-2 gap-10">
-            <div className="flex flex-col gap-3 ">
-              <p>Mint Address</p>
-              <Input
-                className="col-span-3"
-                name="title"
-                onChange={(e) => {
-                  setMintId(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <p>Membership Type</p>
-              {/* TODO: Make the radio button orientation horizontal */}
-              <RadioGroup
-                defaultValue="fungible"
-                onValueChange={(e) => {
-                  setType(e as EMembershipType);
-                }}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="fungible" id="option-one" />
-                  <Label htmlFor="option-one">Fungible Token</Label>
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-4">
+                <div className="flex">
+                  Membership Type
+                  <InfoTooltip
+                    content={
+                      "You can change from one membership type to another through proposals."
+                    }
+                  />
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="nft" id="option-two" />
-                  <Label htmlFor="option-two">NFT</Label>
-                </div>
-              </RadioGroup>
-            </div>
-            {type === EMembershipType.Fungible && mintId !== "" && (
-              <div className="flex flex-col gap-3 ">
-                <p>Holding amount</p>
-                <Input
-                  type="number"
-                  className="col-span-3"
-                  name="title"
-                  onChange={handleChange}
+                <FormField
+                  name="membershipType"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormControl>
+                          <MembershipTypes
+                            selected={field.value}
+                            onSelect={handleSelectMembershipType}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
                 />
               </div>
-            )}
 
-            {type === EMembershipType.NFT && mintId === "" && (
-              <div className="col-span-2 grid grid-cols-2 gap-8 border border-gray-500 py-6 px-4 rounded-xl">
-                <div className="col-span-2">
-                  <p className="text-xl font-medium">NFT Creation</p>
-                </div>
-                <div className="flex flex-col gap-3 col-span-2">
-                  <div className="flex flex-col gap-3">
-                    <p>Image</p>
+              {watchMembershipType === EMembershipType.Fungible && (
+                <FungibleForm form={form} />
+              )}
 
-                    {/* TODO: Add proper bg color */}
-                    {/* TODO: Add proper border color */}
-                    {/* TODO: Add proper border radius */}
-                    <div className="border-dashed border-2 rounded border-gray-500 flex flex-col justify-center items-center gap-3 bg-card p-20 ">
-                      <div className="">
-                        <ImagePlus size={64} />
-                      </div>
-                      <div className="text-center">
-                        <p className="">
-                          Click or drag an image here to upload.
-                        </p>
-                        <p className="">Maximum file size: 5MB</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-3 ">
-                  <p>Name</p>
-                  <Input
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="flex flex-col gap-3 ">
-                  <p>Seller Basis Point</p>
-                  <Input
-                    type="number"
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="flex flex-col gap-3 col-span-2">
-                  <p>Description</p>
-                  <Textarea
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>{" "}
-                {/* TODO: Add appropriate input for metadata */}
-                <div className="flex flex-col gap-3 col-span-2">
-                  <p>Metadata</p>
-                  <Textarea
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-            )}
-            {type === EMembershipType.Fungible && mintId === "" && (
-              <div className="col-span-2 grid grid-cols-2 gap-8 border border-gray-500 py-6 px-4 rounded-xl">
-                <div className="col-span-2">
-                  <p className="text-xl font-medium">Fungible Token Creation</p>
-                </div>
-                <div className="flex flex-col gap-3 col-span-2">
-                  <div className="flex flex-col gap-3">
-                    <p>Image</p>
+              {watchMembershipType === EMembershipType.NFT && (
+                <NFTForm form={form} />
+              )}
 
-                    {/* TODO: Add proper bg color */}
-                    {/* TODO: Add proper border color */}
-                    {/* TODO: Add proper border radius */}
-                    <div className="border-dashed border-2 rounded border-gray-500 flex flex-col justify-center items-center gap-3 bg-card p-20 ">
-                      <div className="">
-                        <ImagePlus size={64} />
-                      </div>
-                      <div className="text-center">
-                        <p className="">
-                          Click or drag an image here to upload.
-                        </p>
-                        <p className="">Maximum file size: 5MB</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-3 ">
-                  <p>Name</p>
-                  <Input
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="flex flex-col gap-3 ">
-                  <p>Total Supply</p>
-                  <Input
-                    type="number"
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="flex flex-col gap-3 col-span-2">
-                  <p>Description</p>
-                  <Textarea
-                    className="col-span-3"
-                    name="title"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-            )}
+              {watchMembershipType === EMembershipType.Hybrid && (
+                <HybridForm form={form} />
+              )}
+            </div>
           </div>
-        </div>
+        </form>
+      </Form>
+      {/* TODO: Create a reusable component with all the variants */}
+      <div className="flex justify-between">
+        <Button variant={"outline"} onClick={handleBackPage}>
+          <ArrowLeftIcon size={16} className="mr-2" /> Back
+        </Button>
+        <Button variant={"white"} onClick={form.handleSubmit(onSubmit)}>
+          Next <ArrowRightIcon size={16} className="ml-2" />
+        </Button>
       </div>
     </>
   );
 }
 
-export default Config;
+export default FleetConfig;

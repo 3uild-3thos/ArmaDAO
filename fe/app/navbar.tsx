@@ -36,7 +36,7 @@ export const Navbar = () => {
   }, [publicKey]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/20">
       <div className="relative flex items-center justify-between px-4 py-4 text-lg md:px-20 backdrop-blur-sm">
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-3">

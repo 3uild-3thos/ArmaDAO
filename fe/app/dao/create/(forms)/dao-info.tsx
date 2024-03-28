@@ -2,15 +2,10 @@
 
 // react next
 import Image from "next/image";
-import { useState } from "react";
 
 // lib
 import getBase64 from "@/lib/helpers/getBase64";
-import {
-  FleetInfoDefaults,
-  FleetInfoSchema,
-  IFleetInfo,
-} from "@/lib/schema/fleet.schema";
+import { FleetInfoSchema, IFleetInfo } from "@/lib/schema/fleet.schema";
 
 // hookform
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,23 +22,29 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ImagePlus } from "lucide-react";
+import { ArrowRightIcon, ImagePlus } from "lucide-react";
 
 // zustand
-import useCreateFleet from "@/lib/zustand/create-fleet.store";
+import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
 
-function DaoInfo() {
-  const [uploadedLogo, setUploadedLogo] = useState<string>("");
-  const [uploadedBanner, setUploadedBanner] = useState<string>("");
-  const { page, handleNextPage, handleBackPage } = useCreateFleet();
+function FleetInfo() {
+  const {
+    handleNextPage,
+    fleetInfo,
+    setFleetInfo,
+    logoPreview,
+    setLogoPreview,
+    bannerPreview,
+    setBannerPreview,
+  } = useCreateFleet();
 
   const form = useForm<IFleetInfo>({
     resolver: zodResolver(FleetInfoSchema),
-    defaultValues: FleetInfoDefaults,
+    defaultValues: fleetInfo,
   });
 
   function onSubmit(values: IFleetInfo) {
-    console.log(values);
+    setFleetInfo(values);
     handleNextPage();
   }
 
@@ -56,9 +57,8 @@ function DaoInfo() {
 
     try {
       form.setValue("logoUri", file);
-      console.log("logo file", file);
       form.clearErrors("logoUri");
-      setUploadedLogo(await getBase64(file));
+      setLogoPreview(await getBase64(file));
     } catch (error: any) {
       console.error("Error selecting media: ", error);
     }
@@ -74,19 +74,17 @@ function DaoInfo() {
     try {
       form.setValue("bannerUri", file);
       form.clearErrors("bannerUri");
-      setUploadedBanner(await getBase64(file));
+      setBannerPreview(await getBase64(file));
     } catch (error: any) {
       console.error("Error selecting media: ", error);
     }
   };
 
-  console.log("form", form.getValues());
-
   return (
     <>
       <Form {...form}>
-        <form className="space-y-8">
-          <div className="col-span-2 flex flex-col gap-10">
+        <form className="space-y-8 min-h-[30rem]">
+          <div className="flex flex-col col-span-2 gap-10">
             <div className="flex flex-col gap-3">
               <p className="text-sm text-gray-500">Files</p>
               <p className="">Fleet Banner</p>
@@ -102,13 +100,13 @@ function DaoInfo() {
                   return (
                     <FormItem>
                       <FormControl>
-                        <div className="relative h-80 rounded-xl border-dashed border-2 hover:bg-muted/5 duration-200 cursor-pointer border-gray-500 flex flex-col justify-center items-center gap-3 bg-card p-20">
-                          {uploadedBanner ? (
+                        <div className="relative flex flex-col items-center justify-center gap-3 p-20 duration-200 border border-gray-500 border-dashed cursor-pointer h-80 rounded-xl hover:bg-muted/5 hover:brightness-125 bg-card">
+                          {bannerPreview ? (
                             <Image
-                              src={uploadedBanner}
-                              alt={"Uploaded Logo"}
+                              src={bannerPreview}
+                              alt={"Banner Preview"}
                               layout="fill"
-                              className="h-fit w-full object-cover rounded-xl"
+                              className="object-cover w-full h-fit rounded-xl"
                             />
                           ) : (
                             <>
@@ -122,7 +120,7 @@ function DaoInfo() {
                           <Input
                             type="file"
                             accept="image/png"
-                            className="opacity-0 absolute bottom-0 left-0 w-full h-full overflow-hidden whitespace-nowrap z-10 cursor-pointer"
+                            className="absolute bottom-0 left-0 z-10 w-full h-full overflow-hidden opacity-0 cursor-pointer whitespace-nowrap"
                             onChange={handleSelectBanner}
                           />
                         </div>
@@ -135,7 +133,7 @@ function DaoInfo() {
             </div>
 
             <div className="grid grid-cols-2 gap-10">
-              <div className="flex flex-col gap-7">
+              <div className="flex flex-col gap-8">
                 <p className="text-sm text-gray-500">Basic Information</p>
 
                 <FormField
@@ -146,27 +144,27 @@ function DaoInfo() {
                         <FormControl>
                           <div className="grid grid-cols-4 gap-3">
                             <p>Logo</p>
-                            <div className="col-span-3 flex flex-col gap-4 w-full">
+                            <div className="flex flex-col w-full col-span-3 gap-4">
                               <Button
                                 variant={"outline"}
-                                className="relative py-6 justify-start border-default text-muted/50 cursor-pointer"
+                                className="relative justify-start py-6 cursor-pointer border-default text-muted/50"
                               >
-                                Choose a Logo
+                                Select File
                                 <Input
                                   type="file"
                                   accept="image/png"
-                                  className="opacity-0 absolute bottom-0 left-0 w-full h-full overflow-hidden whitespace-nowrap z-10 cursor-pointer"
+                                  className="absolute bottom-0 left-0 z-10 w-full h-full overflow-hidden opacity-0 cursor-pointer whitespace-nowrap"
                                   onChange={handleSelectLogo}
                                 />
                               </Button>
 
-                              {uploadedLogo && (
+                              {logoPreview && (
                                 <Image
-                                  src={uploadedLogo}
+                                  src={logoPreview}
                                   alt={"Uploaded Logo"}
                                   width={500}
                                   height={500}
-                                  className="h-24 rounded-xl w-24"
+                                  className="w-24 h-24 border-dashed rounded-xl border-default"
                                 />
                               )}
                               <FormMessage />
@@ -184,7 +182,7 @@ function DaoInfo() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
+                        <div className="grid items-start grid-cols-4 gap-3">
                           <p>Name</p>
                           <div className="col-span-3 space-y-2">
                             <Input {...field} />
@@ -219,7 +217,7 @@ function DaoInfo() {
                 />
               </div>
 
-              <div className="flex flex-col gap-7">
+              <div className="flex flex-col gap-8">
                 <p className="text-sm text-gray-500">Links</p>
 
                 <FormField
@@ -228,7 +226,7 @@ function DaoInfo() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
+                        <div className="grid items-center grid-cols-4 gap-3">
                           <div className="flex flex-col">
                             <p>Twitter</p>
                             <p className="text-xs font-light text-gray-500">
@@ -249,7 +247,7 @@ function DaoInfo() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
+                        <div className="grid items-center grid-cols-4 gap-3">
                           <div className="flex flex-col">
                             <p>LinkedIn</p>
                             <p className="text-xs font-light text-gray-500">
@@ -270,7 +268,7 @@ function DaoInfo() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
+                        <div className="grid items-center grid-cols-4 gap-3">
                           <div className="flex flex-col">
                             <p>Github</p>
                             <p className="text-xs font-light text-gray-500">
@@ -291,7 +289,7 @@ function DaoInfo() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <div className="grid grid-cols-4 gap-3 items-center">
+                        <div className="grid items-center grid-cols-4 gap-3">
                           <div className="flex flex-col">
                             <p>Website</p>
                             <p className="text-xs font-light text-gray-500">
@@ -309,14 +307,15 @@ function DaoInfo() {
             </div>
           </div>
         </form>
-        <div className="flex justify-end">
-          <Button variant={"white"} onClick={form.handleSubmit(onSubmit)}>
-            Next
-          </Button>
-        </div>
       </Form>
+      {/* TODO: Create a reusable component with all the variants */}
+      <div className="flex justify-end">
+        <Button variant={"white"} onClick={form.handleSubmit(onSubmit)}>
+          Next <ArrowRightIcon size={16} className="ml-2" />
+        </Button>
+      </div>
     </>
   );
 }
 
-export default DaoInfo;
+export default FleetInfo;

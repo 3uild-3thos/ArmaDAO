@@ -16,7 +16,7 @@ const CompletedNumber = ({ className }: ICompletedNumber) => {
       >
         <div
           className={
-            "h-6 w-6 p-2 flex justify-center items-center rounded-full bg-cyan/50 z-20"
+            "h-7 w-7  p-2 flex justify-center items-center rounded-full bg-cyan/50 z-20"
           }
         >
           <div

@@ -1,8 +1,10 @@
+import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 import { z } from "zod";
 
 export enum EMembershipType {
-  NFT = "NFT",
   Fungible = "Fungible",
+  NFT = "NFT",
+  Hybrid = "Hybrid",
 }
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB in bytes;
@@ -40,12 +42,146 @@ export const FleetInfoSchema = z
   })
   .required();
 
-export const FleetConfigSchema = z.object({
-  membershipType: z.nativeEnum(EMembershipType),
+const PublicKeySchema = z.string().refine(
+  (data) => {
+    // Validate length
+    if (data.length !== 44) return false;
+
+    try {
+      // Attempt to decode to ensure it's base58; Solana public keys are 32 bytes long when decoded
+      const decoded = bs58.decode(data);
+      return decoded.length === 32;
+    } catch {
+      // If decoding fails, it's not a valid base58 string
+      return false;
+    }
+  },
+  {
+    message: "Invalid Solana Public Key",
+  }
+);
+
+export const CreateFTSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Token name is required")
+    .max(24, "Maximum of 24 characters"),
+  symbol: z
+    .string()
+    .min(2, "Minimum of 2 characters")
+    .max(8, "Maximum of 8 characters"),
+  decimals: z.coerce
+    .number()
+    .gte(0, "Decimals must be positive")
+    .lte(9, "Decimals exceeded the maximum"),
+  supply: z.coerce
+    .number()
+    .positive("Supply must be greater than 0")
+    .max(100_000_000_000_000, "Supply exceeded the limit"), // 100 trillion
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .max(250, "Maximum of 250 characters"),
+  logoUri: ImageSchema,
+});
+
+export const NFTTraitsSchema = z.object({
+  traitType: z
+    .string()
+    .min(1, "Token name is required")
+    .max(20, "Maximum of 24 characters"),
+  value: z
+    .string()
+    .min(1, "Token name is required")
+    .max(20, "Maximum of 24 characters"),
+});
+
+export const CreateNFTSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Token name is required")
+    .max(24, "Maximum of 24 characters"),
+  symbol: z
+    .string()
+    .min(2, "Minimum of 2 characters")
+    .max(8, "Maximum of 8 characters"),
+  sellerBasisPoints: z.coerce
+    .number()
+    .gte(0, "Royalty must be positive")
+    .lte(100, "Royalty must be 0 to 100"),
+  supply: z.coerce
+    .number()
+    .positive("Supply must be greater than 0")
+    .max(100_000_000_000_000, "Supply exceeded the limit"), // 100 trillion
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .max(250, "Maximum of 250 characters"),
+  logoUri: ImageSchema,
+  traits: z.array(NFTTraitsSchema),
+});
+
+export const FTMembershipSchema = z.object({
+  mint: PublicKeySchema.optional(),
+  proposalFee: z.coerce.number().gte(0),
+  minQuorum: z.coerce.number().gte(1),
+  minThreshold: z.coerce.number().gte(1),
+  maxExpiry: z.coerce.number(),
+  evaluationPhasePeriod: z.coerce.number(),
+  minStakedRequiredProposal: z.coerce.number().optional(),
+  allowSubfleetCreation: z.coerce.boolean(),
+  minStakedToCreateSubfleet: z.coerce.number().optional(),
+  isHybrid: z.coerce.boolean().default(false),
+});
+
+export const NFTMembershipSchema = z.object({
+  collectionMint: PublicKeySchema.optional(),
+  proposalFee: z.coerce.number().gte(0),
+  minQuorum: z.coerce.number().gte(1),
+  minThreshold: z.coerce.number().gte(1),
+  maxExpiry: z.coerce.number(),
+  evaluationPhasePeriod: z.coerce.number(),
+  minStakedRequiredProposal: z.coerce.number().optional(),
+  allowSubfleetCreation: z.coerce.boolean(),
+  minStakedToCreateSubfleet: z.coerce.number().optional(),
+  isHybrid: z.coerce.boolean().default(false),
+});
+
+export const HybridMembershipSchema = z.object({
+  mint: PublicKeySchema.optional(),
+  proposalFee: z.coerce.number().gte(0),
+  minQuorum: z.coerce.number().gte(1),
+  minThreshold: z.coerce.number().gte(1),
+  maxExpiry: z.coerce.number(),
+  evaluationPhasePeriod: z.coerce.number(),
+  minStakedRequiredProposal: z.coerce.number().optional(),
+  allowSubfleetCreation: z.coerce.boolean(),
+  minStakedToCreateSubfleet: z.coerce.number().optional(),
+  isHybrid: z.coerce.boolean().default(true),
+});
+
+export const FleetConfigSchema = z
+  .object({
+    membershipType: z.nativeEnum(EMembershipType),
+    hasExistingMintAddress: z.coerce.boolean(),
+    config: z.union([
+      FTMembershipSchema,
+      NFTMembershipSchema,
+      HybridMembershipSchema,
+    ]),
+    // createAsset should be nullish() if hasExistingMintAddress is false
+    createAsset: z.union([CreateFTSchema, CreateNFTSchema]).nullish(),
+  })
+  .required();
+
+export const FleetSchema = z.object({
+  info: FleetInfoSchema,
+  config: FleetConfigSchema,
 });
 
 export type IFleetInfo = z.infer<typeof FleetInfoSchema>;
 export type IFleetConfig = z.infer<typeof FleetConfigSchema>;
+export type IFleet = z.infer<typeof FleetSchema>;
 
 export const FleetInfoDefaults: IFleetInfo = {
   id: "",
@@ -57,4 +193,11 @@ export const FleetInfoDefaults: IFleetInfo = {
   linkedIn: "",
   github: "",
   website: "",
+};
+
+export const FleetConfigDefaults: IFleetConfig = {
+  membershipType: null as unknown as EMembershipType,
+  hasExistingMintAddress: true,
+  config: null as unknown as IFleetConfig["config"],
+  createAsset: null,
 };

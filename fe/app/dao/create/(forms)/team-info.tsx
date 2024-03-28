@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 
 // lib
 import {
@@ -7,15 +6,20 @@ import {
   TeamInfoDefaults,
   TeamInfoSchema,
 } from "@/lib/schema/team-info.schema";
+import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 // components
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import TeamMember from "@/create/(forms)/team-member";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 
 function TeamInfo() {
+  const { handleBackPage, handleNextPage } = useCreateFleet();
+
   const form = useForm<ITeamInfo>({
     resolver: zodResolver(TeamInfoSchema),
     defaultValues: TeamInfoDefaults,
@@ -23,6 +27,7 @@ function TeamInfo() {
 
   function onSubmit(values: ITeamInfo) {
     console.log(values);
+    handleNextPage();
   }
 
   return (
@@ -141,6 +146,15 @@ function TeamInfo() {
         </form>
       </Form>
       <TeamMember />
+      {/* TODO: Create a reusable component with all the variants */}
+      <div className="flex justify-between">
+        <Button variant={"outline"} onClick={handleBackPage}>
+          <ArrowLeftIcon size={16} className="mr-2" /> Back
+        </Button>
+        <Button variant={"white"} onClick={form.handleSubmit(onSubmit)}>
+          Next <ArrowRightIcon size={16} className="ml-2" />
+        </Button>
+      </div>
     </>
   );
 }

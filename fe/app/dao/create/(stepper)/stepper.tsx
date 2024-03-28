@@ -1,3 +1,5 @@
+"use client";
+
 // react
 import { ReactNode } from "react";
 
@@ -15,10 +17,7 @@ import {
 
 // lib
 import { cn } from "@/lib/utils";
-
-interface ICreateFleetStepper {
-  page: number;
-}
+import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
 
 interface IStep {
   icon: ReactNode;
@@ -30,30 +29,29 @@ const steps: Array<IStep> = [
   {
     icon: <BadgeInfoIcon size={24} />,
     title: "Fleet DAO Info",
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
-  },
-  {
-    icon: <HammerIcon size={24} />,
-    title: "Team Details",
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
+    description: `Outline your Fleet's brand and digital footprint to connect with the community.`,
   },
   {
     icon: <Settings2Icon size={24} />,
     title: "Fleet DAO Config",
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
+    description: `Set up your governance structure, customizing how your Fleet operates and makes decisions.`,
+  },
+  {
+    icon: <HammerIcon size={24} />,
+    title: "Team Details",
+    description: `Share your team's story and vision, or opt for privacy with anonymity.`,
   },
   {
     icon: <FileCheck2Icon size={24} />,
     title: "Review & Submit",
     description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
+      "Review your details for accuracy, then launch your Fleet into action.",
   },
 ];
 
-const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
+const CreateFleetStepper = () => {
+  const { page } = useCreateFleet();
+
   return (
     <div className="flex flex-col gap-12">
       {steps.map((step: IStep, index: number) => (
@@ -74,7 +72,7 @@ const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
           >
             {step.icon}
           </div>
-          <div className="flex flex-col gap-2 col-span-8">
+          <div className="flex flex-col col-span-8 gap-2">
             <p
               className={cn(
                 "font-medium text-xl text-muted/30",
@@ -85,7 +83,7 @@ const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
             </p>
             <p
               className={cn(
-                "font-normal text-gray-500/40",
+                "font-normal text-gray-500/40 mr-2",
                 index <= page && "text-gray-500"
               )}
             >
@@ -93,7 +91,7 @@ const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
             </p>
           </div>
           {index == page && (
-            <div className="col-span-1 flex items-center">
+            <div className="flex items-center col-span-1">
               <ChevronRightIcon size={40} />
             </div>
           )}
