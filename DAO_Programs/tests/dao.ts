@@ -10,7 +10,7 @@ import { Proposal } from "../target/types/proposal";
 import { Staking } from "../target/types/staking";
 import { Voting } from "../target/types/voting";
 import { ASSOCIATED_TOKEN_PROGRAM_ID, MINT_SIZE, TOKEN_2022_PROGRAM_ID, createAssociatedTokenAccountIdempotentInstruction, createInitializeMint2Instruction, createMintToInstruction, createTransferCheckedInstruction, getAssociatedTokenAddressSync, getMinimumBalanceForRentExemptMint } from "@solana/spl-token";
-import { randomBytes } from "crypto"
+import { randomBytes, randomInt } from "crypto"
 
 const commitment: Commitment = "confirmed"; // processed, confirmed, finalized
 describe("dao", () => {
@@ -35,6 +35,10 @@ describe("dao", () => {
   };
   // DAO ARGUMENTS
   const seed = new BN(randomBytes(8));
+  // Proposal Aruments
+  const id = new BN(randomInt(8)); 
+
+
 /*   const proposalFee = new BN(1e8);
   const minQuorum = new BN(70);
   const minThreshold = new BN(1000);
@@ -50,17 +54,43 @@ describe("dao", () => {
 
 
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
+  //Config PDA
   const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)], dao_program.programId)[0];
+  //SubDao Config Pda
+  const sub_dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8), dao_config_key.toBytes()], dao_program.programId)[0];
 
   const proposal_keypair = Keypair.fromSecretKey(new Uint8Array(ProposalKeypair));
   const staking_keypair = Keypair.fromSecretKey(new Uint8Array(StakingKeypair));
   const voting_keypair = Keypair.fromSecretKey(new Uint8Array(VotingKeypair));
 
 
+  //Core Program PDAS
   //Config Auth
   const auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes()], dao_program.programId)[0];
+  //SubDao Auth
+  const sub_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes()], dao_program.programId)[0];
+
+
+
+  //Staking Program PDAS
   //Stake Auth
   const stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  //SubDao Stake Auth
+  const sub_stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  //StakeState 
+  const stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  //SubDAO StakeState
+  const sub_stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), sub_dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  //Stake ATA
+
+  //Proposal Program PDAS
+
+  const proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), dao_config_key.toBytes(), id.toArrayLike(Buffer, "le", 8) ], proposal_program.programId)[0];
+
+  //Voting Program PDAS
+  const vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_user.publicKey.toBytes(), proposal.toBytes()], voting_program.programId)[0];
+
+
 
   const log = async (signature: string): Promise<string> => {
     console.log(
@@ -69,9 +99,6 @@ describe("dao", () => {
     return signature;
   };
 
-
-
-  
   const accounts = {
     initializer: dao_admin.publicKey,
     initializer_ata:  /* Derived or created ATA for dao_admin for the NFT */,
@@ -81,7 +108,12 @@ describe("dao", () => {
     metadata: /* Derived or fetched Metadata account for the NFT */,
     master_edition: /* Derived or fetched MasterEdition account for the NFT */,
     auth,
+    sub_auth,
     stake_auth,
+    stake_state,
+    sub_stake_state,
+    proposal,
+    vote,
     treasury: /* Derived or created treasury account */,
     config: dao_config_key, // 
     metadata_program: /* PublicKey of the Metadata program */,
