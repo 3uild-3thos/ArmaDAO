@@ -46,12 +46,53 @@ describe("dao", () => {
   const evaluationPhasePeriod = new BN(108000); */
   
 
-  const mint = Keypair.generate();
+
 /*   const collection_mint = new PublicKey("9v9gYTGVaY7f5RXwHNPd7yMdKJ98HWaq456G6HeaShVA"); */
 /*   const dao_admin = Keypair.fromSecretKey(new Uint8Array(daonftuser)); */
-  const dao_user = Keypair.generate();
 
 
+ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
+
+  const [dao_user, dao_user1, mintDao, mintSubDao] = Array.from({ length: 4 }, () =>
+    Keypair.generate()
+  );
+
+  const [daouserAtaDao, daouserAtaSubDao, daouser1AtaDao, daouser1AtaSubDao] = [dao_user, dao_user1]
+  .map((a) =>
+    [mintDao, mintSubDao].map((m) =>
+      getAssociatedTokenAddressSync(m.publicKey, a.publicKey)
+    )
+  )
+  .flat();
+  let collectionMint: PublicKey;
+  let nft: PublicKey;
+  
+  const getMetadata = async (mint: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => {
+    return (
+      anchor.web3.PublicKey.findProgramAddressSync(
+        [
+          Buffer.from("metadata"),
+          TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+          mint.toBuffer(),
+        ],
+        TOKEN_METADATA_PROGRAM_ID
+      )
+    )[0];
+  };
+
+  const getMasterEdition = async (mint: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => {
+    return (
+      anchor.web3.PublicKey.findProgramAddressSync(
+        [
+          Buffer.from("metadata"),
+          TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+          mint.toBuffer(),
+          Buffer.from("edition"),
+        ],
+        TOKEN_METADATA_PROGRAM_ID
+      )
+    )[0];
+  };
 
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
   //Config PDA
@@ -110,10 +151,17 @@ describe("dao", () => {
     auth,
     sub_auth,
     stake_auth,
+    sub_stake_auth,
     stake_state,
     sub_stake_state,
     proposal,
     vote,
+    daouserAtaDao,
+    daouserAtaSubDao,
+    daouser1AtaDao,
+    daouser1AtaSubDao,
+    mintDao: mintDao.publicKey,
+    mintSubDao: mintSubDao.publicKey,
     treasury: /* Derived or created treasury account */,
     config: dao_config_key, // 
     metadata_program: /* PublicKey of the Metadata program */,
