@@ -80,7 +80,7 @@ impl<'info> Vote<'info> {
         self.staking_program.to_account_info(),
         add_account_accounts );
 
-        add_account(cpi_context)?;
+        add_account(cpi_context, amount)?;
 
         self.vote.set_inner(VoteState { 
             owner: self.owner.key(), 

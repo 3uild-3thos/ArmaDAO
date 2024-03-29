@@ -166,7 +166,12 @@
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     },
     {
       "name": "voteSubDao",
@@ -347,7 +352,12 @@
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -524,6 +534,10 @@
           },
           {
             "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedAmount",
             "type": "u64"
           },
           {
@@ -785,8 +799,5 @@
       "name": "InvalidChoice",
       "msg": "Invalid choice"
     }
-  ],
-  "metadata": {
-    "address": "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC"
-  }
+  ]
 }

@@ -88,7 +88,7 @@ impl<'info> VoteSubDao<'info> {
         self.staking_program.to_account_info(),
         add_account_accounts );
 
-        add_account_sub_dao(cpi_context)?;
+        add_account_sub_dao(cpi_context, amount)?;
 
         self.vote.set_inner(VoteState { 
             owner: self.owner.key(), 
