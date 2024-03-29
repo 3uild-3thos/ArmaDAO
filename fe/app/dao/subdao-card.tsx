@@ -5,12 +5,12 @@ import { useState } from "react";
 import Image from "next/image";
 
 // components
-import { Coins, MoveRight, Newspaper, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Coins, MoveRight, Newspaper, Users } from "lucide-react";
 
 // lib
 import shortenDescription from "@/lib/helpers/shortenDescription";
-import { ISubDaoInfo } from "@/lib/schema/subdao-info.schema";
+import { ISubDaoInfo } from "@/lib/schema/fleet.schema";
 
 interface ISubdaoCardProps {
   dao: ISubDaoInfo;

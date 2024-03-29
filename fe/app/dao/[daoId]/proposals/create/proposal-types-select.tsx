@@ -24,7 +24,7 @@ const ProposalTypesSelectComponent = ({
   };
 
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-6">
       {Object.values(EProposalType).map((type) => (
         <Button
           key={`proposal-type-${type}`}

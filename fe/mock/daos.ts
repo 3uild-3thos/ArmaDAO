@@ -1,4 +1,4 @@
-import { EMembershipType, ISubDaoInfo } from "@/lib/schema/subdao-info.schema";
+import { EMembershipType, ISubDaoInfo } from "@/lib/schema/fleet.schema";
 
 export const daos: Array<ISubDaoInfo> = [
   {

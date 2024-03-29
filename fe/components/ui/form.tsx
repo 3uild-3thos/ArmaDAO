@@ -116,7 +116,7 @@ const FormLabel = React.forwardRef<
         {isOptional ? (
           <span className="ml-1 italic text-gray-400">(optional)</span>
         ) : isRequired ? (
-          <span className="ml-1 text-red-700"> *</span>
+          <span className="text-red-700"> *</span>
         ) : (
           <></>
         )}
@@ -181,7 +181,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-normal text-destructive", className)}
+      className={cn("text-sm font-normal text-red-500", className)}
       {...props}
     >
       {body}

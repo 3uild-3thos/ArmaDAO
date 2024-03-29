@@ -12,6 +12,7 @@ import { WalletConnectProvider } from "@/lib/providers";
 import { Navbar } from "@/app/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 const gordita = localFont({
@@ -51,13 +52,15 @@ const RootLayout = ({
       <body className={cn(gordita.variable, "antialiased")}>
         <WalletConnectProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <Navbar />
-            <div className="w-full h-24 bg-background"></div>
-            <main className="flex flex-col h-full min-h-screen px-8 font-gordita md:px-16 lg:px-32 2xl:px-64 bg-background">
-              {children}
-            </main>
-            <div className="w-full h-24 bg-background"></div>
-            <Toaster />
+            <TooltipProvider delayDuration={300}>
+              <Navbar />
+              <div className="w-full h-32 bg-background"></div>
+              <main className="flex flex-col h-full min-h-screen px-8 font-gordita md:px-16 lg:px-32 2xl:px-64 bg-background">
+                {children}
+              </main>
+              <div className="w-full h-32 bg-background"></div>
+              <Toaster />
+            </TooltipProvider>
           </ThemeProvider>
         </WalletConnectProvider>
       </body>

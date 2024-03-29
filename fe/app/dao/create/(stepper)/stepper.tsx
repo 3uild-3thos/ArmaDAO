@@ -1,3 +1,5 @@
+"use client";
+
 // react
 import { ReactNode } from "react";
 
@@ -13,9 +15,9 @@ import {
   Settings2Icon,
 } from "lucide-react";
 
-interface ICreateFleetStepper {
-  page: number;
-}
+// lib
+import { cn } from "@/lib/utils";
+import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
 
 interface IStep {
   icon: ReactNode;
@@ -27,31 +29,29 @@ const steps: Array<IStep> = [
   {
     icon: <BadgeInfoIcon size={24} />,
     title: "Fleet DAO Info",
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
-  },
-  {
-    icon: <HammerIcon size={24} />,
-    title: "Team Details",
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
+    description: `Outline your Fleet's brand and digital footprint to connect with the community.`,
   },
   {
     icon: <Settings2Icon size={24} />,
     title: "Fleet DAO Config",
-    description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
+    description: `Set up your governance structure, customizing how your Fleet operates and makes decisions.`,
+  },
+  {
+    icon: <HammerIcon size={24} />,
+    title: "Team Details",
+    description: `Share your team's story and vision, or opt for privacy with anonymity.`,
   },
   {
     icon: <FileCheck2Icon size={24} />,
     title: "Review & Submit",
     description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam ipsam aspernatur provident ullam ",
+      "Review your details for accuracy, then launch your Fleet into action.",
   },
 ];
 
-const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
-  console.log("page", page);
+const CreateFleetStepper = () => {
+  const { page } = useCreateFleet();
+
   return (
     <div className="flex flex-col gap-12">
       {steps.map((step: IStep, index: number) => (
@@ -64,16 +64,34 @@ const CreateFleetStepper = ({ page }: ICreateFleetStepper) => {
             <InactiveNumber className="col-span-2" page={index + 1} />
           )}
 
-          <div className="flex justify-center mt-[0.5px] col-span-1">
+          <div
+            className={cn(
+              "flex justify-center mt-[0.5px] text-muted/30 col-span-1",
+              index <= page && "text-muted"
+            )}
+          >
             {step.icon}
           </div>
-          <div className="flex flex-col gap-2 col-span-8">
-            <p className="font-medium text-xl">{step.title}</p>
-            {/* TODO: Add proper text color */}
-            <p className="font-normal text-gray-500">{step.description}</p>
+          <div className="flex flex-col col-span-8 gap-2">
+            <p
+              className={cn(
+                "font-medium text-xl text-muted/30",
+                index <= page && "text-muted"
+              )}
+            >
+              {step.title}
+            </p>
+            <p
+              className={cn(
+                "font-normal text-gray-500/40 mr-2",
+                index <= page && "text-gray-500"
+              )}
+            >
+              {step.description}
+            </p>
           </div>
           {index == page && (
-            <div className="col-span-1 flex items-center">
+            <div className="flex items-center col-span-1">
               <ChevronRightIcon size={40} />
             </div>
           )}

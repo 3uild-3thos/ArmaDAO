@@ -11,7 +11,7 @@ const CurrentNumber = ({ className, page }: ICurrentNumber) => {
       <div className="absolute h-full top-4 w-[4px] bg-gradient-to-b from-gray-400/50 to-transparent mx-auto z-[-1] left-0 right-0" />
       <div
         className={
-          "h-8 w-8 p-2 flex justify-center items-center rounded-full bg-gray-400 mt-[-4px]"
+          "h-8 w-8 p-2 flex justify-center items-center rounded-full bg-gray-400 mt-[-2px]"
         }
       >
         <div

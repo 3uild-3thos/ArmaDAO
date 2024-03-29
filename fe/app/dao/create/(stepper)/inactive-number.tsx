@@ -7,8 +7,8 @@ interface IInactiveNumber {
 
 const InactiveNumber = ({ className, page }: IInactiveNumber) => {
   return (
-    <div className={cn("relative z-10 justify-center flex", className)}>
-      <span className="text-muted text-sm">{page}</span>
+    <div className={cn("relative z-10 justify-center flex mt-1", className)}>
+      <span className="text-muted/30 text-sm">{page}</span>
     </div>
   );
 };
