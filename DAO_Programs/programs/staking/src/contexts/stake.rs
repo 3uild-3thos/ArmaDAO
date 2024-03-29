@@ -120,7 +120,7 @@ pub struct StakeNft<'info> {
     #[account(
         mut,
         seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
-        bump = stake_state.vault_bump,
+        bump,
         token::mint = nft,
         token::authority = stake_auth
     )]
