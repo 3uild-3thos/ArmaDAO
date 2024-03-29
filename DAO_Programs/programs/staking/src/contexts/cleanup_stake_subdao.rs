@@ -33,18 +33,18 @@ pub struct CleanupStakeSubDao<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]
@@ -116,7 +116,7 @@ pub struct CleanupStakeNftSubDao<'info> {
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == core_config.collection_mint.expect("Collection mint not initialized"))]
+    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
@@ -126,18 +126,18 @@ pub struct CleanupStakeNftSubDao<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]

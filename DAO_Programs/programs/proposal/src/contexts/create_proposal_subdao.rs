@@ -23,18 +23,18 @@ pub struct CreateProposalSubDao<'info> {
     proposal: Account<'info, Proposal>,
     core_program: Program<'info, CoreProgram>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]
     config_sub_dao: Account<'info, DaoConfig>,
-    #[account(constraint = staking_program.key() == core_config.staking_program)]
+    #[account(constraint = staking_program.key() == config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
@@ -80,7 +80,7 @@ impl<'info> CreateProposalSubDao<'info> {
         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = SubDaoHandler {
             owner: self.owner.to_account_info(),
-            config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             config_sub_dao: self.config_sub_dao.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
@@ -165,13 +165,13 @@ pub struct CreateProposalSubDaoHybrid<'info> {
     master_edition: Account<'info, MasterEditionAccount>,
     core_program: Program<'info, CoreProgram>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]
@@ -221,7 +221,7 @@ impl<'info> CreateProposalSubDaoHybrid<'info> {
         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = SubDaoHandler {
             owner: self.owner.to_account_info(),
-            config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             config_sub_dao: self.config_sub_dao.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };

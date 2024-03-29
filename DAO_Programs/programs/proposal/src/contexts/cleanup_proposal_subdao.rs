@@ -16,13 +16,13 @@ pub struct CleanupProposalSubDao<'info> {
     )]
     proposal: Account<'info, Proposal>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]

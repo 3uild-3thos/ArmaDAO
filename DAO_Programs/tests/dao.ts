@@ -1,5 +1,5 @@
 import * as anchor from "@coral-xyz/anchor";
-import { Keypair, PublicKey, Commitment, LAMPORTS_PER_SOL, SystemProgram, Transaction, SetComputeUnitLimitParams, ComputeBudgetProgram } from "@solana/web3.js";
+import { Keypair, PublicKey, Commitment, LAMPORTS_PER_SOL, SystemProgram, Transaction, SetComputeUnitLimitParams, ComputeBudgetProgram, } from "@solana/web3.js";
 import { Program, BN } from "@coral-xyz/anchor";
 import  DaoKeypair from "../target/deploy/dao-keypair.json";
 import  ProposalKeypair from "../target/deploy/proposal-keypair.json";
@@ -44,8 +44,7 @@ describe("dao", () => {
     return signature;
   };
   // DAO ARGUMENTS
-  /* const seed = new BN(randomBytes(8)); */
-  const seed = new BN(5);
+  const seed = new BN(randomBytes(8));
   // Proposal Aruments
   const id = new BN(randomInt(8)); 
 
@@ -124,15 +123,17 @@ describe("dao", () => {
   
   //Staking Program PDAS
   //Stake Auth
-  const stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  const stakeAuth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
   //SubDao Stake Auth
-  const sub_stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  const sub_stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
   //StakeState 
-  const stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  const stakeState = PublicKey.findProgramAddressSync([Buffer.from("stake"), dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
   //SubDAO StakeState
-  const sub_stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), sub_dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
+  const sub_stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), sub_dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
   //Stake ATA
-
+  const stakeAta = PublicKey.findProgramAddressSync([Buffer.from("vault"), dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  //Sub Stake ATA
+  const subdao_stake_ata = PublicKey.findProgramAddressSync([Buffer.from("vault"), sub_dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
   //Proposal Program PDAS
   //Dao proposal
   const proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), dao_config_key.toBytes(), id.toArrayLike(Buffer, "le", 8) ], proposal_program.programId)[0];
@@ -141,14 +142,16 @@ describe("dao", () => {
 
   //Voting Program PDAS
   //Vote Dao
-  const vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_user.publicKey.toBytes(), proposal.toBytes()], voting_program.programId)[0];
+  const vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_admin.publicKey.toBytes(), proposal.toBytes()], voting_program.programId)[0];
   //Vote SubDAO
-  const subdao_vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_user.publicKey.toBytes(), subdao_proposal.toBytes()], voting_program.programId)[0];
+  const subdao_vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_admin.publicKey.toBytes(), subdao_proposal.toBytes()], voting_program.programId)[0];
 
   const accounts = {
     dao_admin,
     ownerAta, /* Derived or created ATA for dao_admin for the NFT */
     dao_user,
+    stakeAta,
+    subdao_stake_ata,
     /* owner_ata: */ /* Derived or created ATA for dao_user for the NFT */ 
     nft, /* PublicKey of the NFT mint */
     collection,
@@ -156,9 +159,9 @@ describe("dao", () => {
     masterEdition,/* Derived or fetched MasterEdition account for the NFT */
     auth,
     sub_auth,
-    stake_auth,
+    stakeAuth,
     sub_stake_auth,
-    stake_state,
+    stakeState,
     sub_stake_state,
     proposal,
     subdao_proposal,
@@ -184,6 +187,7 @@ describe("dao", () => {
 
   it("Initialize hybrid dao Config Account", async () => {
     const tx = await dao_program.methods
+    
     .initialize(
       seed,
       proposalFee,
@@ -200,16 +204,38 @@ describe("dao", () => {
       false, // allow_sub_dao
       null, // min_staked_create_subdao
       true // is_hybrid
-    )
+    )  
       .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 1600000 } as SetComputeUnitLimitParams)
-      ])
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
       .accounts({...accounts})
       .signers([dao_admin])
+
       .rpc({
         skipPreflight:true
       })
       .then(confirm)
       .then(log);
+      
   });
+
+  it("Initialize NFT Stake Account", async () => {
+    const tx = await staking_program.methods
+    
+    .initStakeNft(
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({...accounts})
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+  
 });

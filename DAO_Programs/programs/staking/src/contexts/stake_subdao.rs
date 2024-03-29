@@ -43,13 +43,13 @@ pub struct StakeSubDao<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]
@@ -125,7 +125,7 @@ pub struct StakeSubDaoNft<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = nft,
         token::authority = auth
@@ -147,13 +147,13 @@ pub struct StakeSubDaoNft<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]

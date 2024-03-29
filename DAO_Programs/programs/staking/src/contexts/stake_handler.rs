@@ -10,16 +10,16 @@ pub struct StakeHandler<'info> {
     owner: Signer<'info>,
     #[account(
         mut,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     system_program: Program<'info, System>
 }
 
@@ -52,13 +52,13 @@ pub struct SubDaoStakeHandler<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
         bump = config_sub_dao.config_bump,
     )]

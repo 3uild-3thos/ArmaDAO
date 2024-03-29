@@ -11,36 +11,36 @@ pub struct CleanupStake<'info> {
     owner: Signer<'info>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = mint,
         token::authority = stake_auth
     )]
     stake_ata: InterfaceAccount<'info, TokenAccount>,
     #[account(
-        seeds=[b"auth", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == core_config.mint.expect("Mint not initialized"))]
+    #[account(constraint = mint.key() == config.mint.expect("Mint not initialized"))]
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
         close = owner,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"core", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     token_program: Interface<'info, TokenInterface>,
@@ -71,7 +71,7 @@ impl<'info> CleanupStake<'info> {
 
         let seeds = &[
             &b"auth"[..],
-            &self.core_config.key().to_bytes()[..],
+            &self.config.key().to_bytes()[..],
             &self.owner.key().to_bytes()[..],
             &[self.stake_state.auth_bump],
         ];
@@ -96,37 +96,37 @@ pub struct CleanupStakeNft<'info> {
     owner: Signer<'info>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = nft,
         token::authority = stake_auth
     )]
     stake_ata: InterfaceAccount<'info, TokenAccount>,
     #[account(
-        seeds=[b"auth", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == core_config.collection_mint.expect("Collection mint not initialized"))]
+    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
         close = owner,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     token_program: Interface<'info, TokenInterface>,
@@ -157,7 +157,7 @@ impl<'info> CleanupStakeNft<'info> {
 
         let seeds = &[
             &b"auth"[..],
-            &self.core_config.key().to_bytes()[..],
+            &self.config.key().to_bytes()[..],
             &self.owner.key().to_bytes()[..],
             &[self.stake_state.auth_bump],
         ];

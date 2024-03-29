@@ -15,16 +15,16 @@ use crate::errors::DaoError;
 #[instruction(seed: u64)]
 pub struct Initialize<'info> {
     #[account(mut)]
-    initializer: Signer<'info>,
+    pub initializer: Signer<'info>,
     #[account(
         mut,
         associated_token::mint = nft,
         associated_token::authority = initializer
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    pub owner_ata: InterfaceAccount<'info, TokenAccount>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(constraint = collection.key() == REQUIRED_COLLECTION_MINT)]
-    collection: InterfaceAccount<'info, Mint>,
+    pub collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
             b"metadata",
@@ -36,7 +36,7 @@ pub struct Initialize<'info> {
         constraint = metadata.collection.as_ref().unwrap().key.as_ref() == collection.key().as_ref(),
         constraint = metadata.collection.as_ref().unwrap().verified == true,
     )]
-    metadata: Account<'info, MetadataAccount>,
+    pub metadata: Account<'info, MetadataAccount>,
     #[account(
         seeds = [
             b"metadata",
@@ -47,18 +47,18 @@ pub struct Initialize<'info> {
         seeds::program = metadata_program.key(),
         bump,
     )]
-    master_edition: Account<'info, MasterEditionAccount>,
+    pub master_edition: Account<'info, MasterEditionAccount>,
     #[account(
         seeds=[b"auth", config.key().as_ref()],
         bump
     )]
     ///CHECK: This is safe. It's just used to sign things
-    auth: UncheckedAccount<'info>,
+    pub auth: UncheckedAccount<'info>,
     #[account(
         seeds=[b"treasury", config.key().as_ref()],
         bump
     )]
-    treasury: SystemAccount<'info>,
+    pub treasury: SystemAccount<'info>,
     #[account(
         init,
         payer = initializer,
@@ -66,11 +66,11 @@ pub struct Initialize<'info> {
         bump,
         space = DaoConfig::LEN
     )]
-    config: Account<'info, DaoConfig>,
-    metadata_program: Program<'info, Metadata>,
-    token_program: Interface<'info, TokenInterface>,
-    associated_token_program: Program<'info, AssociatedToken>,
-    system_program: Program<'info, System>
+    pub config: Account<'info, DaoConfig>,
+    pub metadata_program: Program<'info, Metadata>,
+    pub token_program: Interface<'info, TokenInterface>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
+    pub system_program: Program<'info, System>
 }
 
 impl<'info> Initialize<'info> {
@@ -106,14 +106,15 @@ impl<'info> Initialize<'info> {
         min_staked_create_subdao: Option<u64>,
         //Indicates whether the DAO is a hybrid type
         //set true if hybrid
-        is_hybrid: bool
+        is_hybrid: bool,
+
     ) -> Result<()> {
             validate_nft!(
                 self.metadata.collection, 
                 self.collection
             );
             self.config.check_init_valid_quorum(min_quorum)?;
-
+/* 
             self.config.set_inner(DaoConfig { 
                 seed, 
                 proposal_fee, 
@@ -125,20 +126,20 @@ impl<'info> Initialize<'info> {
                 proposal_program, 
                 voting_program, 
                 staking_program, 
-                auth_bump: bumps.auth, 
-                config_bump: bumps.config, 
-                treasury_bump: bumps.treasury, 
                 collection_mint, 
                 mint, 
                 min_staked_required_proposal, 
                 allow_sub_dao, 
                 min_staked_create_subdao, 
-                is_hybrid
+                is_hybrid,
+                auth_bump: bumps.auth, 
+                config_bump: bumps.config, 
+                treasury_bump: bumps.treasury, 
             });
 
-                Ok(())
+                Ok(()) */
         
-            /* self.config.init(
+            self.config.init(
                 seed,
                 //settings
                 proposal_fee,
@@ -165,7 +166,7 @@ impl<'info> Initialize<'info> {
                 //Optional
                 min_staked_create_subdao,
                 is_hybrid
-             )              */
+             )             
    
     }
 }

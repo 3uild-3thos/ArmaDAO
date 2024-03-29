@@ -12,14 +12,14 @@ declare_id!("stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF");
 pub struct StakeHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub stake_state: AccountInfo<'info>,
-    pub core_config: AccountInfo <'info>,
+    pub config: AccountInfo <'info>,
     pub system_program: AccountInfo<'info>
 }
 #[derive(Accounts)]
 pub struct SubDaoStakeHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub stake_state: AccountInfo<'info>,
-    pub core_config: AccountInfo <'info>,
+    pub config: AccountInfo <'info>,
     pub config_sub_dao: AccountInfo <'info>,
     pub system_program: AccountInfo<'info>
 }
@@ -38,7 +38,9 @@ pub struct StakeState {
 
 impl anchor_lang::AccountDeserialize for StakeState {
     fn try_deserialize(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
-        Self::try_deserialize(buf)
+        /* Self::try_deserialize(buf) */
+        /* Ok(Self::deserialize(buf)?) */
+        Ok(Self::try_deserialize(buf)?)
     }
 
     fn try_deserialize_unchecked(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
@@ -184,7 +186,7 @@ pub fn add_account<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.stake_state.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,
@@ -208,7 +210,7 @@ pub fn remove_account<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.stake_state.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,
@@ -234,7 +236,7 @@ pub fn add_account_sub_dao<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.stake_state.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,
@@ -257,7 +259,7 @@ pub fn remove_account_sub_dao<'info>(
         &[
             ctx.accounts.owner.clone(),
             ctx.accounts.stake_state.clone(),
-            ctx.accounts.core_config.clone(),
+            ctx.accounts.config.clone(),
             ctx.accounts.system_program.clone(),
         ],
         ctx.signer_seeds,
