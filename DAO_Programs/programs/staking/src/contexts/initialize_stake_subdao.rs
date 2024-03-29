@@ -101,7 +101,7 @@ pub struct InitializeStakeSubDaoNft<'info> {
     collection: InterfaceAccount<'info, Mint>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(
-        init,
+        init_if_needed,
         payer = owner,
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump,
@@ -143,6 +143,8 @@ impl<'info> InitializeStakeSubDaoNft<'info> {
         &mut self,
         bumps: &InitializeStakeSubDaoNftBumps
     ) -> Result<()> {
+        // Make sure its NFT based DAO
+        self.config_sub_dao.ensure_not_hybrid ()?;
         self.stake_state.init(
             self.owner.key(),
             bumps.stake_state,

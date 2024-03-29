@@ -27,9 +27,9 @@ pub mod staking {
         ctx.accounts.deposit_tokens(amount)
     }
     // Stake DAO NFTs
-    pub fn stake_nft(ctx: Context<StakeNft>, amount: u64) -> Result<()> {
+    pub fn stake_nft(ctx: Context<StakeNft>) -> Result<()> {
     // Deposit tokens, add stake
-        ctx.accounts.deposit_tokens(amount)
+        ctx.accounts.deposit_tokens()
     }
     // UnStake DAO tokens
     pub fn unstake_tokens(ctx: Context<Stake>, amount: u64) -> Result<()> {
@@ -37,9 +37,9 @@ pub mod staking {
         ctx.accounts.withdraw_tokens(amount)
     }
     // UnStake DAO NFTs
-    pub fn unstake_nft(ctx: Context<StakeNft>, amount: u64) -> Result<()> {
+    pub fn unstake_nft(ctx: Context<StakeNft>) -> Result<()> {
     // Withdraw tokens, remove stake
-        ctx.accounts.withdraw_tokens(amount)
+        ctx.accounts.withdraw_tokens()
     }
 
     // Close a stake account when you're done with it
@@ -70,9 +70,9 @@ pub mod staking {
         ctx.accounts.deposit_tokens(amount)
     }
     // Stake SubDAO Nft
-    pub fn stake_nft_sub_dao(ctx: Context<StakeSubDaoNft>, amount: u64) -> Result<()> {
+    pub fn stake_nft_sub_dao(ctx: Context<StakeSubDaoNft>) -> Result<()> {
         // Deposit tokens, add stake
-        ctx.accounts.deposit_tokens(amount)
+        ctx.accounts.deposit_tokens()
     }
     // UnStake SubDAO tokens
     pub fn unstake_tokens_sub_dao(ctx: Context<StakeSubDao>, amount: u64) -> Result<()> {
@@ -80,9 +80,9 @@ pub mod staking {
         ctx.accounts.withdraw_tokens(amount)
     }  
     // UnStake SubDAO tokens
-    pub fn unstake_nft_sub_dao(ctx: Context<StakeSubDaoNft>, amount: u64) -> Result<()> {
+    pub fn unstake_nft_sub_dao(ctx: Context<StakeSubDaoNft>) -> Result<()> {
         // Withdraw tokens, remove stake
-        ctx.accounts.withdraw_tokens(amount)
+        ctx.accounts.withdraw_tokens()
     }        
     // Close a stake account when you're done with it
     pub fn close_stake_sub_dao(ctx: Context<CleanupStakeSubDao>) -> Result<()> {

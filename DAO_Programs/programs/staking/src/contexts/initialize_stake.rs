@@ -96,7 +96,7 @@ pub struct InitializeStakeNft<'info> {
     collection: InterfaceAccount<'info, Mint>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(
-        init,
+        init_if_needed,
         payer = owner,
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump,
@@ -132,6 +132,7 @@ impl<'info> InitializeStakeNft<'info> {
         &mut self,
         bumps: &InitializeStakeNftBumps
     ) -> Result<()> {
+        self.config.ensure_not_hybrid ()?;
         self.stake_state.init(
             self.owner.key(),
             bumps.stake_state,

@@ -190,13 +190,12 @@ pub struct StakeSubDaoNft<'info> {
 impl<'info> StakeSubDaoNft<'info> {
     pub fn deposit_tokens(
         &mut self,
-        amount: u64
     ) -> Result<()> {
         validate_nft!(
             self.metadata.collection, 
             self.collection
             );
-        self.stake_state.stake(amount)?;
+        self.stake_state.stake(1)?;
 
         let accounts = TransferChecked {
             from: self.owner_ata.to_account_info(),
@@ -210,14 +209,13 @@ impl<'info> StakeSubDaoNft<'info> {
             self.token_program.to_account_info(),
             accounts
         );
-        transfer_checked(ctx, amount, self.nft.decimals)
+        transfer_checked(ctx, 1, self.nft.decimals)
     }
 
     pub fn withdraw_tokens(
         &mut self,
-        amount: u64
     ) -> Result<()> {
-        self.stake_state.unstake(amount)?;
+        self.stake_state.unstake(1)?;
 
         let accounts = TransferChecked {
             from: self.stake_ata.to_account_info(),
@@ -241,6 +239,6 @@ impl<'info> StakeSubDaoNft<'info> {
             signer_seeds
         );
 
-        transfer_checked(ctx, amount, self.nft.decimals)
+        transfer_checked(ctx, 1, self.nft.decimals)
     }
 }
