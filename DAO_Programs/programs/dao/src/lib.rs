@@ -12,7 +12,7 @@ pub mod dao {
     use solana_program::pubkey;
 
     use super::*;
-    pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("daoNFTGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
+    pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7");
 
     // Instantiate a new DAO Config ACC using the DAO2023 program
     pub fn initialize(
