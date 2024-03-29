@@ -25,8 +25,6 @@ describe("dao", () => {
   const provider = anchor.getProvider();
   const connection = provider.connection;
 
-
-
   const confirm = async (signature: string): Promise<string> => {
     const block = await connection.getLatestBlockhash();
     await connection.confirmTransaction({
@@ -35,20 +33,20 @@ describe("dao", () => {
     });
     return signature;
   };
-
   // DAO ARGUMENTS
   const seed = new BN(randomBytes(8));
-  const proposalFee = new BN(1e8);
+/*   const proposalFee = new BN(1e8);
   const minQuorum = new BN(70);
   const minThreshold = new BN(1000);
   const maxExpiry = new BN(432000);
-  const minPrevotingPeriod = new BN(108000);
+  const evaluationPhasePeriod = new BN(108000); */
   
-  //wrong but to test
+
   const mint = Keypair.generate();
-  const collection_mint = new PublicKey("9v9gYTGVaY7f5RXwHNPd7yMdKJ98HWaq456G6HeaShVA");
-  const dao_admin = Keypair.fromSecretKey(new Uint8Array(daonftuser));
+/*   const collection_mint = new PublicKey("9v9gYTGVaY7f5RXwHNPd7yMdKJ98HWaq456G6HeaShVA"); */
+/*   const dao_admin = Keypair.fromSecretKey(new Uint8Array(daonftuser)); */
   const dao_user = Keypair.generate();
+
 
 
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
@@ -59,6 +57,10 @@ describe("dao", () => {
   const voting_keypair = Keypair.fromSecretKey(new Uint8Array(VotingKeypair));
 
 
+  //Config Auth
+  const auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes()], dao_program.programId)[0];
+  //Stake Auth
+  const stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes(), dao_user.publicKey.toBytes()], staking_program.programId)[0];
 
   const log = async (signature: string): Promise<string> => {
     console.log(
@@ -72,12 +74,14 @@ describe("dao", () => {
   
   const accounts = {
     initializer: dao_admin.publicKey,
-    owner_ata: /* Derived or created ATA for dao_admin for the NFT */, 
+    initializer_ata:  /* Derived or created ATA for dao_admin for the NFT */,
+    owner_ata: /* Derived or created ATA for dao_user for the NFT */, 
     nft: /* PublicKey of the NFT mint */,
     collection: collection_mint,
     metadata: /* Derived or fetched Metadata account for the NFT */,
     master_edition: /* Derived or fetched MasterEdition account for the NFT */,
-    auth: /* Derived or created auth account */,
+    auth,
+    stake_auth,
     treasury: /* Derived or created treasury account */,
     config: dao_config_key, // 
     metadata_program: /* PublicKey of the Metadata program */,
@@ -89,12 +93,12 @@ describe("dao", () => {
   it("Initialize Dao Config Account", async () => {
     const tx = await dao_program.methods
     .initialize(
-      seed.toNumber(),
-      proposalFee.toNumber(),
-      minQuorum.toNumber(),
-      minThreshold.toNumber(),
-      maxExpiry.toNumber(),
-      minPrevotingPeriod.toNumber(),
+      seed,
+      new BN(1e8),
+      new BN(70),
+      new BN(1000),
+      new BN(432000),
+      new BN(108000),
       proposal_keypair.publicKey,
       voting_keypair.publicKey,
       staking_keypair.publicKey,
@@ -105,6 +109,7 @@ describe("dao", () => {
       null, // min_staked_create_subdao
       true // is_hybrid
     )
+      .accounts({...accounts})
       .signers([dao_admin])
       .rpc()
       .then(confirm)
