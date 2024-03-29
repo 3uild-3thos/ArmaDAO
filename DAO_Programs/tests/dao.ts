@@ -1,5 +1,5 @@
 import * as anchor from "@coral-xyz/anchor";
-import { Keypair, PublicKey, Commitment, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
+import { Keypair, PublicKey, Commitment, LAMPORTS_PER_SOL, SystemProgram, Transaction, SetComputeUnitLimitParams, ComputeBudgetProgram } from "@solana/web3.js";
 import { Program, BN } from "@coral-xyz/anchor";
 import  DaoKeypair from "../target/deploy/dao-keypair.json";
 import  ProposalKeypair from "../target/deploy/proposal-keypair.json";
@@ -202,6 +202,9 @@ describe("dao", () => {
     )
       .accounts({...accounts})
       .signers([dao_admin])
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 1500000 } as SetComputeUnitLimitParams)
+      ])
       .rpc({
         skipPreflight:true
       })
