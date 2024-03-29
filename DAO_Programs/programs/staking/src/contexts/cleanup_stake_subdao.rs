@@ -15,7 +15,7 @@ pub struct CleanupStakeSubDao<'info> {
         token::mint = mint,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
@@ -30,7 +30,7 @@ pub struct CleanupStakeSubDao<'info> {
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,

@@ -764,6 +764,18 @@ export type Proposal = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -794,18 +806,6 @@ export type Proposal = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }
@@ -1911,6 +1911,18 @@ export const IDL: Proposal = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -1941,18 +1953,6 @@ export const IDL: Proposal = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }

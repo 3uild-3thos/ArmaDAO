@@ -461,6 +461,18 @@ export type Dao = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -491,18 +503,6 @@ export type Dao = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }
@@ -1140,6 +1140,18 @@ export const IDL: Dao = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -1170,18 +1182,6 @@ export const IDL: Dao = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }

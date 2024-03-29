@@ -1260,6 +1260,18 @@ export type Staking = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -1290,18 +1302,6 @@ export type Staking = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }
@@ -2738,6 +2738,18 @@ export const IDL: Staking = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -2768,18 +2780,6 @@ export const IDL: Staking = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }

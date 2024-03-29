@@ -15,7 +15,7 @@ pub struct CleanupStake<'info> {
         token::mint = mint,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
@@ -30,7 +30,7 @@ pub struct CleanupStake<'info> {
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"core", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
@@ -89,7 +89,6 @@ impl<'info> CleanupStake<'info> {
 
 }
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct CleanupStakeNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -100,7 +99,7 @@ pub struct CleanupStakeNft<'info> {
         token::mint = nft,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
@@ -116,7 +115,7 @@ pub struct CleanupStakeNft<'info> {
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,

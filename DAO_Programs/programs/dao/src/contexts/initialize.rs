@@ -114,8 +114,8 @@ impl<'info> Initialize<'info> {
                 self.collection
             );
             self.config.check_init_valid_quorum(min_quorum)?;
-/* 
-            self.config.set_inner(DaoConfig { 
+
+/*             self.config.set_inner(DaoConfig { 
                 seed, 
                 proposal_fee, 
                 min_quorum,
@@ -171,7 +171,7 @@ impl<'info> Initialize<'info> {
     }
 }
 
-//Hybrid SUB FLEETS
+//Create SUB Fleets(FT,NFT,Hybrid) FOR Hybrid Daos
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdao<'info> {
@@ -184,7 +184,7 @@ pub struct InitializeSubdao<'info> {
     )]
     owner_ata: InterfaceAccount<'info, TokenAccount>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
+    /* #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))] *///this will work when config acc derived correctly 
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
@@ -230,7 +230,8 @@ pub struct InitializeSubdao<'info> {
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
-        bump = config.config_bump
+        bump = config.config_bump,
+        constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized")
     )]
     config: Account<'info, DaoConfig>,
     metadata_program: Program<'info, Metadata>,
@@ -260,6 +261,7 @@ impl<'info> InitializeSubdao<'info> {
             self.metadata.collection, 
             self.collection
             );
+            self.config.check_hybrid()?;   
             self.config.check_allow_sub_dao()?;
             self.config_sub_dao.check_init_valid_quorum(min_quorum)?;       
             self.config_sub_dao.set_inner(DaoConfig 
