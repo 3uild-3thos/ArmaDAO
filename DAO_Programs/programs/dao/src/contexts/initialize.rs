@@ -171,7 +171,7 @@ impl<'info> Initialize<'info> {
     }
 }
 
-//Create SUB Fleets(FT,NFT,Hybrid) FOR Hybrid Daos
+//Create SUB Fleets(FT,NFT,Hybrid) FOR DAOS(HYBRIDS AND NFTS) THAT DONT REQUIRE HAVING min_staked_create_subdao
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdao<'info> {
@@ -261,7 +261,8 @@ impl<'info> InitializeSubdao<'info> {
             self.metadata.collection, 
             self.collection
             );
-            self.config.check_hybrid()?;   
+            //Make sure its not staked based to create subdao
+            self.config.check_staked_create_subdao()?;   
             self.config.check_allow_sub_dao()?;
             self.config_sub_dao.check_init_valid_quorum(min_quorum)?;       
             self.config_sub_dao.set_inner(DaoConfig 

@@ -117,6 +117,9 @@ impl DaoConfig {
         self.is_hybrid = is_hybrid;
         Ok(())
     }
+
+
+
     pub fn check_hybrid(&self) -> Result<()> {
         require!(
             self.is_hybrid == true,
@@ -131,6 +134,17 @@ impl DaoConfig {
         );
         Ok(())
     }
+    //check 
+    pub fn check_staked_create_proposal_is_none(&self) -> Result<()> {
+        require!(self.min_staked_required_proposal.is_none(), CoreError::InvalidStakeAmount);
+        Ok(())
+    } 
+
+
+    pub fn check_staked_create_subdao(&self) -> Result<()> {
+        require!(self.min_staked_create_subdao.is_none(), CoreError::InvalidStakeAmount);
+        Ok(())
+    } 
 
     pub fn check_min_staked_create_subdao(&self, amount: u64) -> Result<()> {
         require!(self.min_staked_required_proposal.unwrap() <= amount, CoreError::InvalidStakeAmount);

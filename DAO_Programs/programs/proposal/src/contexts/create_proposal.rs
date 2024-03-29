@@ -90,8 +90,8 @@ impl<'info> CreateProposal<'info> {
             self.metadata.collection, 
             self.collection
             );
-                //Check hybridness
-        self.config.check_hybrid()?;    
+        //Make sure its not staked based
+        self.config.check_staked_create_proposal_is_none()?;    
         // Make sure quorum is valid    
         self.config.check_valid_quorum(quorum)?;                 
         // Check Minimum threshold
@@ -192,8 +192,6 @@ impl<'info> StakeCreateProposal<'info> {
         evaluation_period: u64,
         bumps: &StakeCreateProposalBumps,
     ) -> Result<()> {
-        // Make sure its a staked based DAO
-        self.config.ensure_not_hybrid ()?;
         // Make sure user has staked the required amount
         self.config.check_min_staked_required_proposal(self.stake_state.amount)?;
         // Make sure quorum is valid

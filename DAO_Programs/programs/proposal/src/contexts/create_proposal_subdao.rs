@@ -63,8 +63,6 @@ impl<'info> CreateProposalSubDao<'info> {
         evaluation_period: u64,
         bumps: &CreateProposalSubDaoBumps,
     ) -> Result<()> {
-        // Make sure its a staked based DAO
-        self.config_sub_dao.ensure_not_hybrid ()?;
         // Make sure user has staked the required amount
         self.config_sub_dao.check_min_staked_required_proposal(self.stake_state.amount)?;
         // Make sure quorum is valid
@@ -206,8 +204,8 @@ impl<'info> CreateProposalSubDaoHybrid<'info> {
             self.metadata.collection, 
             self.collection
             );
-        //Check hybridness
-        self.config_sub_dao.check_hybrid()?;
+        //Make sure its not staked based
+        self.config_sub_dao.check_staked_create_proposal_is_none()?;  
         // Make sure quorum is valid
         self.config_sub_dao.check_valid_quorum(quorum)?;               
         // Check Minimum threshold
