@@ -10,7 +10,6 @@ use crate::errors::StakeError;
 
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeSubDao<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -113,7 +112,6 @@ impl<'info> StakeSubDao<'info> {
     }
 }
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeSubDaoNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,

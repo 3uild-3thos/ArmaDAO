@@ -9,7 +9,6 @@ use crate::validate_nft;
 use crate::errors::StakeError;
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct Stake<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -107,7 +106,6 @@ impl<'info> Stake<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,

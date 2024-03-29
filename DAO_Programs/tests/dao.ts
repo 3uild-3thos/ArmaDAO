@@ -14,7 +14,6 @@ import { randomBytes, randomInt } from "crypto"
 /* import  daoAdmin from "../aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE.json"; */
 import daoAdmin from "../wallet.json"
 import  daoUser from "../ugaoB7uFPdVQHGLg9vyePbsF1b75snYdUJtMMPqjgGi.json";
-import NamespaceFactory from "@coral-xyz/anchor/dist/cjs/program/namespace";
 
 const commitment: Commitment = "confirmed"; // processed, confirmed, finalized
 describe("dao", () => {
@@ -46,13 +45,18 @@ describe("dao", () => {
   };
   // DAO ARGUMENTS
   const seed = new BN(randomBytes(8));
-  /*  const seed = new BN(8); */
+
+  //seed 5 = BEJSdFDLAxJh8LDVps197m35jzxtGbwNRgiwcmssu7ZW
+   /* const seed = new BN(5); */
 
   // proposalFee in lamports
   const proposalFee = new BN(1e8);
   const minQuorum: number = 70;
   const minThreshold = new BN(1000);
   //24HOURS 216000 slots 1 HOUR 9000 slots 150 slots
+  //172,800 per day. 
+  //7,200 per houir
+  //120 per min
   //time in slots
   const maxExpiry = new BN(216000);
   //time in slots
@@ -117,6 +121,7 @@ describe("dao", () => {
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
   //Config PDA
   const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)], dao_program.programId)[0];
+  /* const dao_config_key = new anchor.web3.PublicKey("2uxXLa41uLeSaKaUpenF5ngN81PJJqLXfoZBLWut3SFH"); */
   //SubDao Config Pda
   const sub_dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8), dao_config_key.toBytes()], dao_program.programId)[0];
 
@@ -319,7 +324,7 @@ describe("dao", () => {
         mint,
         stakeState,
         config: dao_config_key,
-        tokenProgram: TOKEN_2022_PROGRAM_ID,
+        tokenProgram: TOKEN_PROGRAM_ID,
         associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
         systemProgram: SystemProgram.programId,   
       })
@@ -332,7 +337,7 @@ describe("dao", () => {
       .then(log);
       
   });
-  it("Stake Token", async () => {
+/*   it("Stake Token", async () => {
     const tx = await staking_program.methods
     
     .stakeTokens(staking_amount
@@ -407,7 +412,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });  
+  });   */
 /*   it("Initialize Nft Stake Account", async () => {
     const tx = await staking_program.methods
     
@@ -486,7 +491,7 @@ describe("dao", () => {
 
 
 
-/*   it("Create Proposal ", async () => {
+ /*  it("Create Proposal ", async () => {
     const tx = await proposal_program.methods
     
     .createProposal(

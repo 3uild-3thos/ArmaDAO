@@ -4,7 +4,6 @@ use daoist_programs::modules::DaoConfig;
 use crate::errors::DaoError;
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct CoreHandler<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -28,7 +27,6 @@ impl<'info> CoreHandler<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct SubDaoHandler<'info> {
     #[account(mut)]
     owner: Signer<'info>,

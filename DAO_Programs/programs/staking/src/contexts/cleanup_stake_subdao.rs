@@ -5,7 +5,6 @@ use daoist_programs::modules::{StakeState, DaoConfig};
 use crate::errors::StakeError;
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct CleanupStakeSubDao<'info> {
     #[account(mut)]
     owner: Signer<'info>,
