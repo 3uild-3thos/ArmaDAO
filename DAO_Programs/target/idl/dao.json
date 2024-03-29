@@ -670,5 +670,8 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
+  }
 }
