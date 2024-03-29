@@ -4,7 +4,6 @@ use daoist_programs::modules::{StakeState, DaoConfig};
 use crate::errors::StakeError;
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeHandler<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -41,7 +40,6 @@ impl<'info> StakeHandler<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct SubDaoStakeHandler<'info> {
     #[account(mut)]
     owner: Signer<'info>,

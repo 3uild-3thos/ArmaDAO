@@ -54,6 +54,7 @@ impl anchor_lang::AccountDeserialize for Proposal {
     fn try_deserialize_unchecked(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
         /* Self::try_deserialize_unchecked(buf) */
         Ok(Self::try_deserialize(buf)?)
+       /* Ok(Self::deserialize(buf)?) */
     }
 }
 impl anchor_lang::AccountSerialize for Proposal {}

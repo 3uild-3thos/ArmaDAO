@@ -8,7 +8,6 @@ use daoist_programs::modules::{StakeState,DaoConfig};
 
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct InitializeStake<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -16,7 +15,7 @@ pub struct InitializeStake<'info> {
         associated_token::mint = mint,
         associated_token::authority = owner
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         init,
         payer = owner,
@@ -25,14 +24,14 @@ pub struct InitializeStake<'info> {
         token::mint = mint,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == config.mint.expect("Mint not initialized"))]
+   /*#[account(constraint = mint.key() == config.mint.expect("Mint not initialized"))] */
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         init,
@@ -41,11 +40,12 @@ pub struct InitializeStake<'info> {
         bump,
         space = StakeState::LEN
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds::program = daoist_programs::modules::core_program::ID,      
         bump = config.config_bump,
+        constraint = config.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(),
     )]
     config: Account<'info, DaoConfig>,
     token_program: Interface<'info, TokenInterface>,
@@ -68,7 +68,6 @@ impl<'info> InitializeStake<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct InitializeStakeNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -76,7 +75,7 @@ pub struct InitializeStakeNft<'info> {
         associated_token::mint = nft,
         associated_token::authority = owner
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         init,
         payer = owner,
@@ -85,7 +84,7 @@ pub struct InitializeStakeNft<'info> {
         token::mint = nft,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump
@@ -102,7 +101,7 @@ pub struct InitializeStakeNft<'info> {
         bump,
         space = StakeState::LEN
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,

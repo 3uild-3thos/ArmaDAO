@@ -5,7 +5,6 @@ use crate::errors::ProposalError;
 
 
 #[derive(Accounts)]
-#[instruction(id: u64)]
 pub struct ProposalHandler<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -54,7 +53,6 @@ impl<'info> ProposalHandler<'info> {
 
 
 #[derive(Accounts)]
-#[instruction(id: u64)]
 pub struct SubDaoProposalHandler<'info> {
     #[account(mut)]
     owner: Signer<'info>,

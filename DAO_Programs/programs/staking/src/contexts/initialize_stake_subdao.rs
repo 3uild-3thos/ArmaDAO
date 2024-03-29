@@ -8,7 +8,6 @@ use daoist_programs::modules::{StakeState,DaoConfig};
 
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct InitializeStakeSubDao<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -16,7 +15,7 @@ pub struct InitializeStakeSubDao<'info> {
         associated_token::mint = mint,
         associated_token::authority = owner
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         init,
         payer = owner,
@@ -25,7 +24,7 @@ pub struct InitializeStakeSubDao<'info> {
         token::mint = mint,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump
@@ -41,7 +40,7 @@ pub struct InitializeStakeSubDao<'info> {
         bump,
         space = StakeState::LEN
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
@@ -73,7 +72,6 @@ impl<'info> InitializeStakeSubDao<'info> {
     }
 }
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct InitializeStakeSubDaoNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -81,7 +79,7 @@ pub struct InitializeStakeSubDaoNft<'info> {
         associated_token::mint = nft,
         associated_token::authority = owner
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         init,
         payer = owner,
@@ -90,7 +88,7 @@ pub struct InitializeStakeSubDaoNft<'info> {
         token::mint = nft,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump
@@ -107,7 +105,7 @@ pub struct InitializeStakeSubDaoNft<'info> {
         bump,
         space = StakeState::LEN
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,
