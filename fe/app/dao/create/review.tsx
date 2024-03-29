@@ -69,7 +69,7 @@ function Review() {
                       src={bannerPreview}
                       alt={"Banner Preview"}
                       layout="fill"
-                      className="object-cover w-full h-fit rounded-xl"
+                      className="object-cover w-full h-fit rounded-xl border-default"
                     />
                   </div>
                 )}
