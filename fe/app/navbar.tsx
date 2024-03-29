@@ -8,11 +8,21 @@ import { useEffect, useState } from "react";
 // components
 import { ConnectWallet } from "@/components/ui/connect-wallet";
 import ThemeToggle from "@/components/ui/theme-toggle";
-import { Home, Menu, Star } from "lucide-react";
+import {
+  BadgePlusIcon,
+  HomeIcon,
+  Menu,
+  PackagePlusIcon,
+  RocketIcon,
+  TablePropertiesIcon,
+} from "lucide-react";
 
 // lib
+import { Button } from "@/components/ui/button";
 import { PATH } from "@/lib/routes";
+import { cn } from "@/lib/utils";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { usePathname } from "next/navigation";
 
 interface INavItem {
   title: string;
@@ -23,6 +33,7 @@ export const navItems: Array<INavItem> = [];
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { publicKey } = useWallet();
 
   const handleMenuClick = () => {
@@ -52,34 +63,61 @@ export const Navbar = () => {
             </Link>
           </div>
           <div className="flex items-center gap-7">
-            <div className="flex items-center gap-2">
-              <Home size={15} />
+            <Link href={PATH.home}>
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                className={cn(
+                  "gap-2",
+                  pathname === PATH.home &&
+                    "border-b border-white rounded-b-none"
+                )}
+              >
+                <HomeIcon size={16} /> Home
+              </Button>
+            </Link>
 
-              <Link href={PATH.home}>
-                <p className="text-sm font-medium">Home</p>
-              </Link>
-            </div>
+            <Link href={PATH.fleets}>
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                className={cn(
+                  "gap-2",
+                  pathname === PATH.fleets &&
+                    "border-b border-white rounded-b-none"
+                )}
+              >
+                <RocketIcon size={16} /> Fleets
+              </Button>
+            </Link>
 
-            <div className="flex items-center gap-2">
-              <Star size={15} />
-              <Link href={PATH.mothershipMint}>
-                <p className="text-sm font-medium">Mint</p>
-              </Link>
-            </div>
+            <Link href={PATH.mothershipProposals}>
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                className={cn(
+                  "gap-2",
+                  pathname === PATH.mothershipProposals &&
+                    "border-b border-white rounded-b-none"
+                )}
+              >
+                <TablePropertiesIcon size={16} /> Mothership Proposals
+              </Button>
+            </Link>
 
-            <div className="flex items-center gap-2">
-              <Star size={15} />
-              <Link href={PATH.fleets}>
-                <p className="text-sm font-medium">DAO</p>
-              </Link>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Star size={15} />
-              <Link href={PATH.mothershipProposals}>
-                <p className="text-sm font-medium">Proposals</p>
-              </Link>
-            </div>
+            <Link href={PATH.fleetCreate}>
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                className={cn(
+                  "gap-2",
+                  pathname === PATH.fleetCreate &&
+                    "border-b border-white rounded-b-none"
+                )}
+              >
+                <PackagePlusIcon size={16} /> Create a Fleet
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -94,6 +132,11 @@ export const Navbar = () => {
             } md:static md:w-auto md:bg-transparent md:flex-row md:transform-none md:text-sm bg-black backdrop-blur-md sm:bg-transparent sm:backdrop-blur-none`}
           >
             {/* <Input /> */}
+            <Link href={PATH.mothershipMint}>
+              <Button size={"sm"} variant={"white"} className="gap-2">
+                <BadgePlusIcon size={16} /> Mint Armada NFT
+              </Button>
+            </Link>
             <ConnectWallet />
             <ThemeToggle />
           </div>
