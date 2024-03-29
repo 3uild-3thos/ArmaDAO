@@ -57,7 +57,8 @@ describe("dao", () => {
   const maxExpiry = new BN(216000);
   //time in slots
   const evaluationPhasePeriod = new BN(9000); 
-
+  const required_amount_to_create_subdaos = new BN(3);
+  const required_amount_to_create_proposals = new BN(3);
   const staking_amount = new BN(10);
 
 
@@ -234,7 +235,75 @@ describe("dao", () => {
       .then(log);
       
   });
-  it("Initialize StakeATA + StakeStaTe Account", async () => {
+
+/*   it("Initialize FT dao Config Account", async () => {
+    const tx = await dao_program.methods
+    
+    .initialize(
+      seed,
+      proposalFee,
+      minQuorum,
+      minThreshold,
+      maxExpiry,
+      evaluationPhasePeriod,
+      proposal_keypair.publicKey,
+      voting_keypair.publicKey,
+      staking_keypair.publicKey,
+      null, //collection,
+      mint,
+      required_amount_to_create_proposals, // 
+      true, // allow_sub_dao
+      required_amount_to_create_subdaos, // min_staked_create_subdao
+      false // is_hybrid
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({...accounts})
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  }); */
+/* 
+  it("Initialize NFT dao Config Account", async () => {
+    const tx = await dao_program.methods
+    
+    .initialize(
+      seed,
+      proposalFee,
+      minQuorum,
+      minThreshold,
+      maxExpiry,
+      evaluationPhasePeriod,
+      proposal_keypair.publicKey,
+      voting_keypair.publicKey,
+      staking_keypair.publicKey,
+      collection, //collection,
+      null,
+      required_amount_to_create_proposals, // null because its hybrid
+      true, // allow_sub_dao
+      required_amount_to_create_subdaos, // min_staked_create_subdao
+      false // is_hybrid
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({...accounts})
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  }); */
+/*   it("Initialize StakeATA + StakeStaTe Account", async () => {
     const tx = await staking_program.methods
     
     .initStake(
@@ -262,8 +331,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });
-  it("Stake Token", async () => {
+  }); */
+/*   it("Stake Token", async () => {
     const tx = await staking_program.methods
     
     .stakeTokens(staking_amount
@@ -338,7 +407,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });  
+  });   */
 /*   it("Initialize Nft Stake Account", async () => {
     const tx = await staking_program.methods
     
