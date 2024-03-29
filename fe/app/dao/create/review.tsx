@@ -62,17 +62,17 @@ function Review() {
           <AccordionTrigger>Fleet DAO Info</AccordionTrigger>
           <AccordionContent>
             <div className="px-8 pb-8 pt-4">
-              {bannerPreview && (
-                <div className="max-h-64 relative">
-                  <Image
-                    src={bannerPreview}
-                    alt={"Banner Preview"}
-                    layout="fill"
-                    className="object-cover w-full h-fit rounded-xl"
-                  />
-                </div>
-              )}
               <div className="flex flex-col gap-8">
+                {bannerPreview && (
+                  <div className="h-64 relative">
+                    <Image
+                      src={bannerPreview}
+                      alt={"Banner Preview"}
+                      layout="fill"
+                      className="object-cover w-full h-fit rounded-xl"
+                    />
+                  </div>
+                )}
                 <div className="flex gap-8">
                   <Image
                     src={logoPreview}
