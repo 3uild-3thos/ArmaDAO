@@ -108,10 +108,37 @@ impl<'info> Initialize<'info> {
         //set true if hybrid
         is_hybrid: bool
     ) -> Result<()> {
-
+            validate_nft!(
+                self.metadata.collection, 
+                self.collection
+            );
             self.config.check_init_valid_quorum(min_quorum)?;
+
+            self.config.set_inner(DaoConfig { 
+                seed, 
+                proposal_fee, 
+                min_quorum,
+                min_threshold, 
+                max_expiry, 
+                evaluation_phase_period, 
+                proposal_count : 0, 
+                proposal_program, 
+                voting_program, 
+                staking_program, 
+                auth_bump: bumps.auth, 
+                config_bump: bumps.config, 
+                treasury_bump: bumps.treasury, 
+                collection_mint, 
+                mint, 
+                min_staked_required_proposal, 
+                allow_sub_dao, 
+                min_staked_create_subdao, 
+                is_hybrid
+            });
+
+                Ok(())
         
-            self.config.init(
+            /* self.config.init(
                 seed,
                 //settings
                 proposal_fee,
@@ -138,7 +165,7 @@ impl<'info> Initialize<'info> {
                 //Optional
                 min_staked_create_subdao,
                 is_hybrid
-             )             
+             )              */
    
     }
 }

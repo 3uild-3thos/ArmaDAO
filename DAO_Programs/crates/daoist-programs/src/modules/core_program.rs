@@ -67,7 +67,7 @@ impl anchor_lang::AccountSerialize for DaoConfig {}
 impl DaoConfig {
     pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L) + 1  ;
 
-    pub fn init(
+    /* pub fn init(
         &mut self,
         seed: u64,
         proposal_fee: u64,
@@ -109,7 +109,7 @@ impl DaoConfig {
         self.min_staked_create_subdao = min_staked_create_subdao;
         self.is_hybrid = is_hybrid;
         Ok(())
-    }
+    } */
     pub fn check_hybrid(&self) -> Result<()> {
         require!(
             self.is_hybrid == true,
