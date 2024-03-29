@@ -47,7 +47,6 @@ function FleetConfig() {
   };
 
   const watchMembershipType = form.watch("membershipType");
-  console.log("form", form.getValues());
 
   return (
     <>
@@ -102,7 +101,7 @@ function FleetConfig() {
         </form>
       </Form>
       {/* TODO: Create a reusable component with all the variants */}
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-8">
         <Button variant={"outline"} onClick={handleBackPage}>
           <ArrowLeftIcon size={16} className="mr-2" /> Back
         </Button>

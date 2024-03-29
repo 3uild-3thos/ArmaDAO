@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 
 // lib
 import { IFleetConfig } from "@/lib/schema/fleet.schema";
+import { createFleet } from "@/lib/tooltips/fleet.tooltip";
 
 // react hook form
 import { UseFormReturn } from "react-hook-form";
@@ -68,7 +69,7 @@ const NFTForm = ({ form }: INFTForm) => {
                   <div className="flex items-center">
                     Collection Mint Address
                     <InfoTooltip
-                      content={"The mint address of the NFT collection."}
+                      content={createFleet.config.collectionMintAddress}
                     />
                   </div>
                   <div className="col-span-2 space-y-2">
@@ -86,8 +87,12 @@ const NFTForm = ({ form }: INFTForm) => {
         </p>
       )}
 
-      <p className="text-sm text-gray-500 mt-8">
-        Initial Fleet DAO Configurations
+      <p className="inline text-sm text-gray-500 mt-8">
+        Initial Fleet DAO Configurations{" "}
+        <InfoTooltip
+          content={createFleet.config.initialDaoConfig}
+          className="mt-2"
+        />
       </p>
 
       <div className="grid grid-cols-2 gap-16">
@@ -99,15 +104,20 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       Proposal Fee
                       <InfoTooltip
-                        content={"The payment for each proposal made."}
+                        content={createFleet.config.proposalFee}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-2 space-y-2">
-                      <Input type="number" {...field} />
+                    <div className="col-span-3 space-y-2">
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={String(field.value)}
+                      />
                       <FormMessage />
                     </div>
                   </div>
@@ -123,17 +133,20 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       Min. Quorum
                       <InfoTooltip
-                        content={
-                          "The minimum amount of participation required for a vote to be considered valid."
-                        }
+                        content={createFleet.config.minQuorum}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-2 space-y-2">
-                      <Input type="number" {...field} />
+                    <div className="col-span-3 space-y-2">
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={String(field.value)}
+                      />
                       <FormMessage />
                     </div>
                   </div>
@@ -148,15 +161,20 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       Min. Threshold
                       <InfoTooltip
-                        content={"Minimum amount of staked assets to vote."}
+                        content={createFleet.config.minThreshold}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-2 space-y-2">
-                      <Input type="number" {...field} />
+                    <div className="col-span-3 space-y-2">
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={String(field.value)}
+                      />
                       <FormMessage />
                     </div>
                   </div>
@@ -171,15 +189,20 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       Max Expiry
                       <InfoTooltip
-                        content={"Max expiry is..."}
+                        content={createFleet.config.maxExpiry}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-2 space-y-2">
-                      <Input type="number" {...field} />
+                    <div className="col-span-3 space-y-2">
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={String(field.value)}
+                      />
                       <FormMessage />
                     </div>
                   </div>
@@ -197,17 +220,20 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       Evaluation Phase Period
                       <InfoTooltip
-                        content={
-                          "Minimum duration for the evaluation phase of a proposal."
-                        }
+                        content={createFleet.config.evaluationPhasePeriod}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-2 space-y-2">
-                      <Input type="number" {...field} />
+                    <div className="col-span-3 space-y-2">
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={String(field.value)}
+                      />
                       <FormMessage />
                     </div>
                   </div>
@@ -222,20 +248,23 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       <span>Min. Staked</span>
                       <InfoTooltip
-                        content={
-                          "Minimum amount of staked assets to create a proposal."
-                        }
+                        content={createFleet.config.minStakedRequiredProposal}
                         className="mt-1"
                       />
                       <p className="text-sm font-light text-muted-light">
                         To Create Proposals
                       </p>
                     </div>
-                    <div className="col-span-2 space-y-2">
-                      <Input type="number" {...field} />
+                    <div className="col-span-3 space-y-2">
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={String(field.value)}
+                      />
                       <FormMessage />
                     </div>
                   </div>
@@ -251,16 +280,14 @@ const NFTForm = ({ form }: INFTForm) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-3">
+                    <div className="inline col-span-2">
                       Allow Subfleet Creation?
                       <InfoTooltip
-                        content={
-                          "Allow members to create their own Subfleet DAO under your Fleet."
-                        }
+                        content={createFleet.config.allowSubfleetCreation}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-2 space-y-2">
+                    <div className="col-span-3 space-y-2">
                       <Switch
                         checked={field.value}
                         onCheckedChange={field.onChange}
@@ -281,20 +308,25 @@ const NFTForm = ({ form }: INFTForm) => {
                 <FormItem className="w-full">
                   <FormControl>
                     <div className="grid grid-cols-5 gap-4">
-                      <div className="inline col-span-3">
+                      <div className="inline col-span-2">
                         <span>Min. Staked</span>
                         <InfoTooltip
-                          content={
-                            "The proposal fee is the payment for bounty proposal."
-                          }
+                          content={createFleet.config.minStakedToCreateSubfleet}
                           className="mt-1"
                         />
                         <p className="text-sm font-light text-muted-light">
                           To Create Subfleet DAO
                         </p>
                       </div>
-                      <div className="col-span-2 space-y-2">
-                        <Input type="number" {...field} />
+                      <div className="col-span-3 space-y-2">
+                        <Input
+                          type="number"
+                          {...field}
+                          onChange={(e) =>
+                            field.onChange(Number(e.target.value))
+                          }
+                          value={String(field.value)}
+                        />
                         <FormMessage />
                       </div>
                     </div>

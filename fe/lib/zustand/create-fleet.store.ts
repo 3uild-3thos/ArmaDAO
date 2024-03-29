@@ -1,8 +1,10 @@
 import {
   FleetConfigDefaults,
   FleetInfoDefaults,
+  FleetTeamDefaults,
   IFleetConfig,
   IFleetInfo,
+  IFleetTeam,
 } from "@/lib/schema/fleet.schema";
 import { createSelectors } from "@/lib/zustand/createSelectors";
 import { create } from "zustand";
@@ -20,6 +22,8 @@ interface CreateFleetStore {
   setBannerPreview: (bannerPreview: string) => void;
   fleetConfig: IFleetConfig;
   setFleetConfig: (fleetConfig: IFleetConfig) => void;
+  fleetTeam: IFleetTeam;
+  setFleetTeam: (fleetTeam: IFleetTeam) => void;
 }
 
 const useCreateFleetStoreBase = create<CreateFleetStore>((set) => ({
@@ -35,6 +39,8 @@ const useCreateFleetStoreBase = create<CreateFleetStore>((set) => ({
   setBannerPreview: (bannerPreview: string) => set(() => ({ bannerPreview })),
   fleetConfig: FleetConfigDefaults,
   setFleetConfig: (fleetConfig: IFleetConfig) => set(() => ({ fleetConfig })),
+  fleetTeam: FleetTeamDefaults,
+  setFleetTeam: (fleetTeam: IFleetTeam) => set(() => ({ fleetTeam })),
 }));
 
 export const useCreateFleet = createSelectors(useCreateFleetStoreBase);

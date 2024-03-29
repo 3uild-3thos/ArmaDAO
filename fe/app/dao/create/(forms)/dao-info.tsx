@@ -309,7 +309,7 @@ function FleetInfo() {
         </form>
       </Form>
       {/* TODO: Create a reusable component with all the variants */}
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-8">
         <Button variant={"white"} onClick={form.handleSubmit(onSubmit)}>
           Next <ArrowRightIcon size={16} className="ml-2" />
         </Button>

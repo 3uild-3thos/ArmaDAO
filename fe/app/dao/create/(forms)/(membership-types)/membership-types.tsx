@@ -9,6 +9,7 @@ import { CoinsIcon, CombineIcon, ImageIcon } from "lucide-react";
 
 // lib
 import { EMembershipType } from "@/lib/schema/fleet.schema";
+import { createFleet } from "@/lib/tooltips/fleet.tooltip";
 import { cn } from "@/lib/utils";
 
 interface IMembershipTypes {
@@ -21,19 +22,19 @@ const membershipTypes = [
     type: EMembershipType.Fungible,
     activeIcon: <CoinsIcon size={32} className="text-cyan" />,
     inactiveIcon: <CoinsIcon size={32} className="text-muted" />,
-    tooltip: `Let members do everything such as voting, creating proposals, and more using staked fungible tokens.`,
+    tooltip: createFleet.membershipTypes.fungible,
   },
   {
     type: EMembershipType.NFT,
     activeIcon: <ImageIcon size={32} className="text-cyan" />,
     inactiveIcon: <ImageIcon size={32} className="text-muted" />,
-    tooltip: `Let members do everything such as voting, creating proposals, and more using staked NFT.`,
+    tooltip: createFleet.membershipTypes.nft,
   },
   {
     type: EMembershipType.Hybrid,
     activeIcon: <CombineIcon size={32} className="text-cyan" />,
     inactiveIcon: <CombineIcon size={32} className="text-muted" />,
-    tooltip: `Let members vote using fungible tokens; and create proposals, create a subfleet and more by holding the Armada NFT.`,
+    tooltip: createFleet.membershipTypes.hybrid,
   },
 ];
 

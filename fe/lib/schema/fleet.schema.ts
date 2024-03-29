@@ -42,25 +42,30 @@ export const FleetInfoSchema = z
   })
   .required();
 
-const PublicKeySchema = z.string().refine(
-  (data) => {
-    // Validate length
-    if (data.length !== 44) return false;
+const PublicKeySchema = z
+  .string({
+    required_error: "Public Key is required",
+    invalid_type_error: "Public Key cannot be empty",
+  })
+  .default("")
+  .refine(
+    (data) => {
+      // Validate length
+      if (data?.length !== 44) return false;
 
-    try {
-      // Attempt to decode to ensure it's base58; Solana public keys are 32 bytes long when decoded
-      const decoded = bs58.decode(data);
-      return decoded.length === 32;
-    } catch {
-      // If decoding fails, it's not a valid base58 string
-      return false;
+      try {
+        // Attempt to decode to ensure it's base58; Solana public keys are 32 bytes long when decoded
+        const decoded = bs58.decode(data);
+        return decoded.length === 32;
+      } catch {
+        // If decoding fails, it's not a valid base58 string
+        return false;
+      }
+    },
+    {
+      message: "Invalid Solana Public Key",
     }
-  },
-  {
-    message: "Invalid Solana Public Key",
-  }
-);
-
+  );
 export const CreateFTSchema = z.object({
   name: z
     .string()
@@ -122,65 +127,195 @@ export const CreateNFTSchema = z.object({
 });
 
 export const FTMembershipSchema = z.object({
-  mint: PublicKeySchema.optional(),
-  proposalFee: z.coerce.number().gte(0),
-  minQuorum: z.coerce.number().gte(1),
-  minThreshold: z.coerce.number().gte(1),
-  maxExpiry: z.coerce.number(),
-  evaluationPhasePeriod: z.coerce.number(),
-  minStakedRequiredProposal: z.coerce.number().optional(),
-  allowSubfleetCreation: z.coerce.boolean(),
-  minStakedToCreateSubfleet: z.coerce.number().optional(),
-  isHybrid: z.coerce.boolean().default(false),
+  mint: PublicKeySchema,
+  proposalFee: z
+    .number({
+      required_error: "Proposal Fee is required",
+      invalid_type_error: "Proposal Fee must be a number",
+    })
+    .gte(0, "Proposal Fee must be at least 0"),
+  minQuorum: z
+    .number({
+      required_error: "Min. Quorum is required",
+      invalid_type_error: "Min. Quorum must be a number",
+    })
+    .gte(1),
+  minThreshold: z
+    .number({
+      required_error: "Min. Threshold is required",
+      invalid_type_error: "Min. Threshold must be a number",
+    })
+    .gte(1),
+  maxExpiry: z
+    .number({
+      required_error: "Max Expiry is required",
+      invalid_type_error: "Max Expiry must be a number",
+    })
+    .gte(1),
+  evaluationPhasePeriod: z
+    .number({
+      required_error: "Evaluation Phase Period is required",
+      invalid_type_error: "Evaluation Phase Period must be a number",
+    })
+    .gte(1),
+  minStakedRequiredProposal: z
+    .number({
+      invalid_type_error: "Min. Staked must be a number",
+    })
+    .gte(1)
+    .nullish(),
+  allowSubfleetCreation: z.coerce.boolean().default(false),
+  minStakedToCreateSubfleet: z
+    .number({
+      invalid_type_error: "Min. Staked must be a number",
+    })
+    .gte(1)
+    .nullish(),
+  isHybrid: z.coerce.boolean().default(false).nullish(),
 });
 
 export const NFTMembershipSchema = z.object({
-  collectionMint: PublicKeySchema.optional(),
-  proposalFee: z.coerce.number().gte(0),
-  minQuorum: z.coerce.number().gte(1),
-  minThreshold: z.coerce.number().gte(1),
-  maxExpiry: z.coerce.number(),
-  evaluationPhasePeriod: z.coerce.number(),
-  minStakedRequiredProposal: z.coerce.number().optional(),
-  allowSubfleetCreation: z.coerce.boolean(),
-  minStakedToCreateSubfleet: z.coerce.number().optional(),
-  isHybrid: z.coerce.boolean().default(false),
+  collectionMint: PublicKeySchema,
+  proposalFee: z
+    .number({
+      required_error: "Proposal Fee is required",
+      invalid_type_error: "Proposal Fee must be a number",
+    })
+    .gte(0, "Proposal Fee must be at least 0"),
+  minQuorum: z
+    .number({
+      required_error: "Min. Quorum is required",
+      invalid_type_error: "Min. Quorum must be a number",
+    })
+    .gte(1),
+  minThreshold: z
+    .number({
+      required_error: "Min. Threshold is required",
+      invalid_type_error: "Min. Threshold must be a number",
+    })
+    .gte(1),
+  maxExpiry: z
+    .number({
+      required_error: "Max Expiry is required",
+      invalid_type_error: "Max Expiry must be a number",
+    })
+    .gte(1),
+  evaluationPhasePeriod: z
+    .number({
+      required_error: "Evaluation Phase Period is required",
+      invalid_type_error: "Evaluation Phase Period must be a number",
+    })
+    .gte(1),
+  minStakedRequiredProposal: z
+    .number({
+      invalid_type_error: "Min. Staked must be a number",
+    })
+    .gte(1)
+    .nullish(),
+  allowSubfleetCreation: z.coerce.boolean().default(false),
+  minStakedToCreateSubfleet: z
+    .number({
+      invalid_type_error: "Min. Staked must be a number",
+    })
+    .gte(1)
+    .nullish(),
+  isHybrid: z.coerce.boolean().default(false).nullish(),
 });
 
 export const HybridMembershipSchema = z.object({
-  mint: PublicKeySchema.optional(),
-  proposalFee: z.coerce.number().gte(0),
-  minQuorum: z.coerce.number().gte(1),
-  minThreshold: z.coerce.number().gte(1),
-  maxExpiry: z.coerce.number(),
-  evaluationPhasePeriod: z.coerce.number(),
-  minStakedRequiredProposal: z.coerce.number().optional(),
-  allowSubfleetCreation: z.coerce.boolean(),
-  minStakedToCreateSubfleet: z.coerce.number().optional(),
-  isHybrid: z.coerce.boolean().default(true),
+  mint: PublicKeySchema,
+  proposalFee: z
+    .number({
+      required_error: "Proposal Fee is required",
+      invalid_type_error: "Proposal Fee must be a number",
+    })
+    .gte(0, "Proposal Fee must be at least 0"),
+  minQuorum: z
+    .number({
+      required_error: "Min. Quorum is required",
+      invalid_type_error: "Min. Quorum must be a number",
+    })
+    .gte(1),
+  minThreshold: z
+    .number({
+      required_error: "Min. Threshold is required",
+      invalid_type_error: "Min. Threshold must be a number",
+    })
+    .gte(1),
+  maxExpiry: z
+    .number({
+      required_error: "Max Expiry is required",
+      invalid_type_error: "Max Expiry must be a number",
+    })
+    .gte(1),
+  evaluationPhasePeriod: z
+    .number({
+      required_error: "Evaluation Phase Period is required",
+      invalid_type_error: "Evaluation Phase Period must be a number",
+    })
+    .gte(1),
+  minStakedRequiredProposal: z
+    .number({
+      invalid_type_error: "Min. Staked must be a number",
+    })
+    .gte(1)
+    .nullish(),
+  allowSubfleetCreation: z.coerce.boolean().default(false),
+  minStakedToCreateSubfleet: z
+    .number({
+      invalid_type_error: "Min. Staked must be a number",
+    })
+    .gte(1)
+    .nullish(),
+  isHybrid: z.coerce.boolean().default(true).nullish(),
 });
+
+export const FleetConfigMembershipSchema = z.union([
+  FTMembershipSchema,
+  NFTMembershipSchema,
+  HybridMembershipSchema,
+]);
 
 export const FleetConfigSchema = z
   .object({
     membershipType: z.nativeEnum(EMembershipType),
     hasExistingMintAddress: z.coerce.boolean(),
-    config: z.union([
-      FTMembershipSchema,
-      NFTMembershipSchema,
-      HybridMembershipSchema,
-    ]),
+    config: FleetConfigMembershipSchema,
     // createAsset should be nullish() if hasExistingMintAddress is false
     createAsset: z.union([CreateFTSchema, CreateNFTSchema]).nullish(),
+  })
+  .required();
+
+export const FleetTeamSchema = z
+  .object({
+    teamWallet: PublicKeySchema,
+    stayAnonymous: z.coerce.boolean().default(false),
+    name: z
+      .string()
+      .min(1, "Team name is required")
+      .max(24, "Maximum of 24 characters"),
+    twitter: z.string().optional(),
+    linkedIn: z.string().optional(),
+    github: z.string().optional(),
+    website: z.string().optional(),
   })
   .required();
 
 export const FleetSchema = z.object({
   info: FleetInfoSchema,
   config: FleetConfigSchema,
+  team: FleetTeamSchema,
 });
 
 export type IFleetInfo = z.infer<typeof FleetInfoSchema>;
 export type IFleetConfig = z.infer<typeof FleetConfigSchema>;
+export type INFTMembership = z.infer<typeof NFTMembershipSchema>;
+export type IFTMembership = z.infer<typeof FTMembershipSchema>;
+export type IHybridMembership = z.infer<typeof HybridMembershipSchema>;
+export type IFleetConfigMembershipSchema = z.infer<
+  typeof FleetConfigMembershipSchema
+>;
+export type IFleetTeam = z.infer<typeof FleetTeamSchema>;
 export type IFleet = z.infer<typeof FleetSchema>;
 
 export const FleetInfoDefaults: IFleetInfo = {
@@ -195,9 +330,33 @@ export const FleetInfoDefaults: IFleetInfo = {
   website: "",
 };
 
+export const FleetTeamDefaults: IFleetTeam = {
+  teamWallet: "",
+  name: "",
+  twitter: "",
+  linkedIn: "",
+  github: "",
+  website: "",
+  stayAnonymous: false,
+};
+
+export const FleetConfig: IFleetConfigMembershipSchema = {
+  mint: "",
+  collectionMint: "",
+  proposalFee: null as unknown as number,
+  minQuorum: null as unknown as number,
+  minThreshold: null as unknown as number,
+  maxExpiry: null as unknown as number,
+  evaluationPhasePeriod: null as unknown as number,
+  minStakedRequiredProposal: null as unknown as number,
+  allowSubfleetCreation: false,
+  minStakedToCreateSubfleet: null as unknown as number,
+  isHybrid: false,
+};
+
 export const FleetConfigDefaults: IFleetConfig = {
   membershipType: null as unknown as EMembershipType,
   hasExistingMintAddress: true,
-  config: null as unknown as IFleetConfig["config"],
+  config: FleetConfig,
   createAsset: null,
 };
