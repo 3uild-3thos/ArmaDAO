@@ -407,6 +407,18 @@ export type Voting = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -437,18 +449,6 @@ export type Voting = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }
@@ -1211,6 +1211,18 @@ export const IDL: Voting = {
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -1241,18 +1253,6 @@ export const IDL: Voting = {
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }

@@ -45,6 +45,7 @@ describe("dao", () => {
   };
   // DAO ARGUMENTS
   const seed = new BN(randomBytes(8));
+/*   const seed2 = new BN(randomBytes(8)); */
 
   //seed 5 = BEJSdFDLAxJh8LDVps197m35jzxtGbwNRgiwcmssu7ZW
    /* const seed = new BN(5); */
@@ -120,10 +121,12 @@ describe("dao", () => {
 
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
   //Config PDA
-  const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)], dao_program.programId)[0];
+  /* const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)], dao_program.programId)[0]; */
+  const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toBuffer("le", 8)], dao_program.programId)[0];
   /* const dao_config_key = new anchor.web3.PublicKey("2uxXLa41uLeSaKaUpenF5ngN81PJJqLXfoZBLWut3SFH"); */
   //SubDao Config Pda
-  const sub_dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8), dao_config_key.toBytes()], dao_program.programId)[0];
+  /* const sub_dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8), dao_config_key.toBytes()], dao_program.programId)[0]; */
+  const sub_dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toBuffer("le", 8), dao_config_key.toBuffer()], dao_program.programId)[0];
 
   const proposal_keypair = Keypair.fromSecretKey(new Uint8Array(ProposalKeypair));
   const staking_keypair = Keypair.fromSecretKey(new Uint8Array(StakingKeypair));
@@ -132,39 +135,39 @@ describe("dao", () => {
 
   //Core Program PDAS
   //Config Auth
-  const auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes()], dao_program.programId)[0];
+  const auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBuffer()], dao_program.programId)[0];
   //SubDao Auth
-  const sub_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes()], dao_program.programId)[0];
+  const sub_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBuffer()], dao_program.programId)[0];
   //DAO treasury
-  const treasury = PublicKey.findProgramAddressSync([Buffer.from("treasury"), dao_config_key.toBytes()], dao_program.programId)[0];
+  const treasury = PublicKey.findProgramAddressSync([Buffer.from("treasury"), dao_config_key.toBuffer()], dao_program.programId)[0];
   //SubDao treasury
-  const subdao_treasury = PublicKey.findProgramAddressSync([Buffer.from("treasury"), sub_dao_config_key.toBytes()], dao_program.programId)[0];
+  const subdao_treasury = PublicKey.findProgramAddressSync([Buffer.from("treasury"), sub_dao_config_key.toBuffer()], dao_program.programId)[0];
 
   
   //Staking Program PDAS
   //Stake Auth
-  const stakeAuth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  const stakeAuth = PublicKey.findProgramAddressSync([Buffer.from("auth"), dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //SubDao Stake Auth
-  const sub_stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  const sub_stake_auth = PublicKey.findProgramAddressSync([Buffer.from("auth"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //StakeState 
-  const stakeState = PublicKey.findProgramAddressSync([Buffer.from("stake"), dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  const stakeState = PublicKey.findProgramAddressSync([Buffer.from("stake"), dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //SubDAO StakeState
-  const sub_stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), sub_dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  const sub_stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //Stake ATA
-  const stakeAta = PublicKey.findProgramAddressSync([Buffer.from("vault"), dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  const stakeAta = PublicKey.findProgramAddressSync([Buffer.from("vault"), dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //Sub Stake ATA
-  const subdao_stake_ata = PublicKey.findProgramAddressSync([Buffer.from("vault"), sub_dao_config_key.toBytes(), dao_admin.publicKey.toBytes()], staking_program.programId)[0];
+  const subdao_stake_ata = PublicKey.findProgramAddressSync([Buffer.from("vault"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //Proposal Program PDAS
   //Dao proposal
-  const proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), dao_config_key.toBytes(), id.toArrayLike(Buffer, "le", 8) ], proposal_program.programId)[0];
+  const proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), dao_config_key.toBuffer(), id.toBuffer("le", 8) ], proposal_program.programId)[0];
   //SubDao proposal
-  const subdao_proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), sub_dao_config_key.toBytes(), id.toArrayLike(Buffer, "le", 8) ], proposal_program.programId)[0];
+  const subdao_proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), sub_dao_config_key.toBuffer(), id.toBuffer("le", 8) ], proposal_program.programId)[0];
 
   //Voting Program PDAS
   //Vote Dao
-  const vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_admin.publicKey.toBytes(), proposal.toBytes()], voting_program.programId)[0];
+  const vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_admin.publicKey.toBuffer(), proposal.toBuffer()], voting_program.programId)[0];
   //Vote SubDAO
-  const subdao_vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_admin.publicKey.toBytes(), subdao_proposal.toBytes()], voting_program.programId)[0];
+  const subdao_vote = PublicKey.findProgramAddressSync([Buffer.from("vote"), dao_admin.publicKey.toBuffer(), subdao_proposal.toBuffer()], voting_program.programId)[0];
 
   const accounts = {
     dao_admin,
@@ -198,6 +201,7 @@ describe("dao", () => {
     treasury,
     subdao_treasury,
     config: dao_config_key,  
+    configSubDao: sub_dao_config_key,
     metadataProgram: TOKEN_METADATA_PROGRAM_ID,
     tokenProgram: TOKEN_2022_PROGRAM_ID,
     associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -206,7 +210,7 @@ describe("dao", () => {
 
 
 
-
+  
   it("Initialize hybrid dao Config Account", async () => {
     const tx = await dao_program.methods
     
@@ -238,8 +242,103 @@ describe("dao", () => {
       })
       .then(confirm)
       .then(log);
-      
   });
+
+  it("Initialize Ft SubDAO for hybrid dao Config Account", async () => {
+    const tx = await dao_program.methods
+    
+    .initializeSubDao(
+      seed,
+      proposalFee,
+      minQuorum,
+      minThreshold,
+      maxExpiry,
+      evaluationPhasePeriod,
+      null,
+      mintSubDao.publicKey,
+      required_amount_to_create_proposals, 
+      false // is_hybrid
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({        
+        owner: dao_admin.publicKey,
+        ownerAta,
+        nft,
+        collection,
+        metadata,
+        masterEdition,
+        auth: sub_auth,
+        treasury:subdao_treasury,
+        configSubDao: sub_dao_config_key,
+        config: dao_config_key,
+        metadataProgram: TOKEN_METADATA_PROGRAM_ID,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,   })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+  });
+/*   it("InitializeSubdao FT Dao for NFT/FTs Config Account", async () => {
+    const tx = await dao_program.methods
+    
+    .initializeSubDaoToken(
+      seed2,
+      proposalFee,
+      minQuorum,
+      minThreshold,
+      maxExpiry,
+      evaluationPhasePeriod,
+      null,
+      mintSubDao.publicKey,
+      required_amount_to_create_proposals, // null because its hybrid
+      false // is_hybrid
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({...accounts})
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+  });
+  it("InitializeSubdao NFT Dao for NFT/FTs Config Accountt", async () => {
+    const tx = await dao_program.methods
+    
+    .initializeSubDaoToken(
+      seed2,
+      proposalFee,
+      minQuorum,
+      minThreshold,
+      maxExpiry,
+      evaluationPhasePeriod,
+      collection,
+      null,
+      required_amount_to_create_proposals, // null because its hybrid
+      false // is_hybrid
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({...accounts})
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+  }); */
 
 /*   it("Initialize FT dao Config Account", async () => {
     const tx = await dao_program.methods
@@ -308,7 +407,7 @@ describe("dao", () => {
       .then(log);
       
   }); */
-  it("Initialize StakeATA + StakeStaTe Account", async () => {
+/*   it("Initialize StakeATA + StakeStaTe Account", async () => {
     const tx = await staking_program.methods
     
     .initStake(
@@ -336,7 +435,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });
+  }); */
 /*   it("Stake Token", async () => {
     const tx = await staking_program.methods
     

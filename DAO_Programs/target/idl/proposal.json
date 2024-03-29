@@ -764,6 +764,18 @@
             "type": "publicKey"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -794,18 +806,6 @@
           {
             "name": "isHybrid",
             "type": "bool"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           }
         ]
       }

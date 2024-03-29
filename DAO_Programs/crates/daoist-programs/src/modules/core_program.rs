@@ -35,15 +35,15 @@ pub struct DaoConfig {
     pub proposal_program: Pubkey,
     pub voting_program: Pubkey,
     pub staking_program: Pubkey,
+    pub auth_bump: u8,
+    pub config_bump: u8,
+    pub treasury_bump: u8,
     pub collection_mint: Option<Pubkey>,
     pub mint:Option<Pubkey>,    
     pub min_staked_required_proposal: Option<u64>,
     pub allow_sub_dao: bool,
     pub min_staked_create_subdao: Option<u64>,
     pub is_hybrid: bool,
-    pub auth_bump: u8,
-    pub config_bump: u8,
-    pub treasury_bump: u8,
 }
 
 impl anchor_lang::Owner for DaoConfig {
@@ -56,15 +56,15 @@ impl anchor_lang::AccountDeserialize for DaoConfig {
     fn try_deserialize(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
         /* Self::try_deserialize(buf) */
         Ok(Self::deserialize(buf)?)
-        /* DaoConfig::try_deserialize_unchecked(buf) */
+       /*  DaoConfig::try_deserialize_unchecked(buf) */
 
     }
 
     fn try_deserialize_unchecked(buf: &mut &[u8]) -> anchor_lang::Result<Self> {
         /* Self::try_deserialize_unchecked(buf) */
         Ok(Self::try_deserialize(buf)?)
-       /*  Ok(Self::deserialize(buf)?) */
-       /*  DaoConfig::try_deserialize(buf)      */ 
+        /* Ok(Self::deserialize(buf)?) */
+        /* DaoConfig::try_deserialize(buf)   */    
     }
 
 }
