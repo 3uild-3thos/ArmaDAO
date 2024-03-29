@@ -292,7 +292,7 @@ impl<'info> InitializeSubdao<'info> {
     }
 }
 
-// NFT/FT FLEETS - SUB FLEETS
+// NFT/FT/Hybrid FLEETS - SUB FLEETS - THAT REQUIRE HAVING min_staked_create_subdao
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdaoToken<'info> {
