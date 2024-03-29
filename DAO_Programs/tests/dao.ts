@@ -303,7 +303,7 @@ describe("dao", () => {
       .then(log);
       
   }); */
-/*   it("Initialize StakeATA + StakeStaTe Account", async () => {
+  it("Initialize StakeATA + StakeStaTe Account", async () => {
     const tx = await staking_program.methods
     
     .initStake(
@@ -331,8 +331,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  }); */
-/*   it("Stake Token", async () => {
+  });
+  it("Stake Token", async () => {
     const tx = await staking_program.methods
     
     .stakeTokens(staking_amount
@@ -407,7 +407,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });   */
+  });  
 /*   it("Initialize Nft Stake Account", async () => {
     const tx = await staking_program.methods
     
