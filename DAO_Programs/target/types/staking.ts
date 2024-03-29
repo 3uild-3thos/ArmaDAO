@@ -264,12 +264,7 @@ export type Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "unstakeTokens",
@@ -406,12 +401,7 @@ export type Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "closeStake",
@@ -812,12 +802,7 @@ export type Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "unstakeTokensSubDao",
@@ -964,12 +949,7 @@ export type Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "closeStakeSubDao",
@@ -1762,12 +1742,7 @@ export const IDL: Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "unstakeTokens",
@@ -1904,12 +1879,7 @@ export const IDL: Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "closeStake",
@@ -2310,12 +2280,7 @@ export const IDL: Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "unstakeTokensSubDao",
@@ -2462,12 +2427,7 @@ export const IDL: Staking = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "closeStakeSubDao",
