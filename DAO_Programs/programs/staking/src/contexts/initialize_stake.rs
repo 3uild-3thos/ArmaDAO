@@ -45,7 +45,7 @@ pub struct InitializeStake<'info> {
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,      
         bump = config.config_bump,
-        constraint = mint.key() == config.mint.expect("Mint not initialized")
+       /*  constraint = mint.key() == config.mint.expect("Mint not initialized") */
         /* constraint = config.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(), */
     )]
     config: Account<'info, DaoConfig>,

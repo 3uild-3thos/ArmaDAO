@@ -231,7 +231,7 @@ pub struct InitializeSubdao<'info> {
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         bump = config.config_bump,
-        constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized")
+        /* constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized") */
     )]
     config: Account<'info, DaoConfig>,
     metadata_program: Program<'info, Metadata>,

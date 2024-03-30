@@ -226,8 +226,8 @@ describe("dao", () => {
       staking_keypair.publicKey,
       collection,
       mint,
-      null, // null because its hybrid
-      false, // allow_sub_dao
+      null, // minStakedRequiredProposal null because its hybrid
+      true, // allow_sub_dao
       null, // min_staked_create_subdao
       true // is_hybrid
     )  
@@ -244,7 +244,7 @@ describe("dao", () => {
       .then(log);
   });
 
-  it("Initialize Ft SubDAO for hybrid dao Config Account", async () => {
+  it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
     const tx = await dao_program.methods
     
     .initializeSubDao(
@@ -285,7 +285,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
   });
-/*   it("InitializeSubdao FT Dao for NFT/FTs Config Account", async () => {
+/*   it("InitializeSubdao when min_staked_create_subdao.is_some", async () => {
     const tx = await dao_program.methods
     
     .initializeSubDaoToken(
@@ -312,33 +312,6 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
   });
-  it("InitializeSubdao NFT Dao for NFT/FTs Config Accountt", async () => {
-    const tx = await dao_program.methods
-    
-    .initializeSubDaoToken(
-      seed2,
-      proposalFee,
-      minQuorum,
-      minThreshold,
-      maxExpiry,
-      evaluationPhasePeriod,
-      collection,
-      null,
-      required_amount_to_create_proposals, // null because its hybrid
-      false // is_hybrid
-    )  
-      .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
-      ])  
-      .accounts({...accounts})
-      .signers([dao_admin])
-
-      .rpc({
-        skipPreflight:true
-      })
-      .then(confirm)
-      .then(log);
-  }); */
 
 /*   it("Initialize FT dao Config Account", async () => {
     const tx = await dao_program.methods

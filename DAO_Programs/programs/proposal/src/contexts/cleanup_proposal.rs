@@ -102,6 +102,7 @@ impl<'info> CleanupProposal<'info> {
             ExecutableProposal::SetEvaluationPeriod(amount) => self.config.set_evaluation_phase_period(amount),
             ExecutableProposal::SetAllowSubDao(value) => self.config.set_allow_sub_dao(value)
             //Add set mint/collection mint vice versa
+            //turn off and on hybrid - in a instruction together with either turn null the collection mint or the mint address
         }
     }
 }
