@@ -19,7 +19,7 @@ pub struct InitializeStake<'info> {
     #[account(
         init,
         payer = owner,
-        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump,
         token::mint = mint,
         token::authority = stake_auth
@@ -44,7 +44,7 @@ pub struct InitializeStake<'info> {
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = daoist_programs::modules::core_program::ID,      
-        bump = config.config_bump,
+        bump,
        /*  constraint = mint.key() == config.mint.expect("Mint not initialized") */
         /* constraint = config.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(), */
     )]
@@ -80,7 +80,7 @@ pub struct InitializeStakeNft<'info> {
     #[account(
         init,
         payer = owner,
-        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
         bump,
         token::mint = nft,
         token::authority = stake_auth

@@ -14,6 +14,11 @@ pub mod dao {
     use super::*;
     pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7");
 
+
+    pub fn debugging (ctx : Context<Debugging>)-> Result<()> {
+        ctx.accounts.debug()
+    }
+
     // Instantiate a new DAO Config ACC using the DAO2023 program
     pub fn initialize(
         ctx: Context<Initialize>,

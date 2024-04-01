@@ -728,6 +728,18 @@ export type Proposal = {
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -762,18 +774,6 @@ export type Proposal = {
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",
@@ -1875,6 +1875,18 @@ export const IDL: Proposal = {
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -1909,18 +1921,6 @@ export const IDL: Proposal = {
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",

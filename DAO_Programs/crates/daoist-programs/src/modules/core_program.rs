@@ -24,8 +24,12 @@ pub struct SubDaoHandler<'info> {
 }
 
 #[derive(Clone, Debug, Default, PartialEq, AnchorSerialize, AnchorDeserialize)]
+
 pub struct DaoConfig {
     pub seed: u64,
+    pub auth_bump: u8,
+    pub config_bump: u8,
+    pub treasury_bump: u8,
     pub proposal_fee: u64,
     pub min_quorum: u8,
     pub min_threshold: u64,
@@ -35,9 +39,6 @@ pub struct DaoConfig {
     pub proposal_program: Pubkey,
     pub voting_program: Pubkey,
     pub staking_program: Pubkey,
-    pub auth_bump: u8,
-    pub config_bump: u8,
-    pub treasury_bump: u8,
     pub collection_mint: Option<Pubkey>,
     pub mint:Option<Pubkey>,    
     pub min_staked_required_proposal: Option<u64>,
@@ -66,17 +67,18 @@ impl anchor_lang::AccountDeserialize for DaoConfig {
         /* Ok(Self::deserialize(buf)?) */
         /* DaoConfig::try_deserialize(buf)   */    
     }
-
 }
-
 impl anchor_lang::AccountSerialize for DaoConfig {}
 
 impl DaoConfig {
     pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L) + 1  ;
 
-    pub fn init(
+/*     pub fn init(
         &mut self,
         seed: u64,
+        auth_bump: u8,
+        config_bump: u8,
+        treasury_bump: u8,
         proposal_fee: u64,
         min_quorum: u8,
         min_threshold: u64,
@@ -85,9 +87,6 @@ impl DaoConfig {
         proposal_program: Pubkey,
         voting_program: Pubkey,
         staking_program: Pubkey,
-        auth_bump: u8,
-        config_bump: u8,
-        treasury_bump: u8,
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>,
         min_staked_required_proposal: Option<u64>, 
@@ -97,6 +96,9 @@ impl DaoConfig {
                 
     ) -> Result<()> {
         self.seed = seed;
+        self.auth_bump = auth_bump;
+        self.config_bump = config_bump;
+        self.treasury_bump = treasury_bump;
         self.proposal_fee = proposal_fee;
         self.min_quorum = min_quorum;
         self.min_threshold = min_threshold;
@@ -106,17 +108,16 @@ impl DaoConfig {
         self.proposal_program = proposal_program;
         self.voting_program = voting_program;
         self.staking_program = staking_program;
-        self.auth_bump = auth_bump;
-        self.config_bump = config_bump;
-        self.treasury_bump = treasury_bump;
         self.collection_mint = collection_mint;
         self.mint = mint;
         self.min_staked_required_proposal = min_staked_required_proposal;
         self.allow_sub_dao = allow_sub_dao;
         self.min_staked_create_subdao = min_staked_create_subdao;
         self.is_hybrid = is_hybrid;
+        msg!("seed = {}", seed);
+        
         Ok(())
-    }
+    } */
 
 
 

@@ -371,6 +371,18 @@
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -405,18 +417,6 @@
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",
@@ -799,8 +799,5 @@
       "name": "InvalidChoice",
       "msg": "Invalid choice"
     }
-  ],
-  "metadata": {
-    "address": "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC"
-  }
+  ]
 }

@@ -19,7 +19,7 @@ pub struct InitializeStakeSubDao<'info> {
     #[account(
         init,
         payer = owner,
-        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump,
         token::mint = mint,
         token::authority = stake_auth
@@ -83,7 +83,7 @@ pub struct InitializeStakeSubDaoNft<'info> {
     #[account(
         init,
         payer = owner,
-        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
         bump,
         token::mint = nft,
         token::authority = stake_auth

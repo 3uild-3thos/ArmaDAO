@@ -371,6 +371,18 @@ export type Voting = {
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -405,18 +417,6 @@ export type Voting = {
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",
@@ -1175,6 +1175,18 @@ export const IDL: Voting = {
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -1209,18 +1221,6 @@ export const IDL: Voting = {
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",

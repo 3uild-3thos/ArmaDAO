@@ -21,7 +21,7 @@ pub struct StakeSubDao<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = mint,
         token::authority = auth
@@ -123,7 +123,7 @@ pub struct StakeSubDaoNft<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
         bump,
         token::mint = nft,
         token::authority = auth

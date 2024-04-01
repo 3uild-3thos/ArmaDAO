@@ -3,6 +3,17 @@ export type Dao = {
   "name": "dao",
   "instructions": [
     {
+      "name": "debugging",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "initialize",
       "accounts": [
         {
@@ -425,6 +436,18 @@ export type Dao = {
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -459,18 +482,6 @@ export type Dao = {
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",
@@ -682,6 +693,17 @@ export const IDL: Dao = {
   "name": "dao",
   "instructions": [
     {
+      "name": "debugging",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "initialize",
       "accounts": [
         {
@@ -1104,6 +1126,18 @@ export const IDL: Dao = {
             "type": "u64"
           },
           {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
+          },
+          {
             "name": "proposalFee",
             "type": "u64"
           },
@@ -1138,18 +1172,6 @@ export const IDL: Dao = {
           {
             "name": "stakingProgram",
             "type": "publicKey"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
           },
           {
             "name": "collectionMint",

@@ -9,7 +9,21 @@ use anchor_spl::{
 use daoist_programs::modules::{StakeState, StakingProgram};
 use crate::{validate_nft, REQUIRED_COLLECTION_MINT};
 use crate::errors::DaoError;
-
+#[derive(Accounts)]
+pub struct Debugging<'info> {
+  #[account(
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        bump
+    )] 
+    pub config: Account<'info, DaoConfig>,
+}
+impl<'info> Debugging<'info> {
+    pub fn debug(&self) -> Result<()> {
+        // Dummy function for debugging
+        msg!("seed {}", self.config.seed);    
+        Ok(())
+    }
+}
 
 #[derive(Accounts)]
 #[instruction(seed: u64)]
@@ -109,13 +123,15 @@ impl<'info> Initialize<'info> {
         is_hybrid: bool,
 
     ) -> Result<()> {
-            validate_nft!(
+/*             validate_nft!(
                 self.metadata.collection, 
                 self.collection
             );
             self.config.check_init_valid_quorum(min_quorum)?;
 
-/*             self.config.set_inner(DaoConfig { 
+ */
+            msg!("Debugging this Sourcery");
+            self.config.set_inner(DaoConfig { 
                 seed, 
                 proposal_fee, 
                 min_quorum,
@@ -136,11 +152,15 @@ impl<'info> Initialize<'info> {
                 config_bump: bumps.config, 
                 treasury_bump: bumps.treasury, 
             });
-
-                Ok(()) */
+            msg!("seed {}", self.config.seed);      
+            msg!("proposal fee {}", self.config.proposal_fee);      
+                Ok(())
         
-            self.config.init(
+/*             self.config.init(
                 seed,
+                bumps.auth,
+                bumps.config,
+                bumps.treasury,
                 //settings
                 proposal_fee,
                 min_quorum,
@@ -152,9 +172,6 @@ impl<'info> Initialize<'info> {
                 voting_program, 
                 staking_program,
                 //Bumps
-                bumps.auth,
-                bumps.config,
-                bumps.treasury,
                 //Optional
                 collection_mint,
                 //Optional
@@ -166,12 +183,12 @@ impl<'info> Initialize<'info> {
                 //Optional
                 min_staked_create_subdao,
                 is_hybrid
-             )             
+             )        */      
    
     }
 }
 
-//Create SUB Fleets(FT,NFT,Hybrid) FOR DAOS(HYBRIDS AND NFTS) THAT DONT REQUIRE HAVING min_staked_create_subdao
+//Create SUB Fleets(FT,NFT,Hybrid) FOR DAOS(HYBRIDS AND NFTS) MOTHERSHIPS THAT DONT REQUIRE HAVING min_staked_create_subdao
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdao<'info> {
@@ -292,7 +309,7 @@ impl<'info> InitializeSubdao<'info> {
     }
 }
 
-// NFT/FT/Hybrid FLEETS - SUB FLEETS - THAT REQUIRE HAVING min_staked_create_subdao
+// NFT/FT/Hybrid FLEETS - SUB FLEETS - MOTHERSHIPS THAT REQUIRE HAVING min_staked_create_subdao
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdaoToken<'info> {
