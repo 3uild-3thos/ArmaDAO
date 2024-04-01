@@ -1,4 +1,5 @@
 // components
+import FleetCard from "@/app/dao/fleet-card";
 import {
   Carousel,
   CarouselContent,
@@ -6,21 +7,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import SubdaoCard from "@/dao/subdao-card";
 
 // mock
-import { daos } from "@/mock/daos";
+import { fleets } from "@/mock/fleets";
 
-function SubDaoCarouselList() {
+function FleetCarouselList() {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-xs font-medium">Your Sub-Fleets</p>
+      <p className="text-xs font-medium">Your Fleets</p>
       <Carousel>
         <CarouselContent className="ml-4">
-          {daos.map((dao) => {
+          {fleets.map((fleet) => {
             return (
-              <CarouselItem key={dao.id} className="basis-1/4">
-                <SubdaoCard dao={dao} owned={true} />
+              <CarouselItem key={fleet.info.id} className="basis-1/4">
+                <FleetCard fleet={fleet} owned={true} />
               </CarouselItem>
             );
           })}
@@ -32,4 +32,4 @@ function SubDaoCarouselList() {
   );
 }
 
-export default SubDaoCarouselList;
+export default FleetCarouselList;

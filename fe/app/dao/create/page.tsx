@@ -2,7 +2,7 @@
 
 // Components
 import Config from "@/app/dao/create/(forms)/dao-config";
-import DaoInfo from "@/create/(forms)/dao-info";
+import DaoInfo from "@/app/dao/create/(forms)/fleet-info";
 import TeamInfo from "@/create/(forms)/team-info";
 import Review from "@/create/review";
 import { useCreateFleet } from "@/lib/zustand/create-fleet.store";

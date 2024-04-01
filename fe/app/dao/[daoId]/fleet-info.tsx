@@ -1,7 +1,7 @@
 import LabelValue from "@/components/ui/label-value";
 import { cn } from "@/lib/utils";
 
-const DAOInfoComponent = ({ className }: { className?: string }) => {
+const FleetInfoComponent = ({ className }: { className?: string }) => {
   return (
     <div className={cn("flex flex-col gap-8", className)}>
       <div className="grid grid-cols-2">
@@ -30,4 +30,4 @@ const DAOInfoComponent = ({ className }: { className?: string }) => {
   );
 };
 
-export default DAOInfoComponent;
+export default FleetInfoComponent;

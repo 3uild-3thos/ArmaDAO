@@ -29,55 +29,50 @@ export const ChoiceSchema = z.object({
   votes: z.number(),
 });
 
-export const ProposalSchema = z
-  .object({
-    id: z.string(),
-    title: z.string().min(3, "Title must be at least 3 characters."),
-    description: z
-      .string()
-      .min(50, "Description must be at least 50 characters."),
-    type: z.nativeEnum(EProposalType),
-    totalVotes: z.coerce.number(),
-    pendingVotes: z.coerce.number(),
-    startDate: z.string().datetime(),
-    endDate: z.string().datetime(),
-    postedAt: z.string(),
-    postedBy: z.string(),
-    status: z.nativeEnum(EProposalStatus),
-    choices: z.array(ChoiceSchema).min(2, "Must have at least 2 choices"),
-    quorum: z.coerce
-      .number()
-      .min(1, "Quorum must be greater than 0")
-      .nullable(),
-    threshold: z.coerce
-      .number()
-      .min(1, "Threshold must be greater than 0")
-      .nullable(),
-    expiry: z.string().datetime(),
-    evaluationPeriod: z.string().datetime(),
+export const ProposalSchema = z.object({
+  id: z.string(),
+  title: z.string().min(3, "Title must be at least 3 characters."),
+  description: z
+    .string()
+    .min(50, "Description must be at least 50 characters."),
+  type: z.nativeEnum(EProposalType),
+  totalVotes: z.coerce.number(),
+  pendingVotes: z.coerce.number(),
+  startDate: z.string().datetime(),
+  endDate: z.string().datetime(),
+  postedAt: z.string(),
+  postedBy: z.string(),
+  status: z.nativeEnum(EProposalStatus),
+  choices: z.array(ChoiceSchema).min(2, "Must have at least 2 choices"),
+  quorum: z.coerce.number().min(1, "Quorum must be greater than 0").nullable(),
+  threshold: z.coerce
+    .number()
+    .min(1, "Threshold must be greater than 0")
+    .nullable(),
+  expiry: z.coerce.number(),
+  evaluationPeriod: z.coerce.number(),
 
-    // For Bounty
-    bountyRecipient: z.string().optional(),
-    bountyAmount: z.coerce.number().optional(),
+  // For Bounty
+  bountyRecipient: z.string().nullish(),
+  bountyAmount: z.coerce.number().nullish(),
 
-    // For Executable
-    executableType: z.nativeEnum(EExecutableType).optional(),
-    fleetProposalFee: z.coerce.number().optional(),
-    fleetExpiry: z.string().datetime().optional(),
-    fleetThreshold: z.coerce
-      .number()
-      .min(1, "Threshold must be greater than 0")
-      .nullable()
-      .optional(),
-    fleetQuorum: z.coerce
-      .number()
-      .min(1, "Quorum must be greater than 0")
-      .nullable()
-      .optional(),
-    fleetEvaluationPeriod: z.string().datetime().optional(),
-    fleetAllowSubdao: z.boolean().optional(),
-  })
-  .required();
+  // For Executable
+  executableType: z.nativeEnum(EExecutableType).nullish(),
+  fleetProposalFee: z.coerce.number().nullish(),
+  fleetExpiry: z.coerce.number().nullish(),
+  fleetThreshold: z.coerce
+    .number()
+    .min(1, "Threshold must be greater than 0")
+    .nullable()
+    .nullish(),
+  fleetQuorum: z.coerce
+    .number()
+    .min(1, "Quorum must be greater than 0")
+    .nullable()
+    .nullish(),
+  fleetEvaluationPeriod: z.coerce.number().nullish(),
+  fleetAllowSubdao: z.boolean().nullish(),
+});
 
 export type IChoice = z.infer<typeof ChoiceSchema>;
 export type IProposal = z.infer<typeof ProposalSchema>;
@@ -95,8 +90,8 @@ export const ProposalDefaults: IProposalDefaults = {
   choices: [],
   quorum: 0,
   threshold: 0,
-  expiry: "",
-  evaluationPeriod: "",
+  expiry: 0,
+  evaluationPeriod: 0,
 
   // For Bounty
   bountyRecipient: "",
@@ -105,9 +100,9 @@ export const ProposalDefaults: IProposalDefaults = {
   // For Executable
   executableType: EExecutableType.SET_PROPOSAL_FEE,
   fleetProposalFee: 0,
-  fleetExpiry: "",
+  fleetExpiry: 0,
   fleetThreshold: 0,
   fleetQuorum: 0,
-  fleetEvaluationPeriod: "",
+  fleetEvaluationPeriod: 0,
   fleetAllowSubdao: false,
 };

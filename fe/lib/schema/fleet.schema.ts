@@ -29,12 +29,12 @@ export const FleetInfoSchema = z
       .string()
       .min(1, "Fleet name is required")
       .max(24, "Maximum of 24 characters"),
-    logoUri: ImageSchema,
+    logoUri: z.union([ImageSchema, z.string()]),
     description: z
       .string()
       .min(1, "Description is required")
       .max(250, "Maximum of 250 characters"),
-    bannerUri: ImageSchema.nullish(),
+    bannerUri: z.union([ImageSchema, z.string()]).nullish(),
     twitter: z.string().optional(),
     linkedIn: z.string().optional(),
     github: z.string().optional(),

@@ -1,11 +1,9 @@
-import React from "react";
-
 // next
 import Image from "next/image";
 
 // components
-import SubDaoCarousel from "@/app/dao/subdao-carousel";
-import SubDaosList from "@/dao/subdaos-list";
+import FleetCarousel from "@/app/dao/fleet-carousel";
+import FleetList from "@/app/dao/fleet-list";
 import { Button } from "@/components/ui/button";
 import FilterButton from "@/dao/filter-button";
 
@@ -26,7 +24,7 @@ const DAOPage = () => {
       </div>
 
       {/* TODO: Only show this if the user has the NFT */}
-      <SubDaoCarousel />
+      <FleetCarousel />
 
       <div className="flex justify-between">
         <div className="flex gap-2">
@@ -61,7 +59,7 @@ const DAOPage = () => {
           <FilterButton title="All Categories" />
         </div>
       </div>
-      <SubDaosList />
+      <FleetList />
     </div>
   );
 };

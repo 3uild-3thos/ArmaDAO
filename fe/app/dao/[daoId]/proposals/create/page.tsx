@@ -430,6 +430,7 @@ const DAOProposalCreatePage = () => {
                               placeholder="5vkS...S0kl"
                               required
                               {...field}
+                              value={field?.value || ""}
                             />
                           </FormControl>
                           <FormMessage />
@@ -470,7 +471,7 @@ const DAOProposalCreatePage = () => {
                         <FormLabel>Executable Type</FormLabel>
                         <Select
                           onValueChange={field.onChange}
-                          defaultValue={field.value}
+                          defaultValue={String(field.value || "")}
                         >
                           <FormControl>
                             <SelectTrigger>

@@ -41,6 +41,10 @@ export const proposals: Array<IProposal> = [
         votes: 200,
       },
     ],
+    quorum: 50,
+    threshold: 60,
+    expiry: 50,
+    evaluationPeriod: 50,
   },
   {
     id: "2",
@@ -77,6 +81,10 @@ export const proposals: Array<IProposal> = [
         votes: 200,
       },
     ],
+    quorum: 50,
+    threshold: 60,
+    expiry: 50,
+    evaluationPeriod: 50,
   },
   {
     id: "3",
@@ -113,6 +121,10 @@ export const proposals: Array<IProposal> = [
         votes: 200,
       },
     ],
+    quorum: 50,
+    threshold: 60,
+    expiry: 50,
+    evaluationPeriod: 50,
   },
   {
     id: "4",
@@ -149,6 +161,10 @@ export const proposals: Array<IProposal> = [
         votes: 200,
       },
     ],
+    quorum: 50,
+    threshold: 60,
+    expiry: 50,
+    evaluationPeriod: 50,
   },
 ];
 

@@ -7,13 +7,13 @@ import { useParams, usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 // components
-import DAOInfoComponent from "@/[daoId]/dao-info";
 import DAOStakeComponent from "@/[daoId]/dao-stake";
+import DAOInfoComponent from "@/app/dao/[daoId]/fleet-info";
 
 // lib
 import { cn } from "@/lib/utils";
 
-const DAOTabs = [
+const FleetTabs = [
   {
     label: "Proposals",
     href: "/dao/[daoId]/proposals",
@@ -28,7 +28,7 @@ const DAOTabs = [
   },
 ];
 
-const DAODetailLayout = ({ children }: { children: ReactNode }) => {
+const FleetDetailLayout = ({ children }: { children: ReactNode }) => {
   const { daoId } = useParams();
   const pathname = usePathname();
 
@@ -55,7 +55,7 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
 
       {/* DAO Page Tabs */}
       <div className="flex gap-4 my-4">
-        {DAOTabs.map(({ label, href }) => {
+        {FleetTabs.map(({ label, href }) => {
           const matchedHref = daoId
             ? href.replace("[daoId]", daoId as string)
             : href;
@@ -79,10 +79,10 @@ const DAODetailLayout = ({ children }: { children: ReactNode }) => {
         })}
       </div>
 
-      {/* DAO Detail Pages */}
+      {/* Fleet Detail Pages */}
       <div className="flex flex-col gap-8">{children}</div>
     </div>
   );
 };
 
-export default DAODetailLayout;
+export default FleetDetailLayout;

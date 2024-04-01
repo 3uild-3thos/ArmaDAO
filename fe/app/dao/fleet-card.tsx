@@ -10,14 +10,14 @@ import { Coins, MoveRight, Newspaper, Users } from "lucide-react";
 
 // lib
 import shortenDescription from "@/lib/helpers/shortenDescription";
-import { ISubDaoInfo } from "@/lib/schema/fleet.schema";
+import { IFleet } from "@/lib/schema/fleet.schema";
 
-interface ISubdaoCardProps {
-  dao: ISubDaoInfo;
+interface IFleetCardProps {
+  fleet: IFleet;
   owned?: boolean;
 }
 
-function SubdaoCard({ dao, owned = false }: ISubdaoCardProps) {
+function FleetCard({ fleet, owned = false }: IFleetCardProps) {
   const [seeMore, setseeMore] = useState(false);
 
   const onSeeMore = () => {
@@ -29,8 +29,8 @@ function SubdaoCard({ dao, owned = false }: ISubdaoCardProps) {
       <div className="flex flex-col justify-center items-center w-full">
         <div className="h-64 w-full relative">
           <Image
-            src={dao.image ?? ""}
-            alt={dao.image ?? ""}
+            src={(fleet.info.logoUri as string) ?? ""}
+            alt={fleet.info.name ?? ""}
             fill
             className="rounded-t-lg  object-cover shadow-2xl"
           />
@@ -39,17 +39,17 @@ function SubdaoCard({ dao, owned = false }: ISubdaoCardProps) {
 
       <div className="flex flex-col justify-between gap-3 p-4">
         <div className="flex justify-between items-center">
-          <p className="font-medium text-xl">{dao.title}</p>
+          <p className="font-medium text-xl">{fleet.info.name}</p>
         </div>
 
         <div className="flex flex-wrap gap-1 items-center  h-10 max-h-60">
           <p className="text-xs">
             {seeMore
-              ? shortenDescription(dao.description, 80)
-              : shortenDescription(dao.description, 35)}
+              ? shortenDescription(fleet.info.description, 80)
+              : shortenDescription(fleet.info.description, 35)}
           </p>
 
-          {dao.description.length >= 50 && (
+          {fleet.info.description.length >= 50 && (
             <Button
               variant={"ghost"}
               className="p-0 m-0 h-0"
@@ -69,14 +69,14 @@ function SubdaoCard({ dao, owned = false }: ISubdaoCardProps) {
             <div className="bg-gray-800 p-1 rounded-full">
               <Users size={16} />
             </div>
-            <p className="text-[10px] font-medium">{dao.members}</p>
+            <p className="text-[10px] font-medium">555</p>
           </div>
 
           <div className="flex items-center gap-2">
             <div className="bg-gray-800 p-1 rounded-full">
               <Newspaper size={16} />
             </div>
-            <p className="text-[10px] font-medium">{dao.members}</p>
+            <p className="text-[10px] font-medium">666</p>
           </div>
         </div>
 
@@ -97,4 +97,4 @@ function SubdaoCard({ dao, owned = false }: ISubdaoCardProps) {
   );
 }
 
-export default SubdaoCard;
+export default FleetCard;
