@@ -1,7 +1,7 @@
 export const createFleet = {
   membershipTypes: {
-    fungible: `Let members do everything such as voting, creating proposals, and more using staked fungible tokens.`,
-    nft: `Let members do everything such as voting, creating proposals, and more using staked NFT.`,
+    fungible: `Let members do everything such as voting, creating proposals, and more using fungible tokens.`,
+    nft: `Let members do everything such as voting, creating proposals, and more using NFT.`,
     hybrid: `Let members vote using fungible tokens; and create proposals, create a subfleet and more by holding the Armada NFT.`,
   },
   config: {
@@ -16,7 +16,7 @@ export const createFleet = {
     evaluationPhasePeriod:
       "Minimum duration for the evaluation phase of a proposal.",
     minStakedRequiredProposal:
-      "Minimum amount of staked assets to create a proposal.",
+      "Minimum amount of staked assets to create a proposal. Leave this empty to allow anyone who holds an asset to create a proposal.",
     allowSubfleetCreation:
       "Allow members to create their own Subfleet DAO under your Fleet.",
     minStakedToCreateSubfleet:
