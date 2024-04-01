@@ -1,26 +1,26 @@
+import ProposalCard from "@/app/fleets/[fleetId]/proposals/proposal-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PATH, replacePathKey } from "@/lib/routes";
 import { proposals } from "@/mock/proposals";
-import ProposalCard from "@/proposals/proposal-card";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 
-interface IDAOProposalPage {
-  params: { daoId: string };
+interface IFleetProposalPage {
+  params: { fleetId: string };
 }
 
-const DAOProposalPage = ({ params }: IDAOProposalPage) => {
-  const { daoId } = params;
+const FleetProposalPage = ({ params }: IFleetProposalPage) => {
+  const { fleetId } = params;
 
   const createProposalHref = replacePathKey(PATH.fleetProposalCreate, {
-    daoId,
+    fleetId,
   });
 
   return (
     <div className="grid grid-cols-12">
       <div className="flex flex-col col-span-8 gap-8">
-        <div className="flex justify-between items-center w-full">
+        <div className="flex items-center justify-between w-full">
           <h3 className="text-2xl text-muted">Proposals</h3>
           <Link href={createProposalHref}>
             <Button variant={"outline"}>Create a Proposal</Button>
@@ -53,4 +53,4 @@ const DAOProposalPage = ({ params }: IDAOProposalPage) => {
   );
 };
 
-export default DAOProposalPage;
+export default FleetProposalPage;

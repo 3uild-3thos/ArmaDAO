@@ -10,17 +10,17 @@ import Link from "next/link";
 
 interface IProposalLatestForumComponent {
   forum: IForum;
-  daoId: string;
+  fleetId: string;
   proposalId: string;
 }
 
 const ProposalLatestForumComponent = ({
   forum,
-  daoId,
+  fleetId,
   proposalId,
 }: IProposalLatestForumComponent) => {
   const forumDetailHref = replacePathKey(PATH.fleetForumDetail, {
-    daoId,
+    fleetId,
     proposalId,
     forumId: forum.id,
   });

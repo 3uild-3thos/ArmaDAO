@@ -2,10 +2,10 @@
 import Image from "next/image";
 
 // components
-import FleetCarousel from "@/app/dao/fleet-carousel";
-import FleetList from "@/app/dao/fleet-list";
+import FilterButton from "@/app/fleets/filter-button";
+import FleetCarousel from "@/app/fleets/fleet-carousel";
+import FleetList from "@/app/fleets/fleet-list";
 import { Button } from "@/components/ui/button";
-import FilterButton from "@/dao/filter-button";
 
 const DAOPage = () => {
   return (

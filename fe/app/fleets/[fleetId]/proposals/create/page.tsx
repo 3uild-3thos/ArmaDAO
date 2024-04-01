@@ -6,6 +6,8 @@ import { useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
 // components
+import ProposalSuccessCardComponent from "@/app/fleets/[fleetId]/proposals/create/proposal-success-card";
+import ProposalTypesSelectComponent from "@/app/fleets/[fleetId]/proposals/create/proposal-types-select";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,8 +34,6 @@ import {
 } from "@/components/ui/select";
 import TiptapEditor from "@/components/ui/tiptap-editor";
 import { useToast } from "@/components/ui/use-toast";
-import ProposalSuccessCardComponent from "@/proposals/create/proposal-success-card";
-import ProposalTypesSelectComponent from "@/proposals/create/proposal-types-select";
 
 // lib
 import {

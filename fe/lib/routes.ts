@@ -8,17 +8,17 @@ export const PATH = {
   mothershipProposalDetail: "/proposals/[proposalId]",
 
   // Fleet
-  fleets: "/dao",
-  fleetCreate: "/dao/create",
-  fleetDetail: "/dao/[daoId]",
-  fleetProposals: "/dao/[daoId]/proposals",
-  fleetProposalCreate: "/dao/[daoId]/proposals/create",
-  fleetProposalDetail: "/dao/[daoId]/proposals/[proposalId]",
-  fleetForums: "/dao/[daoId]/forums",
-  fleetForumCreate: "/dao/[daoId]/forums/create",
-  fleetForumDetail: "/dao/[daoId]/forums/[forumId]",
-  fleetTeam: "/dao/[daoId]/team",
-  fleetSettings: "/dao/[daoId]/settings",
+  fleets: "/fleets",
+  fleetCreate: "/fleets/create",
+  fleetDetail: "/fleets/[fleetId]",
+  fleetProposals: "/fleets/[fleetId]/proposals",
+  fleetProposalCreate: "/fleets/[fleetId]/proposals/create",
+  fleetProposalDetail: "/fleets/[fleetId]/proposals/[proposalId]",
+  fleetForums: "/fleets/[fleetId]/forums",
+  fleetForumCreate: "/fleets/[fleetId]/forums/create",
+  fleetForumDetail: "/fleets/[fleetId]/forums/[forumId]",
+  fleetTeam: "/fleets/[fleetId]/team",
+  fleetSettings: "/fleets/[fleetId]/settings",
 };
 
 export const replacePathKey = (

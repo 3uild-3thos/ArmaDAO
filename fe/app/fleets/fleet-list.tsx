@@ -2,7 +2,7 @@
 import { fleets } from "@/mock/fleets";
 
 // components
-import FleetCard from "@/app/dao/fleet-card";
+import FleetCard from "@/app/fleets/fleet-card";
 
 function FleetsList() {
   return (

@@ -1,6 +1,10 @@
 "use client";
 
 // components
+import FungibleForm from "@/app/fleets/create/(forms)/(membership-types)/fungible-form";
+import HybridForm from "@/app/fleets/create/(forms)/(membership-types)/hybrid-form";
+import MembershipTypes from "@/app/fleets/create/(forms)/(membership-types)/membership-types";
+import NFTForm from "@/app/fleets/create/(forms)/(membership-types)/nft-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,10 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import InfoTooltip from "@/components/ui/info-tooltip";
-import FungibleForm from "@/create/(forms)/(membership-types)/fungible-form";
-import HybridForm from "@/create/(forms)/(membership-types)/hybrid-form";
-import MembershipTypes from "@/create/(forms)/(membership-types)/membership-types";
-import NFTForm from "@/create/(forms)/(membership-types)/nft-form";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 

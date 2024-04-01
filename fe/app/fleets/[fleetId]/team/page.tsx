@@ -1,9 +1,8 @@
-import React from "react";
 // components
-import AiSuggestion from "@/team/ai-suggestion";
+import AiSuggestion from "@/app/fleets/[fleetId]/team/ai-suggestion";
+import Nodata from "@/app/fleets/[fleetId]/team/no-data";
+import TeamMember from "@/app/fleets/[fleetId]/team/team-member";
 import { Github, Globe, Linkedin, Twitter } from "lucide-react";
-import TeamMember from "@/team/team-member";
-import Nodata from "@/team/no-data";
 
 // mock
 import { teamMembers } from "@/mock/team-member";

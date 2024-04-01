@@ -5,10 +5,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "a0298e7e-2423-4f4e-a354-8a28cedac426",
       name: "sbgtxXeiJ",
-      logoUri: "https://placekitten.com/527/201",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Direction senior deal police training level team. Enough tough grow poor mean bag. Note beautiful practice goal within.\nSort which school worker deep task instead middle. Drop artist white star.",
-      bannerUri: "https://placekitten.com/86/198",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "http://mclaughlin-turner.org/",
       linkedIn: "https://baker.com/",
       github: "http://www.lane-beasley.com/",
@@ -45,10 +45,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "e1bc7485-0166-4692-a432-51fe2f3b4720",
       name: "uiHIBduHhHsibfYjV",
-      logoUri: "https://placeimg.com/965/835/any",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Draw ready hundred. North rate list old.\nSince never word fall check. Property executive beautiful gas something. Special pass different likely sit dream.\nFront bag senior remain heavy court ground. Least item suddenly why.",
-      bannerUri: "https://dummyimage.com/53x145",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "http://www.merritt.com/",
       linkedIn: "http://walter.info/",
       github: "http://carter.com/",
@@ -85,10 +85,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "284d00e4-3e89-4846-89b3-3bb441a7823b",
       name: "liEWKfpckcDiUrQLEGLv",
-      logoUri: "https://www.lorempixel.com/275/874",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Push establish member dinner couple budget mission. Past perform possible factor would amount face dream.\nBelieve each operation source picture water big me. Standard sing draw end surface face development relate. Total trouble buy physical.",
-      bannerUri: "https://dummyimage.com/483x577",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "https://www.fry-white.biz/",
       linkedIn: "https://www.lopez.com/",
       github: "https://www.sanchez.biz/",
@@ -125,10 +125,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "1dcbe42c-1f47-4cd0-8a7e-e7fefe2c5664",
       name: "iMvQthhnsyiHfvwFTvZNg",
-      logoUri: "https://dummyimage.com/998x939",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Mind indeed ever perhaps trouble marriage item final.\nTeacher say table so travel science hot. Laugh church admit blue push. Simple air his stop popular find. Near president move hit.",
-      bannerUri: "https://placeimg.com/934/799/any",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "http://www.hardy.info/",
       linkedIn: "http://www.garcia-mendez.biz/",
       github: "https://mason.com/",
@@ -165,10 +165,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "787a44f8-9644-4013-be91-deeddf8ac7ec",
       name: "zcOgTuexiniLpMsdSlPYMwVc",
-      logoUri: "https://placekitten.com/886/27",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Experience those order community. Tough under office hope note morning claim. Late attention society tell almost.\nEasy act enough president someone.",
-      bannerUri: "https://dummyimage.com/809x717",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "http://hart.com/",
       linkedIn: "https://le.com/",
       github: "https://www.lane.com/",
@@ -205,10 +205,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "e0d91d4d-212b-435d-9065-f6b8e4faebd3",
       name: "XcYtboBYEVn",
-      logoUri: "https://dummyimage.com/167x416",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Party relationship economy control. Expect left and experience imagine successful. Hospital blue why such military power seem.\nFact option reason simply threat everyone result. Back natural service beat.",
-      bannerUri: "https://dummyimage.com/678x1023",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "https://lyons.biz/",
       linkedIn: "https://www.hansen.com/",
       github: "http://glover-bryant.com/",
@@ -245,10 +245,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "4bcd23e9-1f51-4ccb-b454-99bbf425e3c8",
       name: "xQPHnykagNwSJBaCUqktXza",
-      logoUri: "https://www.lorempixel.com/1007/332",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Either tough difficult spend.\nThese town doctor allow. While model attack happy chair knowledge serious service. Process across plant western class very human.",
-      bannerUri: "https://placeimg.com/470/200/any",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "https://www.kelley.net/",
       linkedIn: "https://schultz-ward.biz/",
       github: "http://schneider.com/",
@@ -285,10 +285,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "7cd589a0-fa5a-4dca-9843-53dd174ea530",
       name: "IjWIgynRFleQ",
-      logoUri: "https://dummyimage.com/713x118",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Report sit night address prove better especially. City material machine whole. Experience office will under institution you drive.\nHundred product course notice great. Same sort agent somebody TV.",
-      bannerUri: "https://dummyimage.com/823x844",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "https://www.hoover.com/",
       linkedIn: "http://www.holden.com/",
       github: "http://www.weber-daugherty.com/",
@@ -325,10 +325,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "684db9c7-13d2-4037-b7ac-90e9b872e4bd",
       name: "PmKmjBTsFab",
-      logoUri: "https://www.lorempixel.com/408/779",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Image cause across hold seat. Hundred beyond fish eye action learn. Skill machine put consider color agreement. Simple huge whole significant another street project first.\nAnswer trip us occur produce. Accept direction job image save.",
-      bannerUri: "https://placekitten.com/467/784",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "https://www.becker-barber.net/",
       linkedIn: "https://smith.com/",
       github: "http://www.maldonado-aguilar.com/",
@@ -365,10 +365,10 @@ export const fleets: Array<IFleet> = [
     info: {
       id: "2c0298a9-776a-4bbc-9ede-e896b859ef37",
       name: "XmmVAJUTyPuML",
-      logoUri: "https://placeimg.com/602/774/any",
+      logoUri: "https://placehold.co/1000x1000",
       description:
         "Whatever road other day. Well else success. Teacher suffer through stock born however his.\nDiscussion laugh order certainly. Look cover college my catch charge sure consumer. Box listen person tonight.",
-      bannerUri: "https://dummyimage.com/52x851",
+      bannerUri: "https://placehold.co/1200x360",
       twitter: "http://www.jordan.com/",
       linkedIn: "http://lee.com/",
       github: "https://www.ortiz-davis.net/",

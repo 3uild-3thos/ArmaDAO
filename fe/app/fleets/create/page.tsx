@@ -1,10 +1,10 @@
 "use client";
 
 // Components
-import Config from "@/app/dao/create/(forms)/dao-config";
-import DaoInfo from "@/app/dao/create/(forms)/fleet-info";
-import TeamInfo from "@/create/(forms)/team-info";
-import Review from "@/create/review";
+import Config from "@/app/fleets/create/(forms)/dao-config";
+import DaoInfo from "@/app/fleets/create/(forms)/fleet-info";
+import TeamInfo from "@/app/fleets/create/(forms)/team-info";
+import Review from "@/app/fleets/create/review";
 import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
 
 export default function CreateDao() {

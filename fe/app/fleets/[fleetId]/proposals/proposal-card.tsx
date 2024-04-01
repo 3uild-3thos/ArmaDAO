@@ -1,12 +1,12 @@
 "use client";
 
+import ProposalStatusBadge from "@/app/fleets/[fleetId]/proposals/proposal-status-badge";
+import ProposalTypeBadge from "@/app/fleets/[fleetId]/proposals/proposal-type-badge";
 import { Card, CardContent } from "@/components/ui/card";
 import LabelValue from "@/components/ui/label-value";
 import shortenAddress from "@/lib/helpers/shortenAddress";
 import { PATH, replacePathKey } from "@/lib/routes";
 import { EProposalStatus, EProposalType } from "@/lib/schema/proposals.schema";
-import ProposalStatusBadge from "@/proposals/proposal-status-badge";
-import ProposalTypeBadge from "@/proposals/proposal-type-badge";
 import { formatDistance } from "date-fns";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -38,10 +38,10 @@ const ProposalCard = ({
   postedBy,
   status,
 }: IProposalCard) => {
-  const { daoId } = useParams();
+  const { fleetId } = useParams();
 
   const proposalHref = replacePathKey(PATH.fleetProposalDetail, {
-    daoId: daoId as string,
+    fleetId: fleetId as string,
     proposalId: id,
   });
 

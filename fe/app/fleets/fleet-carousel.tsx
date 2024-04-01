@@ -1,5 +1,5 @@
 // components
-import FleetCard from "@/app/dao/fleet-card";
+import FleetCard from "@/app/fleets/fleet-card";
 import {
   Carousel,
   CarouselContent,

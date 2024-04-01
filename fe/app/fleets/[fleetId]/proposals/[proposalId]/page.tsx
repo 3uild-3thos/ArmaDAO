@@ -1,13 +1,13 @@
 // component
+import ProposalDateComponent from "@/app/fleets/[fleetId]/proposals/[proposalId]/proposal-date";
+import ProposalInfoComponent from "@/app/fleets/[fleetId]/proposals/[proposalId]/proposal-info";
+import ProposalLatestForum from "@/app/fleets/[fleetId]/proposals/[proposalId]/proposal-latest-forum";
+import ProposalResultsComponent from "@/app/fleets/[fleetId]/proposals/[proposalId]/proposal-results";
+import ProposalStatusBadge from "@/app/fleets/[fleetId]/proposals/proposal-status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import ProposalDateComponent from "@/proposals/[proposalId]/proposal-date";
-import ProposalInfoComponent from "@/proposals/[proposalId]/proposal-info";
-import ProposalLatestForum from "@/proposals/[proposalId]/proposal-latest-forum";
-import ProposalResultsComponent from "@/proposals/[proposalId]/proposal-results";
-import ProposalStatusBadge from "@/proposals/proposal-status-badge";
 
 // lib
 import findLatestForum from "@/lib/helpers/findLatestForum";
@@ -20,11 +20,11 @@ import { proposals } from "@/mock/proposals";
 import ProposalTypeBadge from "../proposal-type-badge";
 
 interface IDAOProposalDetailPage {
-  params: { proposalId: string; daoId: string };
+  params: { proposalId: string; fleetId: string };
 }
 
 const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPage) => {
-  const { daoId, proposalId } = params;
+  const { fleetId, proposalId } = params;
   const proposal = proposals.find((p) => p.id === proposalId);
 
   if (!proposal) {
@@ -94,7 +94,7 @@ const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPage) => {
           />
           <ProposalLatestForum
             forum={latestForum}
-            daoId={daoId}
+            fleetId={fleetId}
             proposalId={proposalId}
           />
           <ProposalResultsComponent />

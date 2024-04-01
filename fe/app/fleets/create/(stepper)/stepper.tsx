@@ -4,9 +4,9 @@
 import { ReactNode } from "react";
 
 // components
-import CompletedNumber from "@/create/(stepper)/completed-number";
-import CurrentNumber from "@/create/(stepper)/current-number";
-import InactiveNumber from "@/create/(stepper)/inactive-number";
+import CompletedNumber from "@/app/fleets/create/(stepper)/completed-number";
+import CurrentNumber from "@/app/fleets/create/(stepper)/current-number";
+import InactiveNumber from "@/app/fleets/create/(stepper)/inactive-number";
 import {
   BadgeInfoIcon,
   ChevronRightIcon,

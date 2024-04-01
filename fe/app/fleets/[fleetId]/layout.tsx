@@ -7,8 +7,8 @@ import { useParams, usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 // components
-import DAOStakeComponent from "@/[daoId]/dao-stake";
-import DAOInfoComponent from "@/app/dao/[daoId]/fleet-info";
+import DAOStakeComponent from "@/app/fleets/[fleetId]/dao-stake";
+import DAOInfoComponent from "@/app/fleets/[fleetId]/fleet-info";
 
 // lib
 import { cn } from "@/lib/utils";
@@ -16,20 +16,20 @@ import { cn } from "@/lib/utils";
 const FleetTabs = [
   {
     label: "Proposals",
-    href: "/dao/[daoId]/proposals",
+    href: "/fleets/[fleetId]/proposals",
   },
   {
     label: "Forums",
-    href: "/dao/[daoId]/forums",
+    href: "/fleets/[fleetId]/forums",
   },
   {
     label: "Team",
-    href: "/dao/[daoId]/team",
+    href: "/fleets/[fleetId]/team",
   },
 ];
 
 const FleetDetailLayout = ({ children }: { children: ReactNode }) => {
-  const { daoId } = useParams();
+  const { fleetId } = useParams();
   const pathname = usePathname();
 
   return (
@@ -56,8 +56,8 @@ const FleetDetailLayout = ({ children }: { children: ReactNode }) => {
       {/* DAO Page Tabs */}
       <div className="flex gap-4 my-4">
         {FleetTabs.map(({ label, href }) => {
-          const matchedHref = daoId
-            ? href.replace("[daoId]", daoId as string)
+          const matchedHref = fleetId
+            ? href.replace("[fleetId]", fleetId as string)
             : href;
           return (
             <Link

@@ -1,5 +1,5 @@
 // components
-import CreateFleetStepper from "@/app/dao/create/(stepper)/stepper";
+import CreateFleetStepper from "@/app/fleets/create/(stepper)/stepper";
 
 const RootLayout = ({
   children,

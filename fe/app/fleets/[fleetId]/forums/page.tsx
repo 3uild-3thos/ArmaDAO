@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 
 // mock
 import { threads } from "@/mock/threads";
@@ -7,12 +6,12 @@ import { threads } from "@/mock/threads";
 // components
 import { ChevronUp, Pencil } from "lucide-react";
 
-import CommentsList from "@/forums/comments-list";
-import Stats from "@/forums/stats";
-import NoData from "@/forums/no-data";
+import CommentsList from "@/app/fleets/[fleetId]/forums/comments-list";
+import NoData from "@/app/fleets/[fleetId]/forums/no-data";
+import Stats from "@/app/fleets/[fleetId]/forums/stats";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 function DAOForumPage() {
   if (threads.length === 0) {

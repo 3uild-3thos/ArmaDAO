@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 // mock
 import { IComment } from "@/lib/schema/threads.schema";
 
 // components
-import { ChevronDown, ChevronUp } from "lucide-react";
-import Comment from "@/forums/comment";
+import Comment from "@/app/fleets/[fleetId]/forums/comment";
 import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface ICommentsListProps {
   comments: IComment[];
