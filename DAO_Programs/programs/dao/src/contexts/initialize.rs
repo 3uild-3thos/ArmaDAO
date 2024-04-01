@@ -12,8 +12,8 @@ use crate::errors::DaoError;
 #[derive(Accounts)]
 pub struct Debugging<'info> {
   #[account(
-        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
-        bump
+/*         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        bump */
     )] 
     pub config: Account<'info, DaoConfig>,
 }
@@ -76,7 +76,7 @@ pub struct Initialize<'info> {
     #[account(
         init,
         payer = initializer,
-        seeds=[b"config", seed.to_le_bytes().as_ref()],
+        seeds=[b"config", seed.to_le_bytes().as_ref() ], 
         bump,
         space = DaoConfig::LEN
     )]

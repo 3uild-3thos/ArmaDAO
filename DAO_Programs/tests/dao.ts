@@ -158,9 +158,15 @@ describe("dao", () => {
   //SubDAO StakeState
   const sub_stake_state = PublicKey.findProgramAddressSync([Buffer.from("stake"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
   //Stake ATA
-  const stakeAta = PublicKey.findProgramAddressSync([Buffer.from("vault"), dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
+  const stakeAta = PublicKey.findProgramAddressSync([Buffer.from("vault"), dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer(), mint.toBuffer()], staking_program.programId)[0];
+  //Stake Nft Ata
+  const stakeAtaNft = PublicKey.findProgramAddressSync([Buffer.from("vault"), dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer(), nft.toBuffer()], staking_program.programId)[0];
+
   //Sub Stake ATA
-  const subdao_stake_ata = PublicKey.findProgramAddressSync([Buffer.from("vault"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer()], staking_program.programId)[0];
+  const subdao_stake_ata = PublicKey.findProgramAddressSync([Buffer.from("vault"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer(), mint.toBuffer()], staking_program.programId)[0];
+  //Sub Stake ATA
+  const subdao_stake_ata_nft = PublicKey.findProgramAddressSync([Buffer.from("vault"), sub_dao_config_key.toBuffer(), dao_admin.publicKey.toBuffer(), nft.toBuffer()], staking_program.programId)[0];
+  //Proposal Program PDAS
   //Proposal Program PDAS
   //Dao proposal
   const proposal = PublicKey.findProgramAddressSync([Buffer.from("proposal"), dao_config_key.toBuffer(), id.toBuffer("le", 8) ], proposal_program.programId)[0];
@@ -178,7 +184,9 @@ describe("dao", () => {
     ownerAta, /* Derived or created ATA for dao_admin for the NFT */
     dao_user,
     stakeAta,
+    stakeAtaNft,
     subdao_stake_ata,
+    subdao_stake_ata_nft,
     /* owner_ata: */ /* Derived or created ATA for dao_user for the NFT */ 
     nft, /* PublicKey of the NFT mint */
     collection,
@@ -315,7 +323,7 @@ describe("dao", () => {
       })
       .then(confirm)
       .then(log);
-  });
+  });*/
 
 /*   it("Initialize FT dao Config Account", async () => {
     const tx = await dao_program.methods
