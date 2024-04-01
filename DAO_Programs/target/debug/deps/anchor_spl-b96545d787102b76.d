@@ -1,0 +1,11 @@
+/home/beliv/wba/anchor/daov1v1/v2/v3/daodevnet/3uild/ArmaDAO/DAO_Programs/target/debug/deps/libanchor_spl-b96545d787102b76.rmeta: /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/lib.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/associated_token.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/mint.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token_2022.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token_interface.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/metadata.rs
+
+/home/beliv/wba/anchor/daov1v1/v2/v3/daodevnet/3uild/ArmaDAO/DAO_Programs/target/debug/deps/anchor_spl-b96545d787102b76.d: /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/lib.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/associated_token.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/mint.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token_2022.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token_interface.rs /home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/metadata.rs
+
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/lib.rs:
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/associated_token.rs:
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/mint.rs:
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token.rs:
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token_2022.rs:
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/token_interface.rs:
+/home/beliv/.cargo/registry/src/index.crates.io-6f17d22bba15001f/anchor-spl-0.29.0/src/metadata.rs:

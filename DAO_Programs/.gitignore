@@ -5,7 +5,6 @@ target/*
 target/deploy/*
 !target/deploy/*-keypair.json
 !target/idl
-target/types
 **/*.rs.bk
 node_modules
 contexts_
