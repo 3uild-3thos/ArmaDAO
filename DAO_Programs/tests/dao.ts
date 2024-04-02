@@ -125,7 +125,8 @@ describe("dao", () => {
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
   //Config PDA
   /* const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)], dao_program.programId)[0]; */
-  const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toBuffer().reverse()], dao_program.programId)[0];
+/*   const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toBuffer().reverse()], dao_program.programId)[0]; */
+const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configteste"), dao_admin.publicKey.toBuffer(), ownerAta.toBuffer()], dao_program.programId)[0];
   console.log("dao config pb", dao_config_key)
   /* const dao_config_key = new anchor.web3.PublicKey("2uxXLa41uLeSaKaUpenF5ngN81PJJqLXfoZBLWut3SFH"); */
   //SubDao Config Pda
@@ -632,7 +633,13 @@ describe("dao", () => {
       .preInstructions([
         ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
       ])  
-      .accounts({config: dao_config_key})
+      .accounts({
+        initializer: dao_admin.publicKey,
+        ownerAta,
+        nft,
+        config: dao_config_key,
+
+      })
       .signers([dao_admin])
 
       .rpc({

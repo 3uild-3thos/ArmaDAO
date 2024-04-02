@@ -31,10 +31,10 @@ pub struct CleanupProposal<'info> {
 
 impl<'info> CleanupProposal<'info> {
     pub fn cleanup_proposal(
-        &mut self
+        &mut self,
     ) -> Result<()> {
         // Try finalize
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config.circulating_supply);
         self.proposal.is_failed()?;
         Ok(())
     }
@@ -43,7 +43,7 @@ impl<'info> CleanupProposal<'info> {
         &mut self
     ) -> Result<()> {
         // Try finalize proposal
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config.circulating_supply);
         // Check if the status is successful
         self.proposal.is_succeeded()?;
         match self.proposal.proposal {

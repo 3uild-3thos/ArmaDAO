@@ -11,9 +11,19 @@ use crate::{validate_nft, REQUIRED_COLLECTION_MINT};
 use crate::errors::DaoError;
 #[derive(Accounts)]
 pub struct Debugging<'info> {
+    #[account(mut)]
+    ///CHECK: THIS IS SAFEEEEE
+    pub initializer: UncheckedAccount<'info>,
+    #[account(
+        mut,
+        associated_token::mint = nft,
+        associated_token::authority = initializer
+    )]
+    pub owner_ata: InterfaceAccount<'info, TokenAccount>,
+    nft: InterfaceAccount<'info, Mint>,
   #[account(
-/*         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
-        bump */
+        seeds=[b"configteste", initializer.key().as_ref(), owner_ata.key().as_ref()],
+        bump = config.config_bump
     )] 
     pub config: Account<'info, DaoConfig>,
 }
@@ -73,10 +83,18 @@ pub struct Initialize<'info> {
         bump
     )]
     pub treasury: SystemAccount<'info>,
-    #[account(
+/*     #[account(
         init,
         payer = initializer,
         seeds=[b"config", seed.to_le_bytes().as_ref() ], 
+        bump,
+        space = DaoConfig::LEN
+    )]
+    pub config: Account<'info, DaoConfig>, */
+    #[account(
+        init,
+        payer = initializer,
+        seeds=[b"configteste", initializer.key().as_ref(), owner_ata.key().as_ref()], 
         bump,
         space = DaoConfig::LEN
     )]
@@ -121,16 +139,17 @@ impl<'info> Initialize<'info> {
         //Indicates whether the DAO is a hybrid type
         //set true if hybrid
         is_hybrid: bool,
+        circulating_supply: u64,
 
     ) -> Result<()> {
-/*             validate_nft!(
+            validate_nft!(
                 self.metadata.collection, 
                 self.collection
             );
             self.config.check_init_valid_quorum(min_quorum)?;
 
- */
-            msg!("Debugging this Sourcery");
+
+            msg!("Dao Created with sucess");
             self.config.set_inner(DaoConfig { 
                 seed, 
                 proposal_fee, 
@@ -151,6 +170,7 @@ impl<'info> Initialize<'info> {
                 auth_bump: bumps.auth, 
                 config_bump: bumps.config, 
                 treasury_bump: bumps.treasury, 
+                circulating_supply
             });
             msg!("seed {}", self.config.seed);      
             msg!("proposal fee {}", self.config.proposal_fee);      
@@ -271,7 +291,8 @@ impl<'info> InitializeSubdao<'info> {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>,
         min_staked_required_proposal : Option<u64>,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         
         validate_nft!(
@@ -302,7 +323,8 @@ impl<'info> InitializeSubdao<'info> {
                 min_staked_required_proposal,
                 allow_sub_dao: false,
                 min_staked_create_subdao: None,
-                is_hybrid
+                is_hybrid,
+                circulating_supply
             });
                 Ok(()) 
    
@@ -363,7 +385,8 @@ impl<'info> InitializeSubdaoToken<'info> {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>,
         min_staked_required_proposal : u64,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         
             self.config.check_allow_sub_dao()?;
@@ -389,7 +412,8 @@ impl<'info> InitializeSubdaoToken<'info> {
                 min_staked_required_proposal: Some(min_staked_required_proposal),
                 allow_sub_dao: false,
                 min_staked_create_subdao: None,
-                is_hybrid
+                is_hybrid,
+                circulating_supply
             });
                 Ok(()) 
    

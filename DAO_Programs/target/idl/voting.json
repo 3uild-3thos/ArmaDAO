@@ -449,6 +449,10 @@
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }

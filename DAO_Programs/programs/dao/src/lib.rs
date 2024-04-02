@@ -36,7 +36,8 @@ pub mod dao {
         min_staked_required_proposal: Option<u64>,
         allow_sub_dao: bool,
         min_staked_create_subdao: Option<u64>,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         ctx.accounts.init(
             seed,
@@ -55,6 +56,7 @@ pub mod dao {
             allow_sub_dao,
             min_staked_create_subdao,
             is_hybrid,
+            circulating_supply
             
         )
     }
@@ -70,7 +72,8 @@ pub mod dao {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
         min_staked_required_proposal: Option<u64>,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -83,7 +86,8 @@ pub mod dao {
             collection_mint,
             mint,
             min_staked_required_proposal,
-            is_hybrid
+            is_hybrid,
+            circulating_supply
         )
     }
     // Instantiate a new SubDAO Config ACC for FT/NFT DAOs
@@ -98,7 +102,8 @@ pub mod dao {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
         min_staked_required_proposal: u64,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -111,7 +116,8 @@ pub mod dao {
             collection_mint,
             mint,
             min_staked_required_proposal,
-            is_hybrid
+            is_hybrid,
+            circulating_supply
         )
     } 
     // Instruction CPI

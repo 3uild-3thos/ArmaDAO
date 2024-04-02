@@ -31,8 +31,8 @@ pub struct DaoConfig {
     pub config_bump: u8,
     pub treasury_bump: u8,
     pub proposal_fee: u64,
-    pub min_quorum: u8,
-    pub min_threshold: u64,
+    pub min_quorum: u8,  //percentage of circulating supply _supply // we receive a u64
+    pub min_threshold: u64, //total number of votes
     pub max_expiry: u64,
     pub evaluation_phase_period: u64,
     pub proposal_count: u64,
@@ -45,6 +45,7 @@ pub struct DaoConfig {
     pub allow_sub_dao: bool,
     pub min_staked_create_subdao: Option<u64>,
     pub is_hybrid: bool,
+    pub circulating_supply: u64,
 }
 
 impl anchor_lang::Owner for DaoConfig {
@@ -71,7 +72,7 @@ impl anchor_lang::AccountDeserialize for DaoConfig {
 impl anchor_lang::AccountSerialize for DaoConfig {}
 
 impl DaoConfig {
-    pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L) + 1  ;
+    pub const LEN: usize = 8 + (6 * U64_L) + (4 * U8_L) + (3 * PUBKEY_L) + (1 + U64_L) + (1 + PUBKEY_L) + (1 + PUBKEY_L) + 1 + (1 + U64_L) + 1 + (1 + U64_L) ;
 
 /*     pub fn init(
         &mut self,

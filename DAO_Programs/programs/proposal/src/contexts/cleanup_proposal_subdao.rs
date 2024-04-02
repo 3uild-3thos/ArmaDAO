@@ -40,7 +40,7 @@ impl<'info> CleanupProposalSubDao<'info> {
         &mut self
     ) -> Result<()> {
         // Try finalize
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config_sub_dao.circulating_supply);
         self.proposal.is_failed()?;
         Ok(())
     }
@@ -49,7 +49,7 @@ impl<'info> CleanupProposalSubDao<'info> {
         &mut self
     ) -> Result<()> {
         // Try finalize proposal
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config_sub_dao.circulating_supply);
         // Check if the status is successful
         self.proposal.is_succeeded()?;
         match self.proposal.proposal {

@@ -6,6 +6,21 @@ export type Dao = {
       "name": "debugging",
       "accounts": [
         {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ownerAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "config",
           "isMut": false,
           "isSigner": false
@@ -150,6 +165,10 @@ export type Dao = {
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -273,6 +292,10 @@ export type Dao = {
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -364,6 +387,10 @@ export type Dao = {
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -514,6 +541,10 @@ export type Dao = {
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }
@@ -696,6 +727,21 @@ export const IDL: Dao = {
       "name": "debugging",
       "accounts": [
         {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ownerAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "config",
           "isMut": false,
           "isSigner": false
@@ -840,6 +886,10 @@ export const IDL: Dao = {
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -963,6 +1013,10 @@ export const IDL: Dao = {
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -1054,6 +1108,10 @@ export const IDL: Dao = {
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -1204,6 +1262,10 @@ export const IDL: Dao = {
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }

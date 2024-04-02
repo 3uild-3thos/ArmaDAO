@@ -6,6 +6,21 @@
       "name": "debugging",
       "accounts": [
         {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ownerAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nft",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "config",
           "isMut": false,
           "isSigner": false
@@ -150,6 +165,10 @@
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -273,6 +292,10 @@
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -364,6 +387,10 @@
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -514,6 +541,10 @@
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }

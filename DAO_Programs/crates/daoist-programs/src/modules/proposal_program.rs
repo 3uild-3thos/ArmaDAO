@@ -108,20 +108,20 @@ impl Proposal {
             self.result = ProposalStatus::Open;
         }
     }
-    pub fn try_finalize(&mut self) {
+    pub fn try_finalize(&mut self, circulating_supply: u64) {
         match self.proposal {
             ProposalType::VoteMultipleChoice => {
                 // Handle the multiple-choice scenario
-                self.finalize_multiple_choice();
+                self.finalize_multiple_choice(circulating_supply);
             },
             _ => {
                 // Handle the preset choice scenario (For, Against, Abstain)
-                self.finalize_preset_choice();
+                self.finalize_preset_choice(circulating_supply);
             },
         }
     }
 
-    pub fn finalize_multiple_choice(&mut self) {
+    pub fn finalize_multiple_choice(&mut self, circulating_supply: u64) {
         // First, check if the proposal has expired.
         if self.check_expiry().is_err() {
             // If the proposal has expired, it fails regardless of the votes.
@@ -131,29 +131,28 @@ impl Proposal {
         // Assuming the proposal has not expired, proceed to check for the winning choice.
         if let Some((_choice, &votes)) = self.vote_counts.iter().enumerate().max_by_key(|&(_idx, &votes)| votes) {
             // Calculate the quorum.
-            let quorum_votes = (self.votes as u128 * (self.quorum / 100) as u128) as u64 ;
+            let quorum_threshold: u64 = ((circulating_supply as u128) * (self.quorum / 100) as u128) as u64;
 
             // Check if the winning choice meets or exceeds the quorum.
-            if votes >= quorum_votes && self.votes >= self.threshold {
+            if votes >= quorum_threshold && self.votes >= self.threshold {
                 // If the winning choice meets the quorum, the proposal succeeds.
                 self.result = ProposalStatus::Succeeded;
         }
         }
     }
 
-    pub fn finalize_preset_choice(&mut self) {
+    pub fn finalize_preset_choice(&mut self, circulating_supply: u64) {
         //vote_counts[0] = for, vote_counts[1] = Against vote_counts[2]  = Abstain
         // Calculate the quorum.
-        let quorum: u64 =
-            ((self.votes - self.vote_counts[2]) as u128 * (self.quorum / 100) as u128) as u64;
+        let quorum_threshold: u64 = ((circulating_supply as u128) * (self.quorum / 100) as u128) as u64;
         // Check if the winning choice meets or exceeds the quorum.    
-        if self.votes >= self.threshold
-            && self.vote_counts[0] >= quorum
+        if self.votes >= self.threshold // Total number of votes > Threshold
+            && self.vote_counts[0] >= quorum_threshold // Total number of votes > 
             && self.check_expiry().is_ok()
         {
             self.result = ProposalStatus::Succeeded
         } else if self.votes < self.threshold && self.check_expiry().is_err()
-            || self.vote_counts[1] >= quorum
+            || self.vote_counts[1] >= quorum_threshold
         {
             self.result = ProposalStatus::Failed
         }

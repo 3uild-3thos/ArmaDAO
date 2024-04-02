@@ -35,7 +35,7 @@ impl<'info> ProposalHandler<'info> {
         require!(choice <= self.proposal.choices, ProposalError::InvalidChoice);
         self.proposal.votes = self.proposal.votes.checked_add(amount).ok_or(ProposalError::Overflow)?;
         self.proposal.vote_counts[choice as usize] = self.proposal.vote_counts[choice as usize].checked_add(amount).ok_or(ProposalError::Overflow)?; 
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config.circulating_supply);
         Ok(())
     }
 
@@ -89,7 +89,7 @@ impl<'info> SubDaoProposalHandler<'info> {
         require!(choice <= self.proposal.choices, ProposalError::InvalidChoice);
         self.proposal.votes = self.proposal.votes.checked_add(amount).ok_or(ProposalError::Overflow)?;
         self.proposal.vote_counts[choice as usize] = self.proposal.vote_counts[choice as usize].checked_add(amount).ok_or(ProposalError::Overflow)?; 
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config_sub_dao.circulating_supply);
         Ok(())
     }
 

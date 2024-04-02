@@ -1302,6 +1302,10 @@ export type Staking = {
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }
@@ -2780,6 +2784,10 @@ export const IDL: Staking = {
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }

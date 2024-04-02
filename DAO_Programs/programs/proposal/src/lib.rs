@@ -163,7 +163,7 @@ pub mod proposal {
     pub fn add_vote_sub_dao(
         ctx: Context<SubDaoProposalHandler>,
         amount: u64,
-        choice: u8
+        choice: u8,
     ) -> Result<()> {
         ctx.accounts.add_vote_sub_dao(amount, choice)
     }
