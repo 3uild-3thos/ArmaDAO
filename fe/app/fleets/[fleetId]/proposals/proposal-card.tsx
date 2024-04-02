@@ -1,0 +1,87 @@
+"use client";
+
+import ProposalStatusBadge from "@/app/fleets/[fleetId]/proposals/proposal-status-badge";
+import ProposalTypeBadge from "@/app/fleets/[fleetId]/proposals/proposal-type-badge";
+import { Card, CardContent } from "@/components/ui/card";
+import LabelValue from "@/components/ui/label-value";
+import shortenAddress from "@/lib/helpers/shortenAddress";
+import { PATH, replacePathKey } from "@/lib/routes";
+import { EProposalStatus, EProposalType } from "@/lib/schema/proposals.schema";
+import { formatDistance } from "date-fns";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
+interface IProposalCard {
+  id: string;
+  title: string;
+  description: string;
+  type: EProposalType;
+  totalVotes: number;
+  pendingVotes: number;
+  startDate: string;
+  endDate: string;
+  postedAt: string;
+  postedBy: string;
+  status: EProposalStatus;
+}
+
+const ProposalCard = ({
+  id,
+  title,
+  description,
+  type,
+  totalVotes,
+  pendingVotes,
+  startDate,
+  endDate,
+  postedAt,
+  postedBy,
+  status,
+}: IProposalCard) => {
+  const { fleetId } = useParams();
+
+  const proposalHref = replacePathKey(PATH.fleetProposalDetail, {
+    fleetId: fleetId as string,
+    proposalId: id,
+  });
+
+  const postedDate = formatDistance(postedAt, new Date(), { addSuffix: true });
+
+  return (
+    <Link href={proposalHref}>
+      <Card className="duration-200 hover:border-muted-light">
+        <CardContent className="flex flex-col gap-4">
+          {/* TODO: Add the type as badge of the card??? */}
+          {/* Title and Status */}
+          <div className="grid grid-cols-12">
+            <div className="flex flex-col items-start col-span-8 gap-2">
+              <div className="text-2xl font-medium">{title}</div>
+              <div className="flex gap-4">
+                <ProposalTypeBadge type={type} />
+                <ProposalStatusBadge status={status} />
+              </div>
+            </div>
+            <div className="flex flex-col items-end col-span-4 gap-2">
+              <div className="text-base text-muted-light">
+                Posted {postedDate} by {shortenAddress(postedBy)}
+              </div>
+            </div>
+          </div>
+          {/* Description */}
+          <div className="text-lg text-muted-light line-clamp-3">
+            {description}
+          </div>
+          {/* Stats */}
+          <div className="flex gap-8 mt-4">
+            <LabelValue label="Total Votes" value={totalVotes} />
+            <LabelValue label="Pending Votes" value={pendingVotes} />
+            <LabelValue label="Start" value={startDate} />
+            <LabelValue label="End" value={endDate} />
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+};
+
+export default ProposalCard;

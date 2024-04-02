@@ -1,3 +1,7 @@
+// metadata
+import meta from "@/lib/metadata.json";
+import type { Metadata } from "next";
+
 // font
 import localFont from "next/font/local";
 
@@ -41,6 +45,53 @@ const gordita = localFont({
   variable: "--font-gordita",
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_HOST_URL ?? ""),
+  title: {
+    default: meta.longName,
+    template: `%s - ${meta.longName}`,
+  },
+  description: meta.description,
+  keywords: meta.keywords,
+  openGraph: {
+    title: meta.longName,
+    description: meta.description,
+    url: process.env.NEXT_PUBLIC_HOST_URL,
+    siteName: meta.longName,
+    locale: "en-US",
+    type: "website",
+    images: [
+      {
+        url: `/assets/og-image.png`,
+        width: 2400,
+        height: 1260,
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    title: meta.longName,
+    card: "summary_large_image",
+    description: meta.description,
+    creator: "@TheArmadaDAO",
+    images: [`/assets/og-image.png`],
+  },
+  icons: {
+    icon: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+  },
+};
 
 const RootLayout = ({
   children,

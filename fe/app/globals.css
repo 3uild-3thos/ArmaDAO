@@ -109,7 +109,7 @@
 
   /* Hide default scrollbar for Webkit browsers (Chrome, Safari) */
   ::-webkit-scrollbar {
-    width: 2px; /* Width of the vertical scrollbar */
+    width: 1px; /* Width of the vertical scrollbar */
   }
 
   /* Remove scrollbar buttons for Webkit browsers */

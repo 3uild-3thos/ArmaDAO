@@ -19,14 +19,13 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/dao/*": ["./app/dao/*"],
-      "@/[daoId]/*": ["./app/dao/[daoId]/*"],
-      "@/proposals/*": ["./app/dao/[daoId]/proposals/*"],
-      "@/forums/*": ["./app/dao/[daoId]/forums/*"],
-      "@/team/*": ["./app/dao/[daoId]/team/*"],
-      "@/create/*": ["./app/dao/create/*"],
-      "@/mint/*": ["./app/mint/*"],
-
+      "@/fleets/*": ["./app/fleets/*"],
+      "@/[fleetId]/*": ["./app/fleets/[fleetId]/*"],
+      "@/proposals/*": ["./app/fleets/[fleetId]/proposals/*"],
+      "@/forums/*": ["./app/fleets/[fleetId]/forums/*"],
+      "@/team/*": ["./app/fleets/[fleetId]/team/*"],
+      "@/create/*": ["./app/fleets/create/*"],
+      "@/mint/*": ["./app/mint/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
