@@ -131,6 +131,7 @@ impl StakeState {
     }
 
     // Make sure the user  users can only unstake tokens that are not currently locked
+    // Make sure the user  users can only vote with tokens that are not currently locked
     pub fn check_locked_amount(&self, amount: u64) -> Result<()> {
         require!(amount <= self.amount - self.locked_amount, CoreError::Overflow);
         Ok(())
@@ -166,12 +167,12 @@ impl StakeState {
         require!(self.amount >= amount, CoreError::InsufficientStake);
         Ok(())
     }
-
+/* 
     // Ensure amount <= self.amount - self.locked_amount
     pub fn check_stake_amount_unlocked(&self, amount: u64) -> Result<()> {
         require!(amount <= self.amount - self.locked_amount, CoreError::InsufficientStake);
         Ok(())
-    }
+    } */
 }    
 
 impl anchor_lang::Id for StakingProgram {

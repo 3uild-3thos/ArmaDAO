@@ -68,7 +68,7 @@ impl<'info> Vote<'info> {
         // Make sure user has staked
         self.stake_state.check_stake_amount(amount)?;
         // Make sure user is voting with unlocked amount
-        self.stake_state.check_stake_amount_unlocked(amount)?;
+        self.stake_state.check_locked_amount(amount)?;
 
         // Add a vote account to the stake state changestate
         let add_account_accounts= StakeHandler {
