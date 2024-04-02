@@ -20,19 +20,19 @@ interface IMembershipTypes {
 const membershipTypes = [
   {
     type: EMembershipType.Fungible,
-    activeIcon: <CoinsIcon size={32} className="text-cyan" />,
+    activeIcon: <CoinsIcon size={32} className="text-magenta-light" />,
     inactiveIcon: <CoinsIcon size={32} className="text-muted" />,
     tooltip: createFleet.membershipTypes.fungible,
   },
   {
     type: EMembershipType.NFT,
-    activeIcon: <ImageIcon size={32} className="text-cyan" />,
+    activeIcon: <ImageIcon size={32} className="text-magenta-light" />,
     inactiveIcon: <ImageIcon size={32} className="text-muted" />,
     tooltip: createFleet.membershipTypes.nft,
   },
   {
     type: EMembershipType.Hybrid,
-    activeIcon: <CombineIcon size={32} className="text-cyan" />,
+    activeIcon: <CombineIcon size={32} className="text-magenta-light" />,
     inactiveIcon: <CombineIcon size={32} className="text-muted" />,
     tooltip: createFleet.membershipTypes.hybrid,
   },

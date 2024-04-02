@@ -52,45 +52,45 @@
   }
 
   .dark {
-    --background: 180, 16.13%, 6.08%;
-    --foreground: 180, 37.5%, 96.86%;
+    --background: 240, 16.13%, 6.08%;
+    --foreground: 240, 37.5%, 96.86%;
 
-    --card: 180, 16.13%, 6.08%;
-    --card-foreground: 180, 37.5%, 96.86%;
+    --card: 240, 16.13%, 6.08%;
+    --card-foreground: 240, 37.5%, 96.86%;
 
-    --popover: 180, 16.13%, 6.08%;
-    --popover-foreground: 180, 37.5%, 96.86%;
+    --popover: 240, 16.13%, 6.08%;
+    --popover-foreground: 240, 37.5%, 96.86%;
 
     --primary: 216.16, 94.81%, 20.1%;
-    --primary-foreground: 180, 16.13%, 6.08%;
+    --primary-foreground: 240, 16.13%, 6.08%;
 
     --secondary: 258.89, 33.4%, 40.73%;
-    --secondary-foreground: 180, 16.13%, 6.08%;
+    --secondary-foreground: 240, 16.13%, 6.08%;
 
     --accent: 195.17, 73.9%, 30.73%;
-    --accent-foreground: 180, 16.13%, 6.08%;
+    --accent-foreground: 240, 16.13%, 6.08%;
 
     --cyan: 180, 86.56%, 50.39%;
-    --cyan-foreground: 180, 16.13%, 6.08%;
+    --cyan-foreground: 240, 16.13%, 6.08%;
 
-    --yellow: 60 85.1% 50%;
-    --yellow-foreground: 180, 16.13%, 6.08%;
+    --yellow: 60, 85.1%, 50%;
+    --yellow-foreground: 240, 16.13%, 6.08%;
 
-    --magenta: 300 85.66% 50.78%;
-    --magenta-foreground: 180, 16.13%, 6.08%;
+    --magenta: 300, 85.66%, 50.78%;
+    --magenta-foreground: 240, 37.5%, 96.86%;
 
-    --muted: 180, 37.5%, 96.86%;
-    --muted-foreground: 180, 16.13%, 6.08%;
+    --muted: 240, 37.5%, 96.86%;
+    --muted-foreground: 240, 16.13%, 6.08%;
 
-    --success: 89.71 81.75% 49.41%;
-    --success-foreground: 180, 16.13%, 6.08%;
+    --success: 89.71, 81.75%, 49.41%;
+    --success-foreground: 240, 16.13%, 6.08%;
 
-    --destructive: 0 86.56% 50.39%;
-    --destructive-foreground: 180, 37.5%, 96.86%;
+    --destructive: 0, 86.56%, 50.39%;
+    --destructive-foreground: 240, 37.5%, 96.86%;
 
-    --border: 180, 37.5%, 96.86%;
-    --input: 180, 37.5%, 96.86%;
-    --ring: 180, 37.5%, 96.86%;
+    --border: 240, 37.5%, 96.86%;
+    --input: 240, 37.5%, 96.86%;
+    --ring: 240, 37.5%, 96.86%;
   }
 
   * {
