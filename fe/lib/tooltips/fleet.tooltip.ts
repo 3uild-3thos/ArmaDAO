@@ -9,9 +9,9 @@ export const createFleet = {
     proposalFee: "The SOL payment for each proposal made.",
     mintAddress: "The mint address of the fungible token.",
     collectionMintAddress: "The mint address of the NFT collection.",
-    minQuorum:
+    quorum:
       "The minimum amount of participation required for a vote to be considered valid.",
-    minThreshold: "Minimum amount of staked assets to vote.",
+    threshold: "Minimum amount of staked assets to vote.",
     maxExpiry: "Max expiry is...",
     evaluationPhasePeriod:
       "Minimum duration for the evaluation phase of a proposal.",

@@ -16,7 +16,10 @@ const InfoTooltip = ({ content, className }: IInfoTooltip) => {
 
   return (
     <Tooltip>
-      <TooltipTrigger className={cn("mx-2", className)} onClick={handleClick}>
+      <TooltipTrigger
+        className={cn("mx-2 cursor-help", className)}
+        onClick={handleClick}
+      >
         <InfoIcon size={12} className="pointer-events-none" />
       </TooltipTrigger>
       <TooltipContent>{content}</TooltipContent>

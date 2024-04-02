@@ -8,6 +8,7 @@ import {
 import InfoTooltip from "@/components/ui/info-tooltip";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 
 // lib
@@ -82,12 +83,12 @@ const NFTForm = ({ form }: INFTForm) => {
           )}
         />
       ) : (
-        <p className="text-sm text-muted-light p-4 rounded-lg border-default">
+        <p className="p-4 text-sm rounded-lg text-muted-light border-default">
           NFT collection creation is coming soon...
         </p>
       )}
 
-      <p className="inline text-sm text-gray-500 mt-8">
+      <p className="inline mt-8 text-sm text-gray-500">
         Initial Fleet DAO Configurations{" "}
         <InfoTooltip
           content={createFleet.config.initialDaoConfig}
@@ -134,20 +135,26 @@ const NFTForm = ({ form }: INFTForm) => {
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
                     <div className="inline col-span-2">
-                      Min. Quorum
+                      Quorum
                       <InfoTooltip
-                        content={createFleet.config.minQuorum}
+                        content={createFleet.config.quorum}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-3 space-y-2">
-                      <Input
-                        type="number"
+                    <div className="flex flex-col col-span-3 space-y-2">
+                      <Slider
+                        defaultValue={[0]}
+                        max={100}
+                        step={1}
+                        min={0}
                         {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={String(field.value)}
+                        value={[field.value]}
+                        onValueChange={(value) => field.onChange(value[0])}
                       />
                       <FormMessage />
+                      <span className="self-end text-sm text-muted">
+                        {field.value}%
+                      </span>
                     </div>
                   </div>
                 </FormControl>
@@ -162,20 +169,26 @@ const NFTForm = ({ form }: INFTForm) => {
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
                     <div className="inline col-span-2">
-                      Min. Threshold
+                      Threshold
                       <InfoTooltip
-                        content={createFleet.config.minThreshold}
+                        content={createFleet.config.threshold}
                         className="mt-1"
                       />
                     </div>
-                    <div className="col-span-3 space-y-2">
-                      <Input
-                        type="number"
+                    <div className="flex flex-col col-span-3 space-y-2">
+                      <Slider
+                        defaultValue={[0]}
+                        max={100}
+                        step={1}
+                        min={0}
                         {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={String(field.value)}
+                        value={[field.value]}
+                        onValueChange={(value) => field.onChange(value[0])}
                       />
                       <FormMessage />
+                      <span className="self-end text-sm text-muted">
+                        {field.value}%
+                      </span>
                     </div>
                   </div>
                 </FormControl>
@@ -190,7 +203,7 @@ const NFTForm = ({ form }: INFTForm) => {
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
                     <div className="inline col-span-2">
-                      Max Expiry
+                      Proposal Expiry
                       <InfoTooltip
                         content={createFleet.config.maxExpiry}
                         className="mt-1"
@@ -221,7 +234,7 @@ const NFTForm = ({ form }: INFTForm) => {
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
                     <div className="inline col-span-2">
-                      Evaluation Phase Period
+                      Proposal Evaluation Period
                       <InfoTooltip
                         content={createFleet.config.evaluationPhasePeriod}
                         className="mt-1"
