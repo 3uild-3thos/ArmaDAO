@@ -1,11 +1,9 @@
-import React from "react";
-
 // next
 import Image from "next/image";
 
 // components
-import { Pin } from "lucide-react";
 import timeAgo from "@/lib/helpers/timeAgo";
+import { Pin } from "lucide-react";
 
 interface ICommentProps {
   content: string;
@@ -20,10 +18,10 @@ function Comment({ content, pinned = false, createdAt }: ICommentProps) {
         <div className="w-fit h-fit">
           <Image
             src={"https://placehold.co/24x24"}
-            alt={"DAO Banner"}
+            alt={"Fleet Logo"}
             width={24}
             height={24}
-            className=" rounded-2xl object-cover shadow-2xl"
+            className="object-cover shadow-2xl rounded-2xl"
           />
         </div>
       </div>

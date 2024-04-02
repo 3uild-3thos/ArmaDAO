@@ -11,7 +11,7 @@ import { MonitorUp, Wallet } from "lucide-react";
 // lib
 import { cn } from "@/lib/utils";
 
-const DAOStakeComponent = ({ className }: { className?: string }) => {
+const FleetStakeComponent = ({ className }: { className?: string }) => {
   const [selectedNFTs, setSelectedNFTs] = useState<Array<number>>([]);
 
   const handleSelectNFT = (index: number) => {
@@ -97,4 +97,4 @@ const DAOStakeComponent = ({ className }: { className?: string }) => {
   );
 };
 
-export default DAOStakeComponent;
+export default FleetStakeComponent;

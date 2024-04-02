@@ -7,8 +7,8 @@ import { useParams, usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 // components
-import DAOStakeComponent from "@/app/fleets/[fleetId]/dao-stake";
-import DAOInfoComponent from "@/app/fleets/[fleetId]/fleet-info";
+import FleetInfoComponent from "@/app/fleets/[fleetId]/fleet-info";
+import FleetStakeComponent from "@/app/fleets/[fleetId]/fleet-stake";
 
 // lib
 import { cn } from "@/lib/utils";
@@ -34,26 +34,26 @@ const FleetDetailLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="flex flex-col gap-16">
-      {/* DAO Banner */}
+      {/* Fleet Banner */}
       <Image
-        src={"https://placehold.co/1920x1080?text=DAO+Banner"}
-        alt={"DAO Banner"}
+        src={"https://placehold.co/1920x1080?text=Fleet+Banner"}
+        alt={"Fleet Banner"}
         width={1920}
         height={1080}
         className="max-h-[20rem] rounded-2xl object-cover shadow-2xl"
       />
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {/* DAO Info (Left) */}
-        <DAOInfoComponent className="sm:pr-8" />
+        {/* Fleet Info (Left) */}
+        <FleetInfoComponent className="sm:pr-8" />
 
         {/* Divider */}
 
-        {/* DAO Stats (Right) */}
-        <DAOStakeComponent className="border-t border-gray-200/10 sm:border-l sm:border-t-0 sm:pl-8" />
+        {/* Fleet Stats (Right) */}
+        <FleetStakeComponent className="border-t border-gray-200/10 sm:border-l sm:border-t-0 sm:pl-8" />
       </div>
 
-      {/* DAO Page Tabs */}
+      {/* Fleet Page Tabs */}
       <div className="flex gap-4 my-4">
         {FleetTabs.map(({ label, href }) => {
           const matchedHref = fleetId

@@ -11,7 +11,7 @@ import { ChevronLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Fragment, ReactNode } from "react";
 
-const DAOLayout = ({ children }: { children: ReactNode }) => {
+const FleetsLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean); // Removes empty segments
 
@@ -22,8 +22,8 @@ const DAOLayout = ({ children }: { children: ReactNode }) => {
     let name = segment;
 
     // Example of custom naming (you might have more complex logic)
-    if (segment === "dao") {
-      name = "DAO"; // Static rename for simplicity
+    if (segment === "fleet") {
+      name = "Fleet"; // Static rename for simplicity
     }
 
     return { name, href };
@@ -70,4 +70,4 @@ const DAOLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default DAOLayout;
+export default FleetsLayout;

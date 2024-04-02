@@ -19,12 +19,12 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/fleets/*": ["app/fleets/*"],
-      "@/[fleetId]/*": ["app/fleets/[fleetId]/*"],
-      "@/proposals/*": ["app/fleets/[fleetId]/proposals/*"],
-      "@/forums/*": ["app/fleets/[fleetId]/forums/*"],
-      "@/team/*": ["app/fleets/[fleetId]/team/*"],
-      "@/create/*": ["app/fleets/create/*"],
+      "@/fleets/*": ["./app/fleets/*"],
+      "@/[fleetId]/*": ["./app/fleets/[fleetId]/*"],
+      "@/proposals/*": ["./app/fleets/[fleetId]/proposals/*"],
+      "@/forums/*": ["./app/fleets/[fleetId]/forums/*"],
+      "@/team/*": ["./app/fleets/[fleetId]/team/*"],
+      "@/create/*": ["./app/fleets/create/*"],
       "@/mint/*": ["./app/mint/*"]
     }
   },

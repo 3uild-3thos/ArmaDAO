@@ -54,7 +54,7 @@ function FleetConfig() {
         <form className="space-y-8 min-h-[30rem]">
           <div className="flex flex-col gap-8">
             <p className="text-sm text-gray-500">
-              How to be a member of your DAO?
+              How to be a member of your Fleet DAO?
             </p>
 
             <div className="flex flex-col gap-8">

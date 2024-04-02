@@ -1,13 +1,13 @@
 "use client";
 
 // Components
-import Config from "@/app/fleets/create/(forms)/dao-config";
-import DaoInfo from "@/app/fleets/create/(forms)/fleet-info";
+import Config from "@/app/fleets/create/(forms)/fleet-config";
+import FleetInfo from "@/app/fleets/create/(forms)/fleet-info";
 import TeamInfo from "@/app/fleets/create/(forms)/team-info";
 import Review from "@/app/fleets/create/review";
 import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
 
-export default function CreateDao() {
+export default function CreateFleet() {
   const { page } = useCreateFleet();
 
   switch (page) {
@@ -18,6 +18,6 @@ export default function CreateDao() {
     case 3:
       return <Review />;
     default:
-      return <DaoInfo />;
+      return <FleetInfo />;
   }
 }

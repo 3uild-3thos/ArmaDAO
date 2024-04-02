@@ -1,13 +1,12 @@
 "use client";
-import React from "react";
 
 // next
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 // components
-import { Github, Globe, Linkedin, Pencil, Trash2, Twitter } from "lucide-react";
 import { ITeamMember } from "@/lib/schema/team-member.schema";
+import { Github, Globe, Linkedin, Pencil, Trash2, Twitter } from "lucide-react";
 
 interface TeamMemberProps {
   member: ITeamMember;
@@ -23,19 +22,19 @@ function TeamMember({ member }: TeamMemberProps) {
   };
 
   return (
-    <div className="p-4 flex gap-4 ">
+    <div className="flex gap-4 p-4 ">
       <div className="h-fit w-fit">
         <Image
           src={"https://placehold.co/100x100"}
-          alt={"DAO Banner"}
+          alt={"Fleet Banner"}
           width={100}
           height={100}
-          className="rounded-lg object-cover shadow-2xl"
+          className="object-cover rounded-lg shadow-2xl"
         />
       </div>
 
-      <div className="flex flex-col gap-3 w-full">
-        <div className="flex justify-between items-start">
+      <div className="flex flex-col w-full gap-3">
+        <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium">{member.name}</p>
             <p className="text-sm"> {member.position}</p>

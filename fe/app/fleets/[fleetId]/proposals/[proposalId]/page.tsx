@@ -17,13 +17,13 @@ import { IChoice } from "@/lib/schema/proposals.schema";
 // mock
 import { forums } from "@/mock/forums";
 import { proposals } from "@/mock/proposals";
-import ProposalTypeBadge from "../proposal-type-badge";
+import ProposalTypeBadge from "@/proposals/proposal-type-badge";
 
-interface IDAOProposalDetailPage {
+interface IFleetProposalDetailPage {
   params: { proposalId: string; fleetId: string };
 }
 
-const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPage) => {
+const FleetProposalDetailPage = ({ params }: IFleetProposalDetailPage) => {
   const { fleetId, proposalId } = params;
   const proposal = proposals.find((p) => p.id === proposalId);
 
@@ -104,4 +104,4 @@ const DAOProposalDetailPage = ({ params }: IDAOProposalDetailPage) => {
   );
 };
 
-export default DAOProposalDetailPage;
+export default FleetProposalDetailPage;

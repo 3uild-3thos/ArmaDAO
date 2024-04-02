@@ -7,15 +7,15 @@ import FleetCarousel from "@/app/fleets/fleet-carousel";
 import FleetList from "@/app/fleets/fleet-list";
 import { Button } from "@/components/ui/button";
 
-const DAOPage = () => {
+const FleetsPage = () => {
   return (
     <div className="flex flex-col gap-12">
-      <p className="font-medium text-3xl">Explore Fleets</p>
-      <div className="w-full flex justify-center">
+      <p className="text-3xl font-medium">Explore Fleets</p>
+      <div className="flex justify-center w-full">
         <div className="h-fit w-fit">
           <Image
             src={"https://placehold.co/1200x360"}
-            alt={"DAO Banner"}
+            alt={"Fleet Banner"}
             width={1200}
             height={360}
             className="rounded-[2rem] object-cover shadow-2xl"
@@ -29,26 +29,26 @@ const DAOPage = () => {
       <div className="flex justify-between">
         <div className="flex gap-2">
           <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">All</p>
+            <p className="text-sm font-medium text-gray-50">All</p>
           </Button>
           <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">Trending</p>
+            <p className="text-sm font-medium text-gray-50">Trending</p>
           </Button>
           <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">Upcoming</p>
+            <p className="text-sm font-medium text-gray-50">Upcoming</p>
           </Button>
           <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">Finished</p>
-          </Button>
-
-          {/* TODO: Only show this if the user has the NFT */}
-          <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">Favourites</p>
+            <p className="text-sm font-medium text-gray-50">Finished</p>
           </Button>
 
           {/* TODO: Only show this if the user has the NFT */}
           <Button variant={"ghost"} className="px-3 py-4">
-            <p className="text-gray-50 font-medium text-sm">Your Sub-Fleets</p>
+            <p className="text-sm font-medium text-gray-50">Favourites</p>
+          </Button>
+
+          {/* TODO: Only show this if the user has the NFT */}
+          <Button variant={"ghost"} className="px-3 py-4">
+            <p className="text-sm font-medium text-gray-50">Your Sub-Fleets</p>
           </Button>
         </div>
 
@@ -64,4 +64,4 @@ const DAOPage = () => {
   );
 };
 
-export default DAOPage;
+export default FleetsPage;

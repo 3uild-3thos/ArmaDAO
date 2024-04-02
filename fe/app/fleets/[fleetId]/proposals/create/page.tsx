@@ -47,7 +47,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon, Plus, XSquareIcon } from "lucide-react";
 
-const DAOProposalCreatePage = () => {
+const FleetProposalCreatePage = () => {
   /* * * * * *
    * States
    * * * * * */
@@ -560,4 +560,4 @@ const DAOProposalCreatePage = () => {
   );
 };
 
-export default DAOProposalCreatePage;
+export default FleetProposalCreatePage;

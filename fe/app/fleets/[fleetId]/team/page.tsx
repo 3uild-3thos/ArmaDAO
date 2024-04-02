@@ -7,10 +7,10 @@ import { Github, Globe, Linkedin, Twitter } from "lucide-react";
 // mock
 import { teamMembers } from "@/mock/team-member";
 
-function DAOTeamPage() {
+function FleetTeamPage() {
   return (
     <div className="grid grid-cols-12">
-      <div className="col-span-8 flex flex-col gap-8">
+      <div className="flex flex-col col-span-8 gap-8">
         {teamMembers.length === 0 ? (
           <Nodata />
         ) : (
@@ -47,4 +47,4 @@ function DAOTeamPage() {
   );
 }
 
-export default DAOTeamPage;
+export default FleetTeamPage;

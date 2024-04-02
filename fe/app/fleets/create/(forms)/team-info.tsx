@@ -53,7 +53,7 @@ function TeamInfo() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <p className="inline text-sm text-gray-500">
-            Who&apos;s the main team behind this DAO?{" "}
+            Who&apos;s the main team behind this Fleet DAO?{" "}
             <InfoTooltip content={createFleet.team.title} className="mt-2" />
           </p>
 

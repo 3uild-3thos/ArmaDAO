@@ -13,7 +13,7 @@ import Stats from "@/app/fleets/[fleetId]/forums/stats";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-function DAOForumPage() {
+function FleetForumPage() {
   if (threads.length === 0) {
     return (
       <div className="grid grid-cols-12">
@@ -29,15 +29,15 @@ function DAOForumPage() {
           return (
             <div className="flex gap-1 p-4" key={thread.id}>
               <div className="p-2">
-                <div className="h-4 w-4 bg-cyan-200 rounded-full"></div>
+                <div className="w-4 h-4 rounded-full bg-cyan-200"></div>
               </div>
 
-              <div className="flex gap-4 flex-col border border-gray-600 p-4 rounded-xl ">
+              <div className="flex flex-col gap-4 p-4 border border-gray-600 rounded-xl ">
                 <div className="flex items-center justify-between">
-                  <div className="bg-gray-800 w-fit py-2 px-4 rounded-3xl">
+                  <div className="px-4 py-2 bg-gray-800 w-fit rounded-3xl">
                     <p className="text-xs font-medium">{thread.type}</p>
                   </div>
-                  <p className="text-gray-500 text-xs">{thread.createdAt}</p>
+                  <p className="text-xs text-gray-500">{thread.createdAt}</p>
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -55,7 +55,7 @@ function DAOForumPage() {
                       <Pencil size={16} />
                     </Button>
                   </div>
-                  <p className="text-s m font-normal">{thread.description}</p>
+                  <p className="font-normal text-s m">{thread.description}</p>
 
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
@@ -74,8 +74,8 @@ function DAOForumPage() {
                       </Button>
                     </div>
 
-                    <div className="bg-gray-700 p-3 flex flex-col gap-2">
-                      <p className="text-gray-400 text-sm font-medium">
+                    <div className="flex flex-col gap-2 p-3 bg-gray-700">
+                      <p className="text-sm font-medium text-gray-400">
                         {thread.changesTitle}
                       </p>
                       <p className="text-sm font-normal text-gray-400">
@@ -106,4 +106,4 @@ function DAOForumPage() {
   );
 }
 
-export default DAOForumPage;
+export default FleetForumPage;
