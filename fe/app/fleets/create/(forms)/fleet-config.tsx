@@ -43,6 +43,7 @@ function FleetConfig() {
   }
 
   const handleSelectMembershipType = (type: EMembershipType) => {
+    form.clearErrors();
     form.setValue("membershipType", type);
   };
 

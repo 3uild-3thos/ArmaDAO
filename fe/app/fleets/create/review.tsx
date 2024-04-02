@@ -48,7 +48,7 @@ function Review() {
         <p className="text-xl font-medium">
           Your Fleet DAO is ready to launch!
         </p>
-        <p className="text-gray-500 font-medium text-sm">
+        <p className="text-sm font-medium text-gray-500">
           Make sure that all of the information below are correct.
         </p>
       </div>
@@ -61,10 +61,10 @@ function Review() {
         <AccordionItem value="fleet-review-1">
           <AccordionTrigger>Fleet DAO Info</AccordionTrigger>
           <AccordionContent>
-            <div className="px-8 pb-8 pt-4">
+            <div className="px-8 pt-4 pb-8">
               <div className="flex flex-col gap-8">
                 {bannerPreview && (
-                  <div className="h-64 relative">
+                  <div className="relative h-64">
                     <Image
                       src={bannerPreview}
                       alt={"Banner Preview"}
@@ -94,14 +94,14 @@ function Review() {
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Twitter Link</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetInfo.twitter || "-"}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Website Link</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetInfo.website || "-"}
                       </div>
                     </div>
@@ -109,14 +109,14 @@ function Review() {
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Github Link</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetInfo.github || "-"}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">LinkedIn Link</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetInfo.linkedIn || "-"}
                       </div>
                     </div>
@@ -129,7 +129,7 @@ function Review() {
         <AccordionItem value="fleet-review-2">
           <AccordionTrigger>Fleet DAO Config</AccordionTrigger>
           <AccordionContent>
-            <div className="px-8 pb-8 pt-4">
+            <div className="px-8 pt-4 pb-8">
               <div className="flex flex-col gap-8">
                 <div className="flex gap-8">
                   <div className="flex flex-col">
@@ -156,19 +156,18 @@ function Review() {
                       </div>
                       {fleetConfig.membershipType ===
                         EMembershipType.Fungible && (
-                        <div className="col-span-4 border-default p-4 overflow-x-auto">
+                        <div className="col-span-4 p-4 overflow-x-auto border-default">
                           {(fleetConfig.config as IFTMembership)?.mint || "-"}
                         </div>
                       )}
                       {fleetConfig.membershipType === EMembershipType.NFT && (
-                        <div className="col-span-4 border-default p-4 overflow-x-auto">
-                          {(fleetConfig.config as INFTMembership)
-                            ?.collectionMint || "-"}
+                        <div className="col-span-4 p-4 overflow-x-auto border-default">
+                          {(fleetConfig.config as INFTMembership)?.mint || "-"}
                         </div>
                       )}
                       {fleetConfig.membershipType ===
                         EMembershipType.Hybrid && (
-                        <div className="col-span-4 border-default p-4 overflow-x-auto">
+                        <div className="col-span-4 p-4 overflow-x-auto border-default">
                           {(fleetConfig.config as IHybridMembership)?.mint ||
                             "-"}
                         </div>
@@ -177,28 +176,28 @@ function Review() {
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Proposal Fee</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetConfig.config?.proposalFee || "-"}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Min. Quorum</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetConfig.config?.minQuorum || "-"}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Min. Threshold</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetConfig.config?.minThreshold || "-"}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Max Expiry</div>
-                      <div className="col-span-4 border-default p-4">
+                      <div className="col-span-4 p-4 border-default">
                         {fleetConfig.config?.maxExpiry || "-"}
                       </div>
                     </div>
@@ -207,7 +206,7 @@ function Review() {
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Evaluation Phase Period</div>
-                      <div className="col-span-4 border-default p-4">
+                      <div className="col-span-4 p-4 border-default">
                         {fleetConfig.config?.evaluationPhasePeriod || "-"}
                       </div>
                     </div>
@@ -219,14 +218,14 @@ function Review() {
                           To Create Proposals
                         </p>
                       </div>
-                      <div className="col-span-4 border-default p-4">
+                      <div className="col-span-4 p-4 border-default">
                         {fleetConfig.config?.minStakedRequiredProposal || "-"}
                       </div>
                     </div>
 
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Evaluation Phase Period</div>
-                      <div className="col-span-4 border-default p-4">
+                      <div className="col-span-4 p-4 border-default">
                         {fleetConfig.config?.allowSubfleetCreation
                           ? "Yes"
                           : "No"}
@@ -240,7 +239,7 @@ function Review() {
                           To Create Subfleets
                         </p>
                       </div>
-                      <div className="col-span-4 border-default p-4">
+                      <div className="col-span-4 p-4 border-default">
                         {fleetConfig.config?.minStakedToCreateSubfleet || "-"}
                       </div>
                     </div>
@@ -253,7 +252,7 @@ function Review() {
         <AccordionItem value="fleet-review-3">
           <AccordionTrigger>Team Details</AccordionTrigger>
           <AccordionContent>
-            <div className="px-8 pb-8 pt-4">
+            <div className="px-8 pt-4 pb-8">
               <div className="flex flex-col gap-8">
                 <div className="flex gap-8">
                   <div className="flex flex-col">
@@ -274,7 +273,7 @@ function Review() {
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Team Name</div>
-                      <div className="col-span-4 border-default p-4 overflow-x-auto">
+                      <div className="col-span-4 p-4 overflow-x-auto border-default">
                         {fleetTeam?.name || "-"}
                       </div>
                     </div>
@@ -287,14 +286,14 @@ function Review() {
                       <div className="flex flex-col gap-8">
                         <div className="grid grid-cols-6 gap-4">
                           <div className="col-span-2">Twitter Profile</div>
-                          <div className="col-span-4 border-default p-4 overflow-x-auto">
+                          <div className="col-span-4 p-4 overflow-x-auto border-default">
                             {fleetTeam?.twitter || "-"}
                           </div>
                         </div>
 
                         <div className="grid grid-cols-6 gap-4">
                           <div className="col-span-2">LinkedIn Profile</div>
-                          <div className="col-span-4 border-default p-4 overflow-x-auto">
+                          <div className="col-span-4 p-4 overflow-x-auto border-default">
                             {fleetTeam?.linkedIn || "-"}
                           </div>
                         </div>
@@ -302,13 +301,13 @@ function Review() {
                       <div className="flex flex-col gap-8">
                         <div className="grid grid-cols-6 gap-4">
                           <div className="col-span-2">Github Profile</div>
-                          <div className="col-span-4 border-default p-4 overflow-x-auto">
+                          <div className="col-span-4 p-4 overflow-x-auto border-default">
                             {fleetTeam?.github || "-"}
                           </div>
                         </div>
                         <div className="grid grid-cols-6 gap-4">
                           <div className="col-span-2">Team Website</div>
-                          <div className="col-span-4 border-default p-4 overflow-x-auto">
+                          <div className="col-span-4 p-4 overflow-x-auto border-default">
                             {fleetTeam?.website || "-"}
                           </div>
                         </div>
@@ -323,7 +322,7 @@ function Review() {
       </Accordion>
 
       {/* TODO: Create a reusable component with all the variants */}
-      <div className="flex justify-between mt-8 w-full">
+      <div className="flex justify-between w-full mt-8">
         <Button variant={"outline"} onClick={handleBackPage}>
           <ArrowLeftIcon size={16} className="mr-2" /> Back
         </Button>

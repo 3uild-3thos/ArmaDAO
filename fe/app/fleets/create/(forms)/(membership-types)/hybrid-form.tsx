@@ -8,8 +8,8 @@ import {
 import InfoTooltip from "@/components/ui/info-tooltip";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
+import BaseConfigForm from "@/create/(forms)/(membership-types)/base-config-form";
 
 // lib
 import { IFleetConfig } from "@/lib/schema/fleet.schema";
@@ -72,7 +72,11 @@ const HybridForm = ({ form }: IHybridForm) => {
                     <InfoTooltip content={createFleet.config.mintAddress} />
                   </div>
                   <div className="col-span-2 space-y-2">
-                    <Input placeholder="6cut...cDU" {...field} />
+                    <Input
+                      placeholder="6cut...cDU"
+                      {...field}
+                      value={field.value}
+                    />
                     <FormMessage />
                   </div>
                 </div>
@@ -95,199 +99,7 @@ const HybridForm = ({ form }: IHybridForm) => {
       </p>
 
       <div className="grid grid-cols-2 gap-16">
-        <div className="flex flex-col gap-8">
-          <FormField
-            control={form.control}
-            name="config.proposalFee"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-2">
-                      Proposal Fee
-                      <InfoTooltip
-                        content={createFleet.config.proposalFee}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div className="col-span-3 space-y-2">
-                      <Input
-                        type="number"
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={String(field.value)}
-                      />
-                      <FormMessage />
-                    </div>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="config.minQuorum"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-2">
-                      Quorum
-                      <InfoTooltip
-                        content={createFleet.config.quorum}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div className="flex flex-col col-span-3 space-y-2">
-                      <Slider
-                        defaultValue={[0]}
-                        max={100}
-                        step={1}
-                        min={0}
-                        {...field}
-                        value={[field.value]}
-                        onValueChange={(value) => field.onChange(value[0])}
-                      />
-                      <FormMessage />
-                      <span className="self-end text-sm text-muted">
-                        {field.value}%
-                      </span>
-                    </div>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="config.minThreshold"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-2">
-                      Threshold
-                      <InfoTooltip
-                        content={createFleet.config.threshold}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div className="flex flex-col col-span-3 space-y-2">
-                      <Slider
-                        defaultValue={[0]}
-                        max={100}
-                        step={1}
-                        min={0}
-                        {...field}
-                        value={[field.value]}
-                        onValueChange={(value) => field.onChange(value[0])}
-                      />
-                      <FormMessage />
-                      <span className="self-end text-sm text-muted">
-                        {field.value}%
-                      </span>
-                    </div>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="config.maxExpiry"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-2">
-                      Proposal Expiry
-                      <InfoTooltip
-                        content={createFleet.config.maxExpiry}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div className="col-span-3 space-y-2">
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="flex flex-col gap-2">
-                          <Input
-                            type="number"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(Number(e.target.value))
-                            }
-                            value={String(field.value)}
-                          />
-                          <span className="text-xs text-muted">hours</span>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <Input
-                            type="number"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(Number(e.target.value))
-                            }
-                            value={String(field.value)}
-                          />
-                          <span className="text-xs text-muted">minutes</span>
-                        </div>
-                      </div>
-                      <FormMessage />
-                    </div>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="flex flex-col gap-8">
-          <FormField
-            control={form.control}
-            name="config.evaluationPhasePeriod"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="grid grid-cols-5 gap-4">
-                    <div className="inline col-span-2">
-                      Proposal Evaluation
-                      <InfoTooltip
-                        content={createFleet.config.evaluationPhasePeriod}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div className="col-span-3 space-y-2">
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="flex flex-col gap-2">
-                          <Input
-                            type="number"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(Number(e.target.value))
-                            }
-                            value={String(field.value)}
-                          />
-                          <span className="text-xs text-muted">hours</span>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <Input
-                            type="number"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(Number(e.target.value))
-                            }
-                            value={String(field.value)}
-                          />
-                          <span className="text-xs text-muted">minutes</span>
-                        </div>
-                      </div>
-                      <FormMessage />
-                    </div>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
+        <BaseConfigForm form={form}>
           <FormField
             control={form.control}
             name="config.minStakedRequiredProposal"
@@ -382,7 +194,7 @@ const HybridForm = ({ form }: IHybridForm) => {
               )}
             />
           )}
-        </div>
+        </BaseConfigForm>
       </div>
     </>
   );
