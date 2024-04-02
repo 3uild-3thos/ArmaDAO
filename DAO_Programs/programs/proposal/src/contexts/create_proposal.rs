@@ -1,5 +1,5 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
-use daoist_programs::modules::{CoreProgram, DaoConfig, StakingProgram, StakeState, CoreHandler, Proposal, ProposalType, add_proposal};
+use daoist_programs::modules::{CoreProgram, DaoConfig, StakingProgram, StakeState, Proposal, ProposalType};
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
@@ -103,7 +103,18 @@ impl<'info> CreateProposal<'info> {
         // Check Minimum Choices
         self.proposal.check_choices()?;
 
-        // Check ID and add proposal change state
+        let check_id_add_proposal_accounts = dao::cpi::accounts::CoreHandler {
+            owner: self.owner.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+            self.core_program.to_account_info(),
+            check_id_add_proposal_accounts
+        );
+            
+        dao::cpi::add_proposal(cpi_context, id)?;
+
+/*         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = CoreHandler {
             owner: self.owner.to_account_info(),
             config: self.config.to_account_info(),
@@ -113,7 +124,7 @@ impl<'info> CreateProposal<'info> {
         self.core_program.to_account_info(),
         check_id_add_proposal_accounts
         );
-        add_proposal(cpi_context, id)?;                                         
+        add_proposal(cpi_context, id)?;       */                                   
         // Initialize the proposal
        self.proposal.init(
             id,
@@ -204,7 +215,20 @@ impl<'info> StakeCreateProposal<'info> {
         self.config.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
         self.proposal.check_choices()?; 
-        // Check ID and add proposal change state
+
+        let check_id_add_proposal_accounts = dao::cpi::accounts::CoreHandler {
+            owner: self.owner.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+            self.core_program.to_account_info(),
+            check_id_add_proposal_accounts
+        );
+            
+        dao::cpi::add_proposal(cpi_context, id)?;
+
+
+/*         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = CoreHandler {
             owner: self.owner.to_account_info(),
             config: self.config.to_account_info(),
@@ -214,7 +238,7 @@ impl<'info> StakeCreateProposal<'info> {
         self.core_program.to_account_info(),
         check_id_add_proposal_accounts
         );
-        add_proposal(cpi_context, id)?;                                        
+        add_proposal(cpi_context, id)?;    */                                     
         // Initialize the proposal
        self.proposal.init(
             id,

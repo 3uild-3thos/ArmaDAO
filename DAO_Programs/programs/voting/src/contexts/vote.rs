@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use daoist_programs::modules::{ProposalProgram, ProposalHandler, Proposal, StakingProgram, StakeHandler, StakeState, DaoConfig, add_vote, add_account};
+use daoist_programs::modules::{ProposalProgram, Proposal, StakingProgram, StakeState, DaoConfig,};
 use crate::state::VoteState;
 
 #[derive(Accounts)]
@@ -50,7 +50,19 @@ impl<'info> Vote<'info> {
         self.proposal.is_analysed()?;
         // Check proposal expiry
         self.proposal.check_expiry()?;
-        // Add vote to proposal change state
+
+        let add_vote_accounts = proposal::cpi::accounts::ProposalHandler{
+            owner: self.owner.to_account_info(),
+            proposal: self.proposal.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+            self.proposal_program.to_account_info(),
+                add_vote_accounts 
+            );
+        proposal::cpi::add_vote(cpi_context, amount, choice)?;
+        
+/*         // Pre cpi feature Add vote to proposal change state
         let add_vote_accounts= ProposalHandler {
             owner: self.owner.to_account_info(),
             proposal: self.proposal.to_account_info(),
@@ -63,14 +75,25 @@ impl<'info> Vote<'info> {
             add_vote_accounts 
         );
 
-        add_vote(cpi_context, amount, choice)?;
+        add_vote(cpi_context, amount, choice)?; */
 
         // Make sure user has staked
         self.stake_state.check_stake_amount(amount)?;
         // Make sure user is voting with unlocked amount
         self.stake_state.check_locked_amount(amount)?;
 
-        // Add a vote account to the stake state changestate
+        let add_account_accounts = staking::cpi::accounts::StakeHandler {
+            owner: self.owner.to_account_info(),
+            stake_state: self.stake_state.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+
+        let cpi_context = CpiContext::new(
+            self.staking_program.to_account_info(),
+            add_account_accounts );
+        staking::cpi::add_account(cpi_context, amount)?;
+
+/*         // Add a vote account to the stake state changestate
         let add_account_accounts= StakeHandler {
             owner: self.owner.to_account_info(),
             stake_state: self.stake_state.to_account_info(),
@@ -82,7 +105,7 @@ impl<'info> Vote<'info> {
         self.staking_program.to_account_info(),
         add_account_accounts );
 
-        add_account(cpi_context, amount)?;
+        add_account(cpi_context, amount)?; */
 
         self.vote.set_inner(VoteState { 
             owner: self.owner.key(), 

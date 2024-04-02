@@ -1,27 +1,27 @@
-use anchor_lang::{prelude::*, solana_program};
+use anchor_lang::{prelude::*, /* solana_program */};
 use crate::constants::*;
 use crate::errors::CoreError;
-use anchor_lang::solana_program::instruction::Instruction;
+/* use anchor_lang::solana_program::instruction::Instruction; */
 
 #[derive(Clone)]
 pub struct ProposalProgram;
 
 declare_id!("propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV");
-#[derive(Accounts)]
+/* #[derive(Accounts)]
 pub struct ProposalHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub proposal: AccountInfo<'info>,
     pub config: AccountInfo<'info>,
     pub system_program: AccountInfo<'info>,
-}
-#[derive(Accounts)]
+} */
+/* #[derive(Accounts)]
 pub struct SubDaoProposalHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub proposal: AccountInfo<'info>,
     pub config: AccountInfo<'info>,
     pub config_sub_dao: AccountInfo<'info>,
     pub system_program: AccountInfo<'info>,
-}
+} */
 
 #[derive(Clone, Debug, Default, PartialEq, AnchorSerialize, AnchorDeserialize)]
 pub struct Proposal {
@@ -265,7 +265,7 @@ impl anchor_lang::Id for ProposalProgram {
 }
 
 // Instructions
-pub fn add_vote<'info>(
+/* pub fn add_vote<'info>(
     ctx: CpiContext<'_, '_, '_, 'info, ProposalHandler<'info>>,
     amount: u64,
     choice: u8,
@@ -288,9 +288,9 @@ pub fn add_vote<'info>(
         ctx.signer_seeds,
     )
     .map_err(Into::into)
-}
+} */
 
-pub fn remove_vote<'info>(
+/* pub fn remove_vote<'info>(
     ctx: CpiContext<'_, '_, '_, 'info, ProposalHandler<'info>>,
     amount: u64,
     choice: u8,
@@ -365,3 +365,4 @@ pub fn remove_vote_sub_dao<'info>(
     )
     .map_err(Into::into)
 }
+ */

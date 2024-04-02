@@ -3,32 +3,6 @@
   "name": "dao",
   "instructions": [
     {
-      "name": "debugging",
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "ownerAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "initialize",
       "accounts": [
         {
@@ -406,11 +380,6 @@
           "name": "config",
           "isMut": true,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -436,11 +405,6 @@
         {
           "name": "configSubDao",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
           "isSigner": false
         }
       ],
@@ -716,5 +680,8 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
+  }
 }

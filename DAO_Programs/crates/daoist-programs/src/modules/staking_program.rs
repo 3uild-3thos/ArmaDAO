@@ -1,14 +1,14 @@
-use anchor_lang::{prelude::*, solana_program};
+use anchor_lang::{prelude::*, /* solana_program */};
 use crate::constants::*;
 use crate::errors::CoreError;
-use anchor_lang::solana_program::instruction::Instruction;
+/* use anchor_lang::solana_program::instruction::Instruction; */
 
 #[derive(Clone)]
 pub struct StakingProgram;
 
 declare_id!("stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF");
 
-#[derive(Accounts)]
+/* #[derive(Accounts)]
 pub struct StakeHandler<'info> {
     pub owner: AccountInfo<'info>,
     pub stake_state: AccountInfo<'info>,
@@ -22,7 +22,7 @@ pub struct SubDaoStakeHandler<'info> {
     pub config: AccountInfo <'info>,
     pub config_sub_dao: AccountInfo <'info>,
     pub system_program: AccountInfo<'info>
-}
+} */
 
 #[derive(Clone, Debug, Default, PartialEq, AnchorSerialize, AnchorDeserialize)]
 pub struct StakeState {
@@ -59,8 +59,6 @@ impl anchor_lang::Owner for StakeState {
         ID
     }
 }
-
-
 impl StakeState {
     
     pub const LEN: usize = 8 + PUBKEY_L + (4 * U64_L) + (3 * U8_L);
@@ -167,12 +165,6 @@ impl StakeState {
         require!(self.amount >= amount, CoreError::InsufficientStake);
         Ok(())
     }
-/* 
-    // Ensure amount <= self.amount - self.locked_amount
-    pub fn check_stake_amount_unlocked(&self, amount: u64) -> Result<()> {
-        require!(amount <= self.amount - self.locked_amount, CoreError::InsufficientStake);
-        Ok(())
-    } */
 }    
 
 impl anchor_lang::Id for StakingProgram {
@@ -182,7 +174,7 @@ impl anchor_lang::Id for StakingProgram {
 }
 
 // Instructions
-pub fn add_account<'info>(
+/* pub fn add_account<'info>(
     ctx: CpiContext<'_, '_, '_, 'info, StakeHandler<'info>>,
     amount: u64,
 ) -> Result<()> {
@@ -277,4 +269,4 @@ pub fn remove_account_sub_dao<'info>(
         ctx.signer_seeds,
     )
     .map_err(Into::into)
-}
+} */

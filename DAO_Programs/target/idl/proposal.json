@@ -572,7 +572,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -581,11 +581,6 @@
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -607,7 +602,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -616,11 +611,6 @@
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -642,7 +632,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -656,11 +646,6 @@
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -682,7 +667,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -696,11 +681,6 @@
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1146,5 +1126,8 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV"
+  }
 }

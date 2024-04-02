@@ -1084,7 +1084,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1093,11 +1093,6 @@
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1115,7 +1110,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1124,11 +1119,6 @@
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1146,7 +1136,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1160,11 +1150,6 @@
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1182,7 +1167,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1196,11 +1181,6 @@
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1477,5 +1457,8 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF"
+  }
 }

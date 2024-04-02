@@ -572,7 +572,7 @@ export type Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -581,11 +581,6 @@ export type Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -607,7 +602,7 @@ export type Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -616,11 +611,6 @@ export type Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -642,7 +632,7 @@ export type Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -656,11 +646,6 @@ export type Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -682,7 +667,7 @@ export type Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -696,11 +681,6 @@ export type Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1723,7 +1703,7 @@ export const IDL: Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -1732,11 +1712,6 @@ export const IDL: Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1758,7 +1733,7 @@ export const IDL: Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -1767,11 +1742,6 @@ export const IDL: Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1793,7 +1763,7 @@ export const IDL: Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -1807,11 +1777,6 @@ export const IDL: Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1833,7 +1798,7 @@ export const IDL: Proposal = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -1847,11 +1812,6 @@ export const IDL: Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }

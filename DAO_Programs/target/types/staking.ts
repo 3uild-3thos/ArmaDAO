@@ -1084,7 +1084,7 @@ export type Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1093,11 +1093,6 @@ export type Staking = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1115,7 +1110,7 @@ export type Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1124,11 +1119,6 @@ export type Staking = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1146,7 +1136,7 @@ export type Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1160,11 +1150,6 @@ export type Staking = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1182,7 +1167,7 @@ export type Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1196,11 +1181,6 @@ export type Staking = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2566,7 +2546,7 @@ export const IDL: Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -2575,11 +2555,6 @@ export const IDL: Staking = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2597,7 +2572,7 @@ export const IDL: Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -2606,11 +2581,6 @@ export const IDL: Staking = {
         },
         {
           "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2628,7 +2598,7 @@ export const IDL: Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -2642,11 +2612,6 @@ export const IDL: Staking = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2664,7 +2629,7 @@ export const IDL: Staking = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -2678,11 +2643,6 @@ export const IDL: Staking = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }

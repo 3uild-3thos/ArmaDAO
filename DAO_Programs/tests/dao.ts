@@ -47,7 +47,7 @@ describe("dao", () => {
   const seed = new BN(randomBytes(8));
   /* const seed = new BN(2564853033990308911); */
   console.log("seeds gerada tests", seed)
-/*   const seed2 = new BN(randomBytes(8)); */
+  const circulating_supply = new BN(1000000);
 
   //seed 5 = BEJSdFDLAxJh8LDVps197m35jzxtGbwNRgiwcmssu7ZW
    /* const seed = new BN(5); */
@@ -125,8 +125,8 @@ describe("dao", () => {
   const dao_keypair = Keypair.fromSecretKey(new Uint8Array(DaoKeypair));
   //Config PDA
   /* const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toArrayLike(Buffer, "le", 8)], dao_program.programId)[0]; */
-/*   const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toBuffer().reverse()], dao_program.programId)[0]; */
-const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configteste"), dao_admin.publicKey.toBuffer(), ownerAta.toBuffer()], dao_program.programId)[0];
+  const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("config"), seed.toBuffer().reverse()], dao_program.programId)[0];
+/* const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configteste"), dao_admin.publicKey.toBuffer(), ownerAta.toBuffer()], dao_program.programId)[0]; */
   console.log("dao config pb", dao_config_key)
   /* const dao_config_key = new anchor.web3.PublicKey("2uxXLa41uLeSaKaUpenF5ngN81PJJqLXfoZBLWut3SFH"); */
   //SubDao Config Pda
@@ -241,7 +241,8 @@ const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configtest
       null, // minStakedRequiredProposal null because its hybrid
       true, // allow_sub_dao
       null, // min_staked_create_subdao
-      true // is_hybrid
+      true, // is_hybrid
+      circulating_supply
     )  
 
       .preInstructions([
@@ -255,6 +256,8 @@ const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configtest
       })
       .then(confirm)
       .then(log);
+      console.log('config key', dao_config_key )
+      console.log('seed', seed)
   });
 
   /* it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
@@ -393,7 +396,7 @@ const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configtest
       .then(log);
       
   }); */
-/*   it("Initialize StakeATA + StakeStaTe Account", async () => {
+  it("Initialize StakeATA + StakeStaTe Account", async () => {
     const tx = await staking_program.methods
     
     .initStake(
@@ -420,8 +423,10 @@ const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configtest
       })
       .then(confirm)
       .then(log);
+      console.log('config key', dao_config_key )
+      console.log('seed', seed)
       
-  }); */
+  });
 /*   it("Stake Token", async () => {
     const tx = await staking_program.methods
     
@@ -625,7 +630,7 @@ const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configtest
   }); */
 
   
-  it("debbuging", async () => {
+ /*  it("debbuging", async () => {
     const tx = await dao_program.methods
     
     .debugging( )  
@@ -647,6 +652,6 @@ const dao_config_key = PublicKey.findProgramAddressSync([Buffer.from("configtest
       })
       .then(confirm)
       .then(log);
-  });
+  }); */
   
 });

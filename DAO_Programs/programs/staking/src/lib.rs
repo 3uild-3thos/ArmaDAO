@@ -100,28 +100,32 @@ pub mod staking {
         ctx: Context<StakeHandler>, 
         amount: u64
     ) -> Result<()> {
-        ctx.accounts.add_account(amount)
+        ctx.accounts.add_account(amount)?;
+        Ok(())
     } 
     // REMOVE ACCOUNT STAKE STATE
     pub fn remove_account(
         ctx: Context<StakeHandler>,
         amount: u64
     ) -> Result<()> {
-        ctx.accounts.remove_account(amount)
+        ctx.accounts.remove_account(amount)?;
+        Ok(())
     }
     // ADD ACCOUNT STAKE STATE SUB DAO
     pub fn add_account_sub_dao(
         ctx: Context<SubDaoStakeHandler>,
         amount: u64
     ) -> Result<()> {
-        ctx.accounts.add_account_sub_dao(amount)
+        ctx.accounts.add_account_sub_dao(amount)?;
+        Ok(())
     } 
     // REMOVE ACCOUNT STAKE STATE SUB DAO
     pub fn remove_account_sub_dao(
         ctx: Context<SubDaoStakeHandler>,
         amount: u64
     ) -> Result<()> {
-        ctx.accounts.remove_account_sub_dao(amount)
+        ctx.accounts.remove_account_sub_dao(amount)?;
+        Ok(())
     }          
 }
 

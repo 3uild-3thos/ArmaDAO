@@ -13,7 +13,6 @@ pub struct CoreHandler<'info> {
         bump = config.config_bump
     )]
     config: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
 }
 
 impl<'info> CoreHandler<'info> {
@@ -41,7 +40,6 @@ pub struct SubDaoHandler<'info> {
         bump = config_sub_dao.config_bump
     )]
     config_sub_dao: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
 }
 impl<'info> SubDaoHandler<'info> {
 

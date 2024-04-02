@@ -9,6 +9,7 @@ use anchor_spl::{
 use daoist_programs::modules::{StakeState, StakingProgram};
 use crate::{validate_nft, REQUIRED_COLLECTION_MINT};
 use crate::errors::DaoError;
+/* 
 #[derive(Accounts)]
 pub struct Debugging<'info> {
     #[account(mut)]
@@ -33,7 +34,7 @@ impl<'info> Debugging<'info> {
         msg!("seed {}", self.config.seed);    
         Ok(())
     }
-}
+} */
 
 #[derive(Accounts)]
 #[instruction(seed: u64)]
@@ -83,22 +84,22 @@ pub struct Initialize<'info> {
         bump
     )]
     pub treasury: SystemAccount<'info>,
-/*     #[account(
+    #[account(
         init,
         payer = initializer,
         seeds=[b"config", seed.to_le_bytes().as_ref() ], 
         bump,
         space = DaoConfig::LEN
     )]
-    pub config: Account<'info, DaoConfig>, */
-    #[account(
+    pub config: Account<'info, DaoConfig>,
+/*     #[account(
         init,
         payer = initializer,
         seeds=[b"configteste", initializer.key().as_ref(), owner_ata.key().as_ref()], 
         bump,
         space = DaoConfig::LEN
     )]
-    pub config: Account<'info, DaoConfig>,
+    pub config: Account<'info, DaoConfig>, */
     pub metadata_program: Program<'info, Metadata>,
     pub token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,

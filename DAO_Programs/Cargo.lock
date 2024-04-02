@@ -1499,6 +1499,7 @@ version = "0.1.0"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
+ "dao",
  "daoist-programs",
  "solana-program",
 ]
@@ -2515,7 +2516,9 @@ dependencies = [
  "anchor-lang",
  "anchor-spl",
  "daoist-programs",
+ "proposal",
  "solana-program",
+ "staking",
 ]
 
 [[package]]

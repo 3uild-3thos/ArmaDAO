@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use daoist_programs::modules::{add_account_sub_dao, add_vote_sub_dao, DaoConfig, Proposal, ProposalProgram, StakeState, StakingProgram, SubDaoProposalHandler, SubDaoStakeHandler};
+use daoist_programs::modules::{ DaoConfig, Proposal, ProposalProgram, StakeState, StakingProgram};
 use crate::state::VoteState;
 
 #[derive(Accounts)]
@@ -56,8 +56,21 @@ impl<'info> VoteSubDao<'info> {
         self.proposal.is_analysed()?;
         // Check proposal expiry
         self.proposal.check_expiry()?;
-        // Add vote to proposal change state
-        let add_vote_accounts= SubDaoProposalHandler {
+
+        let add_vote_accounts = proposal::cpi::accounts::SubDaoProposalHandler{
+            owner: self.owner.to_account_info(),
+            proposal: self.proposal.to_account_info(),
+            config: self.config.to_account_info(),
+            config_sub_dao: self.config_sub_dao.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+            self.proposal_program.to_account_info(),
+                add_vote_accounts 
+            );
+        proposal::cpi::add_vote_sub_dao(cpi_context, amount, choice)?;
+
+        // Pre cpi feature Add vote to proposal change state
+/*         let add_vote_accounts= SubDaoProposalHandler {
             owner: self.owner.to_account_info(),
             proposal: self.proposal.to_account_info(),
             config: self.config.to_account_info(),
@@ -70,14 +83,26 @@ impl<'info> VoteSubDao<'info> {
             add_vote_accounts 
         );
 
-        add_vote_sub_dao(cpi_context, amount, choice)?;
+        add_vote_sub_dao(cpi_context, amount, choice)?; */
 
         // Make sure user has staked
         self.stake_state.check_stake_amount(amount)?;
         // Make sure user is voting with unlocked amount
         self.stake_state.check_locked_amount(amount)?;
-
         // Add a vote account to the stake state changestate
+        let add_account_accounts = staking::cpi::accounts::SubDaoStakeHandler {
+            owner: self.owner.to_account_info(),
+            stake_state: self.stake_state.to_account_info(),
+            config: self.config.to_account_info(),
+            config_sub_dao: self.config_sub_dao.to_account_info(),
+        };
+
+        let cpi_context = CpiContext::new(
+            self.staking_program.to_account_info(),
+            add_account_accounts );
+        staking::cpi::add_account_sub_dao(cpi_context, amount)?;
+
+/*         // pre cpi feature Add a vote account to the stake state changestate
         let add_account_accounts= SubDaoStakeHandler {
             owner: self.owner.to_account_info(),
             stake_state: self.stake_state.to_account_info(),
@@ -90,7 +115,7 @@ impl<'info> VoteSubDao<'info> {
         self.staking_program.to_account_info(),
         add_account_accounts );
 
-        add_account_sub_dao(cpi_context, amount)?;
+        add_account_sub_dao(cpi_context, amount)?; */
 
         self.vote.set_inner(VoteState { 
             owner: self.owner.key(), 

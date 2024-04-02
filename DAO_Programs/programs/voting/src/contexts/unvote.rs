@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use daoist_programs::modules::{ProposalProgram, Proposal, StakingProgram, StakeState, ProposalHandler, StakeHandler, DaoConfig, remove_account, remove_vote};
+use daoist_programs::modules::{ProposalProgram, Proposal, StakingProgram, StakeState, DaoConfig,};
 
 use crate::state::VoteState;
 
@@ -53,8 +53,21 @@ impl<'info> Unvote<'info> {
     ) -> Result<()> {
         // check if proposal is open and expiry
         self.proposal.is_open_and_expiry()?;
+
         
-        // Remove a vote account from the stake state
+        let remove_account_accounts = staking::cpi::accounts::StakeHandler {
+            owner: self.owner.to_account_info(),
+            stake_state: self.stake_state.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+
+        let cpi_context = CpiContext::new(
+            self.staking_program.to_account_info(),
+            remove_account_accounts );
+        staking::cpi::remove_account(cpi_context, amount)
+        
+        
+/*         // Remove a vote account from the stake state
         let remove_account_accounts= StakeHandler {
             owner: self.owner.to_account_info(),
             stake_state: self.stake_state.to_account_info(),
@@ -66,7 +79,7 @@ impl<'info> Unvote<'info> {
         self.staking_program.to_account_info(),
         remove_account_accounts );
 
-        remove_account(cpi_context, amount)
+        remove_account(cpi_context, amount) */
     }
     pub fn remove_vote(
         &mut self,
@@ -77,7 +90,20 @@ impl<'info> Unvote<'info> {
         self.proposal.is_open()?;
         // check if proposal has expired
         self.proposal.check_expiry()?;
-        // Remove vote to proposal
+
+        let remove_vote_accounts =  proposal::cpi::accounts::ProposalHandler{
+            owner: self.owner.to_account_info(),
+            proposal: self.proposal.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+
+        let cpi_context = CpiContext::new(
+            self.proposal_program.to_account_info(),
+                remove_vote_accounts 
+            );
+        proposal::cpi::remove_vote(cpi_context, amount, choice)?;
+
+/*         // Remove vote to proposal
         let remove_vote_accounts= ProposalHandler {
             owner: self.owner.to_account_info(),
             proposal: self.proposal.to_account_info(),
@@ -88,8 +114,21 @@ impl<'info> Unvote<'info> {
         self.proposal_program.to_account_info(),
         remove_vote_accounts );
 
-        remove_vote(cpi_context, amount, choice)?;
+        remove_vote(cpi_context, amount, choice)?; */
 
+        let remove_account_accounts = staking::cpi::accounts::StakeHandler {
+            owner: self.owner.to_account_info(),
+            stake_state: self.stake_state.to_account_info(),
+            config: self.config.to_account_info(),
+        };
+
+        let cpi_context = CpiContext::new(
+            self.staking_program.to_account_info(),
+            remove_account_accounts );
+        staking::cpi::remove_account(cpi_context, amount)
+
+
+        /*       
         // Remove a vote account from the stake state
         let remove_account_accounts= StakeHandler {
             owner: self.owner.to_account_info(),
@@ -102,6 +141,7 @@ impl<'info> Unvote<'info> {
         self.staking_program.to_account_info(),
         remove_account_accounts );
 
-        remove_account(cpi_context, amount)
+        remove_account(cpi_context, amount) */
+        
     }
 }

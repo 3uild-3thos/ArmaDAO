@@ -6,7 +6,7 @@ use crate::errors::StakeError;
 #[derive(Accounts)]
 pub struct StakeHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         mut,
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
@@ -19,12 +19,12 @@ pub struct StakeHandler<'info> {
         bump = config.config_bump,
     )]
     config: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
 }
 
 impl<'info> StakeHandler<'info> {
     // Add a vote account to the stake state
     pub fn add_account(&mut self, amount: u64) -> Result<()> {
+
         self.stake_state.accounts = self.stake_state.accounts.checked_add(1).ok_or(StakeError::Overflow)?;
         self.stake_state.accounts = self.stake_state.locked_amount.checked_add(amount).ok_or(StakeError::Overflow)?;
         Ok(())
@@ -42,7 +42,7 @@ impl<'info> StakeHandler<'info> {
 #[derive(Accounts)]
 pub struct SubDaoStakeHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         mut,
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
@@ -61,7 +61,6 @@ pub struct SubDaoStakeHandler<'info> {
         bump = config_sub_dao.config_bump,
     )]
     config_sub_dao: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
 }
 
 impl<'info> SubDaoStakeHandler<'info> {

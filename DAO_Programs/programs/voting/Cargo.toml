@@ -30,4 +30,6 @@ anchor-spl = { version = "0.29.0" }
 solana-program = "=1.18.8"
 # winnow="=0.4.1"
 # toml_datetime="=0.6.1"
-daoist-programs = {path = "../../crates/daoist-programs"}
+daoist-programs = {path = "../../crates/daoist-programs", features = ["cpi"]} 
+proposal = { path = "../proposal", features = ["cpi"]}
+staking = { path = "../staking", features = ["cpi"]}

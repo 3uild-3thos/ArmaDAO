@@ -153,11 +153,13 @@ pub mod proposal {
     // INSTRUCTIONS CPIS
     // ADD VOTE
     pub fn add_vote(ctx: Context<ProposalHandler>, amount: u64, choice: u8) -> Result<()> {
-        ctx.accounts.add_vote(amount, choice)
+        ctx.accounts.add_vote(amount, choice)?;
+        Ok(())
     }
     // REMOVE VOTE
     pub fn remove_vote(ctx: Context<ProposalHandler>, amount: u64, choice: u8) -> Result<()> {
-        ctx.accounts.remove_vote(amount, choice)
+        ctx.accounts.remove_vote(amount, choice)?;
+        Ok(())
     }
     // ADD VOTE
     pub fn add_vote_sub_dao(
@@ -165,7 +167,8 @@ pub mod proposal {
         amount: u64,
         choice: u8,
     ) -> Result<()> {
-        ctx.accounts.add_vote_sub_dao(amount, choice)
+        ctx.accounts.add_vote_sub_dao(amount, choice)?;
+        Ok(())
     }
     // REMOVE VOTE
     pub fn remove_vote_sub_dao(
@@ -173,6 +176,7 @@ pub mod proposal {
         amount: u64,
         choice: u8
     ) -> Result<()> {
-        ctx.accounts.remove_vote_sub_dao(amount, choice)
+        ctx.accounts.remove_vote_sub_dao(amount, choice)?;
+        Ok(())
     }
 }

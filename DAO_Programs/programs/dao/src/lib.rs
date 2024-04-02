@@ -15,9 +15,9 @@ pub mod dao {
     pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7");
 
 
-    pub fn debugging (ctx : Context<Debugging>)-> Result<()> {
+/*     pub fn debugging (ctx : Context<Debugging>)-> Result<()> {
         ctx.accounts.debug()
-    }
+    } */
 
     // Instantiate a new DAO Config ACC using the DAO2023 program
     pub fn initialize(
@@ -126,14 +126,16 @@ pub mod dao {
         ctx: Context<CoreHandler>,
         id: u64
     ) -> Result<()> {
-        ctx.accounts.add_proposal(id)
+        ctx.accounts.add_proposal(id)?;
+        Ok(())
     }
 
     pub fn add_proposal_sub_dao(
         ctx: Context<SubDaoHandler>,
         id: u64
     ) -> Result<()> {
-        ctx.accounts.add_proposal_sub_dao(id)
+        ctx.accounts.add_proposal_sub_dao(id)?;
+        Ok(())
     }
 
 

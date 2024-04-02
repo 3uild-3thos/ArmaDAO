@@ -3,32 +3,6 @@ export type Dao = {
   "name": "dao",
   "instructions": [
     {
-      "name": "debugging",
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "ownerAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "initialize",
       "accounts": [
         {
@@ -406,11 +380,6 @@ export type Dao = {
           "name": "config",
           "isMut": true,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -436,11 +405,6 @@ export type Dao = {
         {
           "name": "configSubDao",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
           "isSigner": false
         }
       ],
@@ -724,32 +688,6 @@ export const IDL: Dao = {
   "name": "dao",
   "instructions": [
     {
-      "name": "debugging",
-      "accounts": [
-        {
-          "name": "initializer",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "ownerAta",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "initialize",
       "accounts": [
         {
@@ -1127,11 +1065,6 @@ export const IDL: Dao = {
           "name": "config",
           "isMut": true,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -1157,11 +1090,6 @@ export const IDL: Dao = {
         {
           "name": "configSubDao",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
           "isSigner": false
         }
       ],

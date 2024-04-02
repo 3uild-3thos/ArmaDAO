@@ -7,7 +7,7 @@ use crate::errors::ProposalError;
 #[derive(Accounts)]
 pub struct ProposalHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,//voting program
     #[account(
         mut,
         seeds=[b"proposal", config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
@@ -20,7 +20,7 @@ pub struct ProposalHandler<'info> {
         bump = config.config_bump
     )]
     config: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
+    /* system_program: Program<'info, System> */
 }
 
 impl<'info> ProposalHandler<'info> {
@@ -35,7 +35,7 @@ impl<'info> ProposalHandler<'info> {
         require!(choice <= self.proposal.choices, ProposalError::InvalidChoice);
         self.proposal.votes = self.proposal.votes.checked_add(amount).ok_or(ProposalError::Overflow)?;
         self.proposal.vote_counts[choice as usize] = self.proposal.vote_counts[choice as usize].checked_add(amount).ok_or(ProposalError::Overflow)?; 
-        self.proposal.try_finalize(self.config.circulating_supply);
+        /* self.proposal.try_finalize(self.config.circulating_supply); */
         Ok(())
     }
 
@@ -55,7 +55,7 @@ impl<'info> ProposalHandler<'info> {
 #[derive(Accounts)]
 pub struct SubDaoProposalHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         mut,
         seeds=[b"proposal", config_sub_dao.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
@@ -74,7 +74,7 @@ pub struct SubDaoProposalHandler<'info> {
         bump = config_sub_dao.config_bump,
     )]
     config_sub_dao: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
+    /* system_program: Program<'info, System> */
 }
 
 impl<'info> SubDaoProposalHandler<'info> {
@@ -89,7 +89,7 @@ impl<'info> SubDaoProposalHandler<'info> {
         require!(choice <= self.proposal.choices, ProposalError::InvalidChoice);
         self.proposal.votes = self.proposal.votes.checked_add(amount).ok_or(ProposalError::Overflow)?;
         self.proposal.vote_counts[choice as usize] = self.proposal.vote_counts[choice as usize].checked_add(amount).ok_or(ProposalError::Overflow)?; 
-        self.proposal.try_finalize(self.config_sub_dao.circulating_supply);
+        /* self.proposal.try_finalize(self.config_sub_dao.circulating_supply); */
         Ok(())
     }
 

@@ -8,7 +8,7 @@ use crate::errors::CoreError;
 pub struct CoreProgram;
 
 declare_id!("daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
-
+/* 
 #[derive(Accounts)]
 pub struct CoreHandler<'info> {
     pub owner: AccountInfo<'info>,
@@ -21,7 +21,7 @@ pub struct SubDaoHandler<'info> {
     pub config: AccountInfo<'info>,
     pub config_sub_dao: AccountInfo<'info>,
     pub system_program: AccountInfo<'info>
-}
+} */
 
 #[derive(Clone, Debug, Default, PartialEq, AnchorSerialize, AnchorDeserialize)]
 
@@ -238,7 +238,7 @@ impl anchor_lang::Id for CoreProgram {
     }
 }
 
-// Instructions
+/* // Instructions
 pub fn add_proposal<'info>(
     ctx: CpiContext<'_, '_, '_, 'info, CoreHandler<'info>>,
     id: u64,
@@ -285,3 +285,4 @@ pub fn add_proposal_sub_dao<'info>(
     )
     .map_err(Into::into)
 }
+ */
