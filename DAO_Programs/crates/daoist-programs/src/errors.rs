@@ -36,6 +36,8 @@ pub enum CoreError {
     InvalidProposalStatus,
     #[msg("Invalid stake amount")]
     InvalidStakeAmount,
+    #[msg("Invalid unlocked stake amount")]
+    InvalidUnlockedStakeAmount,
     #[msg("Invalid Threshold")]
     InvalidThreshold,
     #[msg("Invalid Required Time")]
@@ -52,6 +54,7 @@ pub enum CoreError {
     InvalidAllowSubDao,
     #[msg("InvalidDaoType")]
     InvalidDaoType,
+    
 }
 
 

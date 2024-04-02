@@ -166,6 +166,12 @@ impl StakeState {
         require!(self.amount >= amount, CoreError::InsufficientStake);
         Ok(())
     }
+
+    // Ensure amount <= self.amount - self.locked_amount
+    pub fn check_stake_amount_unlocked(&self, amount: u64) -> Result<()> {
+        require!(amount <= self.amount - self.locked_amount, CoreError::InsufficientStake);
+        Ok(())
+    }
 }    
 
 impl anchor_lang::Id for StakingProgram {

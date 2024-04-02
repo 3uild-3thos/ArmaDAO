@@ -324,7 +324,7 @@ impl<'info> InitializeSubdao<'info> {
                 allow_sub_dao: false,
                 min_staked_create_subdao: None,
                 is_hybrid,
-                circulating_supply
+                circulating_supply,
             });
                 Ok(()) 
    
