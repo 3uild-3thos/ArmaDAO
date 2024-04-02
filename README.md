@@ -1,5 +1,7 @@
 # Armada
 
+![Armada](https://demo.thearmadadao.xyz/github/cover.png)
+
 ## Overview
 
 Navigate the Future with Armada - No-Code Governance for the Mothership and Its Fleets.A DAO for DAOs, by DAOs.
