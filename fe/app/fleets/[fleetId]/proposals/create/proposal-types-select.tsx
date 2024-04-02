@@ -37,7 +37,7 @@ const ProposalTypesSelectComponent = ({
           {type === EProposalType.VOTE && (
             <>
               {selected === type && (
-                <BadgeCheck size={32} className="text-cyan" />
+                <BadgeCheck size={32} className="text-magenta" />
               )}
               {selected !== type && (
                 <BadgeCheck size={32} className="text-muted" />
@@ -47,7 +47,7 @@ const ProposalTypesSelectComponent = ({
 
           {type === EProposalType.BOUNTY && (
             <>
-              {selected === type && <Gem size={32} className="text-cyan" />}
+              {selected === type && <Gem size={32} className="text-magenta" />}
               {selected !== type && <Gem size={32} className="text-muted" />}
             </>
           )}
@@ -55,7 +55,7 @@ const ProposalTypesSelectComponent = ({
           {type === EProposalType.EXECUTABLE && (
             <>
               {selected === type && (
-                <FileTerminal size={32} className="text-cyan" />
+                <FileTerminal size={32} className="text-magenta" />
               )}
               {selected !== type && (
                 <FileTerminal size={32} className="text-muted" />
@@ -66,7 +66,7 @@ const ProposalTypesSelectComponent = ({
           {type === EProposalType.MULTIPLE_CHOICE && (
             <>
               {selected === type && (
-                <SquareStack size={32} className="text-cyan" />
+                <SquareStack size={32} className="text-magenta" />
               )}
               {selected !== type && (
                 <SquareStack size={32} className="text-muted" />

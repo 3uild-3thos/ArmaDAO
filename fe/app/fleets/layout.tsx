@@ -1,5 +1,6 @@
 "use client";
 
+import Bokeh from "@/components/ui/bokeh";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,37 +36,41 @@ const FleetsLayout = ({ children }: { children: ReactNode }) => {
       : "/";
 
   return (
-    <div className="flex flex-col gap-16">
-      {/* Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList className="flex items-center">
-          {breadcrumbLinks.length > 0 && (
-            <>
-              <BreadcrumbItem>
-                <BreadcrumbLink
-                  href={backHref}
-                  className="flex items-center gap-2"
-                >
-                  <ChevronLeft size={"14"} />
-                  Back
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>|</BreadcrumbSeparator>
-            </>
-          )}
-          {breadcrumbLinks.map((breadcrumb, index) => (
-            <Fragment key={index}>
-              <BreadcrumbItem>
-                <BreadcrumbLink href={breadcrumb.href} className="capitalize">
-                  {breadcrumb.name}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              {index < breadcrumbLinks.length - 1 && <BreadcrumbSeparator />}
-            </Fragment>
-          ))}
-        </BreadcrumbList>
-      </Breadcrumb>
-      {children}
+    <div className="relative z-10 flex flex-col h-full min-h-screen px-8 py-32 overflow-hidden overflow-x-hidden font-gordita md:px-16 lg:px-32 2xl:px-64">
+      <Bokeh className="m-auto bottom-[-25%] right-[-50%] opacity-5 from-magenta" />
+      <Bokeh className="m-auto top-[-40%] left-[-60%] opacity-5 from-cyan" />
+      <div className="flex flex-col gap-16">
+        {/* Breadcrumbs */}
+        <Breadcrumb>
+          <BreadcrumbList className="flex items-center">
+            {breadcrumbLinks.length > 0 && (
+              <>
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    href={backHref}
+                    className="flex items-center gap-2"
+                  >
+                    <ChevronLeft size={"14"} />
+                    Back
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>|</BreadcrumbSeparator>
+              </>
+            )}
+            {breadcrumbLinks.map((breadcrumb, index) => (
+              <Fragment key={index}>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={breadcrumb.href} className="capitalize">
+                    {breadcrumb.name}
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                {index < breadcrumbLinks.length - 1 && <BreadcrumbSeparator />}
+              </Fragment>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
+        {children}
+      </div>
     </div>
   );
 };

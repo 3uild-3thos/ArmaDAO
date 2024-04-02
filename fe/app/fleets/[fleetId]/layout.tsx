@@ -64,7 +64,7 @@ const FleetDetailLayout = ({ children }: { children: ReactNode }) => {
               key={label}
               href={matchedHref}
               className={cn(
-                "relative flex items-center gap-2 rounded-lg py-3 px-6 hover:text-cyan duration-200",
+                "relative flex items-center gap-2 rounded-lg py-3 px-6 hover:text-magenta duration-200",
                 pathname.includes(matchedHref) &&
                   "bg-gray-500/10 hover:text-inherit"
               )}
@@ -72,7 +72,7 @@ const FleetDetailLayout = ({ children }: { children: ReactNode }) => {
             >
               {label}
               {pathname.includes(matchedHref) && (
-                <div className="absolute p-1 rounded-full top-2 right-2 bg-cyan" />
+                <div className="absolute p-1 rounded-full top-2 right-2 bg-magenta" />
               )}
             </Link>
           );

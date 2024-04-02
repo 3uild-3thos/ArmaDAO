@@ -16,7 +16,7 @@ const LabelValue = ({ className, label, value, href }: ILabelValue) => {
       {href ? (
         <Link
           href={href}
-          className="text-xl text-muted flex items-center gap-2 hover:text-cyan duration-200"
+          className="flex items-center gap-2 text-xl duration-200 text-muted hover:text-magenta-light"
         >
           {value} <MoveUpRight size={"20"} />
         </Link>

@@ -1,4 +1,5 @@
 // components
+import BaseConfigForm from "@/app/fleets/create/(forms)/(membership-types)/base-config-form";
 import {
   FormControl,
   FormField,
@@ -9,7 +10,6 @@ import InfoTooltip from "@/components/ui/info-tooltip";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
-import BaseConfigForm from "@/create/(forms)/(membership-types)/base-config-form";
 
 // lib
 import { IFleetConfig } from "@/lib/schema/fleet.schema";

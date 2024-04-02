@@ -21,7 +21,7 @@ const ProposalSuccessCardComponent = ({
           >
             <XIcon className="w-4 h-4" />
           </Button>
-          <CheckCircle className="w-16 h-16 rounded-full bg-cyan text-muted-foreground" />
+          <CheckCircle className="w-16 h-16 rounded-full bg-magenta-light text-muted-foreground" />
           Fleet Proposal has been successfully created!
         </CardContent>
       </Card>
