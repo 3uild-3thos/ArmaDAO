@@ -1,6 +1,6 @@
 # Armada
 
-![Armada](https://demo.thearmadadao.xyz/github/cover.png)
+![Armada](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/cover.png?raw=true)
 
 ## Overview
 
@@ -22,7 +22,7 @@ The Armada is not just a tool; it's a meta-governance ecosystem that allows DAOs
 
 ## Solana Program Architecture
 
-![Armada High-level Architecture](https://demo.thearmadadao.xyz/github/high-level-architecture.png)
+![Armada High-level Architecture](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/high-level-architecture.png?raw=true)
 
 The very first Fleet DAO in devnet can be found [here](https://explorer.solana.com/tx/671veqqMiNQDJ2g5foCv9H7VG8pkURuxNc6nzXnm7xChjrxZ6fDno67FNmVwCkUJpJm7WUTdM3nDBsC89teJ6SyZ?cluster=devnet).
 
@@ -30,7 +30,7 @@ If you want to dive deeper into the Solana programs, read more abouot them [**he
 
 ## Tech Stack
 
-![Armada Tech Stack](https://demo.thearmadadao.xyz/github/tech-stack.png)
+![Armada Tech Stack](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/tech-stack.png?raw=true)
 
 - [**Next.js 13**](https://nextjs.org/): Our Full Stack Framework that enables functionality for both front-end and back-end operations.
 - [**React.js 18**](https://reactjs.org/): Utilized for building our user interface and managing the front-end logic of the application.
