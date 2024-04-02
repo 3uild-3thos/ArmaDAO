@@ -19,7 +19,7 @@ export const createFleet = {
     evaluationPhasePeriod:
       "The duration for evaluating proposals before it becomes active.",
     minStakedRequiredProposal:
-      "Minimum amount of staked assets to create a proposal. Leave this empty to allow anyone who holds an asset to create a proposal.",
+      "Minimum amount of staked assets to create a proposal. Leave this empty to allow anyone who holds an asset to create a proposal. This is required for Fungible membership type.",
     allowSubfleetCreation:
       "Allow members to create their own Subfleet DAO under your Fleet.",
     minStakedToCreateSubfleet:
