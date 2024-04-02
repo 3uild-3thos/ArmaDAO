@@ -210,12 +210,30 @@ const NFTForm = ({ form }: INFTForm) => {
                       />
                     </div>
                     <div className="col-span-3 space-y-2">
-                      <Input
-                        type="number"
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={String(field.value)}
-                      />
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex flex-col gap-2">
+                          <Input
+                            type="number"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(Number(e.target.value))
+                            }
+                            value={String(field.value)}
+                          />
+                          <span className="text-xs text-muted">hours</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <Input
+                            type="number"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(Number(e.target.value))
+                            }
+                            value={String(field.value)}
+                          />
+                          <span className="text-xs text-muted">minutes</span>
+                        </div>
+                      </div>
                       <FormMessage />
                     </div>
                   </div>
@@ -234,19 +252,37 @@ const NFTForm = ({ form }: INFTForm) => {
                 <FormControl>
                   <div className="grid grid-cols-5 gap-4">
                     <div className="inline col-span-2">
-                      Proposal Evaluation Period
+                      Proposal Evaluation
                       <InfoTooltip
                         content={createFleet.config.evaluationPhasePeriod}
                         className="mt-1"
                       />
                     </div>
                     <div className="col-span-3 space-y-2">
-                      <Input
-                        type="number"
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={String(field.value)}
-                      />
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex flex-col gap-2">
+                          <Input
+                            type="number"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(Number(e.target.value))
+                            }
+                            value={String(field.value)}
+                          />
+                          <span className="text-xs text-muted">hours</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <Input
+                            type="number"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(Number(e.target.value))
+                            }
+                            value={String(field.value)}
+                          />
+                          <span className="text-xs text-muted">minutes</span>
+                        </div>
+                      </div>
                       <FormMessage />
                     </div>
                   </div>
