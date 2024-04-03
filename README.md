@@ -22,7 +22,7 @@ The Armada is not just a tool; it's a meta-governance ecosystem that allows DAOs
 - **Plugins and APIs**: No need to stay in the Armada platform to enjoy the full modularity of your DAO. Utilize and maximize our plugins and APIs to integrate your DAO on your own platform.
 - **Community Engagement**: A thriving ecosystem communities in communities share insights, discuss innovation, and foster their DAO's success.
 
-## Solana Program Architecture
+## High-level Architecture
 
 ![Armada High-level Architecture](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/high-level-architecture.png?raw=true)
 
