@@ -1,0 +1,8 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./programs/proposal/Cargo.toml",
+        "./programs/proposal/Cargo.toml"
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false,
+    "CodeGPT.apiKey": "CodeGPT Plus Beta"
+}
