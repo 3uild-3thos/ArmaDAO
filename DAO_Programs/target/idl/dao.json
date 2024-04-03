@@ -374,7 +374,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
@@ -395,7 +395,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
@@ -680,8 +680,5 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ],
-  "metadata": {
-    "address": "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
-  }
+  ]
 }

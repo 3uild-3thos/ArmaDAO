@@ -6,7 +6,7 @@ use crate::errors::DaoError;
 #[derive(Accounts)]
 pub struct CoreHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         mut,
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
@@ -28,7 +28,7 @@ impl<'info> CoreHandler<'info> {
 #[derive(Accounts)]
 pub struct SubDaoHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         bump = config.config_bump

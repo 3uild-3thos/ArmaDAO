@@ -1,5 +1,5 @@
-use anchor_lang::{prelude::*, solana_program};
-use anchor_lang::solana_program::instruction::Instruction;
+use anchor_lang::{prelude::*, /* solana_program */};
+/* use anchor_lang::solana_program::instruction::Instruction; */
 use crate::constants::*;
 use crate::errors::CoreError;
 
@@ -22,6 +22,12 @@ pub struct SubDaoHandler<'info> {
     pub config_sub_dao: AccountInfo<'info>,
     pub system_program: AccountInfo<'info>
 } */
+
+impl anchor_lang::Id for CoreProgram {
+    fn id() -> Pubkey {
+        ID
+    }
+}
 
 #[derive(Clone, Debug, Default, PartialEq, AnchorSerialize, AnchorDeserialize)]
 
@@ -47,6 +53,7 @@ pub struct DaoConfig {
     pub is_hybrid: bool,
     pub circulating_supply: u64,
 }
+
 
 impl anchor_lang::Owner for DaoConfig {
     fn owner() -> Pubkey {
@@ -232,11 +239,7 @@ impl DaoConfig {
 
 }
 
-impl anchor_lang::Id for CoreProgram {
-    fn id() -> Pubkey {
-        ID
-    }
-}
+
 
 /* // Instructions
 pub fn add_proposal<'info>(

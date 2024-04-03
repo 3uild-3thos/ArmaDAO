@@ -374,7 +374,7 @@ export type Dao = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
@@ -395,7 +395,7 @@ export type Dao = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
@@ -1059,7 +1059,7 @@ export const IDL: Dao = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
@@ -1080,7 +1080,7 @@ export const IDL: Dao = {
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
