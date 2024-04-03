@@ -12,7 +12,7 @@ export const ConnectWallet = () => {
     fontSize: "0.875rem",
     paddingX: "24px",
     height: "2.5rem",
-    width: "9rem",
+    width: "10rem",
   };
 
   return (

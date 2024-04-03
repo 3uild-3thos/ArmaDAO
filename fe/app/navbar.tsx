@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 // components
 import { ConnectWallet } from "@/components/ui/connect-wallet";
-import ThemeToggle from "@/components/ui/theme-toggle";
 import {
   BadgePlusIcon,
   HomeIcon,
@@ -49,7 +48,19 @@ export const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/20">
       <div className="relative flex items-center justify-between px-4 py-4 text-lg md:px-20 backdrop-blur-sm">
-        <div className="flex items-center gap-10">
+        <div className="flex md:hidden items-center gap-3">
+          {/* <Smile /> */}
+          <Link href={PATH.home}>
+            <Image
+              src={"/logo.png"}
+              alt={"Armada"}
+              width={1000}
+              height={1000}
+              className="w-10 h-fit"
+            />
+          </Link>
+        </div>
+        <div className="md:flex items-center gap-10 hidden">
           <div className="flex items-center gap-3">
             {/* <Smile /> */}
             <Link href={PATH.home}>
@@ -127,10 +138,65 @@ export const Navbar = () => {
           </div>
 
           <div
-            className={`fixed flex flex-col top-24 items-end md:items-center p-8 md:p-0 gap-4 left-0 w-full z-40 transition-transform duration-300 ease-in-out transform ${
+            className={`fixed flex flex-col top-24 items-center p-8 md:p-0 gap-4 left-0 w-full z-40 transition-transform duration-300 ease-in-out transform ${
               menuOpen ? "translate-x-0" : "translate-x-full"
             } md:static md:w-auto md:bg-transparent md:flex-row md:transform-none md:text-sm bg-black backdrop-blur-md sm:bg-transparent sm:backdrop-blur-none`}
           >
+            <div className="md:hidden items-center gap-4 flex flex-col">
+              <Link href={PATH.home}>
+                <Button
+                  variant={"ghost"}
+                  className={cn(
+                    "gap-2",
+                    pathname === PATH.home &&
+                      "border-b border-white rounded-b-none"
+                  )}
+                >
+                  <HomeIcon size={16} /> Home
+                </Button>
+              </Link>
+
+              <Link href={PATH.fleets}>
+                <Button
+                  variant={"ghost"}
+                  className={cn(
+                    "gap-2",
+                    pathname === PATH.fleets &&
+                      "border-b border-white rounded-b-none"
+                  )}
+                >
+                  <RocketIcon size={16} /> Fleets
+                </Button>
+              </Link>
+
+              <Link href={PATH.mothershipProposals}>
+                <Button
+                  variant={"ghost"}
+                  className={cn(
+                    "gap-2",
+                    pathname === PATH.mothershipProposals &&
+                      "border-b border-white rounded-b-none"
+                  )}
+                >
+                  <TablePropertiesIcon size={16} /> Mothership Proposals
+                </Button>
+              </Link>
+
+              <Link href={PATH.fleetCreate}>
+                <Button
+                  variant={"ghost"}
+                  className={cn(
+                    "gap-2",
+                    pathname === PATH.fleetCreate &&
+                      "border-b border-white rounded-b-none"
+                  )}
+                >
+                  <PackagePlusIcon size={16} /> Create a Fleet
+                </Button>
+              </Link>
+            </div>
+
+            <hr className="h-2 bg-muted" />
             {/* <Input /> */}
             <Link href={PATH.mothershipMint}>
               <Button size={"sm"} variant={"white"} className="gap-2">
@@ -138,7 +204,7 @@ export const Navbar = () => {
               </Button>
             </Link>
             <ConnectWallet />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
         </div>
       </div>
