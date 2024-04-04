@@ -627,12 +627,13 @@ describe("dao", () => {
       ])  
       .accounts({
         owner: dao_admin.publicKey,
-        stakeAta,
-        stakeAuth,
-        mint,
-        stakeState,
+        stakeAta: subdao_stake_ata,
+        stakeAuth: sub_stake_auth,
+        mint: SubDaoMint,
+        stakeState: sub_stake_state,
         config: dao_config_key,
         treasury,
+        configSubDao: sub_dao_config_key,
         tokenProgram: TOKEN_PROGRAM_ID,
         associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
         systemProgram: SystemProgram.programId,   

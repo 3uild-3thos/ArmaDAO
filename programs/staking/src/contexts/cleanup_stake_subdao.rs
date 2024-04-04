@@ -40,9 +40,10 @@ pub struct CleanupStakeSubDao<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        mut,
+        seeds=[b"treasury", config.key().as_ref()],
         seeds::program = dao::state::config::ID,
-        bump = config_sub_dao.treasury_bump
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     #[account(
@@ -134,8 +135,9 @@ pub struct CleanupStakeNftSubDao<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", config_sub_dao.key().as_ref()],
-        bump = config_sub_dao.treasury_bump
+        seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     #[account(
