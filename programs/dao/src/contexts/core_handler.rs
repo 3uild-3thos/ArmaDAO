@@ -7,7 +7,7 @@ use crate::{errors::CoreError, state::DaoConfig};
 #[derive(Accounts)]
 pub struct CoreHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         mut,
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
@@ -18,13 +18,11 @@ pub struct CoreHandler<'info> {
 
 impl<'info> CoreHandler<'info> {
 
-/*     pub fn add_proposal(&mut self, id: u64) -> Result<()> {
-        self.config.proposal_count = self.config.proposal_count.checked_add(1).ok_or(DaoError::Overflow)?;
-        require!(self.config.proposal_count == id, DaoError::InvalidProposalSeed);
-        Ok(())
-    }
- */
     pub fn add_proposal(&mut self, id: u64) -> Result<()> {
+        // Verificar se o signer é autorizado
+        //require!(ctx.accounts.owner.is_signer == true && *ctx.accounts.owner.key == proposal.owner, CustomError::WrongSigner);
+        /* require_eq!(signer.key(), self.owner.key(), CoreError::UnauthorizedSigner); adicionar conta para validar corretamente*/
+        /* require!(self.owner.is_signer == true, CoreError::UnauthorizedSigner); */
         self.config.proposal_count = self.config.proposal_count.checked_add(1).ok_or(CoreError::Overflow)?;
         require!(self.config.proposal_count == id, CoreError::InvalidProposalSeed);
         Ok(())
@@ -35,7 +33,7 @@ impl<'info> CoreHandler<'info> {
 #[derive(Accounts)]
 pub struct SubDaoHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         bump = config.config_bump

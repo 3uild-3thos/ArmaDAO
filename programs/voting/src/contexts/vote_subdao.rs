@@ -17,6 +17,7 @@ pub struct VoteSubDao<'info> {
     vote: Account<'info, VoteState>,
     proposal_program: Program<'info, ProposalProgram>,
     #[account(
+        mut,
         seeds=[b"proposal", config_sub_dao.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
         seeds::program = proposal_program.key(),
         bump = proposal.bump,
@@ -24,6 +25,7 @@ pub struct VoteSubDao<'info> {
     proposal: Account<'info, Proposal>,
     staking_program: Program<'info, StakingProgram>,
     #[account(
+        mut,
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         seeds::program = staking_program.key(),
         bump = stake_state.state_bump,

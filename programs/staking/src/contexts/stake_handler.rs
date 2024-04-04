@@ -26,13 +26,16 @@ impl<'info> StakeHandler<'info> {
     pub fn add_account(&mut self, amount: u64) -> Result<()> {
 
         self.stake_state.accounts = self.stake_state.accounts.checked_add(1).ok_or(StakeError::Overflow)?;
-        self.stake_state.accounts = self.stake_state.locked_amount.checked_add(amount).ok_or(StakeError::Overflow)?;
+        self.stake_state.locked_amount = self.stake_state.locked_amount.checked_add(amount).ok_or(StakeError::Overflow)?;
+        msg!("add o self contas e = {} ", self.stake_state.accounts);
+        msg!("add o self contas e = {} ", self.stake_state.accounts);
+
         Ok(())
     }
     // Remove a vote account from the stake state
     pub fn remove_account(&mut self, amount: u64) -> Result<()> {
         self.stake_state.accounts = self.stake_state.accounts.checked_sub(1).ok_or(StakeError::Underflow)?;
-        self.stake_state.accounts = self.stake_state.locked_amount.checked_sub(amount).ok_or(StakeError::Underflow)?;
+        self.stake_state.locked_amount = self.stake_state.locked_amount.checked_sub(amount).ok_or(StakeError::UnderflowLockedAmount)?;
         Ok(())
     }    
 

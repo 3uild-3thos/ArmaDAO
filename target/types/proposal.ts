@@ -47,7 +47,7 @@ export type Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -147,7 +147,7 @@ export type Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -309,7 +309,7 @@ export type Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -414,7 +414,7 @@ export type Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1178,7 +1178,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1278,7 +1278,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "config",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1440,7 +1440,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1545,7 +1545,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

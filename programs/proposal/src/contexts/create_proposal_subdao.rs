@@ -40,6 +40,7 @@ pub struct StakeSubDaoCreateProposal<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
@@ -157,7 +158,6 @@ pub struct SubDaoCreateProposal<'info> {
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
-    #[account(constraint = collection.key() == config_sub_dao.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
@@ -193,9 +193,11 @@ pub struct SubDaoCreateProposal<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        constraint = config_sub_dao.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(

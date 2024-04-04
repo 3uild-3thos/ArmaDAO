@@ -47,7 +47,7 @@
         },
         {
           "name": "config",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -147,7 +147,7 @@
         },
         {
           "name": "config",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -309,7 +309,7 @@
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -414,7 +414,7 @@
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

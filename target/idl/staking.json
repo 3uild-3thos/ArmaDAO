@@ -1354,111 +1354,116 @@
     },
     {
       "code": 6004,
+      "name": "UnderflowLockedAmount",
+      "msg": "Underflow Locked Amount"
+    },
+    {
+      "code": 6005,
       "name": "AccountsOpen",
       "msg": "You can't unstake with open accounts"
     },
     {
-      "code": 6005,
+      "code": 6006,
       "name": "Expired",
       "msg": "Proposal expired"
     },
     {
-      "code": 6006,
+      "code": 6007,
       "name": "InvalidSlot",
       "msg": "Invalid slot"
     },
     {
-      "code": 6007,
+      "code": 6008,
       "name": "InsufficientStake",
       "msg": "Insufficient stake"
     },
     {
-      "code": 6008,
+      "code": 6009,
       "name": "InvalidName",
       "msg": "Invalid name"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "InvalidGist",
       "msg": "Invalid gist"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "InvalidProposalSeed",
       "msg": "Invalid proposal seed"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "InvalidQuorum",
       "msg": "Invalid quorum"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "InvalidExpiry",
       "msg": "Invalid expiry"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "ProposalClosed",
       "msg": "Proposal closed"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "InvalidVoteAmount",
       "msg": "You can't vote 0!"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "InvalidProposalStatus",
       "msg": "Invalid proposal status"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "InvalidStakeAmount",
       "msg": "Invalid stake amount"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "InvalidThreshold",
       "msg": "Invalid Threshold"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "InvalidRequiredTime",
       "msg": "Invalid Required Time"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "InvalidVoteType",
       "msg": "Invalid Vote Type"
     },
     {
-      "code": 6020,
+      "code": 6021,
       "name": "SingleChoice",
       "msg": "AlreadyVoted"
     },
     {
-      "code": 6021,
+      "code": 6022,
       "name": "InvalidChoicesAmount",
       "msg": "Invalid choices amount"
     },
     {
-      "code": 6022,
+      "code": 6023,
       "name": "InvalidChoice",
       "msg": "Invalid choice"
     },
     {
-      "code": 6023,
+      "code": 6024,
       "name": "CollectionNotSet",
       "msg": "Collection not set"
     },
     {
-      "code": 6024,
+      "code": 6025,
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     },
     {
-      "code": 6025,
+      "code": 6026,
       "name": "LockedToken",
       "msg": "Locked tockens"
     }

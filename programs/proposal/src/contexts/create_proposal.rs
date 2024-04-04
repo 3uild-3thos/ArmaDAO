@@ -62,6 +62,7 @@ pub struct CreateProposal<'info> {
     )]
     core_program: Program<'info, CoreProgram>,
     #[account(
+        mut,
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
@@ -101,7 +102,7 @@ impl<'info> CreateProposal<'info> {
             );
         //Make sure its not staked based
         self.config.check_staked_create_proposal_is_none()?;    
-        // Make sure quorum is valid    
+        // Make sure quorum is valid     
         self.config.check_valid_quorum(quorum)?;                 
         // Check Minimum threshold
         self.config.check_min_threshold(threshold)?;
@@ -188,6 +189,7 @@ pub struct StakeCreateProposal<'info> {
     )]
     core_program: Program<'info, CoreProgram>,
     #[account(
+        mut,
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,

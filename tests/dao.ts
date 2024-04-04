@@ -14,7 +14,6 @@ import { randomBytes, randomInt } from "crypto"
 /* import  daoAdmin from "../aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE.json"; */
 import daoAdmin from "../wallet.json"
 import  daoUser from "../ugaoB7uFPdVQHGLg9vyePbsF1b75snYdUJtMMPqjgGi.json";
-import { publicKey } from "@coral-xyz/anchor/dist/cjs/utils";
 
 const commitment: Commitment = "confirmed"; // processed, confirmed, finalized
 describe("dao", () => {
@@ -48,38 +47,40 @@ describe("dao", () => {
   const seed = new BN(randomBytes(8));
   /* const seed = new BN(21521); */
   console.log("seeds gerada tests", seed)
-  const circulating_supply = new BN(1000000);
+  const circulating_supply = new BN(1000000000000000);
 
   //seed 5 = BEJSdFDLAxJh8LDVps197m35jzxtGbwNRgiwcmssu7ZW
    const seed2 = new BN(randomBytes(8));
    /* console.log("seeds gerada tests", seed) */
 
   // proposalFee in lamports
-  const proposalFee = new BN(1e3);
+  const proposalFee = new BN(1e6);
   const minQuorum: number = 70;
-  const minThreshold = new BN(1000);
+  const minThreshold = new BN(10000000000);
   //24HOURS 216000 slots 1 HOUR 9000 slots 150 slots
   //172,800 per day. 
   //7,200 per houir
   //120 per min
   //time in slots
-  const maxExpiry = new BN(216000);
+  const maxExpiry = new BN(2160000);
   //time in slots
-  const evaluationPhasePeriod = new BN(9000); 
+  const evaluationPhasePeriod = new BN(0); 
   const required_amount_to_create_subdaos = new BN(3);
   const required_amount_to_create_proposals = new BN(3);
-  const staking_amount = new BN(10000000000);
+  const staking_amount = new BN(1000000000);
+  const voting_amount = new BN(100);
   const unstaking_amount = new BN(100);
 
 
   //Proposal Arguments
-  const id = new BN(randomInt(8)); 
+  /* const id = new BN(randomInt(8)); */
+  const id = new BN(1);  
   const name : string = "JonyProposal";
   const quorum: number = 75;
-  const threshold = new BN(1100);
-  const expiry = new BN(10000);
+  const threshold = new BN(100000000000);
+  const expiry = new BN(100000);
   const choices: number = 1;
-  const evaluationperiod = new BN(10000);
+  const evaluationperiod = new BN(1);
   const metadataURI: string = "teste";
 
   const collection = new anchor.web3.PublicKey("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7"); 
@@ -427,7 +428,7 @@ describe("dao", () => {
       console.log(accountinfo)
       
   }); 
-  it("UnStake Token", async () => {
+/*   it("UnStake Token", async () => {
     const tx = await staking_program.methods
     
     .unstakeTokens(staking_amount
@@ -482,7 +483,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });  
+  });   */
 /*    it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
     const tx = await dao_program.methods
     
@@ -757,6 +758,125 @@ describe("dao", () => {
         associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
         systemProgram: SystemProgram.programId,  
        })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+
+
+  it("Vote ", async () => {
+    const tx = await voting_program.methods
+    
+    .vote(
+      voting_amount,
+      0
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        vote,
+        proposalProgram: proposal_keypair.publicKey,
+        proposal,
+        stakingProgram: staking_keypair.publicKey,
+        stakeState,
+        config: dao_config_key,
+        systemProgram: SystemProgram.programId,  
+       })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+
+  it("Unvote ", async () => {
+    const tx = await voting_program.methods
+    
+    .removeVote(
+      voting_amount,
+      0
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        vote,
+        proposalProgram: proposal_keypair.publicKey,
+        proposal,
+        stakingProgram: staking_keypair.publicKey,
+        stakeState,
+        config: dao_config_key,
+        treasury,
+        systemProgram: SystemProgram.programId,  
+       })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+
+  it("UnStake Token", async () => {
+    const tx = await staking_program.methods
+    
+    .unstakeTokens(staking_amount
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({ owner: dao_admin.publicKey,
+        ownerAta: daoAdminAtaDao,
+        stakeAta,
+        stakeAuth,
+        mint,
+        stakeState,
+        config: dao_config_key,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId, })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+  it("Close Stake ", async () => {
+    const tx = await staking_program.methods
+    
+    .closeStake(
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        stakeAta,
+        stakeAuth,
+        mint,
+        stakeState,
+        config: dao_config_key,
+        treasury,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,   
+      })
       .signers([dao_admin])
 
       .rpc({

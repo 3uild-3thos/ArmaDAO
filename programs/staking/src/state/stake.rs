@@ -68,11 +68,13 @@ impl StakeState {
 
     pub fn add_account(&mut self) -> Result<()> {
         self.accounts = self.accounts.checked_add(1).ok_or(StakeError::Overflow)?;
+        msg!("add o self contas e = {} ", self.accounts);
         Ok(())
     }
 
     pub fn remove_account(&mut self) -> Result<()> {
         self.accounts = self.accounts.checked_sub(1).ok_or(StakeError::Underflow)?;
+        msg!("rem o self contas e = {} ", self.accounts);
         Ok(())
     }
 

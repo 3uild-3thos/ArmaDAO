@@ -103,7 +103,7 @@ impl DaoConfig {
     }
     // Check min pre-voting
     pub fn check_evaluation_phase_period(&self, evaluation_period: u64)-> Result<()> {
-        require!(self.evaluation_phase_period <= evaluation_period, CoreError::InvalidExpiry);
+        require!(self.evaluation_phase_period <= evaluation_period, CoreError::InvalidEvaluationPeriod);
         Ok(())
     }
      //Set Allowence Sub Dao

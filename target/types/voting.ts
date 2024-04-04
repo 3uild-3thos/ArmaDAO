@@ -22,7 +22,7 @@ export type Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -32,7 +32,7 @@ export type Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -77,7 +77,7 @@ export type Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -87,7 +87,7 @@ export type Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -97,7 +97,7 @@ export type Voting = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -137,7 +137,7 @@ export type Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -147,7 +147,7 @@ export type Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -157,7 +157,7 @@ export type Voting = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -193,7 +193,7 @@ export type Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -203,7 +203,7 @@ export type Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -253,7 +253,7 @@ export type Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -263,7 +263,7 @@ export type Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -318,7 +318,7 @@ export type Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -328,7 +328,7 @@ export type Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -830,7 +830,7 @@ export const IDL: Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -840,7 +840,7 @@ export const IDL: Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -885,7 +885,7 @@ export const IDL: Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -895,7 +895,7 @@ export const IDL: Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -905,7 +905,7 @@ export const IDL: Voting = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -945,7 +945,7 @@ export const IDL: Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -955,7 +955,7 @@ export const IDL: Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -965,7 +965,7 @@ export const IDL: Voting = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1001,7 +1001,7 @@ export const IDL: Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1011,7 +1011,7 @@ export const IDL: Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1061,7 +1061,7 @@ export const IDL: Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1071,7 +1071,7 @@ export const IDL: Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1126,7 +1126,7 @@ export const IDL: Voting = {
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1136,7 +1136,7 @@ export const IDL: Voting = {
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

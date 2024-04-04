@@ -85,6 +85,8 @@ pub enum CoreError {
     InvalidQuorum,
     #[msg("Invalid expiry")]
     InvalidExpiry,
+    #[msg("Invalid evaluation_phase_period")]
+    InvalidEvaluationPeriod,
     #[msg("Proposal closed")]
     ProposalClosed,
     #[msg("You can't vote 0!")]
@@ -115,6 +117,8 @@ pub enum CoreError {
     CollectionNotSet,
     #[msg("Invalid Collection")]
     InvalidCollection,
+    #[msg("Unauthorized Signer")]
+    UnauthorizedSigner,
     
 }
 
