@@ -18,7 +18,7 @@ pub struct DaoConfig {
     pub config_bump: u8,
     pub treasury_bump: u8,
     pub proposal_fee: u64,
-    pub min_quorum: u8,  //percentage of circulating supply _supply // we receive a u64
+    pub min_quorum: u8,  //percentage of circulating supply _supply // we receive a u8 0-100
     pub min_threshold: u64, //total number of votes
     pub max_expiry: u64,
     pub evaluation_phase_period: u64,
