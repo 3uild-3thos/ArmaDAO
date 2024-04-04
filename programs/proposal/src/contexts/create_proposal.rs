@@ -62,7 +62,7 @@ pub struct CreateProposal<'info> {
     )]
     core_program: Program<'info, CoreProgram>,
     #[account(
-        seeds=[b"core", config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
         constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
@@ -110,7 +110,7 @@ impl<'info> CreateProposal<'info> {
         // Check Min Pre Voting Period
         self.config.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
-        self.proposal.check_choices()?;
+        self.proposal.check_choices(choices)?;
 
         let check_id_add_proposal_accounts = dao::cpi::accounts::CoreHandler {
             owner: self.owner.to_account_info(),
@@ -229,7 +229,7 @@ impl<'info> StakeCreateProposal<'info> {
         // Check Min Pre Voting Period
         self.config.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
-        self.proposal.check_choices()?; 
+        self.proposal.check_choices(choices)?; 
 
         let check_id_add_proposal_accounts = dao::cpi::accounts::CoreHandler {
             owner: self.owner.to_account_info(),

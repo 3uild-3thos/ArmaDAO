@@ -24,7 +24,6 @@ pub struct CleanupStake<'info> {
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == config.mint.expect("Mint not initialized"))]
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
@@ -37,6 +36,7 @@ pub struct CleanupStake<'info> {
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
+        constraint = config.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(),
     )]
     config: Account<'info, DaoConfig>,
     #[account(
@@ -111,7 +111,6 @@ pub struct CleanupStakeNft<'info> {
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
@@ -124,6 +123,7 @@ pub struct CleanupStakeNft<'info> {
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
+        constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config: Account<'info, DaoConfig>,
     #[account(

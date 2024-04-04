@@ -167,17 +167,17 @@ impl Proposal {
         }
         Ok(())
     }
-    pub fn check_choices(&self) -> Result<()> {
+    pub fn check_choices(&self, choices: u8) -> Result<()> {
         match self.proposal {
-            ProposalType::Bounty(_, _) | ProposalType::Executable(_) | ProposalType::Vote => {
-                if self.choices >= 1 && self.choices <= 2 {
+            ProposalType::Bounty(_, _) | ProposalType::Executable(_) | ProposalType::Vote => {               
+                if choices >= 1 && choices < 3 {
                     Ok(())
                 } else {
                     err!(ProposalError::InvalidChoicesAmount)
                 }
             },
             ProposalType::VoteMultipleChoice => {
-                if self.choices >= 1 && self.choices <= 6 {
+                if choices >= 1 && choices <= 6 {
                     Ok(())
                 } else {
                     err!(ProposalError::InvalidChoicesAmount)

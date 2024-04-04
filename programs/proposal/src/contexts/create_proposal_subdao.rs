@@ -80,7 +80,7 @@ impl<'info> StakeSubDaoCreateProposal<'info> {
         // Check Min Pre Voting Period
         self.config_sub_dao.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
-        self.proposal.check_choices()?; 
+        self.proposal.check_choices(choices)?; 
 
         let check_id_add_proposal_accounts = dao::cpi::accounts::SubDaoHandler {
             owner: self.owner.to_account_info(),
@@ -193,7 +193,7 @@ pub struct SubDaoCreateProposal<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
     )]
@@ -240,7 +240,7 @@ impl<'info> SubDaoCreateProposal<'info> {
         // Check Min Pre Voting Period
         self.config_sub_dao.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
-        self.proposal.check_choices()?;
+        self.proposal.check_choices(choices)?;
 
         let check_id_add_proposal_accounts = dao::cpi::accounts::SubDaoHandler {
             owner: self.owner.to_account_info(),

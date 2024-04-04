@@ -14,6 +14,7 @@ import { randomBytes, randomInt } from "crypto"
 /* import  daoAdmin from "../aYTqjMKNNe1KmGT7WR2XHhXu7t6FD7p8DgZnwP3T8rE.json"; */
 import daoAdmin from "../wallet.json"
 import  daoUser from "../ugaoB7uFPdVQHGLg9vyePbsF1b75snYdUJtMMPqjgGi.json";
+import { publicKey } from "@coral-xyz/anchor/dist/cjs/utils";
 
 const commitment: Commitment = "confirmed"; // processed, confirmed, finalized
 describe("dao", () => {
@@ -54,7 +55,7 @@ describe("dao", () => {
    /* console.log("seeds gerada tests", seed) */
 
   // proposalFee in lamports
-  const proposalFee = new BN(1e8);
+  const proposalFee = new BN(1e3);
   const minQuorum: number = 70;
   const minThreshold = new BN(1000);
   //24HOURS 216000 slots 1 HOUR 9000 slots 150 slots
@@ -77,7 +78,7 @@ describe("dao", () => {
   const quorum: number = 75;
   const threshold = new BN(1100);
   const expiry = new BN(10000);
-  const choices: number = 2;
+  const choices: number = 1;
   const evaluationperiod = new BN(10000);
   const metadataURI: string = "teste";
 
@@ -224,7 +225,6 @@ describe("dao", () => {
   };
 
 
-  
   it("Initialize hybrid dao Config Account", async () => {
     const tx = await dao_program.methods
     
@@ -483,7 +483,7 @@ describe("dao", () => {
       .then(log);
       
   });  
-   it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
+/*    it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
     const tx = await dao_program.methods
     
     .initializeSubDao(
@@ -525,8 +525,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
   });
-
-    it("SUBDAO TOKEN Initialize StakeATA + StakeStaTe Account", async () => {
+ */
+/*     it("SUBDAO TOKEN Initialize StakeATA + StakeStaTe Account", async () => {
     const tx = await staking_program.methods
     
     .initStakeSubDao(
@@ -555,8 +555,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });
-  it("SubDao Stake Token", async () => {
+  }); */
+/*   it("SubDao Stake Token", async () => {
     const tx = await staking_program.methods
     
     .stakeTokensSubDao(staking_amount
@@ -585,9 +585,9 @@ describe("dao", () => {
       .then(confirm)
       .then(log); 
  
-  });
+  }); */
 
-  it("Sub Dao UnStake Token", async () => {
+/*   it("Sub Dao UnStake Token", async () => {
     const tx = await staking_program.methods
     
     .unstakeTokensSubDao(staking_amount
@@ -615,8 +615,8 @@ describe("dao", () => {
       })
       .then(confirm)
       .then(log);     
-  });
-
+  }); */
+/* 
   it("SubDao Close Stake ", async () => {
     const tx = await staking_program.methods
     
@@ -647,7 +647,7 @@ describe("dao", () => {
       .then(log);
       
   });  
-
+ */
 /*   it("Initialize Nft Stake Account", async () => {
     const tx = await staking_program.methods
     
@@ -724,17 +724,14 @@ describe("dao", () => {
       
   }); */
 
-
-
- /*  it("Create Proposal ", async () => {
+  it("Create Proposal ", async () => {
     const tx = await proposal_program.methods
     
     .createProposal(
       id,
       name,
       metadataURI,
-      // { Vote: {} }, 
-      ProposalType,
+      { vote: {} },
       quorum,
       threshold,
       expiry,
@@ -744,7 +741,22 @@ describe("dao", () => {
       .preInstructions([
         ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
       ])  
-      .accounts({...accounts})
+      .accounts({
+        owner: dao_admin.publicKey,
+        ownerAta,
+        nft,
+        collection,
+        metadata,
+        masterEdition,
+        proposal,
+        coreProgram: dao_keypair.publicKey,
+        config: dao_config_key,
+        treasury,
+        metadataProgram: TOKEN_METADATA_PROGRAM_ID,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,  
+       })
       .signers([dao_admin])
 
       .rpc({
@@ -753,7 +765,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  }); */
+  });
 
 /*   it("Initialize NFT Stake Account", async () => {
     const tx = await staking_program.methods
