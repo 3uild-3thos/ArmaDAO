@@ -28,19 +28,21 @@ pub struct CleanupStake<'info> {
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
-        close = owner,
+        close = treasury,
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
     stake_state: Box<Account<'info, StakeState>>,
     #[account(
-        seeds=[b"core", config.seed.to_le_bytes().as_ref()],
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
     )]
     config: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
@@ -66,7 +68,7 @@ impl<'info> CleanupStake<'info> {
     ) -> Result<()> {
         let accounts = CloseAccount {
             account: self.stake_ata.to_account_info(),
-            destination: self.owner.to_account_info(),
+            destination: self.treasury.to_account_info(),
             authority: self.stake_auth.to_account_info()
         };
 
@@ -113,7 +115,7 @@ pub struct CleanupStakeNft<'info> {
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
-        close = owner,
+        close = treasury,
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
@@ -151,7 +153,7 @@ impl<'info> CleanupStakeNft<'info> {
     ) -> Result<()> {
         let accounts = CloseAccount {
             account: self.stake_ata.to_account_info(),
-            destination: self.owner.to_account_info(),
+            destination: self.treasury.to_account_info(),
             authority: self.stake_auth.to_account_info()
         };
 

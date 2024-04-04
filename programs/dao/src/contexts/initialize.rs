@@ -174,7 +174,10 @@ impl<'info> Initialize<'info> {
                 circulating_supply
             });
             msg!("seed {}", self.config.seed);      
-            msg!("proposal fee {}", self.config.proposal_fee);      
+            msg!("proposal fee {}", self.config.proposal_fee);
+            msg!("config_bump {}", self.config.config_bump);
+            msg!("treasuru_bump {}", self.config.treasury_bump);             
+
                 Ok(())
         
 /*             self.config.init(

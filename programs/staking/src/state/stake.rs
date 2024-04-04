@@ -48,7 +48,10 @@ impl StakeState {
         &mut self,
         amount: u64
     ) -> Result<()> {
-        self.amount.checked_add(amount).ok_or(StakeError::Overflow)?;
+        self.amount = self.amount.checked_add(amount).ok_or(StakeError::Overflow)?;
+        msg!("o amount e = {} ", amount);
+        msg!("o self amount e = {} ", self.amount);
+
         self.update()
     }
 

@@ -72,6 +72,8 @@ impl<'info> Stake<'info> {
             accounts
         );
         transfer_checked(ctx, amount, self.mint.decimals)?;
+  /*       self.stake_state.stake(amount)?; */
+
         msg!("amount = {}", self.stake_state.amount);      
         msg!("locked amount = {}", self.stake_state.locked_amount);      
         Ok(())
@@ -122,7 +124,7 @@ pub struct StakeNft<'info> {
     #[account(
         mut,
         seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
-        bump,
+        bump, // Nao estou a usar de preposito. Arranjar maneira mais elegante.
         token::mint = nft,
         token::authority = stake_auth
     )]

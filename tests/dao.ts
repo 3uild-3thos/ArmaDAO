@@ -427,10 +427,10 @@ describe("dao", () => {
       console.log(accountinfo)
       
   }); 
-/*   it("UnStake Token", async () => {
+  it("UnStake Token", async () => {
     const tx = await staking_program.methods
     
-    .unstakeTokens(unstaking_amount
+    .unstakeTokens(staking_amount
     )  
       .preInstructions([
         ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
@@ -482,8 +482,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  });   */
-  it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
+  });  
+   it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
     const tx = await dao_program.methods
     
     .initializeSubDao(
@@ -583,11 +583,70 @@ describe("dao", () => {
         skipPreflight:true
       })
       .then(confirm)
+      .then(log); 
+ 
+  });
+
+  it("Sub Dao UnStake Token", async () => {
+    const tx = await staking_program.methods
+    
+    .unstakeTokensSubDao(staking_amount
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({ 
+        owner: dao_admin.publicKey,
+        ownerAta: ownerSubdaoMintAta,
+        stakeAta: subdao_stake_ata,
+        auth: sub_stake_auth,
+        mint: SubDaoMint,
+        stakeState: sub_stake_state,
+        config: dao_config_key,
+        configSubDao: sub_dao_config_key,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,   
+      })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);     
+  });
+
+  it("SubDao Close Stake ", async () => {
+    const tx = await staking_program.methods
+    
+    .closeStakeSubDao(
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        stakeAta,
+        stakeAuth,
+        mint,
+        stakeState,
+        config: dao_config_key,
+        treasury,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,   
+      })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
       .then(log);
-/*       let accountinfo = await anchor.getProvider().connection.getAccountInfo(stakeState);
-      console.log(accountinfo) */
       
-  });   
+  });  
+
 /*   it("Initialize Nft Stake Account", async () => {
     const tx = await staking_program.methods
     
@@ -740,5 +799,4 @@ describe("dao", () => {
   }); */
 
   
-  
-});
+});  
