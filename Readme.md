@@ -5,7 +5,17 @@ A Modern, Modular, Membership Anchor-based DAO
 - **Membership Types:**
   - Token-based membership
   - NFT-based membership
-  - Hybrid membership
+  - Flexible Hybrid membership
+
+- **Proposals Threshold:**  
+  - Required Staked-based Amount to Create proposals 
+  - Holding NFT-based  to create Proposal
+
+- **Voting Threshold:**
+  - Minimum number of votes required for a proposal to be considered valid.
+
+- **Quorum Threshold:** 
+   - Minimum number of votes required for a choice to succeed, based on the circulating supply.
 
 - **Allow SubDAOs Feature:**
   - NFT Ownership Based
@@ -14,6 +24,7 @@ A Modern, Modular, Membership Anchor-based DAO
 - **SubDAOs - Membership:**
   - Token-based membership
   - NFT-based membership
+  - Flexible Hybrid membership
 
 # **Proposals**
 
