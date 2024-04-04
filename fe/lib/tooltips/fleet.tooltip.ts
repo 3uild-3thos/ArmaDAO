@@ -25,6 +25,9 @@ export const createFleet = {
     minStakedToCreateSubfleet:
       "The proposal fee is the payment for bounty proposal.",
   },
+  modules: {
+    title: "Choose the modules you want to enable for your Fleet DAO.",
+  },
   team: {
     title: "You can add more team members later on.",
     stayAnonymous: `You can choose to stay anonymous. But please note that this may affect your DAO's credibility.`,
