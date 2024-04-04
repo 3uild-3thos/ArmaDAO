@@ -52,7 +52,7 @@ export type Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -131,16 +131,6 @@ export type Proposal = {
           "isSigner": false
         },
         {
-          "name": "coreProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "stakingProgram",
           "isMut": false,
           "isSigner": false
@@ -151,8 +141,18 @@ export type Proposal = {
           "isSigner": false
         },
         {
-          "name": "treasury",
+          "name": "coreProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -227,7 +227,7 @@ export type Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -263,7 +263,7 @@ export type Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -288,6 +288,16 @@ export type Proposal = {
           "isSigner": false
         },
         {
+          "name": "stakingProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "coreProgram",
           "isMut": false,
           "isSigner": false
@@ -303,18 +313,8 @@ export type Proposal = {
           "isSigner": false
         },
         {
-          "name": "stakingProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -514,7 +514,7 @@ export type Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -555,7 +555,7 @@ export type Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1183,7 +1183,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1262,16 +1262,6 @@ export const IDL: Proposal = {
           "isSigner": false
         },
         {
-          "name": "coreProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "stakingProgram",
           "isMut": false,
           "isSigner": false
@@ -1282,8 +1272,18 @@ export const IDL: Proposal = {
           "isSigner": false
         },
         {
-          "name": "treasury",
+          "name": "coreProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1358,7 +1358,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1394,7 +1394,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1419,6 +1419,16 @@ export const IDL: Proposal = {
           "isSigner": false
         },
         {
+          "name": "stakingProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "coreProgram",
           "isMut": false,
           "isSigner": false
@@ -1434,18 +1444,8 @@ export const IDL: Proposal = {
           "isSigner": false
         },
         {
-          "name": "stakingProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1645,7 +1645,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1686,7 +1686,7 @@ export const IDL: Proposal = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

@@ -15,7 +15,6 @@ pub struct VoteSubDao<'info> {
         space = VoteState::LEN,
     )]
     vote: Account<'info, VoteState>,
-    #[account(constraint = proposal_program.key() == config_sub_dao.proposal_program)]
     proposal_program: Program<'info, ProposalProgram>,
     #[account(
         seeds=[b"proposal", config_sub_dao.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
@@ -23,7 +22,6 @@ pub struct VoteSubDao<'info> {
         bump = proposal.bump,
     )]
     proposal: Account<'info, Proposal>,
-    #[account(constraint = staking_program.key() == config_sub_dao.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
@@ -41,6 +39,8 @@ pub struct VoteSubDao<'info> {
         seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        has_one = staking_program,
+        has_one = proposal_program
     )]
     config_sub_dao: Account<'info, DaoConfig>,
     system_program: Program<'info, System>

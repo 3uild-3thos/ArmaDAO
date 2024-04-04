@@ -87,7 +87,7 @@ pub mod proposal {
     // Create a SubDao Proposal
     // Staked Based
     pub fn create_proposal_sub_dao(
-        ctx: Context<CreateProposalSubDao>,
+        ctx: Context<StakeSubDaoCreateProposal>,
         id: u64,
         name: String,
         metadata: String,
@@ -118,7 +118,7 @@ pub mod proposal {
     // Create a SubDao Proposal
     // NFT Holding Based
     pub fn create_proposal_sub_dao_hybrid(
-        ctx: Context<CreateProposalSubDaoHybrid>,
+        ctx: Context<SubDaoCreateProposal>,
         id: u64,
         name: String,
         metadata: String,

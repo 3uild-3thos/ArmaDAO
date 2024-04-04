@@ -52,7 +52,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -131,16 +131,6 @@
           "isSigner": false
         },
         {
-          "name": "coreProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "stakingProgram",
           "isMut": false,
           "isSigner": false
@@ -151,8 +141,18 @@
           "isSigner": false
         },
         {
-          "name": "treasury",
+          "name": "coreProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -227,7 +227,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -263,7 +263,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -288,6 +288,16 @@
           "isSigner": false
         },
         {
+          "name": "stakingProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "coreProgram",
           "isMut": false,
           "isSigner": false
@@ -303,18 +313,8 @@
           "isSigner": false
         },
         {
-          "name": "stakingProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -514,7 +514,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -555,7 +555,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1126,8 +1126,5 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ],
-  "metadata": {
-    "address": "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV"
-  }
+  ]
 }

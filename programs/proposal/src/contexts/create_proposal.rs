@@ -9,6 +9,10 @@ use crate::errors::ProposalError;
 use crate::state::{Proposal, ProposalType};
 use dao::state::{DaoConfig, CoreProgram};
 use staking::state::{StakeState, StakingProgram};
+
+
+// CREATE PROPOSALS THAT **DONT REQUIRE** HAVING min_staked_required_proposal = *NFT* Holding Based 
+// For Hybrid Daos And NFT DAOS
 #[derive(Accounts)]
 #[instruction(id: u64)]
 pub struct CreateProposal<'info> {
@@ -21,7 +25,6 @@ pub struct CreateProposal<'info> {
     )]
     owner_ata: InterfaceAccount<'info, TokenAccount>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
@@ -54,15 +57,21 @@ pub struct CreateProposal<'info> {
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
+    #[account(
+        constraint = core_program.key() == dao::state::config::ID,
+    )]
     core_program: Program<'info, CoreProgram>,
     #[account(
         seeds=[b"core", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
+        constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
@@ -153,7 +162,7 @@ impl<'info> CreateProposal<'info> {
         transfer(ctx, self.config.proposal_fee)
     }
 }
-
+// CREATE PROPOSALS THAT **REQUIRE** HAVING min_staked_required_proposal
 #[derive(Accounts)]
 #[instruction(id: u64)]
 pub struct StakeCreateProposal<'info> {
@@ -167,14 +176,6 @@ pub struct StakeCreateProposal<'info> {
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
-    core_program: Program<'info, CoreProgram>,
-    #[account(
-        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
-        seeds::program = dao::state::config::ID,
-        bump = config.config_bump,
-    )]
-    config: Account<'info, DaoConfig>,
-    #[account(constraint = staking_program.key() == config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
@@ -183,11 +184,25 @@ pub struct StakeCreateProposal<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
+        constraint = core_program.key() == dao::state::config::ID,
+    )]
+    core_program: Program<'info, CoreProgram>,
+    #[account(
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+        has_one = staking_program
+    )]
+    config: Account<'info, DaoConfig>,
+    #[account(
+        mut,
         seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     system_program: Program<'info, System>,
+    
 }
 impl<'info> StakeCreateProposal<'info> {    
     pub fn create_proposal(

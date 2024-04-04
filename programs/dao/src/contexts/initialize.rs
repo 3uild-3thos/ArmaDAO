@@ -8,34 +8,6 @@ use anchor_spl::{
 use crate::{validate_nft, REQUIRED_COLLECTION_MINT};
 use crate::{errors::CoreError, state::DaoConfig};
  
-
-/* 
-#[derive(Accounts)]
-pub struct Debugging<'info> {
-    #[account(mut)]
-    ///CHECK: THIS IS SAFEEEEE
-    pub initializer: UncheckedAccount<'info>,
-    #[account(
-        mut,
-        associated_token::mint = nft,
-        associated_token::authority = initializer
-    )]
-    pub owner_ata: InterfaceAccount<'info, TokenAccount>,
-    nft: InterfaceAccount<'info, Mint>,
-  #[account(
-        seeds=[b"configteste", initializer.key().as_ref(), owner_ata.key().as_ref()],
-        bump = config.config_bump
-    )] 
-    pub config: Account<'info, DaoConfig>,
-}
-impl<'info> Debugging<'info> {
-    pub fn debug(&self) -> Result<()> {
-        // Dummy function for debugging
-        msg!("seed {}", self.config.seed);    
-        Ok(())
-    }
-} */
-
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct Initialize<'info> {
@@ -92,14 +64,6 @@ pub struct Initialize<'info> {
         space = DaoConfig::LEN
     )]
     pub config: Account<'info, DaoConfig>,
-/*     #[account(
-        init,
-        payer = initializer,
-        seeds=[b"configteste", initializer.key().as_ref(), owner_ata.key().as_ref()], 
-        bump,
-        space = DaoConfig::LEN
-    )]
-    pub config: Account<'info, DaoConfig>, */
     pub metadata_program: Program<'info, Metadata>,
     pub token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,
@@ -148,7 +112,6 @@ impl<'info> Initialize<'info> {
                 self.collection
             );
             self.config.check_init_valid_quorum(min_quorum)?;
-
 
             msg!("Dao Created with sucess");
             self.config.set_inner(DaoConfig { 
@@ -272,7 +235,7 @@ pub struct InitializeSubdao<'info> {
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         bump = config.config_bump,
-        constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized")
+        constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config: Account<'info, DaoConfig>,
     metadata_program: Program<'info, Metadata>,

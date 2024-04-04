@@ -15,7 +15,6 @@ pub struct Vote<'info> {
         space = VoteState::LEN,
     )]
     vote: Account<'info, VoteState>,
-    #[account(constraint = proposal_program.key() == config.proposal_program)]
     proposal_program: Program<'info, ProposalProgram>,
     #[account(
         seeds=[b"proposal", config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
@@ -23,7 +22,6 @@ pub struct Vote<'info> {
         bump = proposal.bump,
     )]
     proposal: Account<'info, Proposal>,
-    #[account(constraint = staking_program.key() == config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
         seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
@@ -35,6 +33,8 @@ pub struct Vote<'info> {
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.config_bump,
+        has_one = staking_program,
+        has_one = proposal_program
     )]
     config: Account<'info, DaoConfig>,
     system_program: Program<'info, System>

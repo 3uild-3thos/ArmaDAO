@@ -1,5 +1,4 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
-/* use daoist_programs::modules::{/* CoreProgram, DaoConfig, */ StakingProgram, StakeState, Proposal, ProposalType,}; */
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
@@ -12,7 +11,7 @@ use crate::state::{Proposal, ProposalType};
 use staking::state::{StakeState, StakingProgram};
 #[derive(Accounts)]
 #[instruction(id: u64)]
-pub struct CreateProposalSubDao<'info> {
+pub struct StakeSubDaoCreateProposal<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
@@ -23,6 +22,16 @@ pub struct CreateProposalSubDao<'info> {
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
+    staking_program: Program<'info, StakingProgram>,
+    #[account(
+        seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds::program = staking_program.key(),
+        bump = stake_state.state_bump,
+    )]
+    stake_state: Account<'info, StakeState>,
+    #[account(
+        constraint = core_program.key() == dao::state::config::ID,
+    )]
     core_program: Program<'info, CoreProgram>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
@@ -34,24 +43,19 @@ pub struct CreateProposalSubDao<'info> {
         seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        has_one = staking_program
     )]
-    config_sub_dao: Account<'info, DaoConfig>,
-    #[account(constraint = staking_program.key() == config.staking_program)]
-    staking_program: Program<'info, StakingProgram>,
+    config_sub_dao: Account<'info, DaoConfig>,   
     #[account(
-        seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
-        seeds::program = staking_program.key(),
-        bump = stake_state.state_bump,
-    )]
-    stake_state: Account<'info, StakeState>,
-    #[account(
+        mut,
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     system_program: Program<'info, System>,
 }
-impl<'info> CreateProposalSubDao<'info> {    
+impl<'info> StakeSubDaoCreateProposal<'info> {    
     pub fn create_proposal_sub_dao(
         &mut self,
         id: u64,
@@ -63,7 +67,7 @@ impl<'info> CreateProposalSubDao<'info> {
         expiry: u64,
         choices:u8,
         evaluation_period: u64,
-        bumps: &CreateProposalSubDaoBumps,
+        bumps: &StakeSubDaoCreateProposalBumps,
     ) -> Result<()> {
         // Make sure user has staked the required amount
         self.config_sub_dao.check_min_staked_required_proposal(self.stake_state.amount)?;
@@ -130,9 +134,12 @@ impl<'info> CreateProposalSubDao<'info> {
     }
 }
 
+
+// CREATE PROPOSALS THAT **DONT REQUIRE** HAVING min_staked_required_proposal = *NFT* Holding Based 
+// For Hybrid Sub DAOS And NFT Sub DAOS
 #[derive(Accounts)]
 #[instruction(id: u64)]
-pub struct CreateProposalSubDaoHybrid<'info> {
+pub struct SubDaoCreateProposal<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
@@ -175,6 +182,9 @@ pub struct CreateProposalSubDaoHybrid<'info> {
         bump,
     )]
     master_edition: Account<'info, MasterEditionAccount>,
+    #[account(
+        constraint = core_program.key() == dao::state::config::ID,
+    )]
     core_program: Program<'info, CoreProgram>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
@@ -190,6 +200,7 @@ pub struct CreateProposalSubDaoHybrid<'info> {
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
@@ -199,7 +210,7 @@ pub struct CreateProposalSubDaoHybrid<'info> {
     system_program: Program<'info, System>,
     
 }
-impl<'info> CreateProposalSubDaoHybrid<'info> {    
+impl<'info> SubDaoCreateProposal<'info> {    
     pub fn create_proposal_sub_dao_hybrid(
         &mut self,
         id: u64,
@@ -211,7 +222,7 @@ impl<'info> CreateProposalSubDaoHybrid<'info> {
         expiry: u64,
         choices:u8,
         evaluation_period: u64,
-        bumps: &CreateProposalSubDaoHybridBumps,
+        bumps: &SubDaoCreateProposalBumps,
     ) -> Result<()> {
         // Check if NFT is Verified
         validate_nft!(

@@ -23,7 +23,9 @@ pub struct CleanupProposal<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
