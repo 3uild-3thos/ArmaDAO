@@ -4,6 +4,7 @@
 import FungibleForm from "@/app/fleets/create/(forms)/(membership-types)/fungible-form";
 import HybridForm from "@/app/fleets/create/(forms)/(membership-types)/hybrid-form";
 import MembershipTypes from "@/app/fleets/create/(forms)/(membership-types)/membership-types";
+import FleetModules from "@/app/fleets/create/(forms)/(membership-types)/modules";
 import NFTForm from "@/app/fleets/create/(forms)/(membership-types)/nft-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -98,6 +99,8 @@ function FleetConfig() {
                 <HybridForm form={form} />
               )}
             </div>
+
+            {watchMembershipType && <FleetModules />}
           </div>
         </form>
       </Form>

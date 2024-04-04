@@ -1,5 +1,7 @@
 # Armada
 
+![Armada](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/cover.png?raw=true)
+
 ## Overview
 
 Navigate the Future with Armada - No-Code Governance for the Mothership and Its Fleets.A DAO for DAOs, by DAOs.
@@ -12,15 +14,17 @@ The Armada is not just a tool; it's a meta-governance ecosystem that allows DAOs
 
 ## Features
 
+![Armada Features](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/features.png?raw=true)
+
 - **No-code DAO Wizard**: Easily create a very modular DAO, in different membership types, without the need to code.
 - **Modularity and Customizability**: Fine-grain control of every configuration (e.g. membership type, quorum, threshold, name, etc.) and innovation you need for your DAO and your community.
 - **Fully decentralized, community-owned**: The platform itself has a DAO called the Mothership which will be driven by the community in terms of roadmap, features, decisions and even configurations.
 - **Plugins and APIs**: No need to stay in the Armada platform to enjoy the full modularity of your DAO. Utilize and maximize our plugins and APIs to integrate your DAO on your own platform.
 - **Community Engagement**: A thriving ecosystem communities in communities share insights, discuss innovation, and foster their DAO's success.
 
-## Solana Program Architecture
+## High-level Architecture
 
-![Armada High-level Architecture](https://demo.thearmadadao.xyz/github/high-level-architecture.png)
+![Armada High-level Architecture](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/high-level-architecture.png?raw=true)
 
 The very first Fleet DAO in devnet can be found [here](https://explorer.solana.com/tx/671veqqMiNQDJ2g5foCv9H7VG8pkURuxNc6nzXnm7xChjrxZ6fDno67FNmVwCkUJpJm7WUTdM3nDBsC89teJ6SyZ?cluster=devnet).
 
@@ -28,7 +32,7 @@ If you want to dive deeper into the Solana programs, read more abouot them [**he
 
 ## Tech Stack
 
-![Armada Tech Stack](https://demo.thearmadadao.xyz/github/tech-stack.png)
+![Armada Tech Stack](https://github.com/3uild-3thos/ArmaDAO/blob/dev/fe/public/github/tech-stack.png?raw=true)
 
 - [**Next.js 13**](https://nextjs.org/): Our Full Stack Framework that enables functionality for both front-end and back-end operations.
 - [**React.js 18**](https://reactjs.org/): Utilized for building our user interface and managing the front-end logic of the application.

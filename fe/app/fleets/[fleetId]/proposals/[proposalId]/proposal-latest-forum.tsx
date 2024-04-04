@@ -1,7 +1,7 @@
 // components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowDownSquare, ArrowRight, ArrowUpSquare } from "lucide-react";
+import { ArrowDownIcon, ArrowRight, ArrowUpIcon } from "lucide-react";
 
 // lib
 import { PATH, replacePathKey } from "@/lib/routes";
@@ -34,11 +34,11 @@ const ProposalLatestForumComponent = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <ArrowUpSquare size={16} className="text-success" />
+                <ArrowUpIcon size={24} className="text-success" />
                 {forum.upVotes}
               </div>
               <div className="flex items-center gap-2">
-                <ArrowDownSquare size={16} className="text-destructive" />
+                <ArrowDownIcon size={24} className="text-destructive" />
                 {forum.downVotes}
               </div>
             </div>

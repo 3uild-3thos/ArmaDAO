@@ -147,7 +147,7 @@ function FleetInfo() {
                             <div className="flex flex-col w-full col-span-3 gap-4">
                               <Button
                                 variant={"outline"}
-                                className="relative justify-start py-6 cursor-pointer border-default text-muted/50"
+                                className="relative bg-background hover:bg-muted/5 justify-start py-6 cursor-pointer border-default text-muted/50"
                               >
                                 Select File
                                 <Input
