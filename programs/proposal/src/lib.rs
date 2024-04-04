@@ -86,7 +86,7 @@ pub mod proposal {
     }
     // Create a SubDao Proposal
     // Staked Based
-    pub fn create_proposal_sub_dao(
+    pub fn create_proposal_sub_dao_staked(
         ctx: Context<StakeSubDaoCreateProposal>,
         id: u64,
         name: String,
@@ -117,7 +117,7 @@ pub mod proposal {
     }
     // Create a SubDao Proposal
     // NFT Holding Based
-    pub fn create_proposal_sub_dao_hybrid(
+    pub fn create_proposal_sub_dao(
         ctx: Context<SubDaoCreateProposal>,
         id: u64,
         name: String,
@@ -133,7 +133,7 @@ pub mod proposal {
         ctx.accounts.pay_proposal_fee()?;
 
         // Ensure user has actually got tokens staked and create a new proposal
-        ctx.accounts.create_proposal_sub_dao_hybrid(
+        ctx.accounts.create_proposal_sub_dao(
             id,
             name,
             metadata,

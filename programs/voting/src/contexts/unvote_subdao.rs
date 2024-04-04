@@ -27,7 +27,7 @@ pub struct UnvoteSubDao<'info> {
     staking_program: Program<'info, StakingProgram>,
     #[account(
         mut,
-        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         seeds::program = staking_program.key(),
         bump = stake_state.state_bump,
     )]

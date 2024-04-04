@@ -66,7 +66,7 @@ describe("dao", () => {
   //time in slots
   const evaluationPhasePeriod = new BN(0); 
   const required_amount_to_create_subdaos = new BN(3);
-  const required_amount_to_create_proposals = new BN(3);
+  const required_amount_to_create_proposals = new BN(1);
   const staking_amount = new BN(1000000000);
   const voting_amount = new BN(100);
   const unstaking_amount = new BN(100);
@@ -424,67 +424,11 @@ describe("dao", () => {
       })
       .then(confirm)
       .then(log);
-      let accountinfo = await anchor.getProvider().connection.getAccountInfo(stakeState);
-      console.log(accountinfo)
+      //let accountinfo = await anchor.getProvider().connection.getAccountInfo(stakeState);
+      //console.log(accountinfo)
       
   }); 
-/*   it("UnStake Token", async () => {
-    const tx = await staking_program.methods
-    
-    .unstakeTokens(staking_amount
-    )  
-      .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
-      ])  
-      .accounts({ owner: dao_admin.publicKey,
-        ownerAta: daoAdminAtaDao,
-        stakeAta,
-        stakeAuth,
-        mint,
-        stakeState,
-        config: dao_config_key,
-        tokenProgram: TOKEN_PROGRAM_ID,
-        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-        systemProgram: SystemProgram.programId, })
-      .signers([dao_admin])
-
-      .rpc({
-        skipPreflight:true
-      })
-      .then(confirm)
-      .then(log);
-      
-  });
-  it("Close Stake ", async () => {
-    const tx = await staking_program.methods
-    
-    .closeStake(
-    )  
-      .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
-      ])  
-      .accounts({
-        owner: dao_admin.publicKey,
-        stakeAta,
-        stakeAuth,
-        mint,
-        stakeState,
-        config: dao_config_key,
-        treasury,
-        tokenProgram: TOKEN_PROGRAM_ID,
-        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-        systemProgram: SystemProgram.programId,   
-      })
-      .signers([dao_admin])
-
-      .rpc({
-        skipPreflight:true
-      })
-      .then(confirm)
-      .then(log);
-      
-  });   */
-/*    it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
+   it("Initialize SubDAO when min_staked_create_subdao.is_none", async () => {
     const tx = await dao_program.methods
     
     .initializeSubDao(
@@ -526,8 +470,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
   });
- */
-/*     it("SUBDAO TOKEN Initialize StakeATA + StakeStaTe Account", async () => {
+
+    it("SUBDAO TOKEN Initialize StakeATA + StakeStaTe Account", async () => {
     const tx = await staking_program.methods
     
     .initStakeSubDao(
@@ -556,8 +500,8 @@ describe("dao", () => {
       .then(confirm)
       .then(log);
       
-  }); */
-/*   it("SubDao Stake Token", async () => {
+  }); 
+   it("SubDao Stake Token", async () => {
     const tx = await staking_program.methods
     
     .stakeTokensSubDao(staking_amount
@@ -586,69 +530,7 @@ describe("dao", () => {
       .then(confirm)
       .then(log); 
  
-  }); */
-
-/*   it("Sub Dao UnStake Token", async () => {
-    const tx = await staking_program.methods
-    
-    .unstakeTokensSubDao(staking_amount
-    )  
-      .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
-      ])  
-      .accounts({ 
-        owner: dao_admin.publicKey,
-        ownerAta: ownerSubdaoMintAta,
-        stakeAta: subdao_stake_ata,
-        auth: sub_stake_auth,
-        mint: SubDaoMint,
-        stakeState: sub_stake_state,
-        config: dao_config_key,
-        configSubDao: sub_dao_config_key,
-        tokenProgram: TOKEN_PROGRAM_ID,
-        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-        systemProgram: SystemProgram.programId,   
-      })
-      .signers([dao_admin])
-
-      .rpc({
-        skipPreflight:true
-      })
-      .then(confirm)
-      .then(log);     
-  }); */
-/* 
-  it("SubDao Close Stake ", async () => {
-    const tx = await staking_program.methods
-    
-    .closeStakeSubDao(
-    )  
-      .preInstructions([
-        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
-      ])  
-      .accounts({
-        owner: dao_admin.publicKey,
-        stakeAta: subdao_stake_ata,
-        stakeAuth: sub_stake_auth,
-        mint: SubDaoMint,
-        stakeState: sub_stake_state,
-        config: dao_config_key,
-        treasury,
-        configSubDao: sub_dao_config_key,
-        tokenProgram: TOKEN_PROGRAM_ID,
-        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-        systemProgram: SystemProgram.programId,   
-      })
-      .signers([dao_admin])
-
-      .rpc({
-        skipPreflight:true
-      })
-      .then(confirm)
-      .then(log);
-      
-  });  
- */
+  });
 /*   it("Initialize Nft Stake Account", async () => {
     const tx = await staking_program.methods
     
@@ -886,6 +768,169 @@ describe("dao", () => {
       .then(log);
       
   });
+
+  it("Create Proposal SubDao ", async () => {
+    const tx = await proposal_program.methods
+    
+    .createProposalSubDaoStaked(
+      id,
+      name,
+      metadataURI,
+      { vote: {} },
+      quorum,
+      threshold,
+      expiry,
+      choices,
+      evaluationperiod
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        proposal: subdao_proposal,
+        stakingProgram: staking_keypair.publicKey,
+        stakeState: sub_stake_state,
+        coreProgram: dao_keypair.publicKey,
+        config: dao_config_key,
+        configSubDao: sub_dao_config_key,
+        treasury:subdao_treasury,
+        systemProgram: SystemProgram.programId,  
+       })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+
+  it("Vote SubDao", async () => {
+    const tx = await voting_program.methods
+    
+    .voteSubDao(
+      voting_amount,
+      0
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        vote: subdao_vote,
+        proposalProgram: proposal_keypair.publicKey,
+        proposal: subdao_proposal,
+        stakingProgram: staking_keypair.publicKey,
+        stakeState: sub_stake_state,
+        config: dao_config_key,
+        configSubDao: sub_dao_config_key,
+        systemProgram: SystemProgram.programId,  
+       })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+
+  it("Unvote Sub Dao ", async () => {
+    const tx = await voting_program.methods
+    
+    .removeVoteSubDao(
+      voting_amount,
+      0
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        vote: subdao_vote,
+        proposalProgram: proposal_keypair.publicKey,
+        proposal: subdao_proposal,
+        stakingProgram: staking_keypair.publicKey,
+        stakeState: sub_stake_state,
+        config: dao_config_key,
+        treasury:subdao_treasury,
+        configSubDao: sub_dao_config_key,
+        systemProgram: SystemProgram.programId,  
+       })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });
+
+     it("Sub Dao UnStake Token", async () => {
+    const tx = await staking_program.methods
+    
+    .unstakeTokensSubDao(staking_amount
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({ 
+        owner: dao_admin.publicKey,
+        ownerAta: ownerSubdaoMintAta,
+        stakeAta: subdao_stake_ata,
+        auth: sub_stake_auth,
+        mint: SubDaoMint,
+        stakeState: sub_stake_state,
+        config: dao_config_key,
+        configSubDao: sub_dao_config_key,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,   
+      })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);     
+  }); 
+
+  it("SubDao Close Stake ", async () => {
+    const tx = await staking_program.methods
+    
+    .closeStakeSubDao(
+    )  
+      .preInstructions([
+        ComputeBudgetProgram.setComputeUnitLimit({ units: 200000 } as SetComputeUnitLimitParams)
+      ])  
+      .accounts({
+        owner: dao_admin.publicKey,
+        stakeAta: subdao_stake_ata,
+        stakeAuth: sub_stake_auth,
+        mint: SubDaoMint,
+        stakeState: sub_stake_state,
+        config: dao_config_key,
+        treasury,
+        configSubDao: sub_dao_config_key,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,   
+      })
+      .signers([dao_admin])
+
+      .rpc({
+        skipPreflight:true
+      })
+      .then(confirm)
+      .then(log);
+      
+  });  
+ 
 
 /*   it("Initialize NFT Stake Account", async () => {
     const tx = await staking_program.methods

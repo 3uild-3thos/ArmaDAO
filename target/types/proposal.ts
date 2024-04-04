@@ -275,7 +275,7 @@ export type Proposal = {
       "args": []
     },
     {
-      "name": "createProposalSubDao",
+      "name": "createProposalSubDaoStaked",
       "accounts": [
         {
           "name": "owner",
@@ -365,7 +365,7 @@ export type Proposal = {
       ]
     },
     {
-      "name": "createProposalSubDaoHybrid",
+      "name": "createProposalSubDao",
       "accounts": [
         {
           "name": "owner",
@@ -1406,7 +1406,7 @@ export const IDL: Proposal = {
       "args": []
     },
     {
-      "name": "createProposalSubDao",
+      "name": "createProposalSubDaoStaked",
       "accounts": [
         {
           "name": "owner",
@@ -1496,7 +1496,7 @@ export const IDL: Proposal = {
       ]
     },
     {
-      "name": "createProposalSubDaoHybrid",
+      "name": "createProposalSubDao",
       "accounts": [
         {
           "name": "owner",

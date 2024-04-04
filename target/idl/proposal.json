@@ -275,7 +275,7 @@
       "args": []
     },
     {
-      "name": "createProposalSubDao",
+      "name": "createProposalSubDaoStaked",
       "accounts": [
         {
           "name": "owner",
@@ -365,7 +365,7 @@
       ]
     },
     {
-      "name": "createProposalSubDaoHybrid",
+      "name": "createProposalSubDao",
       "accounts": [
         {
           "name": "owner",

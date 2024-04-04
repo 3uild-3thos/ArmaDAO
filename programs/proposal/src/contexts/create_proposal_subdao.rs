@@ -213,7 +213,7 @@ pub struct SubDaoCreateProposal<'info> {
     
 }
 impl<'info> SubDaoCreateProposal<'info> {    
-    pub fn create_proposal_sub_dao_hybrid(
+    pub fn create_proposal_sub_dao(
         &mut self,
         id: u64,
         name: String,
