@@ -4,13 +4,16 @@
 
 ## Overview
 
-Navigate the Future with Armada - No-Code Governance for the Mothership and Its Fleets.A DAO for DAOs, by DAOs.
+Navigate the Future with Armada - No-Code Governance for the Mothership and Its Fleets.
+A DAO for DAOs, by DAOs.
 
 Empower true decentralization: Build and govern DAOs with unparalleled flexibility and ease. Armada revolutionizes the way decentralized autonomous organizations (DAOs) are created and managed. With our intuitive, no-code platform, anyone can build a DAO in minutes, customizing it to fit their unique needs without any technical expertise.
 
 Our platform offers a comprehensive suite of tools for governance, membership management, and treasury operations, all designed to be flexible, modular, and user-friendly.
 
 The Armada is not just a tool; it's a meta-governance ecosystem that allows DAOs themselves to evolve and adapt over time, driven by the collective decision-making of their members.
+
+Website: [https://demo.thearmadadao.xyz](https://demo.thearmadadao.xyz)
 
 ## Features
 
@@ -81,7 +84,6 @@ These are the devnet transactions generated from creating the test cases.
 - Theo Roque | [@theointech](https://twitter.com/theointech): theoroque95@gmail.com
 - João Monteiro | [@beliveNsol](https://twitter.com/beliveNsol): beliven127@gmail.com
 - Renzo Cabarios | [@RenzoCabarios](https://twitter.com/RenzoCabarios): renzo.cabarios@gmail.com
-- Project Website: [https://demo.thearmadadao.xyz](https://demo.thearmadadao.xyz)
 
 ## Acknowledgments
 
