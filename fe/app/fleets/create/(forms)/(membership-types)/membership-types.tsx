@@ -50,14 +50,14 @@ const MembershipTypes = ({ onSelect, selected }: IMembershipTypes) => {
   };
 
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-4 md:gap-6 flex-wrap">
       {membershipTypes.map((mt) => (
         <Tooltip key={`membership-type-${mt.type}`}>
           <TooltipTrigger>
             <Button
               variant={"ghost"}
               className={cn(
-                "flex flex-col justify-start hover:bg-gray-400/5 w-28 gap-4 h-28 break-words text-wrap p-4 rounded-xl border-default"
+                "flex flex-col justify-start hover:bg-gray-400/5 w-24 md:w-28 gap-4 h-24 md:h-28 break-words text-wrap p-4 rounded-xl border-default"
               )}
               onClick={(event) => handleTypeSelect(event, mt.type)}
             >

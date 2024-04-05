@@ -37,10 +37,13 @@ const FleetModules = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-16 gap-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
         {activeModules.map((module) => (
-          <div key={module.name} className="grid grid-cols-3 gap-4">
-            <div className="inline col-span-2">
+          <div
+            key={module.name}
+            className="grid grid-cols-4 md:grid-cols-3 gap-4"
+          >
+            <div className="inline col-span-3 md:col-span-2">
               {module.name}
               <InfoTooltip content={module.description} className="mt-1" />
             </div>
