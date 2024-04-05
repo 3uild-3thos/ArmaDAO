@@ -47,6 +47,20 @@ export const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/20">
+      <div className="bg-blue-950 text-muted font-medium p-2 text-xs text-center md:flex w-full justify-center items-center">
+        All data used on this site are mock and for Renaissance hackathon demo
+        purposes only. Please check the{" "}
+        <Link
+          href={
+            "https://github.com/3uild-3thos/ArmaDAO/tree/dev?tab=readme-ov-file#proof-of-work-solana-programs"
+          }
+          target="_blank"
+          className="mx-1 font-bold underline inline"
+        >
+          Solana Devnet Test Transactions here
+        </Link>{" "}
+        instead.
+      </div>
       <div className="relative flex items-center justify-between px-4 py-4 text-lg md:px-20 backdrop-blur-sm">
         <div className="flex md:hidden items-center gap-3">
           {/* <Smile /> */}
