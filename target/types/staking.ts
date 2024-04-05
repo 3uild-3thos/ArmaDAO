@@ -107,6 +107,11 @@ export type Staking = {
           "isSigner": false
         },
         {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
@@ -478,14 +483,70 @@ export type Staking = {
           "isSigner": false
         },
         {
+          "name": "collection",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "nft",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "collection",
+          "name": "metadata",
           "isMut": false,
           "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeStakeNftState",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
         },
         {
           "name": "stakeState",
@@ -499,17 +560,7 @@ export type Staking = {
         },
         {
           "name": "treasury",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1041,6 +1092,16 @@ export type Staking = {
           "isSigner": false
         },
         {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "stakeState",
           "isMut": true,
           "isSigner": false
@@ -1052,11 +1113,16 @@ export type Staking = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -1067,6 +1133,42 @@ export type Staking = {
         },
         {
           "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeStakeNftSubDaoState",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
           "isMut": false,
           "isSigner": false
         },
@@ -1579,6 +1681,11 @@ export const IDL: Staking = {
           "isSigner": false
         },
         {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
@@ -1950,14 +2057,70 @@ export const IDL: Staking = {
           "isSigner": false
         },
         {
+          "name": "collection",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "nft",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "collection",
+          "name": "metadata",
           "isMut": false,
           "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeStakeNftState",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
         },
         {
           "name": "stakeState",
@@ -1971,17 +2134,7 @@ export const IDL: Staking = {
         },
         {
           "name": "treasury",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -2513,6 +2666,16 @@ export const IDL: Staking = {
           "isSigner": false
         },
         {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "stakeState",
           "isMut": true,
           "isSigner": false
@@ -2524,11 +2687,16 @@ export const IDL: Staking = {
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -2539,6 +2707,42 @@ export const IDL: Staking = {
         },
         {
           "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeStakeNftSubDaoState",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
           "isMut": false,
           "isSigner": false
         },

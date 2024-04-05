@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface},  
     associated_token::AssociatedToken,
-    metadata::{Metadata, MetadataAccount}, 
+    metadata::{Metadata, MetadataAccount, MasterEditionAccount}, 
 };
 /* use daoist_programs::modules::{StakeState,/* DaoConfig */}; */
 use crate::state::StakeState;
@@ -123,6 +123,17 @@ pub struct InitializeStakeNft<'info> {
         constraint = metadata.collection.as_ref().unwrap().verified == true,
     )]
     metadata: Box<Account<'info, MetadataAccount>>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref(),
+            b"edition"
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+    )]
+    master_edition: Account<'info, MasterEditionAccount>,
     metadata_program: Program<'info, Metadata>,
     token_program: Interface<'info, TokenInterface>,
     associated_token_program: Program<'info, AssociatedToken>,

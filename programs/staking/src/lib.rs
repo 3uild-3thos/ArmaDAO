@@ -48,13 +48,19 @@ pub mod staking {
 
     // Close a stake account when you're done with it
     pub fn close_stake(ctx: Context<CleanupStake>) -> Result<()> {
-        // Create a stake account
+        // Close a stake account
         ctx.accounts.cleanup_stake(&ctx.bumps)
     }
-    // Close a Nft stake account when you're done with it
-    pub fn close_stake_nft(ctx: Context<CleanupStakeNft>) -> Result<()> {
-    // Create a stake account
+    // Close a Nft stake ata account when you're done with it
+    pub fn close_stake_nft(ctx: Context<CleanupStakeNftAta>) -> Result<()> {
+    // Close a stakeata account
         ctx.accounts.cleanup_stake(&ctx.bumps)
+    }
+
+    // Close a Nft stakeState account when you're done with it
+    pub fn close_stake_nft_state(ctx: Context<CleanupStakeNft>) -> Result<()> {
+    // Close a stake account
+        ctx.accounts.cleanup_stake_state()
     }
 
     // SubDAO //
@@ -93,11 +99,16 @@ pub mod staking {
         // Create a stake account
         ctx.accounts.cleanup_stake(&ctx.bumps)
     } 
-    // Close a stake account when you're done with it
-    pub fn close_stake_nft_sub_dao(ctx: Context<CleanupStakeNftSubDao>) -> Result<()> {
+    // Close a stake ata account when you're done with it
+    pub fn close_stake_nft_sub_dao(ctx: Context<CleanupStakeNftSubDaoAta>) -> Result<()> {
         // Create a stake account
         ctx.accounts.cleanup_stake(&ctx.bumps)
-    }         
+    }
+    // Close a stake state account when you're done with it
+    pub fn close_stake_nft_sub_dao_state(ctx: Context<CleanupStakeNftSubDao>) -> Result<()> {
+        // Create a stake account
+        ctx.accounts.cleanup_stake()
+    }             
     // INSTRUCTIONS CPIS //          
     // ADD ACCOUNT STAKE STATE
     pub fn add_account(

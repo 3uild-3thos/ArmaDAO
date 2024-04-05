@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{token_interface::{Mint, TokenAccount, TokenInterface, CloseAccount, close_account}, associated_token::AssociatedToken};
+use anchor_spl::{token_interface::{Mint, TokenAccount, TokenInterface, CloseAccount, close_account}, associated_token::AssociatedToken,
+metadata::{Metadata, MetadataAccount, MasterEditionAccount}};
 /* use daoist_programs::modules::{StakeState, /* DaoConfig */}; */
 use crate::state::StakeState;
 use dao::state::DaoConfig;
@@ -100,8 +101,7 @@ impl<'info> CleanupStakeSubDao<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
-pub struct CleanupStakeNftSubDao<'info> {
+pub struct CleanupStakeNftSubDaoAta<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
@@ -121,6 +121,29 @@ pub struct CleanupStakeNftSubDao<'info> {
     nft: InterfaceAccount<'info, Mint>,
     collection: InterfaceAccount<'info, Mint>,
     #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref()
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+        constraint = metadata.collection.as_ref().unwrap().key.as_ref() == collection.key().as_ref(),
+        constraint = metadata.collection.as_ref().unwrap().verified == true,
+    )]
+    metadata: Account<'info, MetadataAccount>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref(),
+            b"edition"
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+    )]
+    master_edition: Account<'info, MasterEditionAccount>,
+    #[account(
         mut,
         close = treasury,
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
@@ -134,6 +157,7 @@ pub struct CleanupStakeNftSubDao<'info> {
     )]
     config: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"treasury", config.key().as_ref()],
         seeds::program = dao::state::config::ID,
         bump = config.treasury_bump
@@ -146,21 +170,20 @@ pub struct CleanupStakeNftSubDao<'info> {
         constraint = config_sub_dao.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config_sub_dao: Account<'info, DaoConfig>,
+    metadata_program: Program<'info, Metadata>,
     token_program: Interface<'info, TokenInterface>,
     associated_token_program: Program<'info, AssociatedToken>,
     system_program: Program<'info, System>
 }
 
-impl<'info> CleanupStakeNftSubDao<'info> {
+impl<'info> CleanupStakeNftSubDaoAta<'info> {
     pub fn cleanup_stake(
         &mut self,
-        _bumps: &CleanupStakeNftSubDaoBumps,
+        _bumps: &CleanupStakeNftSubDaoAtaBumps,
     ) -> Result<()> {
         self.close_stake_ata()?;
-        match self.stake_state.check_stake() {
-            Ok(_) => err!(StakeError::InvalidStakeAmount),
-            Err(_) => Ok(())
-        }
+        Ok(())
+
     }
 
     pub fn close_stake_ata(
@@ -189,6 +212,55 @@ impl<'info> CleanupStakeNftSubDao<'info> {
 
         close_account(ctx)
     }
+
+
+}
+
+
+#[derive(Accounts)]
+pub struct CleanupStakeNftSubDao<'info> {
+    #[account(mut)]
+    owner: Signer<'info>,
+    #[account(
+        mut,
+        close = treasury,
+        seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        bump = stake_state.state_bump
+    )]
+    stake_state: Account<'info, StakeState>,
+    #[account(
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+    )]
+    config: Account<'info, DaoConfig>,
+    #[account(
+        mut,
+        seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.treasury_bump
+    )]
+    treasury: SystemAccount<'info>,
+    #[account(
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config_sub_dao.config_bump,
+    )]
+    config_sub_dao: Account<'info, DaoConfig>,
+    system_program: Program<'info, System>
+}
+
+impl<'info> CleanupStakeNftSubDao<'info> {
+    pub fn cleanup_stake(
+        &mut self,
+    ) -> Result<()> {
+        match self.stake_state.check_stake() {
+            Ok(_) => err!(StakeError::InvalidStakeAmount),
+            Err(_) => Ok(())
+        }
+    }
+
+
 
 
 }
