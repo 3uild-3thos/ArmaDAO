@@ -55,11 +55,16 @@ These are the devnet transactions generated from creating the test cases.
 | Sub DAO Removing Vote                             | [View Transaction](https://explorer.solana.com/tx/5QvD3ZZmCAS389SKUtaAd1ef5LAE3Hg43wQKCwvdyCCAVD7Uuji5ghsbr4CNFgUPCgPrM1d8ENjXL4BE3NJUkcHx?cluster=devnet)          |
 | Sub DAO Unstake FT                                | [View Transaction](https://explorer.solana.com/tx/5H56u1qMtPJLDXVwtqcXdgrhP433ywMqmKuh7PbbmAGKM575cJkCKxZaMrJUrqtRzTAUEL1xZxTk8zC9Q73g4fj6?cluster=devnet)          |
 | Sub DAO Close Stake Account                       | [View Transaction](https://explorer.solana.com/tx/2EJdxukQcgEg2BdZ2B2zSx6Z1naqKftrWR2sEr8AHaDJuvHw1XNE9Ntb5EbLzh24DtSqBUPW6t5MmZDn9D5W1WMa?cluster=devnet)          |
-| Creating NFT DAO                                  | [View Transaction](https://explorer.solana.com/transaction/3aHZUiE83wLCwyM415t1Z8AfgMn4FSJWDRDJGq47JHH3M1nZQpGVmS84ZwK3iyq2s8YKCp2gNeAgmasnzxfzW4CA?cluster=devnet) |
-| Init Staking NFT                                  | [View Transaction](https://explorer.solana.com/transaction/k9mmruNPauufnL1413vvgd8GLmV3qi3iorRoEwdX8WPncSHqub5o26YzHxZibBfaXPJVfUt32BCn3aHqBUFN5Xg?cluster=devnet)  |
-| Staking NFT                                       | [View Transaction](https://explorer.solana.com/tx/3UwEFy1QTFTyYGJ1gLH9MUn7pnucPQLo7ywVXGHpzB3BFVbEcCnTiR8Hpc2E5R7RsPL4rBKxiLk2hZXPdsq8X6Mk?cluster=devnet)          |
-| Unstaking NFT                                     | [View Transaction](https://explorer.solana.com/transaction/4T9cqDMsBAUKzT2rGBySmH5xysRwqbnpTSq3xiNuEzRzUAmzPU8gfXbkqXb7FGbDWUGYVSMKn7m1JtP662p5w7np?cluster=devnet) |
-| Closing Stake Data and Stake State                | [View Transaction](https://explorer.solana.com/transaction/3NBGBZSuYo944qyM3WeV9oFg4HeioqyhcAT6EEsT5sVr5k8wUvPNvq5tkAW4GoahF2okfpSqtzCxBdZ6ABvuLTze?cluster=devnet) |
+| Create NFT DAO                                    | [View Transaction](https://explorer.solana.com/transaction/5r9GQ7MQUAnWJjYCQpS7UWM2Ue9EFCMK93oSSMaNSRxYQqzzTzforiMe4bKqkdgWXT3vjJa8LXUofDE1LVePiFMR?cluster=devnet) |
+| Initialize Nft Stake State and Ata 1 Account      | [View Transaction](https://explorer.solana.com/transaction/MurL1JaznrrGTzWVdNvmKKuqDvEFc3zrGo9MJqGdRPdsgiznRpvus2b8YzP5dxC9nJa6U28mZtme1LiauK4PbuT?cluster=devnet)  |
+| Stake Nft 1                                       | [View Transaction](https://explorer.solana.com/transaction/5mwAWCDaYt3Cpq7fiWXD91KRXpQdHw9CDiPAuJHLhrfxHySAYwUF7wz9ZrLTYiTmJ2jEXbLyxvYZa1mbcTW1vfo?cluster=devnet)  |
+| Initialize Nft 2 Stake ATA Account                | [View Transaction](https://explorer.solana.com/transaction/5oGw9HrQR5XwSJfvbgvpwoFn9b1jeb3UBi2BvJtgFvyAd766KZxbiKXcYvNVqUWgYxRSZwea8fiYB5jr34oCM23c?cluster=devnet) |
+| Stake Nft 2                                       | [View Transaction](https://explorer.solana.com/transaction/5rZpYuUr8ofvs7khkdf5THtLwFc14VXNqyoYM4sWUvLDZs7EgHiLiTcb97xKmFWfkZ5ZJktWcsDdw9C62ST9bLjF?cluster=devnet) |
+| UnStake Nft 1                                     | [View Transaction](https://explorer.solana.com/transaction/Cx6Mn5zkqzQCpNbG9ivgZLHd3XEKZYiZDDNDrLwsaYTfcXeKWxHMLi8dbG5ujoUdDueYCpKmL13D65V3VnbACkT?cluster=devnet)  |
+| UnStake Nft 2                                     | [View Transaction](https://explorer.solana.com/transaction/2h8eLPjs7EwEzNxKCappvUKdYLCLT49vkbqkBLK5v1KKud5psr41xTS8BdChcFzfxxGQmocavfHLuZysH48irCve?cluster=devnet) |
+| Close Stake ATA Nft 1                             | [View Transaction](https://explorer.solana.com/transaction/6LFKLQodxcZzxcGpX4y55FCXyJZGJVP8WLJsZTitr2aVyRawDnkfrhtCYQyd4pAjfBv866aYSRsD9G4Vq2LWkjX?cluster=devnet)  |
+| Close Stake ATA Nft 2                             | [View Transaction](https://explorer.solana.com/transaction/5y6eJ88QrdkDB5N3Zk4dmePtrUpzLziW9SSquhwYRQCC7eseCC9SiAPkhGNYyNaoFqQEUV57p4fcwpxyeoDTiMy4?cluster=devnet) |
+| Close Stake State                                 | [View Transaction](https://explorer.solana.com/transaction/2DbokMUUmKEN41E5igoi9ymLCz4USiNZLRb9TcFzHF8Ay5Kji6Ppx8tmXn7s5tPqeNRCeTUYCuamPMk5sSv5kTmN?cluster=devnet) |
 | More soon...                                      |                                                                                                                                                                     |
 
 ## Tech Stack
