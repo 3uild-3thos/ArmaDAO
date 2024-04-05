@@ -57,7 +57,7 @@ function TeamInfo() {
             <InfoTooltip content={createFleet.team.title} className="mt-2" />
           </p>
 
-          <div className="grid grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div className="flex flex-col gap-8">
               <FormField
                 control={form.control}
@@ -140,7 +140,7 @@ function TeamInfo() {
           </div>
 
           {!watchStayAnonymous && (
-            <div className="grid grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
               <div className="flex flex-col gap-8">
                 <FormField
                   control={form.control}

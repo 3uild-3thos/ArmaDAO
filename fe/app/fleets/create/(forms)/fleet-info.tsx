@@ -100,7 +100,7 @@ function FleetInfo() {
                   return (
                     <FormItem>
                       <FormControl>
-                        <div className="relative flex flex-col items-center justify-center gap-3 p-20 duration-200 border border-gray-500 border-dashed cursor-pointer h-80 rounded-xl hover:bg-muted/5 hover:brightness-125 bg-card">
+                        <div className="relative flex flex-col items-center justify-center gap-3 p-8 md:p-20 duration-200 border border-gray-500 border-dashed cursor-pointer h-32 md:h-80 rounded-xl hover:bg-muted/5 hover:brightness-125 bg-card">
                           {bannerPreview ? (
                             <Image
                               src={bannerPreview}
@@ -132,7 +132,7 @@ function FleetInfo() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="flex flex-col gap-8">
                 <p className="text-sm text-gray-500">Basic Information</p>
 

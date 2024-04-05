@@ -43,7 +43,7 @@ function Review() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 mt-8 md:mt-0">
       <div className="flex flex-col items-center justify-start w-full">
         <p className="text-xl font-medium">
           Your Fleet DAO is ready to launch!
@@ -61,10 +61,10 @@ function Review() {
         <AccordionItem value="fleet-review-1">
           <AccordionTrigger>Fleet DAO Info</AccordionTrigger>
           <AccordionContent>
-            <div className="px-8 pt-4 pb-8">
+            <div className="md:px-8 pt-4 pb-8">
               <div className="flex flex-col gap-8">
                 {bannerPreview && (
-                  <div className="relative h-64">
+                  <div className="relative h-32 md:h-64">
                     <Image
                       src={bannerPreview}
                       alt={"Banner Preview"}
@@ -79,7 +79,7 @@ function Review() {
                     alt={"Uploaded Logo"}
                     width={500}
                     height={500}
-                    className="w-40 h-40 rounded-xl border-default"
+                    className="w-24 h-24 md:w-40 md:h-40 rounded-xl border-default"
                   />
                   <div className="flex flex-col">
                     <p className="text-2xl font-semibold text-muted">
@@ -90,7 +90,7 @@ function Review() {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Twitter Link</div>
@@ -129,7 +129,7 @@ function Review() {
         <AccordionItem value="fleet-review-2">
           <AccordionTrigger>Fleet DAO Config</AccordionTrigger>
           <AccordionContent>
-            <div className="px-8 pt-4 pb-8">
+            <div className="md:px-8 pt-4 pb-8">
               <div className="flex flex-col gap-8">
                 <div className="flex gap-8">
                   <div className="flex flex-col">
@@ -146,7 +146,7 @@ function Review() {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">
@@ -252,7 +252,7 @@ function Review() {
         <AccordionItem value="fleet-review-3">
           <AccordionTrigger>Team Details</AccordionTrigger>
           <AccordionContent>
-            <div className="px-8 pt-4 pb-8">
+            <div className="md:px-8 pt-4 pb-8">
               <div className="flex flex-col gap-8">
                 <div className="flex gap-8">
                   <div className="flex flex-col">
@@ -269,7 +269,7 @@ function Review() {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-8">
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-2">Team Name</div>
@@ -282,7 +282,7 @@ function Review() {
 
                 {!fleetTeam.stayAnonymous && (
                   <>
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="flex flex-col gap-8">
                         <div className="grid grid-cols-6 gap-4">
                           <div className="col-span-2">Twitter Profile</div>
