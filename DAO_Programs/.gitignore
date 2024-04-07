@@ -1,10 +1,6 @@
 .anchor
 .DS_Store
-target/*
-!target/deploy
-target/deploy/*
-!target/deploy/*-keypair.json
-!target/idl
+target
 **/*.rs.bk
 node_modules
 contexts_

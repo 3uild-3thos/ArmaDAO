@@ -1,9 +1,13 @@
 use anchor_lang::prelude::*;
-pub mod contexts;
-pub use contexts::*;
+mod contexts;
+use contexts::*;
 mod errors;
 mod helpers;
-use daoist_programs::modules::ProposalType;
+use crate::state::ProposalType;
+
+//testing
+pub mod state;
+mod constants;
 
 declare_id!("propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV");
 
@@ -82,8 +86,8 @@ pub mod proposal {
     }
     // Create a SubDao Proposal
     // Staked Based
-    pub fn create_proposal_sub_dao(
-        ctx: Context<CreateProposalSubDao>,
+    pub fn create_proposal_sub_dao_staked(
+        ctx: Context<StakeSubDaoCreateProposal>,
         id: u64,
         name: String,
         metadata: String,
@@ -113,8 +117,8 @@ pub mod proposal {
     }
     // Create a SubDao Proposal
     // NFT Holding Based
-    pub fn create_proposal_sub_dao_hybrid(
-        ctx: Context<CreateProposalSubDaoHybrid>,
+    pub fn create_proposal_sub_dao(
+        ctx: Context<SubDaoCreateProposal>,
         id: u64,
         name: String,
         metadata: String,
@@ -129,7 +133,7 @@ pub mod proposal {
         ctx.accounts.pay_proposal_fee()?;
 
         // Ensure user has actually got tokens staked and create a new proposal
-        ctx.accounts.create_proposal_sub_dao_hybrid(
+        ctx.accounts.create_proposal_sub_dao(
             id,
             name,
             metadata,
@@ -153,19 +157,22 @@ pub mod proposal {
     // INSTRUCTIONS CPIS
     // ADD VOTE
     pub fn add_vote(ctx: Context<ProposalHandler>, amount: u64, choice: u8) -> Result<()> {
-        ctx.accounts.add_vote(amount, choice)
+        ctx.accounts.add_vote(amount, choice)?;
+        Ok(())
     }
     // REMOVE VOTE
     pub fn remove_vote(ctx: Context<ProposalHandler>, amount: u64, choice: u8) -> Result<()> {
-        ctx.accounts.remove_vote(amount, choice)
+        ctx.accounts.remove_vote(amount, choice)?;
+        Ok(())
     }
     // ADD VOTE
     pub fn add_vote_sub_dao(
         ctx: Context<SubDaoProposalHandler>,
         amount: u64,
-        choice: u8
+        choice: u8,
     ) -> Result<()> {
-        ctx.accounts.add_vote_sub_dao(amount, choice)
+        ctx.accounts.add_vote_sub_dao(amount, choice)?;
+        Ok(())
     }
     // REMOVE VOTE
     pub fn remove_vote_sub_dao(
@@ -173,6 +180,7 @@ pub mod proposal {
         amount: u64,
         choice: u8
     ) -> Result<()> {
-        ctx.accounts.remove_vote_sub_dao(amount, choice)
+        ctx.accounts.remove_vote_sub_dao(amount, choice)?;
+        Ok(())
     }
 }

@@ -1,5 +1,4 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
-use daoist_programs::modules::{CoreProgram, DaoConfig, StakingProgram, StakeState, SubDaoHandler, Proposal, ProposalType, add_proposal_sub_dao};
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
@@ -7,10 +6,12 @@ use anchor_spl::{
 };
 use crate::validate_nft;
 use crate::errors::ProposalError;
-
+use dao::state::{DaoConfig, CoreProgram};
+use crate::state::{Proposal, ProposalType};
+use staking::state::{StakeState, StakingProgram};
 #[derive(Accounts)]
 #[instruction(id: u64)]
-pub struct CreateProposalSubDao<'info> {
+pub struct StakeSubDaoCreateProposal<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
@@ -21,20 +22,6 @@ pub struct CreateProposalSubDao<'info> {
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
-    core_program: Program<'info, CoreProgram>,
-    #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
-    )]
-    core_config: Account<'info, DaoConfig>,
-    #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = config_sub_dao.config_bump,
-    )]
-    config_sub_dao: Account<'info, DaoConfig>,
-    #[account(constraint = staking_program.key() == core_config.staking_program)]
     staking_program: Program<'info, StakingProgram>,
     #[account(
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
@@ -43,13 +30,33 @@ pub struct CreateProposalSubDao<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
+        constraint = core_program.key() == dao::state::config::ID,
+    )]
+    core_program: Program<'info, CoreProgram>,
+    #[account(
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+    )]
+    config: Account<'info, DaoConfig>,
+    #[account(
+        mut,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config_sub_dao.config_bump,
+        has_one = staking_program
+    )]
+    config_sub_dao: Account<'info, DaoConfig>,   
+    #[account(
+        mut,
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     system_program: Program<'info, System>,
 }
-impl<'info> CreateProposalSubDao<'info> {    
+impl<'info> StakeSubDaoCreateProposal<'info> {    
     pub fn create_proposal_sub_dao(
         &mut self,
         id: u64,
@@ -61,10 +68,8 @@ impl<'info> CreateProposalSubDao<'info> {
         expiry: u64,
         choices:u8,
         evaluation_period: u64,
-        bumps: &CreateProposalSubDaoBumps,
+        bumps: &StakeSubDaoCreateProposalBumps,
     ) -> Result<()> {
-        // Make sure its a staked based DAO
-        self.config_sub_dao.ensure_not_hybrid ()?;
         // Make sure user has staked the required amount
         self.config_sub_dao.check_min_staked_required_proposal(self.stake_state.amount)?;
         // Make sure quorum is valid
@@ -76,11 +81,23 @@ impl<'info> CreateProposalSubDao<'info> {
         // Check Min Pre Voting Period
         self.config_sub_dao.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
-        self.proposal.check_choices()?; 
-        // Check ID and add proposal change state
+        self.proposal.check_choices(choices)?; 
+
+        let check_id_add_proposal_accounts = dao::cpi::accounts::SubDaoHandler {
+            owner: self.owner.to_account_info(),
+            config: self.config.to_account_info(),
+            config_sub_dao: self.config_sub_dao.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+            self.core_program.to_account_info(),
+            check_id_add_proposal_accounts
+        );
+            
+        dao::cpi::add_proposal_sub_dao(cpi_context, id)?;
+/*         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = SubDaoHandler {
             owner: self.owner.to_account_info(),
-            config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             config_sub_dao: self.config_sub_dao.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
@@ -88,7 +105,7 @@ impl<'info> CreateProposalSubDao<'info> {
         self.core_program.to_account_info(),
         check_id_add_proposal_accounts
         );
-        add_proposal_sub_dao(cpi_context, id)?;                                        
+        add_proposal_sub_dao(cpi_context, id)?;         */                                
         // Initialize the proposal
        self.proposal.init(
             id,
@@ -118,9 +135,12 @@ impl<'info> CreateProposalSubDao<'info> {
     }
 }
 
+
+// CREATE PROPOSALS THAT **DONT REQUIRE** HAVING min_staked_required_proposal = *NFT* Holding Based 
+// For Hybrid Sub DAOS And NFT Sub DAOS
 #[derive(Accounts)]
 #[instruction(id: u64)]
-pub struct CreateProposalSubDaoHybrid<'info> {
+pub struct SubDaoCreateProposal<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
@@ -138,7 +158,6 @@ pub struct CreateProposalSubDaoHybrid<'info> {
         space = Proposal::LEN
     )]
     proposal: Account<'info, Proposal>,
-    #[account(constraint = collection.key() == config_sub_dao.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
@@ -163,21 +182,27 @@ pub struct CreateProposalSubDaoHybrid<'info> {
         bump,
     )]
     master_edition: Account<'info, MasterEditionAccount>,
+    #[account(
+        constraint = core_program.key() == dao::state::config::ID,
+    )]
     core_program: Program<'info, CoreProgram>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        mut,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        constraint = config_sub_dao.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
@@ -187,8 +212,8 @@ pub struct CreateProposalSubDaoHybrid<'info> {
     system_program: Program<'info, System>,
     
 }
-impl<'info> CreateProposalSubDaoHybrid<'info> {    
-    pub fn create_proposal_sub_dao_hybrid(
+impl<'info> SubDaoCreateProposal<'info> {    
+    pub fn create_proposal_sub_dao(
         &mut self,
         id: u64,
         name: String,
@@ -199,15 +224,15 @@ impl<'info> CreateProposalSubDaoHybrid<'info> {
         expiry: u64,
         choices:u8,
         evaluation_period: u64,
-        bumps: &CreateProposalSubDaoHybridBumps,
+        bumps: &SubDaoCreateProposalBumps,
     ) -> Result<()> {
         // Check if NFT is Verified
         validate_nft!(
             self.metadata.collection, 
             self.collection
             );
-        //Check hybridness
-        self.config_sub_dao.check_hybrid()?;
+        //Make sure its not staked based
+        self.config_sub_dao.check_staked_create_proposal_is_none()?;  
         // Make sure quorum is valid
         self.config_sub_dao.check_valid_quorum(quorum)?;               
         // Check Minimum threshold
@@ -217,11 +242,24 @@ impl<'info> CreateProposalSubDaoHybrid<'info> {
         // Check Min Pre Voting Period
         self.config_sub_dao.check_evaluation_phase_period(evaluation_period)?;
         // Check Minimum Choices
-        self.proposal.check_choices()?; 
-        // Check ID and add proposal change state
+        self.proposal.check_choices(choices)?;
+
+        let check_id_add_proposal_accounts = dao::cpi::accounts::SubDaoHandler {
+            owner: self.owner.to_account_info(),
+            config: self.config.to_account_info(),
+            config_sub_dao: self.config_sub_dao.to_account_info(),
+        };
+        let cpi_context = CpiContext::new(
+            self.core_program.to_account_info(),
+            check_id_add_proposal_accounts
+        );
+            
+        dao::cpi::add_proposal_sub_dao(cpi_context, id)?;
+
+/*         // Check ID and add proposal change state
         let check_id_add_proposal_accounts = SubDaoHandler {
             owner: self.owner.to_account_info(),
-            config: self.core_config.to_account_info(),
+            config: self.config.to_account_info(),
             config_sub_dao: self.config_sub_dao.to_account_info(),
             system_program: self.system_program.to_account_info(),
         };
@@ -229,7 +267,7 @@ impl<'info> CreateProposalSubDaoHybrid<'info> {
         self.core_program.to_account_info(),
         check_id_add_proposal_accounts
         );
-        add_proposal_sub_dao(cpi_context, id)?;                                        
+        add_proposal_sub_dao(cpi_context, id)?;     */                                    
         // Initialize the proposal
        self.proposal.init(
             id,

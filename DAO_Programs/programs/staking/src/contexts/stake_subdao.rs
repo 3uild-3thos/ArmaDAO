@@ -4,13 +4,13 @@ use anchor_spl::{
     associated_token::AssociatedToken,
     metadata::{Metadata, MetadataAccount, MasterEditionAccount}, 
 };
-use daoist_programs::modules::{StakeState, DaoConfig};
+use dao::state::DaoConfig;
 use crate::validate_nft;
 use crate::errors::StakeError;
+use crate::state::StakeState;
 
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeSubDao<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -22,7 +22,7 @@ pub struct StakeSubDao<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = mint,
         token::authority = auth
@@ -34,7 +34,6 @@ pub struct StakeSubDao<'info> {
     )]
     ///CHECK: This is safe. It's just used to sign things
     auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == config_sub_dao.mint.expect("Mint not initialized"))]
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
@@ -43,15 +42,16 @@ pub struct StakeSubDao<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        constraint = config_sub_dao.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(),
     )]
     config_sub_dao: Account<'info, DaoConfig>,
     token_program: Interface<'info, TokenInterface>,
@@ -113,7 +113,6 @@ impl<'info> StakeSubDao<'info> {
     }
 }
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeSubDaoNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -125,8 +124,8 @@ pub struct StakeSubDaoNft<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
-        bump = stake_state.vault_bump,
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
+        bump,
         token::mint = nft,
         token::authority = auth
     )]
@@ -137,7 +136,6 @@ pub struct StakeSubDaoNft<'info> {
     )]
     ///CHECK: This is safe. It's just used to sign things
     auth: UncheckedAccount<'info>,
-    #[account(constraint = collection.key() == config_sub_dao.collection_mint.expect("Collection mint not initialized"))]
     collection: InterfaceAccount<'info, Mint>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(
@@ -147,15 +145,16 @@ pub struct StakeSubDaoNft<'info> {
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        constraint = config_sub_dao.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(
@@ -190,13 +189,12 @@ pub struct StakeSubDaoNft<'info> {
 impl<'info> StakeSubDaoNft<'info> {
     pub fn deposit_tokens(
         &mut self,
-        amount: u64
     ) -> Result<()> {
         validate_nft!(
             self.metadata.collection, 
             self.collection
             );
-        self.stake_state.stake(amount)?;
+        self.stake_state.stake(1)?;
 
         let accounts = TransferChecked {
             from: self.owner_ata.to_account_info(),
@@ -210,14 +208,13 @@ impl<'info> StakeSubDaoNft<'info> {
             self.token_program.to_account_info(),
             accounts
         );
-        transfer_checked(ctx, amount, self.nft.decimals)
+        transfer_checked(ctx, 1, self.nft.decimals)
     }
 
     pub fn withdraw_tokens(
         &mut self,
-        amount: u64
     ) -> Result<()> {
-        self.stake_state.unstake(amount)?;
+        self.stake_state.unstake(1)?;
 
         let accounts = TransferChecked {
             from: self.stake_ata.to_account_info(),
@@ -241,6 +238,6 @@ impl<'info> StakeSubDaoNft<'info> {
             signer_seeds
         );
 
-        transfer_checked(ctx, amount, self.nft.decimals)
+        transfer_checked(ctx, 1, self.nft.decimals)
     }
 }

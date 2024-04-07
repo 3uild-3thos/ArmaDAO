@@ -2,7 +2,7 @@ export const createFleet = {
   membershipTypes: {
     fungible: `Let members do everything such as voting, creating proposals, and more using fungible tokens.`,
     nft: `Let members do everything such as voting, creating proposals, and more using NFT.`,
-    hybrid: `Let members vote using fungible tokens; and create proposals, create a subfleet and more by holding the Armada NFT.`,
+    hybrid: `Let members vote using fungible tokens; and create proposals, create a subfleet and more with NFT.`,
   },
   config: {
     initialDaoConfig: `Set the initial configs of your Fleet DAO. Some configs will act as the baseline minimum for all proposals. These configs can still be changed through proposals.`,

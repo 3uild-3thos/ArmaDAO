@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "programs/*", "crates/*",
+    "programs/*",
 ]
 resolver = "2"
 
