@@ -1,27 +1,27 @@
 use anchor_lang::prelude::*;
-use daoist_programs::modules::{Proposal, ProposalStatus, DaoConfig};
+/* use daoist_programs::modules::{Proposal, ProposalStatus, /* DaoConfig */}; */
 
 use crate::errors::ProposalError;
-
+use dao::state::DaoConfig;
+use crate::state::{Proposal, ProposalStatus};
 
 #[derive(Accounts)]
-#[instruction(id: u64)]
 pub struct ProposalHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,//voting program
     #[account(
         mut,
-        seeds=[b"proposal", core_config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
+        seeds=[b"proposal", config.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
         bump = proposal.bump
     )]
     proposal: Account<'info, Proposal>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump
     )]
-    core_config: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
+    config: Account<'info, DaoConfig>,
+    /* system_program: Program<'info, System> */
 }
 
 impl<'info> ProposalHandler<'info> {
@@ -36,7 +36,7 @@ impl<'info> ProposalHandler<'info> {
         require!(choice <= self.proposal.choices, ProposalError::InvalidChoice);
         self.proposal.votes = self.proposal.votes.checked_add(amount).ok_or(ProposalError::Overflow)?;
         self.proposal.vote_counts[choice as usize] = self.proposal.vote_counts[choice as usize].checked_add(amount).ok_or(ProposalError::Overflow)?; 
-        self.proposal.try_finalize();
+        /* self.proposal.try_finalize(self.config.circulating_supply); */
         Ok(())
     }
 
@@ -54,10 +54,9 @@ impl<'info> ProposalHandler<'info> {
 
 
 #[derive(Accounts)]
-#[instruction(id: u64)]
 pub struct SubDaoProposalHandler<'info> {
     #[account(mut)]
-    owner: Signer<'info>,
+    owner: AccountInfo<'info>,
     #[account(
         mut,
         seeds=[b"proposal", config_sub_dao.key().as_ref(), proposal.id.to_le_bytes().as_ref()],
@@ -65,18 +64,18 @@ pub struct SubDaoProposalHandler<'info> {
     )]
     proposal: Account<'info, Proposal>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
     )]
     config_sub_dao: Account<'info, DaoConfig>,
-    system_program: Program<'info, System>
+    /* system_program: Program<'info, System> */
 }
 
 impl<'info> SubDaoProposalHandler<'info> {
@@ -91,7 +90,7 @@ impl<'info> SubDaoProposalHandler<'info> {
         require!(choice <= self.proposal.choices, ProposalError::InvalidChoice);
         self.proposal.votes = self.proposal.votes.checked_add(amount).ok_or(ProposalError::Overflow)?;
         self.proposal.vote_counts[choice as usize] = self.proposal.vote_counts[choice as usize].checked_add(amount).ok_or(ProposalError::Overflow)?; 
-        self.proposal.try_finalize();
+        /* self.proposal.try_finalize(self.config_sub_dao.circulating_supply); */
         Ok(())
     }
 

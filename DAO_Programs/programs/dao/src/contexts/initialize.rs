@@ -1,30 +1,27 @@
 use anchor_lang::prelude::*;
 
-use daoist_programs::modules::DaoConfig;
 use anchor_spl::{
     token_interface::{TokenAccount, Mint, TokenInterface}, 
     metadata::{Metadata, MetadataAccount,MasterEditionAccount}, 
     associated_token::AssociatedToken
 };
-use daoist_programs::modules::{StakeState, StakingProgram};
 use crate::{validate_nft, REQUIRED_COLLECTION_MINT};
-use crate::errors::DaoError;
-
-
+use crate::{errors::CoreError, state::DaoConfig};
+ 
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct Initialize<'info> {
     #[account(mut)]
-    initializer: Signer<'info>,
+    pub initializer: Signer<'info>,
     #[account(
         mut,
         associated_token::mint = nft,
         associated_token::authority = initializer
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    pub owner_ata: InterfaceAccount<'info, TokenAccount>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(constraint = collection.key() == REQUIRED_COLLECTION_MINT)]
-    collection: InterfaceAccount<'info, Mint>,
+    pub collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
             b"metadata",
@@ -36,7 +33,7 @@ pub struct Initialize<'info> {
         constraint = metadata.collection.as_ref().unwrap().key.as_ref() == collection.key().as_ref(),
         constraint = metadata.collection.as_ref().unwrap().verified == true,
     )]
-    metadata: Account<'info, MetadataAccount>,
+    pub metadata: Account<'info, MetadataAccount>,
     #[account(
         seeds = [
             b"metadata",
@@ -47,30 +44,30 @@ pub struct Initialize<'info> {
         seeds::program = metadata_program.key(),
         bump,
     )]
-    master_edition: Account<'info, MasterEditionAccount>,
+    pub master_edition: Account<'info, MasterEditionAccount>,
     #[account(
         seeds=[b"auth", config.key().as_ref()],
         bump
     )]
     ///CHECK: This is safe. It's just used to sign things
-    auth: UncheckedAccount<'info>,
+    pub auth: UncheckedAccount<'info>,
     #[account(
         seeds=[b"treasury", config.key().as_ref()],
         bump
     )]
-    treasury: SystemAccount<'info>,
+    pub treasury: SystemAccount<'info>,
     #[account(
         init,
         payer = initializer,
-        seeds=[b"config", seed.to_le_bytes().as_ref()],
+        seeds=[b"config", seed.to_le_bytes().as_ref()], 
         bump,
         space = DaoConfig::LEN
     )]
-    config: Account<'info, DaoConfig>,
-    metadata_program: Program<'info, Metadata>,
-    token_program: Interface<'info, TokenInterface>,
-    associated_token_program: Program<'info, AssociatedToken>,
-    system_program: Program<'info, System>
+    pub config: Account<'info, DaoConfig>,
+    pub metadata_program: Program<'info, Metadata>,
+    pub token_program: Interface<'info, TokenInterface>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
+    pub system_program: Program<'info, System>
 }
 
 impl<'info> Initialize<'info> {
@@ -84,7 +81,7 @@ impl<'info> Initialize<'info> {
         min_threshold: u64,
         //Maximum expiry time for proposals
         max_expiry: u64,
-        //Evaluation phase period for proposals
+        //Evaluation phase period for proposals Example 216000 - 1 day in slots.
         evaluation_phase_period: u64,
         proposal_program: Pubkey,
         voting_program: Pubkey,
@@ -106,13 +103,51 @@ impl<'info> Initialize<'info> {
         min_staked_create_subdao: Option<u64>,
         //Indicates whether the DAO is a hybrid type
         //set true if hybrid
-        is_hybrid: bool
-    ) -> Result<()> {
+        is_hybrid: bool,
+        circulating_supply: u64,
 
+    ) -> Result<()> {
+            validate_nft!(
+                self.metadata.collection, 
+                self.collection
+            );
             self.config.check_init_valid_quorum(min_quorum)?;
+
+            msg!("Dao Created with sucess");
+            self.config.set_inner(DaoConfig { 
+                seed, 
+                proposal_fee, 
+                min_quorum,
+                min_threshold, 
+                max_expiry, 
+                evaluation_phase_period, 
+                proposal_count : 0, 
+                proposal_program, 
+                voting_program, 
+                staking_program, 
+                collection_mint, 
+                mint, 
+                min_staked_required_proposal, 
+                allow_sub_dao, 
+                min_staked_create_subdao, 
+                is_hybrid,
+                auth_bump: bumps.auth, 
+                config_bump: bumps.config, 
+                treasury_bump: bumps.treasury, 
+                circulating_supply
+            });
+            msg!("seed {}", self.config.seed);      
+            msg!("proposal fee {}", self.config.proposal_fee);
+            msg!("config_bump {}", self.config.config_bump);
+            msg!("treasuru_bump {}", self.config.treasury_bump);             
+
+                Ok(())
         
-            self.config.init(
+/*             self.config.init(
                 seed,
+                bumps.auth,
+                bumps.config,
+                bumps.treasury,
                 //settings
                 proposal_fee,
                 min_quorum,
@@ -124,9 +159,6 @@ impl<'info> Initialize<'info> {
                 voting_program, 
                 staking_program,
                 //Bumps
-                bumps.auth,
-                bumps.config,
-                bumps.treasury,
                 //Optional
                 collection_mint,
                 //Optional
@@ -138,12 +170,12 @@ impl<'info> Initialize<'info> {
                 //Optional
                 min_staked_create_subdao,
                 is_hybrid
-             )             
+             )        */      
    
     }
 }
 
-//Hybrid FLEETS - SUB FLEETS
+//Create SUB Fleets(FT,NFT,Hybrid) FOR DAOS(HYBRIDS AND NFTS) MOTHERSHIPS THAT DONT REQUIRE HAVING min_staked_create_subdao
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdao<'info> {
@@ -156,7 +188,7 @@ pub struct InitializeSubdao<'info> {
     )]
     owner_ata: InterfaceAccount<'info, TokenAccount>,
     nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))]
+    /* #[account(constraint = collection.key() == config.collection_mint.expect("Collection mint not initialized"))] *///this will work when config acc derived correctly 
     collection: InterfaceAccount<'info, Mint>,
     #[account(
         seeds = [
@@ -182,8 +214,8 @@ pub struct InitializeSubdao<'info> {
     )]
     master_edition: Account<'info, MasterEditionAccount>,
     #[account(
-        seeds=[b"auth", config.key().as_ref()],
-        bump = config.auth_bump
+        seeds=[b"auth", config_sub_dao.key().as_ref()],
+        bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     auth: UncheckedAccount<'info>,
@@ -202,7 +234,8 @@ pub struct InitializeSubdao<'info> {
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(
         seeds=[b"config", config.seed.to_le_bytes().as_ref()],
-        bump = config.config_bump
+        bump = config.config_bump,
+        constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
     config: Account<'info, DaoConfig>,
     metadata_program: Program<'info, Metadata>,
@@ -225,13 +258,16 @@ impl<'info> InitializeSubdao<'info> {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>,
         min_staked_required_proposal : Option<u64>,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         
         validate_nft!(
             self.metadata.collection, 
             self.collection
             );
+            //Make sure its not staked based to create subdao
+            self.config.check_staked_create_subdao()?;   
             self.config.check_allow_sub_dao()?;
             self.config_sub_dao.check_init_valid_quorum(min_quorum)?;       
             self.config_sub_dao.set_inner(DaoConfig 
@@ -246,7 +282,7 @@ impl<'info> InitializeSubdao<'info> {
                 proposal_program: self.config.proposal_program, 
                 voting_program: self.config.voting_program, 
                 staking_program: self.config.staking_program, 
-                auth_bump: self.config.auth_bump, 
+                auth_bump: bumps.auth, 
                 config_bump: bumps.config_sub_dao, 
                 treasury_bump: bumps.treasury,
                 collection_mint,
@@ -254,22 +290,23 @@ impl<'info> InitializeSubdao<'info> {
                 min_staked_required_proposal,
                 allow_sub_dao: false,
                 min_staked_create_subdao: None,
-                is_hybrid
+                is_hybrid,
+                circulating_supply,
             });
                 Ok(()) 
    
     }
 }
 
-// NFT/FT FLEETS - SUB FLEETS
+/* // NFT/FT/Hybrid FLEETS - SUB FLEETS - MOTHERSHIPS THAT REQUIRE HAVING min_staked_create_subdao
 #[derive(Accounts)]
 #[instruction(seed: u64)]
 pub struct InitializeSubdaoToken<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
-        seeds=[b"auth", config.key().as_ref()],
-        bump = config.auth_bump
+        seeds=[b"auth", config_sub_dao.key().as_ref()],
+        bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     auth: UncheckedAccount<'info>,
@@ -315,7 +352,8 @@ impl<'info> InitializeSubdaoToken<'info> {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>,
         min_staked_required_proposal : u64,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         
             self.config.check_allow_sub_dao()?;
@@ -333,7 +371,7 @@ impl<'info> InitializeSubdaoToken<'info> {
                 proposal_program: self.config.proposal_program, 
                 voting_program: self.config.voting_program, 
                 staking_program: self.config.staking_program, 
-                auth_bump: self.config.auth_bump, 
+                auth_bump: bumps.auth, 
                 config_bump: bumps.config_sub_dao, 
                 treasury_bump: bumps.treasury,
                 collection_mint, 
@@ -341,9 +379,10 @@ impl<'info> InitializeSubdaoToken<'info> {
                 min_staked_required_proposal: Some(min_staked_required_proposal),
                 allow_sub_dao: false,
                 min_staked_create_subdao: None,
-                is_hybrid
+                is_hybrid,
+                circulating_supply
             });
                 Ok(()) 
    
     }
-}
+} */

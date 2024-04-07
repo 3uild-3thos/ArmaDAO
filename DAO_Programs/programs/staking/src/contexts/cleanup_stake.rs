@@ -1,53 +1,57 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{token_interface::{Mint, TokenAccount, TokenInterface, CloseAccount, close_account}, associated_token::AssociatedToken};
-use daoist_programs::modules::{StakeState, DaoConfig};
+use anchor_spl::{token_interface::{Mint, TokenAccount, TokenInterface, CloseAccount, close_account}, 
+associated_token::AssociatedToken,
+metadata::{Metadata, MetadataAccount, MasterEditionAccount}};
+/* use daoist_programs::modules::{StakeState, /* DaoConfig */}; */
+use dao::state::DaoConfig;
+use crate::state::StakeState;
 
 use crate::errors::StakeError;
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct CleanupStake<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = mint,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
-        seeds=[b"auth", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == core_config.mint.expect("Mint not initialized"))]
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
-        close = owner,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        close = treasury,
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+        constraint = config.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(),
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        mut,
+        seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
     token_program: Interface<'info, TokenInterface>,
     associated_token_program: Program<'info, AssociatedToken>,
     system_program: Program<'info, System>
 }
-
 impl<'info> CleanupStake<'info> {
     pub fn cleanup_stake(
         &mut self,
@@ -59,19 +63,18 @@ impl<'info> CleanupStake<'info> {
             Err(_) => Ok(())
         }
     }
-
     pub fn close_stake_ata(
         &self
     ) -> Result<()> {
         let accounts = CloseAccount {
             account: self.stake_ata.to_account_info(),
-            destination: self.owner.to_account_info(),
+            destination: self.treasury.to_account_info(),
             authority: self.stake_auth.to_account_info()
         };
 
         let seeds = &[
             &b"auth"[..],
-            &self.core_config.key().to_bytes()[..],
+            &self.config.key().to_bytes()[..],
             &self.owner.key().to_bytes()[..],
             &[self.stake_state.auth_bump],
         ];
@@ -83,95 +86,147 @@ impl<'info> CleanupStake<'info> {
             accounts, 
             signer_seeds
         );
-
         close_account(ctx)
     }
-
-
 }
 #[derive(Accounts)]
-#[instruction(seed: u64)]
+pub struct CleanupStakeNftAta<'info> {
+    #[account(mut)]
+    owner: Signer<'info>,
+    #[account(
+        mut,
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
+        bump,
+        token::mint = nft,
+        token::authority = stake_auth
+    )]
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
+    #[account(
+        seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
+        bump = stake_state.auth_bump
+    )]
+    ///CHECK: This is safe. It's just used to sign things
+    stake_auth: UncheckedAccount<'info>,
+    collection: InterfaceAccount<'info, Mint>,
+    nft: InterfaceAccount<'info, Mint>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref()
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+        constraint = metadata.collection.as_ref().unwrap().key.as_ref() == collection.key().as_ref(),
+        constraint = metadata.collection.as_ref().unwrap().verified == true,
+    )]
+    metadata: Account<'info, MetadataAccount>,
+    #[account(
+        seeds = [
+            b"metadata",
+            metadata_program.key().as_ref(),
+            nft.key().as_ref(),
+            b"edition"
+        ],
+        seeds::program = metadata_program.key(),
+        bump,
+    )]
+    master_edition: Account<'info, MasterEditionAccount>,
+    #[account(
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
+        bump = stake_state.state_bump
+    )]
+    stake_state: Box<Account<'info, StakeState>>,
+    #[account(
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+        constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
+    )]
+    config: Account<'info, DaoConfig>,
+    #[account(
+        mut,
+        seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.treasury_bump
+    )]
+    treasury: SystemAccount<'info>,
+    metadata_program: Program<'info, Metadata>,
+    token_program: Interface<'info, TokenInterface>,
+    associated_token_program: Program<'info, AssociatedToken>,
+    system_program: Program<'info, System>
+}
+impl<'info> CleanupStakeNftAta<'info> {
+    pub fn cleanup_stake(
+        &mut self,
+        _bumps: &CleanupStakeNftAtaBumps,
+    ) -> Result<()> {
+        self.close_stake_ata()?;
+        Ok(())
+    }
+
+    pub fn close_stake_ata(
+        &self
+    ) -> Result<()> {
+        let accounts = CloseAccount {
+            account: self.stake_ata.to_account_info(),
+            destination: self.treasury.to_account_info(),
+            authority: self.stake_auth.to_account_info()
+        };
+
+        let seeds = &[
+            &b"auth"[..],
+            &self.config.key().to_bytes()[..],
+            &self.owner.key().to_bytes()[..],
+            &[self.stake_state.auth_bump],
+        ];
+
+        let signer_seeds = &[&seeds[..]];
+
+        let ctx = CpiContext::new_with_signer(
+            self.token_program.to_account_info(), 
+            accounts, 
+            signer_seeds
+        );
+        close_account(ctx)
+    }
+}
+
+#[derive(Accounts)]
 pub struct CleanupStakeNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
-        bump = stake_state.vault_bump,
-        token::mint = nft,
-        token::authority = stake_auth
-    )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
-    #[account(
-        seeds=[b"auth", core_config.key().as_ref(), owner.key().as_ref()],
-        bump = stake_state.auth_bump
-    )]
-    ///CHECK: This is safe. It's just used to sign things
-    stake_auth: UncheckedAccount<'info>,
-    nft: InterfaceAccount<'info, Mint>,
-    #[account(constraint = collection.key() == core_config.collection_mint.expect("Collection mint not initialized"))]
-    collection: InterfaceAccount<'info, Mint>,
-    #[account(
-        mut,
-        close = owner,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        close = treasury,
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"treasury", core_config.key().as_ref()],
-        bump = core_config.treasury_bump
+        mut,
+        seeds=[b"treasury", config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.treasury_bump
     )]
     treasury: SystemAccount<'info>,
-    token_program: Interface<'info, TokenInterface>,
-    associated_token_program: Program<'info, AssociatedToken>,
     system_program: Program<'info, System>
 }
 
 impl<'info> CleanupStakeNft<'info> {
-    pub fn cleanup_stake(
+    pub fn cleanup_stake_state(
         &mut self,
-        _bumps: &CleanupStakeNftBumps,
     ) -> Result<()> {
-        self.close_stake_ata()?;
         match self.stake_state.check_stake() {
             Ok(_) => err!(StakeError::InvalidStakeAmount),
             Err(_) => Ok(())
         }
     }
-
-    pub fn close_stake_ata(
-        &self
-    ) -> Result<()> {
-        let accounts = CloseAccount {
-            account: self.stake_ata.to_account_info(),
-            destination: self.owner.to_account_info(),
-            authority: self.stake_auth.to_account_info()
-        };
-
-        let seeds = &[
-            &b"auth"[..],
-            &self.core_config.key().to_bytes()[..],
-            &self.owner.key().to_bytes()[..],
-            &[self.stake_state.auth_bump],
-        ];
-
-        let signer_seeds = &[&seeds[..]];
-
-        let ctx = CpiContext::new_with_signer(
-            self.token_program.to_account_info(), 
-            accounts, 
-            signer_seeds
-        );
-
-        close_account(ctx)
-    }
-
 
 }

@@ -36,7 +36,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -97,12 +97,17 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
           "isMut": false,
           "isSigner": false
         },
@@ -163,7 +168,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -239,7 +244,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -264,12 +269,7 @@
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "unstakeTokens",
@@ -305,7 +305,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -381,7 +381,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -406,12 +406,7 @@
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "closeStake",
@@ -442,13 +437,13 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -488,27 +483,42 @@
           "isSigner": false
         },
         {
-          "name": "nft",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "collection",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "stakeState",
-          "isMut": true,
+          "name": "nft",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -520,6 +530,37 @@
         {
           "name": "associatedTokenProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeStakeNftState",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -564,7 +605,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -630,7 +671,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -701,7 +742,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -772,7 +813,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -812,12 +853,7 @@
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "unstakeTokensSubDao",
@@ -853,7 +889,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -924,7 +960,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -964,12 +1000,7 @@
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "closeStakeSubDao",
@@ -1000,13 +1031,13 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1061,22 +1092,37 @@
           "isSigner": false
         },
         {
+          "name": "metadata",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "masterEdition",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "stakeState",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "configSubDao",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "metadataProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -1099,7 +1145,7 @@
       "args": []
     },
     {
-      "name": "addAccount",
+      "name": "closeStakeNftSubDaoState",
       "accounts": [
         {
           "name": "owner",
@@ -1112,7 +1158,17 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
           "isMut": false,
           "isSigner": false
         },
@@ -1123,6 +1179,32 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "addAccount",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakeState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     },
     {
       "name": "removeAccount",
@@ -1130,7 +1212,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1138,17 +1220,17 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     },
     {
       "name": "addAccountSubDao",
@@ -1156,7 +1238,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1164,7 +1246,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -1172,14 +1254,14 @@
           "name": "configSubDao",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     },
     {
       "name": "removeAccountSubDao",
@@ -1187,7 +1269,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "stakeState",
@@ -1195,7 +1277,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -1203,14 +1285,14 @@
           "name": "configSubDao",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -1222,6 +1304,18 @@
           {
             "name": "seed",
             "type": "u64"
+          },
+          {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
           },
           {
             "name": "proposalFee",
@@ -1260,18 +1354,6 @@
             "type": "publicKey"
           },
           {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
-          },
-          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -1302,6 +1384,10 @@
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }
@@ -1317,6 +1403,10 @@
           },
           {
             "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedAmount",
             "type": "u64"
           },
           {
@@ -1366,108 +1456,121 @@
     },
     {
       "code": 6004,
+      "name": "UnderflowLockedAmount",
+      "msg": "Underflow Locked Amount"
+    },
+    {
+      "code": 6005,
       "name": "AccountsOpen",
       "msg": "You can't unstake with open accounts"
     },
     {
-      "code": 6005,
+      "code": 6006,
       "name": "Expired",
       "msg": "Proposal expired"
     },
     {
-      "code": 6006,
+      "code": 6007,
       "name": "InvalidSlot",
       "msg": "Invalid slot"
     },
     {
-      "code": 6007,
+      "code": 6008,
       "name": "InsufficientStake",
       "msg": "Insufficient stake"
     },
     {
-      "code": 6008,
+      "code": 6009,
       "name": "InvalidName",
       "msg": "Invalid name"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "InvalidGist",
       "msg": "Invalid gist"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "InvalidProposalSeed",
       "msg": "Invalid proposal seed"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "InvalidQuorum",
       "msg": "Invalid quorum"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "InvalidExpiry",
       "msg": "Invalid expiry"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "ProposalClosed",
       "msg": "Proposal closed"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "InvalidVoteAmount",
       "msg": "You can't vote 0!"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "InvalidProposalStatus",
       "msg": "Invalid proposal status"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "InvalidStakeAmount",
       "msg": "Invalid stake amount"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "InvalidThreshold",
       "msg": "Invalid Threshold"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "InvalidRequiredTime",
       "msg": "Invalid Required Time"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "InvalidVoteType",
       "msg": "Invalid Vote Type"
     },
     {
-      "code": 6020,
+      "code": 6021,
       "name": "SingleChoice",
       "msg": "AlreadyVoted"
     },
     {
-      "code": 6021,
+      "code": 6022,
       "name": "InvalidChoicesAmount",
       "msg": "Invalid choices amount"
     },
     {
-      "code": 6022,
+      "code": 6023,
       "name": "InvalidChoice",
       "msg": "Invalid choice"
     },
     {
-      "code": 6023,
+      "code": 6024,
       "name": "CollectionNotSet",
       "msg": "Collection not set"
     },
     {
-      "code": 6024,
+      "code": 6025,
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
+    },
+    {
+      "code": 6026,
+      "name": "LockedToken",
+      "msg": "Locked tockens"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF"
+  }
 }

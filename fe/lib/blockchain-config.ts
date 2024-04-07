@@ -14,13 +14,12 @@ interface IConfig {
 interface IBlockchainConfig {
   [key: string]: IConfig;
 }
-
 const config: IBlockchainConfig = {
   devnet: {
     proposalProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
-    stakingProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
-    daoProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
-    votingProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
+    stakingProgram: "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF",
+    daoProgram: "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V",
+    votingProgram: "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC",
     cluster: WalletAdapterNetwork.Devnet,
     rpcUrl: clusterApiUrl(WalletAdapterNetwork.Devnet),
     connection: new Connection(

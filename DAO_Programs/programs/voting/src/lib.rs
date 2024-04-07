@@ -21,9 +21,9 @@ pub mod voting {
             ctx.accounts.remove_vote(amount, choice)
         }   
         // Close a voting position after a proposal has passed/expired
-        pub fn cleanup_vote(ctx: Context<Unvote>) -> Result<()> {
+        pub fn cleanup_vote(ctx: Context<Unvote>, amount: u64,) -> Result<()> {
             // Decrement votes for user
-            ctx.accounts.cleanup_vote()
+            ctx.accounts.cleanup_vote(amount)
         }  
         //SUB DAOS
         // Vote on a Sub Dao proposal
@@ -37,8 +37,8 @@ pub mod voting {
             ctx.accounts.remove_vote(amount, choice)
         }
         // Close a voting position after a proposal has passed/expired
-        pub fn cleanup_vote_sub_dao(ctx: Context<UnvoteSubDao>) -> Result<()> {
+        pub fn cleanup_vote_sub_dao(ctx: Context<UnvoteSubDao>,amount: u64) -> Result<()> {
             // Decrement votes for user
-            ctx.accounts.cleanup_vote()
+            ctx.accounts.cleanup_vote(amount)
         }                           
 }

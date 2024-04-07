@@ -1,4 +1,4 @@
-export default [
+const featuredFleets = [
   {
     id: 1,
     title: "Main DAO",
@@ -24,3 +24,5 @@ export default [
     proposals: 1,
   },
 ];
+
+export default featuredFleets;

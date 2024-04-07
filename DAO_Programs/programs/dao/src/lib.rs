@@ -1,8 +1,11 @@
 use anchor_lang::prelude::*;
-mod contexts;
-use contexts::*;
+pub mod contexts;
+pub use contexts::*;
 mod errors;
 mod helpers;
+//testing
+pub mod state;
+mod constants;
 
 declare_id!("daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
 
@@ -12,7 +15,12 @@ pub mod dao {
     use solana_program::pubkey;
 
     use super::*;
-    pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("daoNFTGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V");
+    pub const REQUIRED_COLLECTION_MINT: Pubkey = pubkey!("Ghx1VpngEJcSQNmGa9SnwGK85CnX4Mi6pLh8hNFZioy7");
+
+
+/*     pub fn debugging (ctx : Context<Debugging>)-> Result<()> {
+        ctx.accounts.debug()
+    } */
 
     // Instantiate a new DAO Config ACC using the DAO2023 program
     pub fn initialize(
@@ -31,10 +39,11 @@ pub mod dao {
         min_staked_required_proposal: Option<u64>,
         allow_sub_dao: bool,
         min_staked_create_subdao: Option<u64>,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         ctx.accounts.init(
-            seed, 
+            seed,
             &ctx.bumps, 
             proposal_fee, 
             min_quorum, 
@@ -49,7 +58,9 @@ pub mod dao {
             min_staked_required_proposal,
             allow_sub_dao,
             min_staked_create_subdao,
-            is_hybrid
+            is_hybrid,
+            circulating_supply
+            
         )
     }
     // Instantiate a new SubDAO Config ACC for Hybrid DAOS
@@ -64,7 +75,8 @@ pub mod dao {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
         min_staked_required_proposal: Option<u64>,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -77,10 +89,11 @@ pub mod dao {
             collection_mint,
             mint,
             min_staked_required_proposal,
-            is_hybrid
+            is_hybrid,
+            circulating_supply
         )
     }
-    // Instantiate a new SubDAO Config ACC for FT/NFT DAOs
+/*     // Instantiate a new SubDAO Config ACC for FT/NFT DAOs
     pub fn initialize_sub_dao_token(
         ctx: Context<InitializeSubdaoToken>,
         seed: u64,
@@ -92,7 +105,8 @@ pub mod dao {
         collection_mint: Option<Pubkey>,
         mint: Option<Pubkey>, 
         min_staked_required_proposal: u64,
-        is_hybrid: bool
+        is_hybrid: bool,
+        circulating_supply: u64,
     ) -> Result<()> {
         ctx.accounts.init(
             seed, 
@@ -105,23 +119,26 @@ pub mod dao {
             collection_mint,
             mint,
             min_staked_required_proposal,
-            is_hybrid
+            is_hybrid,
+            circulating_supply
         )
-    } 
+    }  */
     // Instruction CPI
     // ADD PROPOSAL
     pub fn add_proposal(
         ctx: Context<CoreHandler>,
         id: u64
     ) -> Result<()> {
-        ctx.accounts.add_proposal(id)
+        ctx.accounts.add_proposal(id)?;
+        Ok(())
     }
 
     pub fn add_proposal_sub_dao(
         ctx: Context<SubDaoHandler>,
         id: u64
     ) -> Result<()> {
-        ctx.accounts.add_proposal_sub_dao(id)
+        ctx.accounts.add_proposal_sub_dao(id)?;
+        Ok(())
     }
 
 

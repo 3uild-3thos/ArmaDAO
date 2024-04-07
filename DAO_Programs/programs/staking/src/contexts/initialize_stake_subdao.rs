@@ -4,11 +4,11 @@ use anchor_spl::{
     associated_token::AssociatedToken,
     metadata::{Metadata, MetadataAccount}, 
 };
-use daoist_programs::modules::{StakeState,DaoConfig};
-
+/* use daoist_programs::modules::{StakeState,/* DaoConfig */}; */
+use dao::state::DaoConfig;
+use crate::state::StakeState;
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct InitializeStakeSubDao<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -16,24 +16,23 @@ pub struct InitializeStakeSubDao<'info> {
         associated_token::mint = mint,
         associated_token::authority = owner
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         init,
         payer = owner,
-        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump,
         token::mint = mint,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == config_sub_dao.mint.expect("Mint not initialized"))]
-    mint: InterfaceAccount<'info, Mint>,
+    mint: Box<InterfaceAccount<'info, Mint>>,
     #[account(
         init,
         payer = owner,
@@ -41,19 +40,20 @@ pub struct InitializeStakeSubDao<'info> {
         bump,
         space = StakeState::LEN
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Box<Account<'info, DaoConfig>>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
+        constraint = config_sub_dao.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(),
     )]
-    config_sub_dao: Account<'info, DaoConfig>,
+    config_sub_dao: Box<Account<'info, DaoConfig>>,
     token_program: Interface<'info, TokenInterface>,
     associated_token_program: Program<'info, AssociatedToken>,
     system_program: Program<'info, System>
@@ -73,7 +73,6 @@ impl<'info> InitializeStakeSubDao<'info> {
     }
 }
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct InitializeStakeSubDaoNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -81,16 +80,16 @@ pub struct InitializeStakeSubDaoNft<'info> {
         associated_token::mint = nft,
         associated_token::authority = owner
     )]
-    owner_ata: InterfaceAccount<'info, TokenAccount>,
+    owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         init,
         payer = owner,
-        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config_sub_dao.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
         bump,
         token::mint = nft,
         token::authority = stake_auth
     )]
-    stake_ata: InterfaceAccount<'info, TokenAccount>,
+    stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         seeds=[b"auth", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump
@@ -101,22 +100,22 @@ pub struct InitializeStakeSubDaoNft<'info> {
     collection: InterfaceAccount<'info, Mint>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(
-        init,
+        init_if_needed,
         payer = owner,
         seeds=[b"stake", config_sub_dao.key().as_ref(), owner.key().as_ref()],
         bump,
         space = StakeState::LEN
     )]
-    stake_state: Account<'info, StakeState>,
+    stake_state: Box<Account<'info, StakeState>>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
     )]
     config_sub_dao: Account<'info, DaoConfig>,
@@ -143,6 +142,8 @@ impl<'info> InitializeStakeSubDaoNft<'info> {
         &mut self,
         bumps: &InitializeStakeSubDaoNftBumps
     ) -> Result<()> {
+        // Make sure its NFT based DAO
+        self.config_sub_dao.ensure_not_hybrid ()?;
         self.stake_state.init(
             self.owner.key(),
             bumps.stake_state,

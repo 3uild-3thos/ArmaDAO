@@ -1,5 +1,6 @@
 "use client";
 
+import getConfig from "@/lib/blockchain-config";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -8,7 +9,6 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { ReactNode, useMemo } from "react";
-import getConfig from "../blockchain-config";
 
 export const WalletConnectProvider = ({
   children,
