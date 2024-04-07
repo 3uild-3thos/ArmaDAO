@@ -51,15 +51,30 @@ export const Navbar = () => {
         All data used on this site are mock and for Renaissance hackathon demo
         purposes only. Please check the{" "}
         <Link
-          href={
-            "https://github.com/3uild-3thos/ArmaDAO/tree/dev?tab=readme-ov-file#proof-of-work-solana-programs"
-          }
+          href={`${
+            process.env.NEXT_PUBLIC_GITHUB_URL ??
+            "https://github.com/3uild-3thos/ArmaDAO"
+          }?tab=readme-ov-file#proof-of-work-solana-programs`}
           target="_blank"
           className="mx-1 font-bold underline inline"
         >
           Solana Devnet Test Transactions here
         </Link>{" "}
         instead.
+      </div>
+      <div className="bg-blue-800 text-muted font-medium p-2 text-xs text-center md:flex w-full justify-center items-center">
+        Watch the{" "}
+        <Link
+          href={
+            process.env.NEXT_PUBLIC_DEMO_URL ??
+            "https://drive.google.com/file/d/1qFzTenXGLKfrbmaUcUFY8eu9DoPgAZpw/view?usp=sharing"
+          }
+          target="_blank"
+          className="ml-1 font-bold underline inline"
+        >
+          pitch and demo here
+        </Link>
+        .
       </div>
       <div className="relative flex items-center justify-between px-4 py-4 text-lg md:px-20 backdrop-blur-sm">
         <div className="flex md:hidden items-center gap-3">
