@@ -10,6 +10,8 @@ pub enum StakeError {
     Overflow,
     #[msg("Underflow")]
     Underflow,
+    #[msg("Underflow Locked Amount")]
+    UnderflowLockedAmount,
     #[msg("You can't unstake with open accounts")]
     AccountsOpen,
     #[msg("Proposal expired")]
@@ -52,5 +54,8 @@ pub enum StakeError {
     CollectionNotSet,
     #[msg("Invalid Collection")]
     InvalidCollection,
+    #[msg("Locked tockens")]
+    LockedToken,
 }
+
 

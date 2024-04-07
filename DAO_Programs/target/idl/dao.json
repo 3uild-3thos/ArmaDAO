@@ -139,6 +139,10 @@
         {
           "name": "isHybrid",
           "type": "bool"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "u64"
         }
       ]
     },
@@ -262,97 +266,10 @@
         {
           "name": "isHybrid",
           "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "initializeSubDaoToken",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
         },
         {
-          "name": "auth",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "treasury",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "configSubDao",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakingProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeState",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "seed",
+          "name": "circulatingSupply",
           "type": "u64"
-        },
-        {
-          "name": "proposalFee",
-          "type": "u64"
-        },
-        {
-          "name": "minQuorum",
-          "type": "u8"
-        },
-        {
-          "name": "minThreshold",
-          "type": "u64"
-        },
-        {
-          "name": "maxExpiry",
-          "type": "u64"
-        },
-        {
-          "name": "evaluationPhasePeriod",
-          "type": "u64"
-        },
-        {
-          "name": "collectionMint",
-          "type": {
-            "option": "publicKey"
-          }
-        },
-        {
-          "name": "mint",
-          "type": {
-            "option": "publicKey"
-          }
-        },
-        {
-          "name": "minStakedRequiredProposal",
-          "type": "u64"
-        },
-        {
-          "name": "isHybrid",
-          "type": "bool"
         }
       ]
     },
@@ -362,16 +279,11 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
           "isSigner": false
         }
       ],
@@ -388,7 +300,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "config",
@@ -398,11 +310,6 @@
         {
           "name": "configSubDao",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
           "isSigner": false
         }
       ],
@@ -423,6 +330,18 @@
           {
             "name": "seed",
             "type": "u64"
+          },
+          {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
           },
           {
             "name": "proposalFee",
@@ -461,18 +380,6 @@
             "type": "publicKey"
           },
           {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
-          },
-          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -503,42 +410,10 @@
           {
             "name": "isHybrid",
             "type": "bool"
-          }
-        ]
-      }
-    },
-    {
-      "name": "StakeState",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "owner",
-            "type": "publicKey"
           },
           {
-            "name": "amount",
+            "name": "circulatingSupply",
             "type": "u64"
-          },
-          {
-            "name": "accounts",
-            "type": "u64"
-          },
-          {
-            "name": "updated",
-            "type": "u64"
-          },
-          {
-            "name": "vaultBump",
-            "type": "u8"
-          },
-          {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "stateBump",
-            "type": "u8"
           }
         ]
       }
@@ -612,63 +487,91 @@
     },
     {
       "code": 6013,
+      "name": "InvalidEvaluationPeriod",
+      "msg": "Invalid evaluation_phase_period"
+    },
+    {
+      "code": 6014,
       "name": "ProposalClosed",
       "msg": "Proposal closed"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "InvalidVoteAmount",
       "msg": "You can't vote 0!"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "InvalidProposalStatus",
       "msg": "Invalid proposal status"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "InvalidStakeAmount",
       "msg": "Invalid stake amount"
     },
     {
-      "code": 6017,
+      "code": 6018,
+      "name": "InvalidUnlockedStakeAmount",
+      "msg": "Invalid unlocked stake amount"
+    },
+    {
+      "code": 6019,
       "name": "InvalidThreshold",
       "msg": "Invalid Threshold"
     },
     {
-      "code": 6018,
+      "code": 6020,
       "name": "InvalidRequiredTime",
       "msg": "Invalid Required Time"
     },
     {
-      "code": 6019,
+      "code": 6021,
       "name": "InvalidVoteType",
       "msg": "Invalid Vote Type"
     },
     {
-      "code": 6020,
+      "code": 6022,
       "name": "SingleChoice",
       "msg": "AlreadyVoted"
     },
     {
-      "code": 6021,
+      "code": 6023,
       "name": "InvalidChoicesAmount",
       "msg": "Invalid choices amount"
     },
     {
-      "code": 6022,
+      "code": 6024,
       "name": "InvalidChoice",
       "msg": "Invalid choice"
     },
     {
-      "code": 6023,
+      "code": 6025,
+      "name": "InvalidAllowSubDao",
+      "msg": "Subdao Disabled"
+    },
+    {
+      "code": 6026,
+      "name": "InvalidDaoType",
+      "msg": "InvalidDaoType"
+    },
+    {
+      "code": 6027,
       "name": "CollectionNotSet",
       "msg": "Collection not set"
     },
     {
-      "code": 6024,
+      "code": 6028,
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
+    },
+    {
+      "code": 6029,
+      "name": "UnauthorizedSigner",
+      "msg": "Unauthorized Signer"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
+  }
 }

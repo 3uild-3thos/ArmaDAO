@@ -1,8 +1,8 @@
 [features]
 seeds = false
 skip-lint = false
-[programs.localnet]
-dao2 = "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
+[programs.devnet]
+dao = "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
 proposal = "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV"
 voting = "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC"
 staking = "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF"
@@ -11,7 +11,7 @@ staking = "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "./wallet.json"
 
 [scripts]

@@ -22,7 +22,7 @@
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -32,11 +32,11 @@
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -77,7 +77,7 @@
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -87,17 +87,17 @@
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -137,7 +137,7 @@
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -147,17 +147,17 @@
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -166,7 +166,12 @@
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     },
     {
       "name": "voteSubDao",
@@ -188,7 +193,7 @@
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -198,11 +203,11 @@
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -248,7 +253,7 @@
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -258,17 +263,17 @@
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -313,7 +318,7 @@
         },
         {
           "name": "proposal",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -323,17 +328,17 @@
         },
         {
           "name": "stakeState",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -347,7 +352,12 @@
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -359,6 +369,18 @@
           {
             "name": "seed",
             "type": "u64"
+          },
+          {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
           },
           {
             "name": "proposalFee",
@@ -397,18 +419,6 @@
             "type": "publicKey"
           },
           {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
-          },
-          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -439,6 +449,10 @@
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }
@@ -524,6 +538,10 @@
           },
           {
             "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedAmount",
             "type": "u64"
           },
           {
@@ -785,5 +803,8 @@
       "name": "InvalidChoice",
       "msg": "Invalid choice"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC"
+  }
 }

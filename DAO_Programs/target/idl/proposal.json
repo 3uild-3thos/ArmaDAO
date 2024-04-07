@@ -46,13 +46,13 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
-          "isMut": false,
+          "name": "config",
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -131,16 +131,6 @@
           "isSigner": false
         },
         {
-          "name": "coreProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "stakingProgram",
           "isMut": false,
           "isSigner": false
@@ -151,8 +141,18 @@
           "isSigner": false
         },
         {
-          "name": "treasury",
+          "name": "coreProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -221,13 +221,13 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -257,13 +257,13 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -275,7 +275,7 @@
       "args": []
     },
     {
-      "name": "createProposalSubDao",
+      "name": "createProposalSubDaoStaked",
       "accounts": [
         {
           "name": "owner",
@@ -285,21 +285,6 @@
         {
           "name": "proposal",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "coreProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "configSubDao",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -313,8 +298,23 @@
           "isSigner": false
         },
         {
-          "name": "treasury",
+          "name": "coreProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "configSubDao",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treasury",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -365,7 +365,7 @@
       ]
     },
     {
-      "name": "createProposalSubDaoHybrid",
+      "name": "createProposalSubDao",
       "accounts": [
         {
           "name": "owner",
@@ -408,13 +408,13 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "configSubDao",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -503,7 +503,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -514,7 +514,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -544,7 +544,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
@@ -555,7 +555,7 @@
         },
         {
           "name": "treasury",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -572,7 +572,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -580,12 +580,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         }
@@ -607,7 +602,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -615,12 +610,7 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         }
@@ -642,7 +632,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -650,17 +640,12 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -682,7 +667,7 @@
         {
           "name": "owner",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "proposal",
@@ -690,17 +675,12 @@
           "isSigner": false
         },
         {
-          "name": "coreConfig",
+          "name": "config",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "configSubDao",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -726,6 +706,18 @@
           {
             "name": "seed",
             "type": "u64"
+          },
+          {
+            "name": "authBump",
+            "type": "u8"
+          },
+          {
+            "name": "configBump",
+            "type": "u8"
+          },
+          {
+            "name": "treasuryBump",
+            "type": "u8"
           },
           {
             "name": "proposalFee",
@@ -764,18 +756,6 @@
             "type": "publicKey"
           },
           {
-            "name": "authBump",
-            "type": "u8"
-          },
-          {
-            "name": "configBump",
-            "type": "u8"
-          },
-          {
-            "name": "treasuryBump",
-            "type": "u8"
-          },
-          {
             "name": "collectionMint",
             "type": {
               "option": "publicKey"
@@ -806,6 +786,10 @@
           {
             "name": "isHybrid",
             "type": "bool"
+          },
+          {
+            "name": "circulatingSupply",
+            "type": "u64"
           }
         ]
       }
@@ -891,6 +875,10 @@
           },
           {
             "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedAmount",
             "type": "u64"
           },
           {
@@ -1138,5 +1126,8 @@
       "name": "InvalidCollection",
       "msg": "Invalid Collection"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV"
+  }
 }

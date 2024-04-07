@@ -5,7 +5,17 @@ A Modern, Modular, Membership Anchor-based DAO
 - **Membership Types:**
   - Token-based membership
   - NFT-based membership
-  - Hybrid membership
+  - Flexible Hybrid membership
+
+- **Proposals Threshold:**  
+  - Required Staked-based Amount to Create proposals 
+  - Holding NFT-based  to create Proposal
+
+- **Voting Threshold:**
+  - Minimum number of votes required for a proposal to be considered valid.
+
+- **Quorum Threshold:** 
+   - Minimum number of votes required for a choice to succeed, based on the circulating supply.
 
 - **Allow SubDAOs Feature:**
   - NFT Ownership Based
@@ -14,6 +24,7 @@ A Modern, Modular, Membership Anchor-based DAO
 - **SubDAOs - Membership:**
   - Token-based membership
   - NFT-based membership
+  - Flexible Hybrid membership
 
 # **Proposals**
 
@@ -30,7 +41,7 @@ There are different types of proposals that can be created in the ArmaDAO system
 - **Bounty:** Proposals to pay a certain amount to a specific address.
 - **Executable:** Proposals to execute specific instructions on the blockchain. This can include setting fees, adjusting thresholds, and more.
 - **Vote:** Proposals intended solely to gather community opinions, without involving financial transactions.
-- **MultiChoiceVote:** MultiChoice Proposals intended solely to gather community opinions, without involving financial transactions.
+- **Vote Multiple Choice:** MultiChoice Proposals intended solely to gather community opinions, without involving financial transactions.
 
 These are the common proposal types in our system, each serving its own purpose and functionality.  
 

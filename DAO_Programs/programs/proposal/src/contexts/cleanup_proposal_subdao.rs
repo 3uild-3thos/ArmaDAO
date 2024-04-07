@@ -1,6 +1,6 @@
 use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
-use daoist_programs::modules::{DaoConfig, ExecutableProposal, Proposal, ProposalType};
-
+use crate::state::{Proposal, ExecutableProposal, ProposalType};
+use dao::state::DaoConfig;
 #[derive(Accounts)]
 pub struct CleanupProposalSubDao<'info> {
     #[account(mut)]
@@ -16,19 +16,21 @@ pub struct CleanupProposalSubDao<'info> {
     )]
     proposal: Account<'info, Proposal>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     #[account(
-        seeds=[b"core", config_sub_dao.seed.to_le_bytes().as_ref(), core_config.key().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
+        seeds=[b"config", config_sub_dao.seed.to_le_bytes().as_ref(), config.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.config_bump,
     )]
     config_sub_dao: Account<'info, DaoConfig>,
     #[account(
+        mut,
         seeds=[b"treasury", config_sub_dao.key().as_ref()],
+        seeds::program = dao::state::config::ID,
         bump = config_sub_dao.treasury_bump
     )]
     treasury: SystemAccount<'info>,
@@ -40,7 +42,7 @@ impl<'info> CleanupProposalSubDao<'info> {
         &mut self
     ) -> Result<()> {
         // Try finalize
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config_sub_dao.circulating_supply);
         self.proposal.is_failed()?;
         Ok(())
     }
@@ -49,15 +51,14 @@ impl<'info> CleanupProposalSubDao<'info> {
         &mut self
     ) -> Result<()> {
         // Try finalize proposal
-        self.proposal.try_finalize();
+        self.proposal.try_finalize(self.config_sub_dao.circulating_supply);
         // Check if the status is successful
         self.proposal.is_succeeded()?;
         match self.proposal.proposal {
             ProposalType::Bounty(payee, payout) => self.payout_bounty(payee, payout),
             ProposalType::Executable(executable_proposal)  => self.execute_tx(executable_proposal),
             ProposalType::Vote => self.finalize_vote(),
-            ProposalType::VoteMultipleChoice => self.finalize_vote(),
-            
+            ProposalType::VoteMultipleChoice => self.finalize_vote(),            
         }
     }
 

@@ -4,12 +4,12 @@ use anchor_spl::{
     associated_token::AssociatedToken,
     metadata::{Metadata, MetadataAccount, MasterEditionAccount}
 };
-use daoist_programs::modules::{StakeState, DaoConfig};
+/* use daoist_programs::modules::{StakeState, /* DaoConfig */}; */
+use dao::state::DaoConfig;
 use crate::validate_nft;
 use crate::errors::StakeError;
-
+use crate::state::StakeState;
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct Stake<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -21,32 +21,32 @@ pub struct Stake<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), mint.key().as_ref()],
         bump = stake_state.vault_bump,
         token::mint = mint,
         token::authority = stake_auth
     )]
     stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
-        seeds=[b"auth", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
     stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = mint.key() == core_config.mint.expect("Mint not initialized"))]
     mint: InterfaceAccount<'info, Mint>,
     #[account(
         mut,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+        constraint = config.mint.as_ref().unwrap().key().as_ref() == mint.key().as_ref(),
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     token_program: Interface<'info, TokenInterface>,
     associated_token_program: Program<'info, AssociatedToken>,
     system_program: Program<'info, System>
@@ -71,7 +71,12 @@ impl<'info> Stake<'info> {
             self.token_program.to_account_info(),
             accounts
         );
-        transfer_checked(ctx, amount, self.mint.decimals)
+        transfer_checked(ctx, amount, self.mint.decimals)?;
+  /*       self.stake_state.stake(amount)?; */
+
+        msg!("amount = {}", self.stake_state.amount);      
+        msg!("locked amount = {}", self.stake_state.locked_amount);      
+        Ok(())
     }
 
     pub fn withdraw_tokens(
@@ -89,7 +94,7 @@ impl<'info> Stake<'info> {
 
         let seeds = &[
             &b"auth"[..],
-            &self.core_config.key().to_bytes()[..],
+            &self.config.key().to_bytes()[..],
             &self.owner.key().to_bytes()[..],
             &[self.stake_state.auth_bump],
         ];
@@ -107,7 +112,6 @@ impl<'info> Stake<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(seed: u64)]
 pub struct StakeNft<'info> {
     #[account(mut)]
     owner: Signer<'info>,
@@ -119,19 +123,18 @@ pub struct StakeNft<'info> {
     owner_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
         mut,
-        seeds = [b"vault", core_config.key().as_ref(), owner.key().as_ref()],
-        bump = stake_state.vault_bump,
+        seeds = [b"vault", config.key().as_ref(), owner.key().as_ref(), nft.key().as_ref()],
+        bump, // Nao estou a usar de preposito. Arranjar maneira mais elegante.
         token::mint = nft,
         token::authority = stake_auth
     )]
     stake_ata: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
-        seeds=[b"auth", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"auth", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.auth_bump
     )]
     ///CHECK: This is safe. It's just used to sign things
-    stake_auth: UncheckedAccount<'info>,
-    #[account(constraint = collection.key() == core_config.collection_mint.expect("Collection mint not initialized"))]
+    stake_auth: UncheckedAccount<'info>,    
     collection: InterfaceAccount<'info, Mint>,
     nft: InterfaceAccount<'info, Mint>,
     #[account(
@@ -159,16 +162,17 @@ pub struct StakeNft<'info> {
     master_edition: Account<'info, MasterEditionAccount>,
     #[account(
         mut,
-        seeds=[b"stake", core_config.key().as_ref(), owner.key().as_ref()],
+        seeds=[b"stake", config.key().as_ref(), owner.key().as_ref()],
         bump = stake_state.state_bump
     )]
     stake_state: Account<'info, StakeState>,
     #[account(
-        seeds=[b"core", core_config.seed.to_le_bytes().as_ref()],
-        seeds::program = daoist_programs::modules::core_program::ID,
-        bump = core_config.config_bump,
+        seeds=[b"config", config.seed.to_le_bytes().as_ref()],
+        seeds::program = dao::state::config::ID,
+        bump = config.config_bump,
+        constraint = config.collection_mint.as_ref().unwrap().key().as_ref() == collection.key().as_ref(),
     )]
-    core_config: Account<'info, DaoConfig>,
+    config: Account<'info, DaoConfig>,
     metadata_program: Program<'info, Metadata>,
     token_program: Interface<'info, TokenInterface>,
     associated_token_program: Program<'info, AssociatedToken>,
@@ -178,14 +182,13 @@ pub struct StakeNft<'info> {
 impl<'info> StakeNft<'info> {
     pub fn deposit_tokens(
         &mut self,
-        amount: u64
     ) -> Result<()> {
         // Check if NFT is Verified
         validate_nft!(
             self.metadata.collection, 
             self.collection
             );
-        self.stake_state.stake(amount)?;
+        self.stake_state.stake(1)?;
 
         let accounts = TransferChecked {
             from: self.owner_ata.to_account_info(),
@@ -199,14 +202,13 @@ impl<'info> StakeNft<'info> {
             self.token_program.to_account_info(),
             accounts
         );
-        transfer_checked(ctx, amount, self.nft.decimals)
+        transfer_checked(ctx, 1, self.nft.decimals)
     }
 
     pub fn withdraw_tokens(
         &mut self,
-        amount: u64
     ) -> Result<()> {
-        self.stake_state.unstake(amount)?;
+        self.stake_state.unstake(1)?;
 
         let accounts = TransferChecked {
             from: self.stake_ata.to_account_info(),
@@ -217,7 +219,7 @@ impl<'info> StakeNft<'info> {
 
         let seeds = &[
             &b"auth"[..],
-            &self.core_config.key().to_bytes()[..],
+            &self.config.key().to_bytes()[..],
             &self.owner.key().to_bytes()[..],
             &[self.stake_state.auth_bump],
         ];
@@ -230,6 +232,6 @@ impl<'info> StakeNft<'info> {
             signer_seeds
         );
 
-        transfer_checked(ctx, amount, self.nft.decimals)
+        transfer_checked(ctx, 1, self.nft.decimals)
     }
 }
