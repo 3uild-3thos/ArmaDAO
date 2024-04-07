@@ -46,8 +46,8 @@ export const Navbar = () => {
   }, [publicKey]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/20">
-      <div className="bg-blue-950 text-muted font-medium p-2 text-xs text-center md:flex w-full justify-center items-center">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/30">
+      <div className="bg-gradient-magenta text-muted font-medium p-2 text-sm text-center md:flex w-full justify-center items-center">
         All data used on this site are mock and for Renaissance hackathon demo
         purposes only. Please check the{" "}
         <Link
@@ -62,7 +62,7 @@ export const Navbar = () => {
         </Link>{" "}
         instead.
       </div>
-      <div className="bg-blue-800 text-muted font-medium p-2 text-xs text-center md:flex w-full justify-center items-center">
+      <div className="bg-gradient-blue text-muted font-medium p-2 text-sm text-center md:flex w-full justify-center items-center">
         Watch the{" "}
         <Link
           href={
