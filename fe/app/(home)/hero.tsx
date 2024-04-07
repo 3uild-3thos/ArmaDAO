@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section
       id="home-hero"
-      className="relative flex flex-col items-center justify-center w-full h-full px-4 sm:px-0 gap-8 pt-32 pb-24"
+      className="relative flex flex-col items-center justify-center w-full h-full px-4 sm:px-0 gap-8 pt-48 pb-24"
     >
       <BackgroundBeams />
 

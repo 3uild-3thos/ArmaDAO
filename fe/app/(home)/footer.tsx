@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { PATH } from "@/lib/routes";
-import { TwitterIcon } from "lucide-react";
+import { GithubIcon, TwitterIcon, VideoIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -45,9 +45,30 @@ const Footer = () => {
             className="bg-gradient-magenta p-1.5 rounded-2xl text-muted mt-4 sm:mt-0"
           />
         </Link>
-        {/* <Link href={"#"} target="_blank">
-          <FaGithub className="text-3xl text-white lg:text-2xl" />
-        </Link> */}
+        <Link
+          href={
+            process.env.NEXT_PUBLIC_GITHUB_URL ??
+            "https://github.com/3uild-3thos/ArmaDAO"
+          }
+          target="_blank"
+        >
+          <GithubIcon
+            size={32}
+            className="bg-gradient-magenta p-1.5 rounded-2xl text-muted mt-4 sm:mt-0"
+          />
+        </Link>
+        <Link
+          href={
+            process.env.NEXT_PUBLIC_DEMO_URL ??
+            "https://drive.google.com/file/d/1qFzTenXGLKfrbmaUcUFY8eu9DoPgAZpw/view?usp=sharing"
+          }
+          target="_blank"
+        >
+          <VideoIcon
+            size={32}
+            className="bg-gradient-magenta p-1.5 rounded-2xl text-muted mt-4 sm:mt-0"
+          />
+        </Link>
       </div>
     </div>
   );
