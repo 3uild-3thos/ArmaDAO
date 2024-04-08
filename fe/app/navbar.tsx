@@ -30,6 +30,14 @@ interface INavItem {
 
 export const navItems: Array<INavItem> = [];
 
+const SoonPill = () => {
+  return (
+    <div className="absolute h-4 pointer-events-none top-0 -right-6 text-[8px] font-bold rounded-lg right bg-gradient-magenta px-1 flex justify-center items-center text-white">
+      Soon!
+    </div>
+  );
+};
+
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -117,7 +125,8 @@ export const Navbar = () => {
               </Button>
             </Link>
 
-            <Link href={PATH.fleets}>
+            {/* <Link href={PATH.fleets}> */}
+            <Link href={"#"} className="relative">
               <Button
                 size={"sm"}
                 variant={"ghost"}
@@ -126,12 +135,15 @@ export const Navbar = () => {
                   pathname === PATH.fleets &&
                     "border-b border-white rounded-b-none"
                 )}
+                disabled
               >
                 <RocketIcon size={16} /> Fleets
               </Button>
+              <SoonPill />
             </Link>
 
-            <Link href={PATH.mothershipProposals}>
+            {/* <Link href={PATH.mothershipProposals}> */}
+            <Link href={"#"} className="relative">
               <Button
                 size={"sm"}
                 variant={"ghost"}
@@ -140,9 +152,11 @@ export const Navbar = () => {
                   pathname === PATH.mothershipProposals &&
                     "border-b border-white rounded-b-none"
                 )}
+                disabled
               >
                 <TablePropertiesIcon size={16} /> Mothership Proposals
               </Button>
+              <SoonPill />
             </Link>
 
             <Link href={PATH.fleetCreate}>
@@ -185,7 +199,8 @@ export const Navbar = () => {
                 </Button>
               </Link>
 
-              <Link href={PATH.fleets}>
+              {/* <Link href={PATH.fleets}> */}
+              <Link href={"#"} className="relative">
                 <Button
                   variant={"ghost"}
                   className={cn(
@@ -193,12 +208,15 @@ export const Navbar = () => {
                     pathname === PATH.fleets &&
                       "border-b border-white rounded-b-none"
                   )}
+                  disabled
                 >
                   <RocketIcon size={16} /> Fleets
                 </Button>
+                <SoonPill />
               </Link>
 
-              <Link href={PATH.mothershipProposals}>
+              {/* <Link href={PATH.mothershipProposals}> */}
+              <Link href={"#"} className="relative">
                 <Button
                   variant={"ghost"}
                   className={cn(
@@ -206,9 +224,11 @@ export const Navbar = () => {
                     pathname === PATH.mothershipProposals &&
                       "border-b border-white rounded-b-none"
                   )}
+                  disabled
                 >
                   <TablePropertiesIcon size={16} /> Mothership Proposals
                 </Button>
+                <SoonPill />
               </Link>
 
               <Link href={PATH.fleetCreate}>

@@ -33,7 +33,7 @@ const MothershipProposalsLayout = ({ children }: { children: ReactNode }) => {
       : "/";
 
   return (
-    <div className="relative z-10 flex flex-col h-full min-h-screen px-8 py-32 overflow-hidden overflow-x-hidden font-gordita md:px-16 lg:px-32 2xl:px-64">
+    <div className="relative z-10 flex flex-col h-full min-h-screen px-8 py-56 md:py-48 overflow-hidden overflow-x-hidden font-gordita md:px-16 lg:px-32 2xl:px-64">
       <Bokeh className="m-auto bottom-[-25%] right-[-50%] opacity-5 from-magenta" />
       <Bokeh className="m-auto top-[-50%] left-[-70%] opacity-5 from-cyan" />
       <div className="flex flex-col gap-16">

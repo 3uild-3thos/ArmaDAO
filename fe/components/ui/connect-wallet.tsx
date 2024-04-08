@@ -13,6 +13,9 @@ export const ConnectWallet = () => {
     paddingX: "24px",
     height: "2.5rem",
     width: "10rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   };
 
   return (
