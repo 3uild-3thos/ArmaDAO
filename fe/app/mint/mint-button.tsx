@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 // lib
@@ -6,15 +5,15 @@ import { PATH } from "@/lib/routes";
 
 // components
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Image from "next/image";
 
 function MintButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"outline"} size={"lg"} className="min-w-full">
-          Mint NFT
+        <Button variant={"white"} size={"lg"} className="min-w-full">
+          Mint Armada NFT
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

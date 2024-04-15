@@ -6,6 +6,8 @@ interface IConfig {
   stakingProgram: string;
   daoProgram: string;
   votingProgram: string;
+  armadaNftUri: string;
+  armadaNftPrice: number;
   cluster: WalletAdapterNetwork;
   rpcUrl: string;
   connection: Connection;
@@ -20,6 +22,10 @@ const config: IBlockchainConfig = {
     stakingProgram: "stakyTBmEpbUcxNhjiv16Bvr53RVy68ENBZXPiUzNcF",
     daoProgram: "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V",
     votingProgram: "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC",
+    armadaNftUri:
+      process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_URI ??
+      "https://gateway.irys.xyz/YYEDwDeN1CYGp6Z1fbqx1W2w1ZDNu9xXeY8v-8_iKgE",
+    armadaNftPrice: Number(process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_PRICE ?? 1),
     cluster: WalletAdapterNetwork.Devnet,
     rpcUrl: clusterApiUrl(WalletAdapterNetwork.Devnet),
     connection: new Connection(
@@ -32,6 +38,10 @@ const config: IBlockchainConfig = {
     stakingProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
     daoProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
     votingProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
+    armadaNftUri:
+      process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_URI ??
+      "https://gateway.irys.xyz/YYEDwDeN1CYGp6Z1fbqx1W2w1ZDNu9xXeY8v-8_iKgE",
+    armadaNftPrice: Number(process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_PRICE ?? 1),
     cluster: WalletAdapterNetwork.Devnet,
     rpcUrl: clusterApiUrl(WalletAdapterNetwork.Devnet),
     connection: new Connection(

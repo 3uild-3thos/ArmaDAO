@@ -1,119 +1,98 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+"use client";
 
 // components
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowRightToLine } from "lucide-react";
+import LabelValue from "@/components/ui/label-value";
 import MintButton from "@/mint/mint-button";
+import MintStatus, { EMintStatus } from "@/mint/mint-status";
 
 // lib
+import Bokeh from "@/components/ui/bokeh";
+import getConfig from "@/lib/blockchain-config";
 import shortenAddress from "@/lib/helpers/shortenAddress";
+import { BadgeCheckIcon } from "lucide-react";
+import Image from "next/image";
 
 function Mint() {
+  const { armadaNftUri, armadaNftPrice } = getConfig();
+
   return (
     <div className="flex flex-col gap-10">
-      <p className="text-xl font-bold">Armada NFT</p>
-      <div className="grid grid-cols-2 gap-10">
-        <div className="flex justify-center">
-          <Image
-            src={"https://placehold.co/500x1920"}
-            alt={"DAO Banner"}
-            width={500}
-            height={1920}
-            className="max-h-[40rem] rounded-2xl object-cover shadow-2xl"
+      <p className="text-xl font-bold">Mint an Armada NFT</p>
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-start z-10">
+        <div className="relative flex justify-center min-h-[30rem]">
+          <Bokeh className="m-auto opacity-50 from-magenta w-80 h-80 z-[-1]" />
+          <iframe
+            src={armadaNftUri}
+            frameBorder="0"
+            className="w-full rounded-2xl shadow-xl border-default"
           />
         </div>
 
-        <div className="flex items-center justify-center">
-          <Card className="min-w-[40rem] p-2">
+        <div className="flex flex-col gap-8">
+          <Card>
             <CardContent>
-              <Card>
-                <CardContent className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
-                    <p>Mint Stages</p>
-                  </div>
-                  <p className="text-sm text-gray-500">
-                    MAX 1 TOKEN | Free Mint
-                  </p>
-                </CardContent>
-              </Card>
-
-              <div className="p-3 flex flex-col gap-8">
-                <div className="text-green-500 text-2xl">Live</div>
-                <div className="flex flex-col">
-                  <p className="text-sm text-gray-500">Price</p>
-                  <p className="text-xl font-semibold">Free</p>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <p className="text-sm">
-                    Email Address{" "}
-                    <span className="text-gray-500">(Optional)</span>
-                  </p>
-                  <Input className="col-span-3" name="title" />
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="terms" />
-                  <label
-                    htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    I agree to the{" "}
-                    <Link href="/terms">
-                      {" "}
-                      <span className="underline font-medium">
-                        General Terms of Service
-                      </span>
-                    </Link>
-                  </label>
-                </div>
+              <div className="grid grid-cols-2 gap-8">
+                <LabelValue
+                  label="Status"
+                  value={<MintStatus status={EMintStatus.MINT_PAUSED} />}
+                />
+                <LabelValue label="Mint Phase" value="Early Access" />
+                <LabelValue
+                  label="Price"
+                  value={
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        src={"/assets/icons/solana.svg"}
+                        alt={"SOL"}
+                        width={100}
+                        height={100}
+                        className="w-6 h-fit"
+                      />
+                      {armadaNftPrice === 0
+                        ? "Free"
+                        : armadaNftPrice.toFixed(2)}
+                    </div>
+                  }
+                />
+                <LabelValue
+                  label="Standard"
+                  value="Metaplex Core"
+                  href="https://developers.metaplex.com/core"
+                />
               </div>
             </CardContent>
-            <CardFooter className="flex justify-between">
+            <CardFooter className="flex justify-between mt-8">
               <MintButton />
             </CardFooter>
           </Card>
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-xl font-bold">Overview</p>
 
-          <div className="flex flex-col gap-3">
-            <p>Armada NFT</p>
+          <Card>
+            <CardContent>
+              <div className="flex flex-col gap-6">
+                <LabelValue
+                  label="Mint Address"
+                  value={shortenAddress(
+                    "EzhM1Anf8sNxMPJwSVdUf5SCtULkhpKDuzWxocBsF2cA"
+                  )}
+                  href="https://explorer.solana.com/address/EzhM1Anf8sNxMPJwSVdUf5SCtULkhpKDuzWxocBsF2cA?cluster=devnet"
+                />
 
-            <div className="flex items-center gap-1">
-              <p className="text-sm text-gray-500">
-                Contract{" "}
-                {shortenAddress("EzhM1Anf8sNxMPJwSVdUf5SCtULkhpKDuzWxocBsF2cA")}{" "}
-              </p>
-              {/* TODO: Add new tabs icon  */}
-              <ArrowRightToLine className="text-gray-500" />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Cupiditate soluta explicabo, maiores eligendi dolore aspernatur
-                asperiores dolorem fugit suscipit assumenda at, alias repellat
-                porro! Delectus porro dolor quisquam laudantium placeat.
-              </p>{" "}
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Cupiditate soluta explicabo, maiores eligendi dolore aspernatur
-              </p>{" "}
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Cupiditate soluta explicabo, maiores eligendi dolore aspernatur
-              </p>{" "}
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Cupiditate soluta explicabo, maiores eligendi dolore aspernatur
-                asperiores dolorem fugit suscipit assumenda at, alias repellat
-                porro! Delectus porro dol
-              </p>
-            </div>
-          </div>
+                <div className="flex flex-col gap-8 text-muted">
+                  <p>
+                    The Armada NFT will be your gateway to a fully
+                    decentralized, transparent, and community-driven ecosystem.
+                    By holding or staking an Armada NFT, you shall be eligible
+                    to the following:
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <BadgeCheckIcon className="text-success" /> Create a Fleet
+                    DAO
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
