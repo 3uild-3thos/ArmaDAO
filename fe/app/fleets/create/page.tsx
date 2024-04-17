@@ -5,10 +5,10 @@ import Config from "@/app/fleets/create/(forms)/fleet-config";
 import FleetInfo from "@/app/fleets/create/(forms)/fleet-info";
 import TeamInfo from "@/app/fleets/create/(forms)/team-info";
 import Review from "@/app/fleets/create/review";
-import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { useStore } from "@/lib/zustand/store";
 
 export default function CreateFleet() {
-  const { page } = useCreateFleet();
+  const { page } = useStore();
 
   switch (page) {
     case 1:

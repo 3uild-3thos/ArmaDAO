@@ -3,7 +3,7 @@
 // lib
 import { FleetTeamSchema, IFleetTeam } from "@/lib/schema/fleet.schema";
 import { createFleet } from "@/lib/tooltips/fleet.tooltip";
-import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { useStore } from "@/lib/zustand/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -26,7 +26,7 @@ import { useEffect } from "react";
 
 function TeamInfo() {
   const { handleBackPage, handleNextPage, fleetTeam, setFleetTeam } =
-    useCreateFleet();
+    useStore();
 
   const { publicKey } = useWallet();
 

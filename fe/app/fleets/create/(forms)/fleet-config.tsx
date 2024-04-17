@@ -19,7 +19,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 // zustand
-import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { useStore } from "@/lib/zustand/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // schema
@@ -31,7 +31,7 @@ import {
 
 function FleetConfig() {
   const { handleBackPage, handleNextPage, fleetConfig, setFleetConfig } =
-    useCreateFleet();
+    useStore();
 
   const form = useForm<IFleetConfig>({
     resolver: zodResolver(FleetConfigSchema),

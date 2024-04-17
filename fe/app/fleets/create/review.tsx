@@ -18,7 +18,7 @@ import {
   IHybridMembership,
   INFTMembership,
 } from "@/lib/schema/fleet.schema";
-import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { useStore } from "@/lib/zustand/store";
 import { ArrowLeftIcon } from "lucide-react";
 
 function Review() {
@@ -29,7 +29,7 @@ function Review() {
     fleetConfig,
     fleetTeam,
     handleBackPage,
-  } = useCreateFleet();
+  } = useStore();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

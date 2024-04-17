@@ -6,10 +6,9 @@ import {
   IFleetInfo,
   IFleetTeam,
 } from "@/lib/schema/fleet.schema";
-import { createSelectors } from "@/lib/zustand/createSelectors";
-import { create } from "zustand";
+import { StateCreator } from "zustand";
 
-interface CreateFleetStore {
+export interface ICreateFleetStore {
   page: number;
   setPage: (page: number) => void;
   handleNextPage: () => void;
@@ -26,7 +25,7 @@ interface CreateFleetStore {
   setFleetTeam: (fleetTeam: IFleetTeam) => void;
 }
 
-const useCreateFleetStoreBase = create<CreateFleetStore>((set) => ({
+export const createFleetStore: StateCreator<ICreateFleetStore> = (set) => ({
   page: 0,
   setPage: (page: number) => set(() => ({ page })),
   handleNextPage: () => set((state) => ({ page: state.page + 1 })),
@@ -41,6 +40,4 @@ const useCreateFleetStoreBase = create<CreateFleetStore>((set) => ({
   setFleetConfig: (fleetConfig: IFleetConfig) => set(() => ({ fleetConfig })),
   fleetTeam: FleetTeamDefaults,
   setFleetTeam: (fleetTeam: IFleetTeam) => set(() => ({ fleetTeam })),
-}));
-
-export const useCreateFleet = createSelectors(useCreateFleetStoreBase);
+});
