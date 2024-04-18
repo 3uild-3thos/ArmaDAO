@@ -2,3 +2,5 @@
 .DS_Store
 fe/.env
 DAO_Programs/target/*/**
+scripts/node_modules
+scripts/.env

@@ -12,6 +12,8 @@ import getConfig from "@/lib/blockchain-config";
 import shortenAddress from "@/lib/helpers/shortenAddress";
 import { BadgeCheckIcon } from "lucide-react";
 import Image from "next/image";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 function Mint() {
   const { armadaNftUri, armadaNftPrice } = getConfig();
@@ -22,11 +24,12 @@ function Mint() {
       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-start z-10">
         <div className="relative flex justify-center min-h-[30rem]">
           <Bokeh className="m-auto opacity-50 from-magenta w-80 h-80 z-[-1]" />
-          <iframe
-            src={armadaNftUri}
-            frameBorder="0"
-            className="w-full rounded-2xl shadow-xl border-default"
-          />
+          <Suspense fallback={<Loading />}>
+            <iframe
+              src={armadaNftUri}
+              className="w-full rounded-2xl shadow-xl border-default"
+            />
+          </Suspense>
         </div>
 
         <div className="flex flex-col gap-8">

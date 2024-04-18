@@ -8,22 +8,27 @@ import {
 } from "@/lib/schema/fleet.schema";
 import { StateCreator } from "zustand";
 
-export interface ICreateFleetStore {
+interface IState {
   page: number;
+  fleetInfo: IFleetInfo;
+  logoPreview: string;
+  bannerPreview: string;
+  fleetConfig: IFleetConfig;
+  fleetTeam: IFleetTeam;
+}
+
+interface IActions {
   setPage: (page: number) => void;
   handleNextPage: () => void;
   handleBackPage: () => void;
-  fleetInfo: IFleetInfo;
   setFleetInfo: (fleetInfo: IFleetInfo) => void;
-  logoPreview: string;
   setLogoPreview: (logoPreview: string) => void;
-  bannerPreview: string;
   setBannerPreview: (bannerPreview: string) => void;
-  fleetConfig: IFleetConfig;
   setFleetConfig: (fleetConfig: IFleetConfig) => void;
-  fleetTeam: IFleetTeam;
   setFleetTeam: (fleetTeam: IFleetTeam) => void;
 }
+
+export type ICreateFleetStore = IState & IActions;
 
 export const createFleetStore: StateCreator<ICreateFleetStore> = (set) => ({
   page: 0,
