@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 // components
 import { ConnectWallet } from "@/components/ui/connect-wallet";
 import {
-  BadgePlusIcon,
   HomeIcon,
   Menu,
   PackagePlusIcon,
@@ -247,9 +246,14 @@ export const Navbar = () => {
 
             <hr className="h-2 bg-muted" />
             {/* <Input /> */}
-            <Link href={PATH.mothershipMint}>
+            {/* <Link href={PATH.mothershipMint}>
               <Button size={"sm"} variant={"white"} className="gap-2">
                 <BadgePlusIcon size={16} /> Mint Armada NFT
+              </Button>
+            </Link> */}
+            <Link href={PATH.waitlist} target="_blank">
+              <Button size={"sm"} variant={"white"} className="gap-2">
+                Join Waitlist
               </Button>
             </Link>
             <ConnectWallet />
