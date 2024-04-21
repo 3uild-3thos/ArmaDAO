@@ -36,7 +36,7 @@ function MintButton() {
       >
         Mint Armada NFT
       </Button>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
           <div className="flex flex-col items-center gap-5 p-8 text-center">
             <div className="relative flex justify-center">
