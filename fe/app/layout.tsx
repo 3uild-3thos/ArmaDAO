@@ -1,5 +1,6 @@
 // metadata
 import meta from "@/lib/metadata.json";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 
 // font
@@ -107,6 +108,7 @@ const RootLayout = ({
               <Navbar />
               <main className="bg-background">{children}</main>
               <Toaster />
+              <Analytics />
             </TooltipProvider>
           </ThemeProvider>
         </WalletConnectProvider>
