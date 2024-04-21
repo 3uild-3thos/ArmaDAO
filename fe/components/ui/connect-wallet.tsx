@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { ClientOnly } from "remix-utils/client-only";
 
-export const ConnectWallet = () => {
+interface IConnectWallet {
+  fullWidth?: boolean;
+}
+
+export const ConnectWallet = ({ fullWidth = false }: IConnectWallet) => {
   const style = {
     background: "transparent",
     borderRadius: "0.5rem",
@@ -12,7 +16,7 @@ export const ConnectWallet = () => {
     fontSize: "0.875rem",
     paddingX: "24px",
     height: "2.5rem",
-    width: "10rem",
+    width: fullWidth ? "100%" : "10rem",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

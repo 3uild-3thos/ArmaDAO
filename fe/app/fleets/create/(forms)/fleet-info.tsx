@@ -25,7 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowRightIcon, ImagePlus } from "lucide-react";
 
 // zustand
-import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { useStore } from "@/lib/zustand/store";
 
 function FleetInfo() {
   const {
@@ -36,7 +36,7 @@ function FleetInfo() {
     setLogoPreview,
     bannerPreview,
     setBannerPreview,
-  } = useCreateFleet();
+  } = useStore();
 
   const form = useForm<IFleetInfo>({
     resolver: zodResolver(FleetInfoSchema),

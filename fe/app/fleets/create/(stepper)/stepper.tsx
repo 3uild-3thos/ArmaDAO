@@ -17,7 +17,7 @@ import {
 
 // lib
 import { cn } from "@/lib/utils";
-import { useCreateFleet } from "@/lib/zustand/create-fleet.store";
+import { useStore } from "@/lib/zustand/store";
 
 interface IStep {
   icon: ReactNode;
@@ -50,7 +50,7 @@ const steps: Array<IStep> = [
 ];
 
 const CreateFleetStepper = () => {
-  const { page } = useCreateFleet();
+  const { page } = useStore();
 
   return (
     <div className="flex flex-col gap-12">

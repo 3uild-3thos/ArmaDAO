@@ -1,4 +1,3 @@
-import { createSelectors } from "@/lib/zustand/createSelectors";
 import {
   getAllDaoConfig,
   getAllProposal,
@@ -6,32 +5,32 @@ import {
   getAllVoteState,
 } from "@/programs/voting";
 import { AnchorProvider, ProgramAccount } from "@coral-xyz/anchor";
-import { create } from "zustand";
+import { StateCreator } from "zustand";
 
-interface VotingStoreState {
+interface IVotingStoreState {
   daoConfigs: ProgramAccount[];
   stakeStates: ProgramAccount[];
   proposals: ProgramAccount[];
   voteStates: ProgramAccount[];
 }
 
-interface VotingStoreActions {
+interface IVotingStoreActions {
   getAllDaoConfig: (provider: AnchorProvider) => Promise<void>;
   getAllStakeState: (provider: AnchorProvider) => Promise<void>;
   getAllProposal: (provider: AnchorProvider) => Promise<void>;
   getAllVoteState: (provider: AnchorProvider) => Promise<void>;
 }
 
-type VotingStore = VotingStoreState & VotingStoreActions;
+export type IVotingStore = IVotingStoreState & IVotingStoreActions;
 
-const initialState: VotingStoreState = {
+const initialState: IVotingStoreState = {
   daoConfigs: [],
   stakeStates: [],
   proposals: [],
   voteStates: [],
 };
 
-const useVotingStoreBase = create<VotingStore>((set) => ({
+export const createVotingStore: StateCreator<IVotingStore> = (set) => ({
   getAllDaoConfig: async (provider: AnchorProvider) => {
     const accounts = await getAllDaoConfig(provider);
     return set(() => ({ daoConfigs: accounts }));
@@ -49,6 +48,4 @@ const useVotingStoreBase = create<VotingStore>((set) => ({
     return set(() => ({ voteStates: accounts }));
   },
   ...initialState,
-}));
-
-export default createSelectors(useVotingStoreBase);
+});

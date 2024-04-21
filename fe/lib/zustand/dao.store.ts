@@ -1,26 +1,25 @@
-import { createSelectors } from "@/lib/zustand/createSelectors";
 import { getAllDaoConfig, getAllStakeState } from "@/programs/dao";
 import { AnchorProvider, ProgramAccount } from "@coral-xyz/anchor";
-import { create } from "zustand";
+import { StateCreator } from "zustand";
 
-interface DaoStoreState {
+interface IDaoStoreState {
   daoConfigs: ProgramAccount[];
   stakeStates: ProgramAccount[];
 }
 
-interface DaoStoreActions {
+interface IDaoStoreActions {
   getAllDaoConfig: (provider: AnchorProvider) => Promise<void>;
   getAllStakeState: (provider: AnchorProvider) => Promise<void>;
 }
 
-type DaoStore = DaoStoreState & DaoStoreActions;
+export type IDaoStore = IDaoStoreState & IDaoStoreActions;
 
-const initialState: DaoStoreState = {
+const initialState: IDaoStoreState = {
   daoConfigs: [],
   stakeStates: [],
 };
 
-const useDaoStoreBase = create<DaoStore>((set) => ({
+export const createDaoStore: StateCreator<IDaoStore> = (set) => ({
   getAllDaoConfig: async (provider: AnchorProvider) => {
     const accounts = await getAllDaoConfig(provider);
     console.log(accounts);
@@ -34,6 +33,4 @@ const useDaoStoreBase = create<DaoStore>((set) => ({
   },
 
   ...initialState,
-}));
-
-export default createSelectors(useDaoStoreBase);
+});

@@ -19,6 +19,11 @@ export const PATH = {
   fleetForumDetail: "/fleets/[fleetId]/forums/[forumId]",
   fleetTeam: "/fleets/[fleetId]/team",
   fleetSettings: "/fleets/[fleetId]/settings",
+
+  // Waitlist
+  waitlist:
+    process.env.NEXT_PUBLIC_WAITLIST_LINK ??
+    "https://airtable.com/appRtoUHAbn2q0sAH/pagVIw2S9LQfeeIdU/form",
 };
 
 export const replacePathKey = (
