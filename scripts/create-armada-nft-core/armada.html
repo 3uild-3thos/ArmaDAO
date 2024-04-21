@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Armada NFT</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      body {
+        perspective: 1500px;
+        background: linear-gradient(black, #0d1212);
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        background: white;
+        box-shadow: 0 0 3px 1px white;
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkle 2s infinite ease-in-out;
+      }
+
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .card {
+        position: relative; /* Make sure your card is positioned above the sparkles */
+        z-index: 100;
+
+        width: 37vw;
+        height: 37vw;
+        min-width: 320px;
+        min-height: 320px;
+        box-shadow: 0 5px 5px #00000099;
+
+        border-radius: 12px;
+        background-image: url(https://gateway.irys.xyz/ybYOZTcIWKoDnVu8a02Jwjk6nLpakqWkp-hC2daETSk);
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+
+        transition-duration: 300ms;
+        transition-property: transform, box-shadow;
+        transition-timing-function: ease-out;
+        transform: rotate3d(0);
+      }
+
+      .card:hover,
+      .card:focus,
+      .card:active {
+        transition-duration: 150ms;
+        box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.1);
+      }
+
+      .card .glow {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        border-radius: 12px;
+
+        background-image: radial-gradient(
+          circle at 50% -20%,
+          #ffffff22,
+          #0000000f
+        );
+      }
+
+      .bokeh {
+        position: absolute;
+        background-image: linear-gradient(to top right, magenta, transparent);
+        border-radius: 50%;
+        top: -300px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 'auto';
+        filter: blur(180px);
+        margin: auto;
+        opacity: 0.12;
+        width: 500px;
+        height: 100%;
+        z-index: -100;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bokeh"></div>
+    <div class="card">
+      <div class="glow"></div>
+    </div>
+
+    <script>
+      const $card = document.querySelector(".card");
+      let bounds;
+
+      function rotateToMouse(e) {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const leftX = mouseX - bounds.x;
+        const topY = mouseY - bounds.y;
+        const center = {
+          x: leftX - bounds.width / 2,
+          y: topY - bounds.height / 2,
+        };
+        const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
+
+        $card.style.transform = `
+    scale3d(1.07, 1.07, 1.07)
+    rotate3d(
+      ${center.y / 100},
+      ${-center.x / 100},
+      0,
+      ${Math.log(distance) * 2}deg
+    )
+  `;
+
+        $card.querySelector(".glow").style.backgroundImage = `
+    radial-gradient(
+      circle at
+      ${center.x * 2 + bounds.width / 2}px
+      ${center.y * 2 + bounds.height / 2}px,
+      #ffffff55,
+      #0000000f
+    )
+  `;
+      }
+
+      $card.addEventListener("mouseenter", () => {
+        bounds = $card.getBoundingClientRect();
+        document.addEventListener("mousemove", rotateToMouse);
+      });
+
+      $card.addEventListener("mouseleave", () => {
+        document.removeEventListener("mousemove", rotateToMouse);
+        $card.style.transform = "";
+        $card.style.background = "";
+      });
+    </script>
+
+    <script>
+      function generateSparkles() {
+        const sparkleAmount = 100;
+        for (let i = 0; i < sparkleAmount; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.classList.add("sparkle");
+          document.body.appendChild(sparkle);
+          sparkle.style.top = `${Math.random() * window.innerHeight}px`;
+          sparkle.style.left = `${Math.random() * window.innerWidth}px`;
+          sparkle.style.animationDelay = `${Math.random() * 1}s`;
+        }
+      }
+      window.onload = generateSparkles;
+    </script>
+  </body>
+</html>

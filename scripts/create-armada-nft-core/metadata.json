@@ -1,0 +1,14 @@
+{
+  "name": "Armada DAO NFT",
+  "symbol": "ARMD",
+  "description": "The Armada DAO NFT will be your gateway to a fully decentralized, transparent, and community-driven ecosystem. By holding or staking an Armada NFT, you will able to create a DAO, create and participate on proposals, and earn rewards. The Armada DAO NFT will be the key to unlocking the full potential of the Armada ecosystem.",
+  "image": "https://gateway.irys.xyz/VXyfRi_RdBieQ2vz9iDNNqLiBKjmsTRul3VtrgNeAqU",
+  "animation_url": "https://gateway.irys.xyz/Iohj89IpfhWp2X7Gph6_ktpkk3VkRY_Qi_bNL8h4miM",
+  "external_url": "https://TheArmadaDAO.xyz",
+  "attributes": [
+    {
+      "trait_type": "DAO",
+      "value": "Armada DAO"
+    }
+  ]
+}

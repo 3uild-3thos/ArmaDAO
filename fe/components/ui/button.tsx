@@ -6,19 +6,22 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap hover:brightness-105 duration-300 ease-in-out transition-all rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap hover:brightness-105 duration-300 ease-in-out transition-all rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-90",
   {
     variants: {
       variant: {
         default:
-          "border-2 border-magenta/40 bg-gradient-to-r from-magenta via-magenta-light to-magenta text-magenta-foreground",
-        white: "bg-muted text-muted-foreground",
+          "border-2 border-magenta/40 bg-gradient-to-r from-magenta via-magenta-light to-magenta text-magenta-foreground hover:shadow-[0_16px_40px_hsla(289, 93.66%, 64.78%, 20%)]",
+        white:
+          "shadow-[0_4px_14px_0_rgb(0,0,0,20%)] hover:shadow-[0_6px_20px_rgba(93,93,93,63%)] bg-muted text-muted-foreground rounded-md disabled:bg-muted/95",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-default bg-transparent hover:bg-muted/5",
+        outline:
+          "border-default bg-transparent hover:bg-muted/5 shadow-[0_4px_14px_0_rgb(0,0,0,20%)] hover:shadow-[0_6px_20px_rgba(93,93,93,63%)]",
         secondary: "bg-magenta text-magenta-foreground hover:bg-magenta/80",
-        ghost: "hover:text-magenta-light",
-        link: "text-magenta-light underline-offset-4 hover:underline",
+        ghost:
+          "shadow-[0_4px_14px_0_rgb(0,0,0,20%)] hover:text-magenta-light hover:shadow-[0_16px_40px_hsla(289, 93.66%, 64.78%, 20%)]",
+        link: "text-magenta-light underline-offset-4 hover:underline hover:shadow-[0_6px_20px_hsla(289, 93.66%, 64.78%, 20%)]",
       },
       size: {
         default: "h-10 px-4 py-2",

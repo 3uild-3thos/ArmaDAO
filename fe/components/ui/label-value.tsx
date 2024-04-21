@@ -8,9 +8,16 @@ interface ILabelValue {
   value: ReactNode;
   href?: string;
   className?: string;
+  target?: string;
 }
 
-const LabelValue = ({ className, label, value, href }: ILabelValue) => {
+const LabelValue = ({
+  className,
+  label,
+  value,
+  href,
+  target = "_self",
+}: ILabelValue) => {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <div className="text-base text-muted-light">{label}</div>
@@ -18,6 +25,7 @@ const LabelValue = ({ className, label, value, href }: ILabelValue) => {
         <Link
           href={href}
           className="flex items-center gap-2 text-xl duration-200 text-muted hover:text-magenta-light"
+          target={target}
         >
           {value} <MoveUpRight size={"20"} />
         </Link>

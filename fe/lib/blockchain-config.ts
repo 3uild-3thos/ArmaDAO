@@ -8,6 +8,8 @@ interface IConfig {
   votingProgram: string;
   armadaNftUri: string;
   armadaNftPrice: number;
+  armadaNftAddress: string;
+  armadaNftCreator: string;
   cluster: WalletAdapterNetwork;
   rpcUrl: string;
   connection: Connection;
@@ -24,7 +26,7 @@ const config: IBlockchainConfig = {
     votingProgram: "voteUXym9t6h3VzHYumMyMCXmiDoYqMiC2g4JnvdnGC",
     armadaNftUri:
       process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_URI ??
-      "https://gateway.irys.xyz/YYEDwDeN1CYGp6Z1fbqx1W2w1ZDNu9xXeY8v-8_iKgE",
+      "https://gateway.irys.xyz/Iohj89IpfhWp2X7Gph6_ktpkk3VkRY_Qi_bNL8h4miM",
     armadaNftPrice: Number(process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_PRICE ?? 1),
     cluster: WalletAdapterNetwork.Devnet,
     rpcUrl: clusterApiUrl(WalletAdapterNetwork.Devnet),
@@ -32,22 +34,26 @@ const config: IBlockchainConfig = {
       clusterApiUrl(WalletAdapterNetwork.Devnet),
       "finalized"
     ),
+    armadaNftAddress: "6PKWbigBGxbAAJnv42L5BDsTymoaFYMWaQXxveMmxs3o",
+    armadaNftCreator: "EAxH8ovue9FC2e95UTYjM6vsNtrrqW4LMFSjmsH2hd39",
   },
   mainnet: {
-    proposalProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
-    stakingProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
-    daoProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
-    votingProgram: "propm845StqEBV57ZSnTe8EW8duzAxo5p7h4inhibXV",
+    proposalProgram: "",
+    stakingProgram: "",
+    daoProgram: "",
+    votingProgram: "",
     armadaNftUri:
       process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_URI ??
-      "https://gateway.irys.xyz/YYEDwDeN1CYGp6Z1fbqx1W2w1ZDNu9xXeY8v-8_iKgE",
+      "https://gateway.irys.xyz/Iohj89IpfhWp2X7Gph6_ktpkk3VkRY_Qi_bNL8h4miM",
     armadaNftPrice: Number(process.env.NEXT_PUBLIC_ARMADA_NFT_IRYS_PRICE ?? 1),
-    cluster: WalletAdapterNetwork.Devnet,
-    rpcUrl: clusterApiUrl(WalletAdapterNetwork.Devnet),
+    cluster: WalletAdapterNetwork.Mainnet,
+    rpcUrl: clusterApiUrl(WalletAdapterNetwork.Mainnet),
     connection: new Connection(
-      clusterApiUrl(WalletAdapterNetwork.Devnet),
+      clusterApiUrl(WalletAdapterNetwork.Mainnet),
       "finalized"
     ),
+    armadaNftAddress: "",
+    armadaNftCreator: "",
   },
 };
 

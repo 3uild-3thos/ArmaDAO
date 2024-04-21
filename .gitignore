@@ -4,3 +4,4 @@ fe/.env
 DAO_Programs/target/*/**
 scripts/node_modules
 scripts/.env
+scripts/wallet.json

@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@irys/sdk": "^0.1.22",
     "@metaplex-foundation/mpl-core": "^0.4.5",
     "@metaplex-foundation/umi": "^0.9.1",
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
+    "@solana/wallet-adapter-base": "^0.9.23",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {

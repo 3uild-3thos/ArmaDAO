@@ -1,4 +1,8 @@
 import {
+  IArmadaMintStore,
+  armadaMintStore,
+} from "@/lib/zustand/armada-mint.store";
+import {
   ICreateFleetStore,
   createFleetStore,
 } from "@/lib/zustand/create-fleet.store";
@@ -7,12 +11,14 @@ import { IDaoStore, createDaoStore } from "@/lib/zustand/dao.store";
 import { IVotingStore, createVotingStore } from "@/lib/zustand/voting.store";
 import { create } from "zustand";
 
-export const useStoreBase = create<
-  ICreateFleetStore & IDaoStore & IVotingStore
->()((...state) => ({
+type IStore = ICreateFleetStore & IDaoStore & IVotingStore & IArmadaMintStore;
+
+export const useStoreBase = create<IStore>()((...state) => ({
   ...createFleetStore(...state),
   ...createDaoStore(...state),
   ...createVotingStore(...state),
+  ...createVotingStore(...state),
+  ...armadaMintStore(...state),
 }));
 
 export const useStore = createSelectors(useStoreBase);
