@@ -570,8 +570,5 @@
       "name": "UnauthorizedSigner",
       "msg": "Unauthorized Signer"
     }
-  ],
-  "metadata": {
-    "address": "daoSYkGVA6pu5CxknvVMMTc8nFAGsYzfQt2jK5CgC5V"
-  }
+  ]
 }

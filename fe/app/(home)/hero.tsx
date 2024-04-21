@@ -30,16 +30,21 @@ const Hero = () => {
             </h3>
           </div>
           <div className="flex flex-col sm:flex-row gap-8 my-8">
-            <Link href={PATH.mothershipMint}>
+            {/* <Link href={PATH.mothershipMint}>
               <Button variant={"outline"} className="px-8 text-lg h-14">
                 Mint Armada NFT
               </Button>
+            </Link> */}
+            <Link href={PATH.waitlist} target="_blank">
+              <Button variant={"white"} className="px-8 text-lg h-14">
+                Join Waitlist
+              </Button>
             </Link>
-            <Link href={PATH.fleetCreate}>
+            {/* <Link href={PATH.fleetCreate}>
               <Button variant={"white"} className="px-8 text-lg h-14">
                 Create your Fleet
               </Button>
-            </Link>
+            </Link> */}
           </div>
           <div className="flex items-center justify-center gap-4">
             <span>Powered by</span>
